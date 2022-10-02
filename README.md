@@ -1,7 +1,5 @@
 # J TALE Presents... Auto-suggest for developers
 
-
-
 ## WHAT:
 - Analyze chatbot transcripts for frequently asked questions and bot responses
 - Auto-suggest questions and bot responses
