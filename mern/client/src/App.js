@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import * as React from 'react';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        <button type="button" className='Main-button'>J TALE is the best!</button>
         <a
           className="App-link"
           href="https://reactjs.org"
