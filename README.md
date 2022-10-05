@@ -17,7 +17,3 @@ Testing
 - Provide 5 initial questions, each which flows at least 3 layers deep
 - Suggest a total of 30 question-answer pairs
 
-<<<<<<< HEAD
-helllo
-=======
->>>>>>> ac78113e646e7c055cc7072a946bdd9c00c7f47d
