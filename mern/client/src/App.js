@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import * as React from "react";
 import axios from "axios";
@@ -59,33 +58,20 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
         <div className="buttonContainer">
           <button type="button" className="Main-button">
-            J TALE is the best!
+            Data from backend!
           </button>
           <button
             type="button"
             className="Main-button"
             onClick={() => getUserData()}
           >
-            Voiceflow!
+            Voiceflow API Call!
           </button>
         </div>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  
+      </div>
   );
 }
 
