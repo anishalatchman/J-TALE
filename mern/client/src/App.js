@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
-import * as React from 'react';
+import logo from "./logo.svg";
+import "./App.css";
+import * as React from "react";
+import axios from "axios";
+import cors from "cors";
+// import * as dotenv from "dotenv";
 
 function App() {
-  // const axios = require('axios');
+  // const VOICEFLOW_API_KEY = process.env.VOICEFLOW_API_KEY;
+  // const versionID = process.env.VERSION_ID;App.use(cors)
+  // App.use(cors);
 
-  // // View our quick start guide to get your API key:
-  // // https://www.voiceflow.com/api/dialog-manager#section/Quick-Start
-  // const apiKey = 'VF.DM.633ccf1ff8b6f600072caa42.VsDy3SIG7hSTI6NA';
-  
+  const VOICEFLOW_API_KEY = "VF.DM.633ccf1ff8b6f600072caa42.VsDy3SIG7hSTI6NA";
+  const versionID = "6339c2e3e0ace2310edf6016";
+  const url = `https://api-dm-test.voiceflow.fr/exportraw/${VOICEFLOW_API_KEY}?versionID=${versionID}`;
+
   // const userID = 'user_123'; // Unique ID used to track conversation state
   // const userInput = 'Hello world!'; // User's message to your Voiceflow project
-  
+
   // const body = {
   //   action: {
   //     type: 'text',
   //     payload: userInput,
   //   },
   // };
-  
+
+  async function getUserData() {
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods":
+            "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+        },
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   // async function startInteract() {
   //   // Start a conversation
   //   const response = await axios({
@@ -30,14 +50,12 @@ function App() {
   //     },
   //     data: body,
   //   });
-  
+
   //   // Log the response
   //   console.log(response.data);
   // }
-  
-  // startInteract().catch((error) => console.error(error));
-  
 
+  // startInteract().catch((error) => console.error(error));
 
   return (
     <div className="App">
@@ -46,7 +64,18 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <button type="button" className='Main-button'>J TALE is the best!</button>
+        <div className="buttonContainer">
+          <button type="button" className="Main-button">
+            J TALE is the best!
+          </button>
+          <button
+            type="button"
+            className="Main-button"
+            onClick={() => getUserData()}
+          >
+            Voiceflow!
+          </button>
+        </div>
         <a
           className="App-link"
           href="https://reactjs.org"

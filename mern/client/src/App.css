@@ -33,8 +33,9 @@
 }
 
 .Main-button {
-  @apply bg-voiceflow-blue text-white p-4 rounded;
+  @apply bg-voiceflow-blue text-white p-4 rounded mx-2;
 }
+
 
 @keyframes App-logo-spin {
   from {
