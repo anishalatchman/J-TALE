@@ -27,7 +27,7 @@ export default class GetUser extends Component {
     render() {
     return (
         <div>
-        <h3>Logged Exercises</h3>
+        <h3 className='p-2'>Logged Exercises</h3>
         <table className="table">
             <thead className="thead-light">
             <tr>
