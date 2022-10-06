@@ -1,51 +1,49 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 
 export default class GetUser extends Component {
+  constructor(props) {
+    super(props);
 
-    constructor(props) {
-        super(props);
+    this.state = { users: [] };
+  }
 
-        this.state = {users: []};
-      }
-      
-      componentDidMount() {
-        axios.get('http://localhost:5000/users/')
-          .then(response => {
-            if (response.data.length > 0) {
-              this.setState({
-                users: response.data.map(user => user.username)
-              })
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-    
-      }
+  componentDidMount() {
+    axios
+      .get("http://localhost:5000/users/")
+      .then((response) => {
+        if (response.data.length > 0) {
+          this.setState({
+            users: response.data.map((user) => user.username),
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-    render() {
+  render() {
     return (
-        <div>
-        <h3 className='p-2'>Logged Exercises</h3>
+      <div>
+        <h3 className="p-2">Logged Exercises</h3>
         <table className="table">
-            <thead className="thead-light">
+          <thead className="thead-light">
             <tr>
-                <th>Username</th>
+              <th>Username</th>
             </tr>
-            </thead>
-            <tbody>
-            { 
-                this.state.users.map(function(user) {
-                    return <option 
-                      key={user}
-                      value={user}>{user}
-                      </option>;
-                  })
-            }
-            </tbody>
+          </thead>
+          <tbody>
+            {this.state.users.map(function (user) {
+              return (
+                <option key={user} value={user}>
+                  {user}
+                </option>
+              );
+            })}
+          </tbody>
         </table>
-        </div>
-    )
-    }
+      </div>
+    );
+  }
 }
