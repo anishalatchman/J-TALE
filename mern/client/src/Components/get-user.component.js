@@ -3,25 +3,49 @@ import axios from 'axios';
 
 export default class GetUser extends Component {
 
-  render() {
+    constructor(props) {
+        super(props);
+
+        this.state = {users: []};
+      }
+      
+      componentDidMount() {
+        axios.get('http://localhost:5000/users/')
+          .then(response => {
+            if (response.data.length > 0) {
+              this.setState({
+                users: response.data.map(user => user.username)
+              })
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+    
+      }
+
+    render() {
     return (
-      <div>
-        <h3>Get Users</h3>
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group"> 
-            <label>Username: </label>
-            <input  type="text"
-                required
-                className="form-control"
-                value={this.state.username}
-                onChange={this.onChangeUsername}
-                />
-          </div>
-          <div className="form-group">
-            <input type="submit" value="Create User" className="btn btn-primary" />
-          </div>
-        </form>
-      </div>
+        <div>
+        <h3>Logged Exercises</h3>
+        <table className="table">
+            <thead className="thead-light">
+            <tr>
+                <th>Username</th>
+            </tr>
+            </thead>
+            <tbody>
+            { 
+                this.state.users.map(function(user) {
+                    return <option 
+                      key={user}
+                      value={user}>{user}
+                      </option>;
+                  })
+            }
+            </tbody>
+        </table>
+        </div>
     )
-  }
+    }
 }

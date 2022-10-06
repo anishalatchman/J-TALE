@@ -13,10 +13,8 @@ function App() {
       <Navbar>
       </Navbar>
       <Routes>
-      <Route path="/user" element={<CreateUser/>} />
-      </Routes>
-      <Routes>
-      <Route path="/get" element={<GetUser/>} />
+        <Route path="/get" element={<GetUser/>} />
+        <Route path="/user" element={<CreateUser/>} />
       </Routes>
       </div>
     </Router>
