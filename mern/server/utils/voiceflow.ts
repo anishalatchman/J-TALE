@@ -7,5 +7,7 @@ function addUser (user) {
 }
 
 function getTranscript() {
-    axios.post("")
+    axios.get("")
 }
+
+export getTranscript()

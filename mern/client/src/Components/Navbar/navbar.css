@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navbar-bg {
+    @apply bg-voiceflow-blue text-white p-4 px-20;
+  }
+.navbar-links {
+  @apply flex flex-row text-3xl items-center;
+}
+
+.nav-link {
+  @apply flex-row justify-start;
+}
+
+.nav-icon {
+  display: flex;
+  width:37px;
+  height:37px; 
+  top:10px;
+  @apply mr-2;
+}
