@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./uploadTranscript.css";
+import "./../../Components/Buttons/ButtonStyleSheet.css"
 
 export default class Landing extends Component {
     
@@ -14,8 +15,8 @@ export default class Landing extends Component {
         </div>
         <h4 className="subtitle">No file chosen</h4>
         <div className="buttonContainer">
-          <button className="button2">Upload Transcript</button>
-          <button className="button2">Recover Session</button>
+          <button className="outline">Upload Transcript</button>
+          <button className="outline">Recover Session</button>
         </div>
       </div>
     );
