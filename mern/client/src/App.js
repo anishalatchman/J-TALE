@@ -7,6 +7,7 @@ import GetUser from "./Components/get-user.component";
 import CreateUser from "./Components/create-user.component";
 import GetTranscript from "./Components/get-transcript.component";
 import Landing from "./screens/Landing/landing";
+import UploadTranscript from "./screens/Landing/uploadTranscript"
 
 function App() {
   return (
