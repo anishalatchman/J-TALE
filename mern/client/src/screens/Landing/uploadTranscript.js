@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./uploadTranscript.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css"
+import GenericButton from "../../Components/Buttons/GenericButton";
 
 export default class Landing extends Component {
     
@@ -15,8 +16,18 @@ export default class Landing extends Component {
         </div>
         <h4 className="subtitle">No file chosen</h4>
         <div className="buttonContainer">
-          <button className="outline">Upload Transcript</button>
-          <button className="outline">Recover Session</button>
+        <GenericButton
+            buttonType="outline"
+            onClick={() => null}
+            disabled={false}
+            text={"Upload Transcript"}
+          />
+          <GenericButton
+            buttonType="outline"
+            onClick={() => null}
+            disabled={false}
+            text={"Begin Session"}
+          />
         </div>
       </div>
     );
