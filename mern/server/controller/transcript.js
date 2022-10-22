@@ -51,7 +51,7 @@ export const createTranscriptAPI = asyncHandler( async(req,res) => {
         console.log(vf_transcript, 1);
         new Transcript({ transcript: body.toString() })
           .save()
-          .then(() => res.json("Transcript added!"))  
+          .then(() => res.json({id}))  
         
     } catch (error) {
 
