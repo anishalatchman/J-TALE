@@ -4,8 +4,7 @@ import asyncHandler from "express-async-handler";
 export const getTranscript = asyncHandler( async(req, res) => {
 
     try {
-
-        const transcript = await Transcript.find();
+        const transcript = await Transcript.findById(req.params.id);
         res.status(200).json(transcript)
         
     } catch (error) {
