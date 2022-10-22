@@ -49,7 +49,7 @@ export const createTranscriptAPI = asyncHandler( async(req,res) => {
     try {
 
         console.log(vf_transcript, 1);
-        new Transcript({ transcript: body.toString() })
+        new Transcript({ name: req.body.name, data: body.toString() })
           .save()
           .then(() => res.json({id}))  
         
