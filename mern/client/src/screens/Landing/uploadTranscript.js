@@ -20,13 +20,13 @@ export default class Landing extends Component {
             buttonType="outline"
             onClick={() => null}
             disabled={false}
-            text={"Upload Transcript"}
+            text={"Begin Session"}
           />
           <GenericButton
             buttonType="outline"
             onClick={() => null}
             disabled={false}
-            text={"Begin Session"}
+            text={"Go Back"}
           />
         </div>
       </div>
