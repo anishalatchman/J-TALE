@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.title{
+    @apply text-center mt-20 mb-6;
+    font-size: 70px;
+}
+
+.subtitle{
+    @apply text-center mb-20;
+}
+
+.buttonContainer{
+    @apply mb-20 items-center flex flex-col;
+}
+
+.blueOutlineButton {
+    @apply border-2 border-voiceflow-blue mb-20 rounded-full p-3 text-voiceflow-blue;
+}
+
+.whiteFillButton {
+    @apply mb-20 rounded-full p-3 text-voiceflow-blue;
+}
