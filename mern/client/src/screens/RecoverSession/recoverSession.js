@@ -21,17 +21,18 @@ export default class RecoverSession extends Component {
 
   render() {
     return (
-      <div>
-      <form onSubmit={this.handleSubmit}> 
-          <label> Input Session ID
-          <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Session ID" />        
-          </label>
-        <input type="submit" value="Begin Session" />
+      <div className="container w-50">
+        <h1 className="h1 title">
+          Recover Session
+        </h1>
+      <form className="inputForm" onSubmit={this.handleSubmit}> 
+          <label> Input Session ID </label>
+          <input className="m-6 pl-4 pr-2 pt-2 pb-2 block rounded-full" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Session ID" />        
+          <input className="whiteFillButton" type="submit" value="Begin Session" />
       </form>
       <div className="buttonContainer">
-          <button className="whiteFillButton">Begin Session</button>
           <button className="blueOutlineButton">Go Back</button>
-        </div>
+      </div>
       </div>
     );
   }

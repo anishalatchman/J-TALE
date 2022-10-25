@@ -16,7 +16,7 @@ function App() {
       <div>
         <Navbar />
         <Routes>
-          <Route path="/" element={<RecoverSession />} />
+          <Route path="/" element={<Landing />} />
           <Route path="/recover" element={<RecoverSession />} />
           <Route path="/get" element={<GetUser />} />
           <Route path="/user" element={<CreateUser />} />
