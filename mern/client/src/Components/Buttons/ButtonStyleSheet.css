@@ -11,22 +11,22 @@
   src: url(../../../fonts/Nunito-VariableFont_wght.ttf);
 }
 
-.navbar-bg {
-    @apply bg-voiceflow-blue text-white p-2 px-20;
-  }
-.navbar-links {
-  @apply flex flex-row text-3xl items-center font-montserrat;
-  font-weight: 400;
+.blue {
+  @apply w-40 border-2 border-voiceflow-blue m-3 rounded-full p-3 text-white bg-voiceflow-blue font-nunito;
+  font-weight: 700;
 }
 
-.nav-link {
-  @apply flex-row justify-start;
+.outline {
+  @apply w-40 border-2 border-voiceflow-blue m-3 rounded-full p-3 text-voiceflow-blue font-nunito;
+  font-weight: 700;
 }
 
-.nav-icon {
-  display: flex;
-  width:37px;
-  height:37px; 
-  top:10px;
-  @apply mr-2;
+.disabled{
+  @apply w-40 border-2 opacity-25 border-voiceflow-blue m-3 rounded-full p-3 text-voiceflow-blue font-nunito;
+  font-weight: 700;
+}
+
+.black {
+  @apply w-40 border-2 border-black m-3 rounded-full p-3 text-black font-nunito;
+  font-weight: 700;
 }

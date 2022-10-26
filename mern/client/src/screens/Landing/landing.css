@@ -1,14 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap'); */
+@font-face {
+    font-family: "Montserrat";
+    font-weight: 800;
+    src: url(../../../fonts/Montserrat-VariableFont_wght.ttf);
+  }
+  @font-face {
+    font-family: "Nunito";
+    src: url(../../../fonts/Nunito-VariableFont_wght.ttf);
+  }
 .title{
-    @apply text-center mt-20 mb-6;
-    font-size: 70px;
+    @apply text-center mt-20 mb-6 font-montserrat;
+    /* font-family: 'Montserrat', sans-serif; */
+    font-size: 50px;
+    font-weight: 800;
 }
 
 .subtitle{
-    @apply text-center mb-20;
+    @apply text-center mb-20 font-nunito;
+    /* font-family: 'Nunito', sans-serif; */
+    font-weight: 400;
 }
 
 .buttonContainer{
