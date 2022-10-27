@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.pageTitle{
+    @apply text-center mx-auto text-4xl font-montserrat font-bold mt-20;
+    font-size: 50px;
+}
+
+.subtitle{
+    @apply text-center mb-20;
+    /* input label text styled inside inputForm */
+}
+
+.buttonContainer{
+    @apply mb-10 items-center flex flex-col;
+}
+
+.inputForm{
+    @apply m-10 pt-8 pb-8 flex flex-col justify-center items-center bg-voiceflow-blue rounded-3xl;
+}
