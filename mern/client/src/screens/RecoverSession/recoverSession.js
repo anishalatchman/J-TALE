@@ -3,6 +3,7 @@ import axios from "axios";
 import "./recoverSession.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 
+
 export default class RecoverSession extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +14,7 @@ export default class RecoverSession extends Component {
     };
 
     handleChange(event) {    
-      this.setState({value: event.target.value});  
+      this.setState({value: event.target.value}); 
     }
     handleSubmit(event) {
       alert('A name was submitted: ' + this.state.value);
@@ -27,8 +28,8 @@ export default class RecoverSession extends Component {
           Recover Session
         </h1>
       <form className="inputForm w-1/3 mx-auto" onSubmit={this.handleSubmit}> 
-          <label className="text-xl font-medium"> Input Session ID </label>
-          <input className="m-6 w-3/4 pl-4 pr-2 pt-2 pb-2 block rounded-full" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Session ID" />        
+          <label className="text-xl text-white font-medium"> Input Session ID </label>
+          <input className="m-6 w-3/4 pl-4 pr-2 pt-2 pb-2 block rounded-full text-black" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Session ID" />        
           <GenericButton
               buttonType="white"
               onClick={() => this.handleChange}
