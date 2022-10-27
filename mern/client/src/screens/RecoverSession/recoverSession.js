@@ -28,7 +28,7 @@ export default class RecoverSession extends Component {
           Recover Session
         </h1>
       <form className="inputForm w-1/3 mx-auto" onSubmit={this.handleSubmit}> 
-          <label className="text-xl text-white font-medium"> Input Session ID </label>
+          <label className="text-xl text-white font-nunito font-medium"> Input Session ID </label>
           <input className="m-6 w-3/4 pl-4 pr-2 pt-2 pb-2 block rounded-full text-black" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Session ID" />        
           <GenericButton
               buttonType="white"
