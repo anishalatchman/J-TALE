@@ -1,6 +1,8 @@
-# J-TALE
+# Branch naming convention
+devName/featureName
 
-Testing
+(ex. jtale/landingPage)
+
 # J TALE Presents... Auto-suggest for developers
 
 ## WHAT:
