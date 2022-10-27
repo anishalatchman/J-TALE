@@ -25,10 +25,11 @@
 }
 
 .black {
-  @apply w-40 border-2 border-black m-3 rounded-full p-3 pl-6 pr-6 text-black font-nunito;
+  @apply w-40 border-2 border-black m-3 rounded-full p-3 text-black font-nunito;
   font-weight: 700;
 }
 
 .white {
-  @apply border-2 border-voiceflow-blue rounded-full p-3 pl-6 pr-6 text-voiceflow-blue bg-white;
+  @apply w-40 border-2 border-voiceflow-blue rounded-full p-3 text-voiceflow-blue bg-white;
+  font-weight: 700;
 }
