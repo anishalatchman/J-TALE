@@ -1,0 +1,51 @@
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e5e5e5;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(182, 182, 182);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(155, 155, 155);
+}
+
+.scroller { 
+  background-color: rgb(221, 221, 221);
+  height: 700px;
+  width: 500px;
+  border-radius: 20px;
+  overflow-y: auto;
+  overflow-x: auto;
+ }
+
+@font-face {
+  font-family: "Montserrat";
+  src: url(../fonts/Montserrat/Montserrat-Italic-VariableFont_wght.ttf);
+}
+
+.title{
+  @apply text-center mt-20 mb-6;
+  /* font-family: 'Montserrat', sans-serif; */
+  font-size: 50px;
+  font-weight: 800;
+}
+
+
+.blue {
+  @apply w-40 border-2 items-center flex flex-col border-voiceflow-blue m-3 rounded-full p-3 text-white bg-voiceflow-blue;
+  font-weight: 700;
+  text-align: center;
+}
+
+.buttonContainer{
+  @apply mb-5 items-center flex flex-col;
+}
