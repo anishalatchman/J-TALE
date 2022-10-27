@@ -7,10 +7,18 @@ module.exports = {
   },
   purge: [],
   theme: {
+    fontFamily: {
+      'montserrat': 'Montserrat, sans-serif',
+      'nunito': 'Nunito, sans-serif',
+    },
     extend: {
       colors: {
         "voiceflow-blue": "#1C4EFF",
+        "lighter-blue": "#5AA6FF",
       },
+      // fontFamily: {
+      //   "montserrat": ["Montserrat", "sans-serif"],
+      // }
     },
   },
   variants: {},

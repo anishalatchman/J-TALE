@@ -49,3 +49,9 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: "Montserrat";
+  font-weight: 900;
+  src: url(../fonts/Montserrat-Black.ttf);
+}
