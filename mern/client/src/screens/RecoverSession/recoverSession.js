@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./recoverSession.css";
+import GenericButton from "../../Components/Buttons/GenericButton";
 
 export default class RecoverSession extends Component {
   constructor(props) {
@@ -21,17 +22,27 @@ export default class RecoverSession extends Component {
 
   render() {
     return (
-      <div className="container w-50">
-        <h1 className="h1 title">
+      <div className="container">
+        <h1 className="pageTitle">
           Recover Session
         </h1>
-      <form className="inputForm" onSubmit={this.handleSubmit}> 
-          <label> Input Session ID </label>
-          <input className="m-6 pl-4 pr-2 pt-2 pb-2 block rounded-full" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Session ID" />        
-          <input className="whiteFillButton" type="submit" value="Begin Session" />
+      <form className="inputForm w-1/3 mx-auto" onSubmit={this.handleSubmit}> 
+          <label className="text-xl font-medium"> Input Session ID </label>
+          <input className="m-6 w-3/4 pl-4 pr-2 pt-2 pb-2 block rounded-full" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Session ID" />        
+          <GenericButton
+              buttonType="white"
+              onClick={() => this.handleChange}
+              disabled={false}
+              text={"Begin Session"}
+            />
       </form>
       <div className="buttonContainer">
-          <button className="blueOutlineButton">Go Back</button>
+        <GenericButton
+              buttonType="outline"
+              onClick={() => null}
+              disabled={false}
+              text={"Go Back"}
+            />
       </div>
       </div>
     );

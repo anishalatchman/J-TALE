@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-.title{
-    @apply text-center mt-20 mb-6;
-    font-size: 60px;
+.pageTitle{
+    @apply text-center mx-auto text-4xl font-bold mt-20;
+    font-size: 50px;
 }
 
 .subtitle{
@@ -17,12 +17,5 @@
 }
 
 .inputForm{
-    @apply text-white m-10 pt-6 pb-10 flex flex-col justify-center items-center bg-voiceflow-blue rounded-xl;
-}
-.blueOutlineButton {
-    @apply border-2 border-voiceflow-blue mb-20 rounded-full p-3 text-voiceflow-blue;
-}
-
-.whiteFillButton {
-    @apply block rounded-full p-3 text-voiceflow-blue;
+    @apply text-white m-10 pt-6 pb-8 flex flex-col justify-center items-center bg-voiceflow-blue rounded-2xl;
 }

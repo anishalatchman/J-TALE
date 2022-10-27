@@ -3,18 +3,22 @@
 @tailwind utilities;
 
 .blue {
-  @apply border-2 border-voiceflow-blue mb-20 rounded-full p-3 text-white bg-voiceflow-blue;
+  @apply border-2 border-voiceflow-blue mb-20 rounded-full p-3 pl-6 pr-6 text-white bg-voiceflow-blue;
 
 }
 
 .outline {
-  @apply border-2 border-voiceflow-blue mb-20 rounded-full p-3 text-voiceflow-blue;
+  @apply border-2 border-voiceflow-blue mb-20 rounded-full p-3 pl-6 pr-6 text-voiceflow-blue;
 }
 
 .disabled{
-  @apply border-2 opacity-25 border-voiceflow-blue mb-20 rounded-full p-3 text-voiceflow-blue;
+  @apply border-2 opacity-25 border-voiceflow-blue mb-20 rounded-full p-3 pl-6 pr-6 text-voiceflow-blue;
 }
 
 .black {
-  @apply border-2 border-black mb-20 rounded-full p-3 text-black;
+  @apply border-2 border-black mb-20 rounded-full p-3 pl-6 pr-6 text-black;
+}
+
+.white {
+  @apply border-2 border-voiceflow-blue rounded-full p-3 pl-6 pr-6 text-voiceflow-blue bg-white;
 }
