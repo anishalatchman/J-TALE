@@ -17,5 +17,5 @@
 }
 
 .inputForm{
-    @apply text-white m-10 pt-6 pb-8 flex flex-col justify-center items-center bg-voiceflow-blue rounded-2xl;
+    @apply m-10 pt-6 pb-8 flex flex-col justify-center items-center bg-voiceflow-blue rounded-3xl;
 }
