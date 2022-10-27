@@ -3,7 +3,6 @@ import axios from "axios";
 import "./recoverSession.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 
-
 export default class RecoverSession extends Component {
   constructor(props) {
     super(props);
