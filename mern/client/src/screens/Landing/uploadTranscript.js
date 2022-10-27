@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import "./uploadTranscript.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css"
 import GenericButton from "../../Components/Buttons/GenericButton";
+import Scrollbar from "../../Components/transcript-scroller.component";
+import scroller from "../../Components/transcript-scroller.component.css"
+
 
 export default class Landing extends Component {
     
@@ -28,6 +31,9 @@ export default class Landing extends Component {
             disabled={false}
             text={"Begin Session"}
           />
+        </div>
+        <div class="scroller">
+          <Scrollbar/>
         </div>
       </div>
     );

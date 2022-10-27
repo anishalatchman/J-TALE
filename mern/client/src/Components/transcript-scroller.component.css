@@ -1,0 +1,29 @@
+
+  /* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #e5e5e5;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(182, 182, 182);
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(155, 155, 155);
+  }
+  
+  .scroller { 
+    background-color: rgb(221, 221, 221);
+    height: 700px;
+    width: 500px;
+    overflow-y: auto;
+    overflow-x: auto;
+   }
+  
