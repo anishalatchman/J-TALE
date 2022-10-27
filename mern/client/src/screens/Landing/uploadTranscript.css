@@ -11,15 +11,27 @@
     @apply text-center mb-10;
 }
 
-.buttonContainer{
+.buttonContainer1{
     @apply px-20 mb-5 items-center flex flex-col;
 }
 
+.buttonContainer2{
+    @apply px-20 mb-5 justify-center flex flex-row;
+}
+
 .button1 {
-    @apply w-40 h-20 border-2 border-voiceflow-blue mb-5 rounded-full p-3 bg-voiceflow-blue text-white;
+    @apply w-64 h-20 border-2 border-voiceflow-blue mb-5 rounded-full p-3 bg-voiceflow-blue text-white font-nunito; 
+    font-size: 27px;
 }
 
 .button2 {
-    @apply border-2 border-voiceflow-blue mb-10 rounded-full p-3 text-voiceflow-blue;
+    @apply border-2 border-voiceflow-blue mb-5 rounded-full p-3 text-voiceflow-blue;
 }
 
+.upload-icon {
+    display: inline-flex;
+    width:37px;
+    height:37px; 
+    top:10px;
+    @apply mr-2;
+  }

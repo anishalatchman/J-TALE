@@ -15,8 +15,8 @@ export default class GenericButton extends Component {
     return (
       <button
         className={this.props.buttonType}
-        onClick={this.props.disabled}
-        disabled={this.props.onClick}
+        onClick={this.props.onClick}
+        disabled={this.props.disabled}
       >
         {this.props.text}
       </button>
