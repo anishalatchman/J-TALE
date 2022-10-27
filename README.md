@@ -1,6 +1,3 @@
-# J-TALE
-
-Testing
 # J TALE Presents... Auto-suggest for developers
 
 ## WHAT:
