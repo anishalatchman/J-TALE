@@ -30,6 +30,5 @@
 }
 
 .white {
-  @apply w-40 border-2 border-voiceflow-blue rounded-full p-3 text-voiceflow-blue bg-white;
-  font-weight: 700;
+  @apply w-40 border-2 border-voiceflow-blue rounded-full p-3 text-voiceflow-blue bg-white font-nunito font-bold;
 }
