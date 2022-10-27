@@ -8,7 +8,7 @@ import CreateUser from "./Components/create-user.component";
 import GetTranscript from "./Components/get-transcript.component";
 import Landing from "./screens/Landing/landing";
 import RecoverSession from "./screens/RecoverSession/recoverSession";
-import UploadTranscript from "./screens/Landing/uploadTranscript"
+import UploadTranscript from "./screens/UploadTranscript/uploadTranscript"
 
 function App() {
   return (
