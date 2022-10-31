@@ -24,10 +24,10 @@ function StartingIntent() {
           </div>
         </div>
         <div>
-          <h4 className="subtitle">
+          <h4 className="instructions">
             Select intents you would like to include by clicking once.
           </h4>
-          <h4 className="subtitle">
+          <h4 className="instructions">
             Choose a specific path by clicking again and selecting next.
           </h4>
         </div>

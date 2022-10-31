@@ -11,7 +11,7 @@
     @apply w-3/4;
 }
 
-.subtitle{
+.instructions{
     @apply text-gray text-left ml-4 mb-10;
 }
 
