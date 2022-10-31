@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import "./uploadTranscript.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
+import axios from "axios";
 
 function UploadTranscript() {
   const Navigate = useNavigate();
@@ -12,7 +13,7 @@ function UploadTranscript() {
   };
   const inputRef = useRef(null);
   const [fileName, setFileName] = useState("No files chosen");
-  const [files, setFiles] = useState("");
+  const [files, setFiles] = useState();
 
   const handleClick = () => {
     // open file input box on click of button
@@ -57,12 +58,16 @@ function UploadTranscript() {
           Choose File
         </button>
       </div>
-      <h4 className="subtitle"> {fileName + files} </h4>
+      <h4 className="subtitle"> {fileName} </h4>
       <div className="buttonContainer2">
         <GenericButton
-          buttonType="blue"
-          onClick={() => null}
-          disabled={false}
+          buttonType={files ? "blue" : "disabled"}
+          onClick={() =>
+            axios
+              .post("http://localhost:5000/transcript/add", files)
+              .then(console.log("Transcript Uploaded!"))
+          }
+          disabled={files ? false : true}
           text={"Begin Session"}
         />
         <GenericButton
