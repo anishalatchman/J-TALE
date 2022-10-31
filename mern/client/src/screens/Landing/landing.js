@@ -1,14 +1,13 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React from "react";
 import "./landing.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Landing() {
   const Navigate = useNavigate();
   const PageChange = () => {
     Navigate("/upload");
-  }
+  };
   return (
     <div className="container">
       <h1 className="h1 title">
@@ -18,7 +17,9 @@ function Landing() {
       <div className="buttonContainer">
         <GenericButton
           buttonType="blue"
-          onClick={() => {PageChange()}}
+          onClick={() => {
+            PageChange();
+          }}
           disabled={false}
           text={"Upload Transcript"}
         />
@@ -32,7 +33,7 @@ function Landing() {
     </div>
   );
 }
-export default Landing
+export default Landing;
 
 // export default class Landing extends Component {
 //   // constructor(props) {
