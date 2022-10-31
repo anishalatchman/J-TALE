@@ -20,6 +20,9 @@ module.exports = {
       //   "montserrat": ["Montserrat", "sans-serif"],
       // }
     },
+    minWidth: {
+      '15': '15%',
+    }
   },
   variants: {},
   plugins: [],
