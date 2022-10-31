@@ -23,7 +23,6 @@ function App() {
           <Route path="/upload" element={<UploadTranscript />} />
           <Route path="/startingintent" element={<StartingIntent />} />
         </Routes>
-        {/* <button type="button" class="btn btn-primary btn-lg btn-block">J TALE is the best!</button> */}
       </div>
     </Router>
   );
