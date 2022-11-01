@@ -22,6 +22,7 @@
 .subtitle{
     @apply text-center mb-20 font-nunito;
     /* font-family: 'Nunito', sans-serif; */
+    font-size: 20px;
     font-weight: 400;
 }
 
