@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import GenericButton from "./Buttons/GenericButton";
+import GenericButton from "../Buttons/GenericButton";
 import "./transcript-scroller.component.css";
 
 export default class Scrollbar extends Component {
@@ -7,7 +7,7 @@ export default class Scrollbar extends Component {
         return (
         <div class="scroller">
 
-        <h1 className="title">Transcript</h1>
+        <h1 className="scrollerTitle">Transcript</h1>
 
 
         <p>This is where the text of the transcript will be </p>
@@ -40,7 +40,7 @@ export default class Scrollbar extends Component {
         <div className="buttonContainer">
             <GenericButton
                 buttonType="blue"
-                class="btn-bot"
+                // class="btn-bot"
                 onClick={() => null}
                 disabled={false}
                 text={"Export Transcript"}

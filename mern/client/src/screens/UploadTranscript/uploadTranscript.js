@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import "./uploadTranscript.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css"
 import GenericButton from "../../Components/Buttons/GenericButton";
-import Scrollbar from "../../Components/transcript-scroller.component";
-import scroller from "../../Components/transcript-scroller.component.css"
+import Scrollbar from "../../Components/TranscriptScroller/transcript-scroller.component";
 import { Navigate, useNavigate } from "react-router-dom";
 
 
