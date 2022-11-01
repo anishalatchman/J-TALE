@@ -4,7 +4,7 @@ import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
-import axios from "axios";
+import { transcriptJSONConverter } from "../../utils/transcript";
 
 function UploadTranscript() {
   const Navigate = useNavigate();
@@ -37,6 +37,7 @@ function UploadTranscript() {
     fileReader.onload = (event) => {
       setFiles(event.target.result);
     };
+    console.log(typeof fileName, "This is the type of filename");
   };
   return (
     <div className="container">
@@ -62,11 +63,7 @@ function UploadTranscript() {
       <div className="buttonContainer2">
         <GenericButton
           buttonType={files ? "blue" : "disabled"}
-          onClick={() =>
-            axios
-              .post("http://localhost:5000/transcript/add", files)
-              .then(console.log("Transcript Uploaded!"))
-          }
+          onClick={() => transcriptJSONConverter(fileName, files)}
           disabled={files ? false : true}
           text={"Begin Session"}
         />
@@ -78,9 +75,6 @@ function UploadTranscript() {
           disabled={false}
           text={"Go Back"}
         />
-      </div>
-      <div class="scroller">
-        <Scrollbar />
       </div>
     </div>
   );
