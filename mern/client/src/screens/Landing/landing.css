@@ -14,7 +14,6 @@
   
 .title{
     @apply text-center mt-20 mb-6 font-montserrat;
-    /* font-family: 'Montserrat', sans-serif; */
     font-size: 50px;
     font-weight: 800;
 }
