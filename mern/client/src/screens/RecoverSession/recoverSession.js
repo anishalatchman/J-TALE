@@ -2,22 +2,30 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./recoverSession.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { withRouter } from "../../withRouter";
 
-export default class RecoverSession extends Component {
+
+class RecoverSession extends Component {
   constructor(props) {
     super(props);
 
     this.state = {value: ''};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleBack = this.handleBack.bind(this);
     };
 
     handleChange(event) {    
-      this.setState({value: event.target.value}); 
+      this.setState({value: event.target.value});
     }
     handleSubmit(event) {
       alert('A name was submitted: ' + this.state.value);
       event.preventDefault();
+    }
+    handleBack(event) {
+      this.props.navigate('/') 
     }
 
   render() {
@@ -39,7 +47,7 @@ export default class RecoverSession extends Component {
       <div className="buttonContainer">
         <GenericButton
               buttonType="outline"
-              onClick={() => null}
+              onClick={this.handleBack}
               disabled={false}
               text={"Go Back"}
             />
@@ -48,3 +56,48 @@ export default class RecoverSession extends Component {
     );
   }
 }
+
+export default withRouter(RecoverSession);
+
+// FUNCTIONAL RECAT VRSN:
+// function RecoverSession() {
+//   const Navigate = useNavigate();
+//   const PageChange = (url) => {
+//   Navigate(url);
+//   }
+
+//     const [name, setName] = useState(0);
+
+//     const handleSubmit = (event) => {
+//       event.preventDefault();
+//       alert(`The name you entered was: ${name}`)
+//       console.log(name)
+//     }
+
+//     return (
+//       <div className="container">
+//         <h1 className="pageTitle">
+//           Recover Session
+//         </h1>
+//       <form>
+//         <label>Enter your name:
+//           <input 
+//             type="text" 
+//             value={name}
+//             onChange={(e) => setName(e.target.value)}
+//           />
+//         </label>
+//         <input type="submit" />
+//       </form>
+//       <div className="buttonContainer">
+//         <GenericButton
+//               buttonType="outline"
+//               onClick={() => PageChange("/")}
+//               disabled={false}
+//               text={"Go Back"}
+//             />
+//       </div>
+//       </div>
+//     );
+//   }
+//   export default RecoverSession
