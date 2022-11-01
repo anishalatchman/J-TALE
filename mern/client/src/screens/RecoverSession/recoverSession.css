@@ -4,7 +4,7 @@
 
 .pageTitle{
     @apply text-center mx-auto text-4xl font-montserrat font-bold mt-20;
-    font-size: 50px;
+    font-size: 60px;
 }
 
 .subtitle{

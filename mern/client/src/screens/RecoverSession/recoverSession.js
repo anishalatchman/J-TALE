@@ -4,40 +4,50 @@ import "./recoverSession.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { withRouter } from "../../withRouter";
 
-function RecoverSession() {
-  const Navigate = useNavigate();
-  const PageChange = (url) => {
-  Navigate(url);
-  }
 
-    const [name, setName] = useState(0);
+class RecoverSession extends Component {
+  constructor(props) {
+    super(props);
 
-    const handleSubmit = (event) => {
+    this.state = {value: ''};
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleBack = this.handleBack.bind(this);
+    };
+
+    handleChange(event) {    
+      this.setState({value: event.target.value});
+    }
+    handleSubmit(event) {
+      alert('A name was submitted: ' + this.state.value);
       event.preventDefault();
-      alert(`The name you entered was: ${name}`)
-      console.log(name)
+    }
+    handleBack(event) {
+      this.props.navigate('/') 
     }
 
+  render() {
     return (
       <div className="container">
         <h1 className="pageTitle">
           Recover Session
         </h1>
-      <form>
-        <label>Enter your name:
-          <input 
-            type="text" 
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
-        <input type="submit" />
+      <form className="inputForm w-1/3 mx-auto" onSubmit={this.handleSubmit}> 
+          <label className="text-xl text-white font-nunito font-medium"> Input Session ID </label>
+          <input className="m-6 w-3/4 pl-4 pr-2 pt-2 pb-2 block rounded-full text-black" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Session ID" />        
+          <GenericButton
+              buttonType="white"
+              onClick={() => this.handleChange}
+              disabled={false}
+              text={"Begin Session"}
+            />
       </form>
       <div className="buttonContainer">
         <GenericButton
               buttonType="outline"
-              onClick={() => PageChange("/")}
+              onClick={this.handleBack}
               disabled={false}
               text={"Go Back"}
             />
@@ -45,45 +55,44 @@ function RecoverSession() {
       </div>
     );
   }
-  export default RecoverSession
+}
 
-// export default class RecoverSession extends Component {
-//   constructor(props) {
-//     super(props);
+export default withRouter(RecoverSession);
 
-//     this.state = {value: ''};
-//     this.handleChange = this.handleChange.bind(this);
-//     this.handleSubmit = this.handleSubmit.bind(this);
-//     };
+// FUNCTIONAL RECAT VRSN:
+// function RecoverSession() {
+//   const Navigate = useNavigate();
+//   const PageChange = (url) => {
+//   Navigate(url);
+//   }
 
-//     handleChange(event) {    
-//       this.setState({value: event.target.value}); 
-//     }
-//     handleSubmit(event) {
-//       alert('A name was submitted: ' + this.state.value);
+//     const [name, setName] = useState(0);
+
+//     const handleSubmit = (event) => {
 //       event.preventDefault();
+//       alert(`The name you entered was: ${name}`)
+//       console.log(name)
 //     }
 
-//   render() {
 //     return (
 //       <div className="container">
 //         <h1 className="pageTitle">
 //           Recover Session
 //         </h1>
-//       <form className="inputForm w-1/3 mx-auto" onSubmit={this.handleSubmit}> 
-//           <label className="text-xl text-white font-nunito font-medium"> Input Session ID </label>
-//           <input className="m-6 w-3/4 pl-4 pr-2 pt-2 pb-2 block rounded-full text-black" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Session ID" />        
-//           <GenericButton
-//               buttonType="white"
-//               onClick={() => this.handleChange}
-//               disabled={false}
-//               text={"Begin Session"}
-//             />
+//       <form>
+//         <label>Enter your name:
+//           <input 
+//             type="text" 
+//             value={name}
+//             onChange={(e) => setName(e.target.value)}
+//           />
+//         </label>
+//         <input type="submit" />
 //       </form>
 //       <div className="buttonContainer">
 //         <GenericButton
 //               buttonType="outline"
-//               onClick={() => null}
+//               onClick={() => PageChange("/")}
 //               disabled={false}
 //               text={"Go Back"}
 //             />
@@ -91,18 +100,4 @@ function RecoverSession() {
 //       </div>
 //     );
 //   }
-// }
-
-{/* <form className="inputForm w-1/3 mx-auto" onSubmit={this.handleSubmit}>  */}
-
-        {/* <label>Input Session ID</label>
-        <br />
-        <input 
-          name='inputSessionId' 
-          type='text' // store whatever gets inputted inside of a variable 
-          // that variable is passed to handleSubmit()
-        />
-        <br/>
-          <label className="text-xl text-white font-nunito font-medium"> Input Session ID </label>
-          <input className="m-6 w-3/4 pl-4 pr-2 pt-2 pb-2 block rounded-full text-black" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Session ID" />        
-          */}
+//   export default RecoverSession
