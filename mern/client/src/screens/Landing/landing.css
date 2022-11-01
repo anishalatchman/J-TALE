@@ -11,6 +11,7 @@
     font-family: "Nunito";
     src: url(../../../fonts/Nunito-VariableFont_wght.ttf);
   }
+  
 .title{
     @apply text-center mt-20 mb-6 font-montserrat;
     /* font-family: 'Montserrat', sans-serif; */
