@@ -23,8 +23,6 @@ function UploadTranscript() {
   //What happens when file is chosen
   const handleFileChange = (event) => {
     const fileObj = event.target.files && event.target.files[0];
-    console.log(typeof event.target.files[0]);
-    console.log(event.target.files[0]);
     if (!fileObj) {
       return;
     }
@@ -37,7 +35,6 @@ function UploadTranscript() {
     fileReader.onload = (event) => {
       setFiles(event.target.result);
     };
-    console.log(typeof fileName, "This is the type of filename");
   };
   return (
     <div className="container">
@@ -63,7 +60,9 @@ function UploadTranscript() {
       <div className="buttonContainer2">
         <GenericButton
           buttonType={files ? "blue" : "disabled"}
-          onClick={() => transcriptJSONConverter(fileName, files)}
+          onClick={() => {
+            transcriptJSONConverter(fileName, files);
+          }}
           disabled={files ? false : true}
           text={"Begin Session"}
         />

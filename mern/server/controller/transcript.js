@@ -11,16 +11,14 @@ export const getTranscript = asyncHandler(async (req, res) => {
 });
 
 export const createTranscript = asyncHandler(async (req, res) => {
-  console.log("Hello");
   const data = req.body.data;
   const name = req.body.name;
 
-  const transcriptExists = await Transcipt.findOne({ name });
+  const transcriptExists = await Transcript.findOne({ name });
 
   if (transcriptExists) {
     res.status(400).json("Card already exists");
   }
-  console.log(data, name);
   const transcript = await Transcript.create({
     name,
     data,
@@ -44,7 +42,6 @@ export const createTranscriptAPI = asyncHandler(async (req, res) => {
   let vf_transcript;
 
   try {
-    console.log(vf_transcript, 1);
     new Transcript({ name: req.body.name, data: body.toString() })
       .save()
       .then(() => res.json({ id }));
