@@ -2,18 +2,23 @@ import React from "react";
 import "./uploadTranscript.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
-import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import { transcriptJSONConverter } from "../../utils/transcript";
+import { useNavigate } from "react-router-dom";
+import SuccessModal from "./SuccessModal";
 
 function UploadTranscript() {
+
   const Navigate = useNavigate();
-  const PageChange = () => {
-    Navigate("/");
+
+  const PageChange = (url) => {
+    Navigate(url);
   };
+
   const inputRef = useRef(null);
   const [fileName, setFileName] = useState("No files chosen");
   const [files, setFiles] = useState();
+  const [openSuccessModal, setOpenSuccessModal] = useState(false)
 
   const handleClick = () => {
     // open file input box on click of button
@@ -61,19 +66,24 @@ function UploadTranscript() {
         <GenericButton
           buttonType={files ? "blue" : "disabled"}
           onClick={() => {
-            transcriptJSONConverter(fileName, files);
+            transcriptJSONConverter(fileName, files); // Checks if the transcript is a string, and then sends transcript to DB
+            setOpenSuccessModal(true);
           }}
           disabled={files ? false : true}
           text={"Begin Session"}
         />
+    
         <GenericButton
           buttonType="outline"
           onClick={() => {
-            PageChange();
+            PageChange("/");
           }}
           disabled={false}
           text={"Go Back"}
         />
+        {openSuccessModal && (
+          <SuccessModal closeModal={setOpenSuccessModal} fileName = {fileName} />
+        )}
       </div>
     </div>
   );

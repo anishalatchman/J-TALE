@@ -1,0 +1,50 @@
+{
+    "questions": {
+        "q1" : {
+            "question": "What kind of pizza do you want to order?",
+            "intents": ["cheese", "pepperoni", "hawaiian", "vegetarian"],
+            "children": [{
+                "q1": {
+
+                },
+                "q2": {
+
+                },
+                "q3": {
+
+                }
+            }]
+        },
+        "q2":{
+            "question": "What kind of shoes do you want to purchase?",
+            "intents": ["cheese", "pepperoni", "hawaiian", "vegetarian"],
+            "children": [{
+                "q1": {
+
+                },
+                "q2": {
+
+                },
+                "q3": {
+                    
+                }
+            }]
+        },
+        "q3": {
+            "question": "What kind of clothes do you want to buy?",
+            "intents": ["cheese", "pepperoni", "hawaiian", "vegetarian"],
+            "children": [{
+                "q1": {
+
+                },
+                "q2": {
+
+                },
+                "q3": {
+                    
+                }
+            }]
+
+        }
+    } 
+}

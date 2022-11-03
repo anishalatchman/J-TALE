@@ -1,10 +1,12 @@
 import axios from "axios";
 
 export function transcriptJSONConverter(fileName, body) {
+
   if (typeof fileName === "string") {
     const transcript = { name: fileName, data: body };
     uploadFile(transcript);
   }
+
 }
 
 export function uploadFile(transcript) {
@@ -16,3 +18,4 @@ export function uploadFile(transcript) {
     })
     .catch((e) => console.log(e.response.data));
 }
+
