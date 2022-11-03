@@ -17,7 +17,7 @@
         },
         "q2":{
             "question": "What kind of shoes do you want to purchase?",
-            "intents": ["cheese", "pepperoni", "hawaiian", "vegetarian"],
+            "intents": ["Runners", "Yeezys", "Jordans", "Dunks"],
             "children": [{
                 "q1": {
 
@@ -32,7 +32,7 @@
         },
         "q3": {
             "question": "What kind of clothes do you want to buy?",
-            "intents": ["cheese", "pepperoni", "hawaiian", "vegetarian"],
+            "intents": ["Shirts", "Pants", "Socks", "Jackets"],
             "children": [{
                 "q1": {
 
