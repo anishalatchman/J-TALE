@@ -2,7 +2,8 @@ import React from "react";
 import "./uploadTranscript.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
-import { useNavigate } from "react-router-dom";
+import Scrollbar from "../../Components/TranscriptScroller/transcript-scroller.component";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function UploadTranscript() {
   const Navigate = useNavigate();
@@ -39,6 +40,9 @@ function UploadTranscript() {
           text={"Go Back"}
         />
       </div>
+      <div class="scroller">
+          <Scrollbar/>
+        </div>
     </div>
   );
 }

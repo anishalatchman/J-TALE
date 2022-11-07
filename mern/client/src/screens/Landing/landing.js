@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 
 function Landing() {
   const Navigate = useNavigate();
-  const PageChange = () => {
-    Navigate("/upload");
-  };
+  const PageChange = (url) => {
+    Navigate(url);
+  }
   return (
     <div className="container">
       <h1 className="h1 title">
@@ -17,15 +17,13 @@ function Landing() {
       <div className="buttonContainer">
         <GenericButton
           buttonType="blue"
-          onClick={() => {
-            PageChange();
-          }}
+          onClick={() => {PageChange("/upload")}}
           disabled={false}
           text={"Upload Transcript"}
         />
         <GenericButton
           buttonType="outline"
-          onClick={() => null}
+          onClick={() => {PageChange("/recover")}}
           disabled={false}
           text={"Recover Session"}
         />
