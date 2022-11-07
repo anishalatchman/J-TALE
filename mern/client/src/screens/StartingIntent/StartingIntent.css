@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.title{
-    @apply text-center mt-32 mb-6;
-    font-size: 64px;
+.intentTitle{
+    @apply text-left mt-32 mb-6 font-montserrat;
+    font-weight: 800;
+    font-size: 58px;
 }
 
 .intentContainer{

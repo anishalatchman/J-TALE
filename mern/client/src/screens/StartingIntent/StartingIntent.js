@@ -12,7 +12,7 @@ function StartingIntent() {
   return (
     <div className="container">
       <div className="intentContainer">
-        <h1 className="h1 title">How can I help you today?</h1>
+        <h1 className="h1 intentTitle">How can I help you today?</h1>
         <div>
           <div>
             <GenericButton buttonType="intent1" text={"Order Pizza"} />
