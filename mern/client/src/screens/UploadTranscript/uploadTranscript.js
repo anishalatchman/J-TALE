@@ -26,7 +26,7 @@ function UploadTranscript() {
         Choose File</button>
       </div>
       <h4 className="subtitle">No files chosen</h4>
-      <div className="buttonContainer2">
+      <div className="buttonRow">
         <GenericButton
           buttonType="blue"
           onClick={() => null}
