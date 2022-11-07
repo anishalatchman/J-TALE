@@ -67,12 +67,10 @@ function UploadTranscript() {
           buttonType={files ? "blue" : "disabled"}
           onClick={() => {
             transcriptJSONConverter(fileName, files); // Checks if the transcript is a string, and then sends transcript to DB
-            setOpenSuccessModal(true);
-          }}
+            setOpenSuccessModal(true)}}
           disabled={files ? false : true}
           text={"Begin Session"}
         />
-    
         <GenericButton
           buttonType="outline"
           onClick={() => {

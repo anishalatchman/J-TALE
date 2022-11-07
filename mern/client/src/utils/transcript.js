@@ -1,21 +1,32 @@
 import axios from "axios";
 
-export function transcriptJSONConverter(fileName, body) {
+var res
 
-  if (typeof fileName === "string") {
-    const transcript = { name: fileName, data: body };
-    uploadFile(transcript);
-  }
+// Sends Transcript to Database
+async function uploadFile(transcript) {
 
-}
-
-export function uploadFile(transcript) {
   axios
     .post("http://localhost:5000/transcript/add", transcript)
     .then(() => {
       console.log("Transcript Uploaded!");
-      return true;
+      return true
     })
-    .catch((e) => console.log(e.response.data));
+    .catch((e) => {
+      return e.response.data
+    });
+  
+} 
+
+// Checks if transcript file is a string and calls Upload Transcript
+export async function transcriptJSONConverter(fileName, body) {
+
+  if (typeof fileName === "string") {
+
+    // Defines new obj transcript in form required by mongoose schemas
+    const transcript = { name: fileName, data: body };
+    res = await uploadFile(transcript);
+    console.log(res)
+    return res
+  }
 }
 

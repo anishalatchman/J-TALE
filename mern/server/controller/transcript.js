@@ -26,8 +26,7 @@ export const createTranscript = asyncHandler(async (req, res) => {
   if (transcript) {
     res.status(200).json({
       id: transcript.id,
-      name: transcript.name,
-      data: transcript.data,
+      name: transcript.name
     });
   } else {
     res.status(400).json("Invalid transcript Data");

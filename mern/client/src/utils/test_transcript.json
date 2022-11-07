@@ -1,50 +1,2034 @@
 {
-    "questions": {
-        "q1" : {
-            "question": "What kind of pizza do you want to order?",
-            "intents": ["cheese", "pepperoni", "hawaiian", "vegetarian"],
-            "children": [{
+  "id": "test123456789",
+  "questions": {
+    "q1": {
+      "question": "What kind of pizza do you want to order?",
+      "intents": [
+        {
+          "intent1": {
+            "value": "cheese",
+            "included": false,
+            "children": [
+              {
                 "q1": {
-
+                  "question": "What size of pizza would you like?",
+                  "intents": [
+                    {
+                      "intent1": {
+                        "value": "small",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "Would you like a combination?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "yes",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "How would  you like to pay?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "credit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "debit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "paypal",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent2": {
+                                    "value": "no",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "How would  you like to pay?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "credit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "debit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "paypal",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            },
+                            "q2": {
+                              "question": "How many additional toppings?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "0",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent2": {
+                                    "value": "1",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent3": {
+                                    "value": "2",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent4": {
+                                    "value": "3",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      },
+                      "intent2": {
+                        "value": "medium",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "Would you like a combination?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "yes",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "How would  you like to pay?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "credit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "debit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "paypal",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent2": {
+                                    "value": "no",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "How would  you like to pay?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "credit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "debit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "paypal",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            },
+                            "q2": {
+                              "question": "How many additional toppings?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "0",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent2": {
+                                    "value": "1",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent3": {
+                                    "value": "2",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent4": {
+                                    "value": "3",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      },
+                      "intent3": {
+                        "value": "large",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "Would you like a combination?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "yes",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "How would  you like to pay?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "credit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "debit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "paypal",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent2": {
+                                    "value": "no",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "How would  you like to pay?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "credit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "debit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "paypal",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            },
+                            "q2": {
+                              "question": "How many additional toppings?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "0",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent2": {
+                                    "value": "1",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent3": {
+                                    "value": "2",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent4": {
+                                    "value": "3",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "question_included": false
                 },
                 "q2": {
-
-                },
-                "q3": {
-
+                  "question": "How many additional toppings?",
+                  "intents": [
+                    {
+                      "intent1": {
+                        "value": "0",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "What toppings do you want?",
+                              "intents": [{}],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      },
+                      "intent2": {
+                        "value": "1",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "What toppings do you want?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "sausage",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent2": {
+                                    "value": "peppers",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent3": {
+                                    "value": "mushrooms",
+                                    "included": false,
+                                    "children": [{}]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      },
+                      "intent3": {
+                        "value": "2",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "What toppings do you want?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "sausage",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent2": {
+                                    "value": "peppers",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent3": {
+                                    "value": "mushrooms",
+                                    "included": false,
+                                    "children": [{}]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      },
+                      "intent4": {
+                        "value": "3",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "What toppings do you want?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "sausage",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent2": {
+                                    "value": "peppers",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent3": {
+                                    "value": "mushrooms",
+                                    "included": false,
+                                    "children": [{}]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "question_included": false
                 }
-            }]
-        },
-        "q2":{
-            "question": "What kind of shoes do you want to purchase?",
-            "intents": ["Runners", "Yeezys", "Jordans", "Dunks"],
-            "children": [{
+              }
+            ]
+          },
+          "intent2": {
+            "value": "pepperoni",
+            "included": false,
+            "children": [
+              {
                 "q1": {
-
+                  "question": "What size of pizza would you like?",
+                  "intents": [
+                    {
+                      "intent1": {
+                        "value": "small",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "Would you like a combination?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "yes",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "How would you like to pay?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "credit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "debit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "paypal",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent2": {
+                                    "value": "no",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "How would  you like to pay?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "credit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "debit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "paypal",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            },
+                            "q2": {
+                              "question": "How many additional toppings?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "0",
+                                    "included": false,
+                                    "children": [{}],
+                                    "question_included": false
+                                  },
+                                  "intent2": {
+                                    "value": "1",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent3": {
+                                    "value": "2",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent4": {
+                                    "value": "3",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      },
+                      "intent2": {
+                        "value": "medium",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "Would you like a combination?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "yes",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {},
+                                        "q2": {},
+                                        "q3": {}
+                                      }
+                                    ]
+                                  },
+                                  "intent2": {
+                                    "value": "no",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "How would  you like to pay?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "credit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "debit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "paypal",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            },
+                            "q2": {
+                              "question": "How many additional toppings?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "0",
+                                    "included": false,
+                                    "children": [{}],
+                                    "question_included": false
+                                  },
+                                  "intent2": {
+                                    "value": "1",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent3": {
+                                    "value": "2",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent4": {
+                                    "value": "3",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      },
+                      "intent3": {
+                        "value": "large",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "Would you like a combination?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "yes",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {},
+                                        "q2": {},
+                                        "q3": {}
+                                      }
+                                    ]
+                                  },
+                                  "intent2": {
+                                    "value": "no",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "How would  you like to pay?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "credit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "debit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "paypal",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            },
+                            "q2": {
+                              "question": "How many additional toppings?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "0",
+                                    "included": false,
+                                    "children": [{}],
+                                    "question_included": false
+                                  },
+                                  "intent2": {
+                                    "value": "1",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent3": {
+                                    "value": "2",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent4": {
+                                    "value": "3",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "question_included": false
                 },
                 "q2": {
-
-                },
-                "q3": {
-                    
+                  "question": "How many additional toppings?",
+                  "intents": [
+                    {
+                      "intent1": {
+                        "value": "0",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "What toppings do you want?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "sausage",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent2": {
+                                    "value": "peppers",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent3": {
+                                    "value": "mushrooms",
+                                    "included": false,
+                                    "children": [{}]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      },
+                      "intent2": {
+                        "value": "1",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "What toppings do you want?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "sausage",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent2": {
+                                    "value": "peppers",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent3": {
+                                    "value": "mushrooms",
+                                    "included": false,
+                                    "children": [{}]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      },
+                      "intent3": {
+                        "value": "2",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "What toppings do you want?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "sausage",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent2": {
+                                    "value": "peppers",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent3": {
+                                    "value": "mushrooms",
+                                    "included": false,
+                                    "children": [{}]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      },
+                      "intent4": {
+                        "value": "3",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "What toppings do you want?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "sausage",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent2": {
+                                    "value": "peppers",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent3": {
+                                    "value": "mushrooms",
+                                    "included": false,
+                                    "children": [{}]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "question_included": false
                 }
-            }]
-        },
-        "q3": {
-            "question": "What kind of clothes do you want to buy?",
-            "intents": ["Shirts", "Pants", "Socks", "Jackets"],
-            "children": [{
+              }
+            ]
+          },
+          "intent3": {
+            "value": "hawaiian",
+            "included": false,
+            "children": [
+              {
                 "q1": {
-
+                  "question": "What size of pizza would you like?",
+                  "intents": [
+                    {
+                      "intent1": {
+                        "value": "small",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "Would you like a combination?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "yes",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "How would  you like to pay?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "credit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "debit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "paypal",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent2": {
+                                    "value": "no",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "How would  you like to pay?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "credit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "debit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "paypal",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            },
+                            "q2": {
+                              "question": "How many additional toppings?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "0",
+                                    "included": false,
+                                    "children": [{}],
+                                    "question_included": false
+                                  },
+                                  "intent2": {
+                                    "value": "1",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent3": {
+                                    "value": "2",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent4": {
+                                    "value": "3",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      },
+                      "intent2": {
+                        "value": "medium",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "Would you like a combination?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "yes",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "question": "How would  you like to pay?",
+                                        "intents": [
+                                          {
+                                            "intent1": {
+                                              "value": "credit",
+                                              "included": false,
+                                              "children": [{}]
+                                            },
+                                            "intent2": {
+                                              "value": "debit",
+                                              "included": false,
+                                              "children": [{}]
+                                            },
+                                            "intent3": {
+                                              "value": "paypal",
+                                              "included": false,
+                                              "children": [{}]
+                                            }
+                                          }
+                                        ],
+                                        "question_included": false
+                                      }
+                                    ]
+                                  },
+                                  "intent2": {
+                                    "value": "no",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "How would  you like to pay?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "credit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "debit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "paypal",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            },
+                            "q2": {
+                              "question": "How many additional toppings?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "0",
+                                    "included": false,
+                                    "children": [{}],
+                                    "question_included": false
+                                  },
+                                  "intent2": {
+                                    "value": "1",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent3": {
+                                    "value": "2",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent4": {
+                                    "value": "3",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      },
+                      "intent3": {
+                        "value": "large",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "Would you like a combination?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "yes",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "How would  you like to pay?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "credit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "debit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "paypal",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent2": {
+                                    "value": "no",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "How would  you like to pay?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "credit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "debit",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "paypal",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            },
+                            "q2": {
+                              "question": "How many additional toppings?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "0",
+                                    "included": false,
+                                    "children": [{}],
+                                    "question_included": false
+                                  },
+                                  "intent2": {
+                                    "value": "1",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent3": {
+                                    "value": "2",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "intent4": {
+                                    "value": "3",
+                                    "included": false,
+                                    "children": [
+                                      {
+                                        "q1": {
+                                          "question": "What toppings do you want?",
+                                          "intents": [
+                                            {
+                                              "intent1": {
+                                                "value": "sausage",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent2": {
+                                                "value": "peppers",
+                                                "included": false,
+                                                "children": [{}]
+                                              },
+                                              "intent3": {
+                                                "value": "mushrooms",
+                                                "included": false,
+                                                "children": [{}]
+                                              }
+                                            }
+                                          ],
+                                          "question_included": false
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "question_included": false
                 },
                 "q2": {
-
-                },
-                "q3": {
-                    
+                  "question": "How many additional toppings?",
+                  "intents": [
+                    {
+                      "intent1": {
+                        "value": "0",
+                        "included": false,
+                        "children": [{}],
+                        "question_included": false
+                      },
+                      "intent2": {
+                        "value": "1",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "What toppings do you want?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "sausage",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent2": {
+                                    "value": "peppers",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent3": {
+                                    "value": "mushrooms",
+                                    "included": false,
+                                    "children": [{}]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      },
+                      "intent3": {
+                        "value": "2",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "What toppings do you want?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "sausage",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent2": {
+                                    "value": "peppers",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent3": {
+                                    "value": "mushrooms",
+                                    "included": false,
+                                    "children": [{}]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      },
+                      "intent4": {
+                        "value": "3",
+                        "included": false,
+                        "children": [
+                          {
+                            "q1": {
+                              "question": "What toppings do you want?",
+                              "intents": [
+                                {
+                                  "intent1": {
+                                    "value": "sausage",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent2": {
+                                    "value": "peppers",
+                                    "included": false,
+                                    "children": [{}]
+                                  },
+                                  "intent3": {
+                                    "value": "mushrooms",
+                                    "included": false,
+                                    "children": [{}]
+                                  }
+                                }
+                              ],
+                              "question_included": false
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "question_included": false
                 }
-            }]
-
+              }
+            ]
+          }
         }
-    } 
+      ],
+      "question_included": false
+    }
+  }
 }
