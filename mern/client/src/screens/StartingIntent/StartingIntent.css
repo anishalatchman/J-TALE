@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .title{
-    @apply text-center mt-40 mb-6;
+    @apply text-center mt-32 mb-6;
     font-size: 64px;
 }
 
@@ -12,6 +12,10 @@
 }
 
 .instructions{
+    @apply text-gray text-left ml-4 mt-2;
+}
+
+.instructions1{
     @apply text-gray text-left ml-4 mb-10;
 }
 

@@ -15,26 +15,26 @@ function StartingIntent() {
         <h1 className="h1 title">How can I help you today?</h1>
         <div>
           <div>
-            <GenericButton buttonType="outline" text={"Order Pizza"} />
-            <GenericButton buttonType="outline" text={"Order Drink"} />
+            <GenericButton buttonType="intent1" text={"Order Pizza"} />
+            <GenericButton buttonType="intent1" text={"Order Drink"} />
           </div>
           <div>
-            <GenericButton buttonType="outline" text={"Order Side"} />
-            <GenericButton buttonType="outline" text={"Delivery problem"} />
+            <GenericButton buttonType="intent1" text={"Order Side"} />
+            <GenericButton buttonType="intent1" text={"Delivery problem"} />
           </div>
         </div>
         <div>
           <h4 className="instructions">
             Select intents you would like to include by clicking once.
           </h4>
-          <h4 className="instructions">
+          <h4 className="instructions1">
             Choose a specific path by clicking again and selecting next.
           </h4>
         </div>
         <div>
           <GenericButton buttonType="outline" text={"Save"} />
           <GenericButton
-            buttonType="disabled"
+            buttonType="outline"
             text={"Go Back"}
             disabled={true}
           />
