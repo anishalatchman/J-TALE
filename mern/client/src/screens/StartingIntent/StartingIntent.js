@@ -3,6 +3,7 @@ import "./StartingIntent.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { useNavigate } from "react-router-dom";
+import Scrollbar from "../../Components/TranscriptScroller/transcript-scroller.component";
 
 function StartingIntent() {
   const Navigate = useNavigate();
@@ -11,6 +12,9 @@ function StartingIntent() {
   };
   return (
     <div className="container">
+        <div class="scroller">
+          <Scrollbar/>
+        </div>
       <div className="intentContainer">
         <h1 className="h1 intentTitle">How can I help you today?</h1>
         <div>

@@ -40,9 +40,6 @@ function UploadTranscript() {
           text={"Go Back"}
         />
       </div>
-      <div class="scroller">
-          <Scrollbar/>
-        </div>
     </div>
   );
 }

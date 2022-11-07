@@ -25,8 +25,9 @@
 
 .scroller { 
   background-color: rgb(221, 221, 221);
+  float: right;
   height: 700px;
-  width: 500px;
+  width: 450px;
   border-radius: 20px;
   overflow-y: auto;
   overflow-x: auto;
