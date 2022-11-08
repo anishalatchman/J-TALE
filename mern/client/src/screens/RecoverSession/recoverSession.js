@@ -59,7 +59,7 @@ class RecoverSession extends Component {
 
 export default withRouter(RecoverSession);
 
-// FUNCTIONAL RECAT VRSN:
+// FUNCTIONAL REACT VRSN:
 // function RecoverSession() {
 //   const Navigate = useNavigate();
 //   const PageChange = (url) => {

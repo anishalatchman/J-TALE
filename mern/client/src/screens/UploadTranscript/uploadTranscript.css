@@ -15,8 +15,8 @@
     @apply px-20 mb-5 items-center flex flex-col;
 }
 
-.buttonContainer2{
-    @apply px-20 mb-5 justify-center flex flex-row;
+.buttonRow{
+    @apply mb-10  justify-center flex flex-row;
 }
 
 .button1 {
