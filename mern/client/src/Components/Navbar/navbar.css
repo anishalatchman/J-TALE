@@ -20,7 +20,7 @@
 }
 
 .nav-link {
-  @apply flex-row justify-start;
+  @apply flex-row justify-start pl-10;
 }
 
 .nav-icon {
