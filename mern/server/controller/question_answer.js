@@ -17,17 +17,19 @@ export const createQA = asyncHandler( async(req, res) => {
 
     const question = req.body.question
     const intent = req.body.intent
+    const level = req.body.intent
+    const children = req.body.children
 
     const qa = await QA.create({
         question,
-        intent
+        intent,
+        level,
+        children
     });
 
     try {
         res.status(200).json({
-            id: qa.id,
-            question: qa.question,
-            intent: qa.intent
+            id: qa.id
         });
       } catch {
         res.status(400).json("Invalid QA Data");
@@ -45,11 +47,13 @@ export const deleteQA = asyncHandler( async(req, res) => {
     }
 })
 
-export const updateQA = asyncHandler( async(req, res) => {
+export const updateQA = asyncHandler(async(req, res) => {
 
     const qa = await QA.findById(req.params.id)
     const question = req.body.question
     const intent = req.body.intent
+    const level = req.body.level
+    const children = req.body.children
 
     if(!qa){
         res.status(401).json("QA not Found")
@@ -61,6 +65,12 @@ export const updateQA = asyncHandler( async(req, res) => {
         }
         if(intent){
             qa.intent = intent
+        }
+        if(level){
+            qa.level = level
+        }
+        if(children){
+            qa.children = children
         }
         qa.save()
         res.status(200).json(qa.id)
