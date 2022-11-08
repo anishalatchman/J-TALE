@@ -26,17 +26,18 @@
 .scroller { 
   background-color: rgb(221, 221, 221);
   float: right;
-  height: 700px;
+  height: 550px;
   width: 450px;
   border-radius: 20px;
   overflow-y: auto;
   overflow-x: auto;
+  padding-left: 20px;
  }
 
 .scrollerTitle{
-  @apply text-center mt-10 mb-6 font-montserrat;
+  @apply mt-6 mb-6 font-montserrat;
   /* font-family: 'Montserrat', sans-serif; */
-  font-size: 60px;
+  font-size: 35px;
   font-weight: 800;
 }
 

@@ -3,8 +3,7 @@
 @tailwind utilities;
 
 .intentTitle{
-    @apply text-left mt-32 mb-6 font-montserrat;
-    font-weight: 800;
+    @apply text-left mt-16 mb-6 font-montserrat font-bold;
     font-size: 58px;
 }
 
