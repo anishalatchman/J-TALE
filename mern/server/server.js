@@ -22,9 +22,11 @@ connection.once("open", () => {
 
 import qaRouter from "./routes/question_answer.js";
 import transcriptRouter from "./routes/transcript.js";
+import flowRouter from './routes/flow.js'
 
 app.use("/qa", qaRouter);
 app.use("/transcript", transcriptRouter);
+app.use("/flow", flowRouter)
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

@@ -8,12 +8,14 @@ const QASchema = new Schema({
         require: true
     },
     intents: [{
-        name: String,
-        value: mongoose.Schema.Types.ObjectId, ref: 'QA'
+        type: String,
+        included: Boolean,
+        children: mongoose.Schema.Types.Mixed
     }],
     level:{
         type: Number
-    }
+    },
+    included: Boolean
 })
 
 const QA = mongoose.model("QA", QASchema)

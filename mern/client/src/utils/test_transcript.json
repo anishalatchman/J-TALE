@@ -1,6 +1,5 @@
 {
-  "id": "test123456789",
-  "questions": {
+  "questions": [{
     "q1": {
       "question": "What kind of pizza do you want to order?",
       "intents": [
@@ -2030,5 +2029,5 @@
       ],
       "question_included": false
     }
-  }
+  }]
 }
