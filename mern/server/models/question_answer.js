@@ -1,24 +1,21 @@
-import mongoose from "mongoose"
+import mongoose, { Mongoose } from "mongoose"
 
 const Schema = mongoose.Schema;
 
-const QAShema = new Schema({
+const QASchema = new Schema({
     question:{
         type: String,
         require: true
     },
     intents: [{
-        type: String
+        name: String,
+        value: mongoose.Schema.Types.ObjectId, ref: 'QA'
     }],
     level:{
         type: Number
-    },
-    children: [{
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'QA',
-    }]
+    }
 })
 
-const QA = mongoose.model("QA", QAShema)
+const QA = mongoose.model("QA", QASchema)
 
 export default QA

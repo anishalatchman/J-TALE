@@ -23,8 +23,7 @@ export const createQA = asyncHandler( async(req, res) => {
     const qa = await QA.create({
         question,
         intent,
-        level,
-        children
+        level
     });
 
     try {
@@ -53,7 +52,6 @@ export const updateQA = asyncHandler(async(req, res) => {
     const question = req.body.question
     const intent = req.body.intent
     const level = req.body.level
-    const children = req.body.children
 
     if(!qa){
         res.status(401).json("QA not Found")
@@ -68,9 +66,6 @@ export const updateQA = asyncHandler(async(req, res) => {
         }
         if(level){
             qa.level = level
-        }
-        if(children){
-            qa.children = children
         }
         qa.save()
         res.status(200).json(qa.id)

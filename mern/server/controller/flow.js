@@ -1,4 +1,5 @@
-import Flow from "../models/flow.js"
+import Flow from "../models/flow.model.js"
+import parseTranscript from "../utils/parsetranscript.js";
 import asyncHandler from "express-async-handler";
 
 export const getFlow = asyncHandler(async(req, res) => {
@@ -14,8 +15,12 @@ export const getFlow = asyncHandler(async(req, res) => {
 export const createFlow = asyncHandler(async(req, res) => {
 
     const name = res.body.name
-    
+    const transcript = req.body.transcript
+
     // Calls Function to Craete the QA Pair and returns the top level pairs
+    const question = parseTranscript(transcript)
+
+
 
 })
 
