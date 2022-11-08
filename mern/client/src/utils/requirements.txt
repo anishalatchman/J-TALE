@@ -1,0 +1,60 @@
+This is associated with the test_transcript.json file
+
+Here we have description of how the transcript is formated:
+
+Question 1: What kind of pizza do you want to order
+- Cheese
+    - What Size:
+        -Small
+            - Would you like a combo
+                - Yes
+                    - Payment
+                - No
+                    - Payment
+            - Do you want additional Toppings
+                - 0
+                - 1
+                    - Sausgae, Peppers, Mushrooms
+                - 2
+                    -Sausgae, Peppers, Mushrooms
+                - 3
+                    - Sausgae, Peppers, Mushrooms
+        -Medium
+                        - Would you like a combo
+                - Yes
+                    - Payment
+                - No
+                    - Payment
+            - Do you want additional Toppings
+                - 0
+                - 1
+                    - Sausgae, Peppers, Mushrooms
+                - 2
+                    -Sausgae, Peppers, Mushrooms
+                - 3
+                    - Sausgae, Peppers, Mushrooms
+        -Large
+                        - Would you like a combo
+                - Yes
+                    - Payment
+                - No
+                    - Payment
+            - Do you want additional Toppings
+                - 0
+                - 1
+                    - Sausgae, Peppers, Mushrooms
+                - 2
+                    -Sausgae, Peppers, Mushrooms
+                - 3
+                    - Sausgae, Peppers, Mushrooms
+    - Do you want additional Toppings
+        - 0
+        - 1
+            - Sausgae, Peppers, Mushrooms
+        - 2
+            -Sausgae, Peppers, Mushrooms
+        - 3
+            - Sausgae, Peppers, Mushrooms
+- Pepperoni 
+- Hawaiian
+- Note Same Questions are given for Pepperoni and Hawaiian so info is not rewritten
