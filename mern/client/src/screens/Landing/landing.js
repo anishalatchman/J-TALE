@@ -1,8 +1,7 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React from "react";
 import "./landing.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Landing() {
 
@@ -34,7 +33,7 @@ function Landing() {
     </div>
   );
 }
-export default Landing
+export default Landing;
 
 // export default class Landing extends Component {
 //   // constructor(props) {

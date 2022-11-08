@@ -15,6 +15,7 @@ module.exports = {
       colors: {
         "voiceflow-blue": "#1C4EFF",
         "lighter-blue": "#5AA6FF",
+        gray: "rgba(0,0,0,0.5)",
       },
       // fontFamily: {
       //   "montserrat": ["Montserrat", "sans-serif"],
