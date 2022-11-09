@@ -1,4 +1,4 @@
-import mongoose, { Mongoose } from "mongoose"
+import mongoose from "mongoose"
 
 const Schema = mongoose.Schema;
 
@@ -12,9 +12,9 @@ const QASchema = new Schema({
         included: Boolean,
         children: mongoose.Schema.Types.Mixed
     }],
-    level:{
-        type: Number
-    },
+    // level:{
+    //     type: Number
+    // },
     included: Boolean
 })
 
