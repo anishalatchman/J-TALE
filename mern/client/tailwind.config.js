@@ -8,8 +8,8 @@ module.exports = {
   purge: [],
   theme: {
     fontFamily: {
-      'montserrat': 'Montserrat, sans-serif',
-      'nunito': 'Nunito, sans-serif',
+      montserrat: "Montserrat, sans-serif",
+      nunito: "Nunito, sans-serif",
     },
     extend: {
       colors: {
@@ -22,8 +22,8 @@ module.exports = {
       // }
     },
     minWidth: {
-      '15': '15%',
-    }
+      15: "15%",
+    },
   },
   variants: {},
   plugins: [],
