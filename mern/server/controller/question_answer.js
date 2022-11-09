@@ -17,13 +17,13 @@ export const createQA = asyncHandler( async(req, res) => {
 
     const question = req.body.question
     const intent = req.body.intent
-    const level = req.body.intent
+    // const level = req.body.intent
     const children = req.body.children
 
     const qa = await QA.create({
         question,
         intent,
-        level,
+        // level,
         children
     });
 
@@ -52,7 +52,7 @@ export const updateQA = asyncHandler(async(req, res) => {
     const qa = await QA.findById(req.params.id)
     const question = req.body.question
     const intent = req.body.intent
-    const level = req.body.level
+    // const level = req.body.level
     const children = req.body.children
 
     if(!qa){
@@ -66,9 +66,9 @@ export const updateQA = asyncHandler(async(req, res) => {
         if(intent){
             qa.intent = intent
         }
-        if(level){
-            qa.level = level
-        }
+        // if(level){
+        //     qa.level = level
+        // }
         if(children){
             qa.children = children
         }

@@ -14,13 +14,29 @@ export const getFlow = asyncHandler(async(req, res) => {
 
 export const createFlow = asyncHandler(async(req, res) => {
 
+    const name = req.body.name
     // const name = res.body.name
     const transcript = req.body
-
     // Calls Function to Craete the QA Pair and returns the top level pairs
-    const question = parseTranscript(transcript)
+    const questions = parseTranscript(transcript)
+    let flowExists = await Flow.findOne({ name });
 
+    if(flowExists){
+        res.status(404).json("Session already exists")
+    }
 
+    const flow = await Flow.create({
+        name,
+        questions
+    });
+    if (flow) {
+        res.status(200).json({
+            id: transcript.id,
+            name: transcript.name
+        });
+    } else {
+        res.status(400).json("Invalid transcript Data");
+    }
 
 })
 
