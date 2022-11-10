@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./savingSession.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
-import { withRouter } from "../../withRouter";
+import { withRouter } from "../withRouter";
 
 class SavingSession extends Component {
   constructor(props) {
