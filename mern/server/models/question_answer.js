@@ -5,7 +5,8 @@ const Schema = mongoose.Schema;
 const QASchema = new Schema({
     id: { 
         type: String,
-        require: true
+        require: true,
+        unique: true
     },
     question:{
         type: String,

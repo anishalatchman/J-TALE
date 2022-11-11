@@ -3,7 +3,8 @@ import asyncHandler from "express-async-handler";
 
 export const getQA = asyncHandler(async(req, res) => {
 
-    const qa = await QA.findById(req.params.id);
+    const id = req.body.id
+    const qa = await QA.findOne({id})
 
     if(!qa){
         res.status(400).json("No Qa Exists with Given Session ID")
@@ -15,16 +16,17 @@ export const getQA = asyncHandler(async(req, res) => {
 
 export const createQA = asyncHandler( async(req, res) => {
 
+    const id = req.body.id
     const question = req.body.question
     const intent = req.body.intent
-    // const level = req.body.intent
-    const children = req.body.children
+    const question_included = req.body.question_included
 
     const qa = await QA.create({
+
+        id,
         question,
         intent,
-        // level,
-        children
+        question_included
     });
 
     try {
@@ -39,8 +41,9 @@ export const createQA = asyncHandler( async(req, res) => {
 
 export const deleteQA = asyncHandler( async(req, res) => {
 
+    const id = req.body.id
     try{
-        const qa = await QA.findByIdAndDelete(req.params.id)
+        const qa = await QA.findOneAndDelete({id})
         res.status(200).json(qa)
     } catch(error){
         res.status(404).json("Unable to Delete QA")
@@ -49,11 +52,12 @@ export const deleteQA = asyncHandler( async(req, res) => {
 
 export const updateQA = asyncHandler(async(req, res) => {
 
-    const qa = await QA.findById(req.params.id)
+    const id = req.body.id
+    const qa = await QA.findOne({id})
+
     const question = req.body.question
-    const intent = req.body.intent
-    // const level = req.body.level
-    const children = req.body.children
+    const intents = req.body.intents
+    const question_included = req.body.question_included
 
     if(!qa){
         res.status(401).json("QA not Found")
@@ -63,14 +67,11 @@ export const updateQA = asyncHandler(async(req, res) => {
         if(question){
             qa.question = question
         }
-        if(intent){
-            qa.intent = intent
+        if(intents){
+            qa.intents = intents
         }
-        // if(level){
-        //     qa.level = level
-        // }
-        if(children){
-            qa.children = children
+        if(question_included){
+            qa.question_included = question_included
         }
         qa.save()
         res.status(200).json(qa.id)
