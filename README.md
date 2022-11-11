@@ -1,3 +1,8 @@
+# Branch naming convention
+devName/featureName
+
+(ex. jtale/landingPage)
+
 # J TALE Presents... Auto-suggest for developers
 
 ## WHAT:

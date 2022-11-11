@@ -1,55 +1,39 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React from "react";
 import "./landing.css";
+import GenericButton from "../../Components/Buttons/GenericButton";
+import { useNavigate } from "react-router-dom";
 
-export default class Landing extends Component {
-  constructor(props) {
-    super(props);
+function Landing() {
+  const Navigate = useNavigate();
+  const PageChange = (url) => {
+    Navigate(url);
+  };
 
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-
-    this.state = {
-      username: "",
-    };
-  }
-
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value,
-    });
-  }
-
-  onSubmit(e) {
-    e.preventDefault();
-
-    const user = {
-      username: this.state.username,
-    };
-
-    console.log(user);
-
-    axios
-      .post("http://localhost:5000/users/add", user)
-      .then((res) => console.log(res.data));
-
-    this.setState({
-      username: "",
-    });
-  }
-
-  render() {
-    return (
-      <div className="container">
-        <h1 className="h1 title">
-          Transcript to chatbot <br /> with a couple clicks
-        </h1>
-        <h4 className="subtitle">A flow-building plugin for Voiceflow</h4>
-        <div className="buttonContainer">
-          <button className="button">Upload Transcript</button>
-          <button className="button">Recover Session</button>
-        </div>
+  return (
+    <div className="container">
+      <h1 className="h1 title">
+        Transcript to chatbot <br /> with a couple clicks
+      </h1>
+      <h4 className="subtitle">A flow-building plugin for Voiceflow</h4>
+      <div className="buttonContainer">
+        <GenericButton
+          buttonType="blue"
+          onClick={() => {
+            PageChange("/upload");
+          }}
+          disabled={false}
+          text={"Upload Transcript"}
+        />
+        <GenericButton
+          buttonType="outline"
+          onClick={() => {
+            PageChange("/recover");
+          }}
+          disabled={false}
+          text={"Recover Session"}
+        />
       </div>
-    );
-  }
+    </div>
+  );
 }
+export default Landing;

@@ -2,13 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: "Montserrat";
+    font-weight: 800;
+    src: url(../../fonts/Montserrat-VariableFont_wght.ttf);
+  }
+  @font-face {
+    font-family: "Nunito";
+    src: url(../../fonts/Nunito-VariableFont_wght.ttf);
+  }
+  
 .title{
-    @apply text-center mt-20 mb-6;
-    font-size: 70px;
+    @apply text-center mt-20 mb-6 font-montserrat;
+    font-size: 50px;
+    font-weight: 800;
 }
 
 .subtitle{
-    @apply text-center mb-20;
+    @apply text-center mb-20 font-nunito;
+    /* font-family: 'Nunito', sans-serif; */
+    font-size: 20px;
+    font-weight: 400;
 }
 
 .buttonContainer{
