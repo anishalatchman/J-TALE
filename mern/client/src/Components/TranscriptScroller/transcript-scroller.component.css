@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Montserrat";
-  src: url(../../../fonts/Montserrat-VariableFont_wght.ttf);
+  src: url(../../fonts/Montserrat-VariableFont_wght.ttf);
 }
 
 /* width */
@@ -25,17 +25,19 @@
 
 .scroller { 
   background-color: rgb(221, 221, 221);
-  height: 700px;
-  width: 500px;
+  float: right;
+  height: 550px;
+  width: 450px;
   border-radius: 20px;
   overflow-y: auto;
   overflow-x: auto;
+  padding-left: 20px;
  }
 
 .scrollerTitle{
-  @apply text-center mt-10 mb-6 font-montserrat;
+  @apply mt-6 mb-6 font-montserrat;
   /* font-family: 'Montserrat', sans-serif; */
-  font-size: 60px;
+  font-size: 35px;
   font-weight: 800;
 }
 

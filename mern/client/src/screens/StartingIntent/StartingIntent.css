@@ -2,21 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-.title{
-    @apply text-center mt-40 mb-6;
-    font-size: 60px;
+.intentTitle{
+    @apply text-left mt-16 mb-6 font-montserrat font-bold;
+    font-size: 58px;
 }
 
-.subtitle{
-    @apply text-center mb-10;
+.intentContainer{
+    @apply w-3/4;
+}
+
+.instructions{
+    @apply text-gray text-left ml-4 mt-2;
+}
+
+.instructions1{
+    @apply text-gray text-left ml-4 mb-10;
 }
 
 .buttonContainer1{
     @apply px-20 mb-5 items-center flex flex-col;
 }
 
-.buttonRow{
-    @apply mb-10  justify-center flex flex-row;
+.buttonContainer2{
+    @apply px-20 mb-5 justify-center flex flex-row;
 }
 
 .button1 {
