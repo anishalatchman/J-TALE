@@ -53,11 +53,11 @@ export const deleteQA = asyncHandler( async(req, res) => {
 export const updateQA = asyncHandler(async(req, res) => {
 
     const id = req.body.id
-    const qa = await QA.findOne({id})
-
     const question = req.body.question
     const intents = req.body.intents
     const question_included = req.body.question_included
+    
+    const qa = await QA.findOne({id})
 
     if(!qa){
         res.status(401).json("QA not Found")
