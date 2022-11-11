@@ -15,9 +15,9 @@ const QASchema = new Schema({
         type: Boolean
     },
     intents: [{
-        type: String,
-        included: Boolean,
-        children: String
+        value: {type: String},
+        included: {type: Boolean},
+        children: [{type: String}]
     }]
 })
 

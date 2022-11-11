@@ -8,9 +8,7 @@ const flowschema = new Schema({
         require: true
     },
     questions: [{
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'QA',
-        require: true
+        type: String
     }]
 })
 
