@@ -1,9 +1,9 @@
-import express from 'express';
-import cors from 'cors';
-import mongoose from 'mongoose'
-import dotenv from 'dotenv'
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-dotenv.config()
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -22,11 +22,11 @@ connection.once("open", () => {
 
 import qaRouter from "./routes/question_answer.js";
 import transcriptRouter from "./routes/transcript.js";
-import flowRouter from './routes/flow.js'
+import flowRouter from "./routes/flow.js";
 
 app.use("/qa", qaRouter);
 app.use("/transcript", transcriptRouter);
-app.use("/flow", flowRouter)
+app.use("/flow", flowRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

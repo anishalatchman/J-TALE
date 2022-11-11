@@ -16,9 +16,10 @@ export const createFlow = asyncHandler(async(req, res) => {
 
     const name = req.body.name
     // const name = res.body.name
-    const transcript = req.body
+    const transcript = req.body.questions
     // Calls Function to Craete the QA Pair and returns the top level pairs
     const questions = parse(transcript)
+
     let flowExists = await Flow.findOne({ name });
 
     if(flowExists){
