@@ -886,7 +886,7 @@
 
             },            {
                 "id": "00100011",
-                "question": "How would you like to pay?",
+                "question": "What toppings would you like?",
                 "question_included": false,
                 "intents": [
                     {
@@ -924,7 +924,7 @@
 
             },            {
                 "id": "00100100",
-                "question": "How would you like to pay?",
+                "question": "What toppings would you like?",
                 "question_included": false,
                 "intents": [
                     {
