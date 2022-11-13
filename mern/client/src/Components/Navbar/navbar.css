@@ -12,14 +12,14 @@
 }
 
 .navbar-bg {
-    @apply bg-voiceflow-blue text-white p-4 px-20;
+    @apply flex bg-voiceflow-blue text-white p-3 px-20 justify-between;
   }
 .navbar-links {
-  @apply flex flex-row text-3xl items-center;
+  @apply flex flex-row text-3xl items-center font-nunito font-medium;
 }
 
 .nav-link {
-  @apply flex-row justify-start pl-10;
+  @apply flex justify-start pl-10;
 }
 
 .nav-icon {

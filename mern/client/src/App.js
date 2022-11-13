@@ -11,6 +11,7 @@ import RecoverSession from "./screens/RecoverSession/recoverSession";
 import UploadTranscript from "./screens/UploadTranscript/uploadTranscript";
 import StartingIntent from "./screens/StartingIntent/StartingIntent";
 import SavingSession from "./screens/SavingSession/savingSession";
+import NavbarButtons from "./Components/Navbar/navbarbuttons.component";
 
 function App() {
   return (
