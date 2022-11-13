@@ -3,11 +3,15 @@ import { Link } from "react-router-dom";
 import "./navbar.css";
 import GenericButton from "../Buttons/GenericButton";
 
-export default function NavbarButtons({pageid}) {
-  var sessionid = "12345";
-  const setSessionID = (id) => {
-    sessionid = id;
-  };
+export default function NavSelector({pageid}) {
+  // React state to manage visibility
+  const [show, setShow] = useState();
+
+  // function to toggle the boolean value
+  function toggleShow() {
+    setShow(!show);
+  }
+  var buttonText = show ? "Hide Component" : "Show Component";
 
   return (
     <nav className="navbar-bg">

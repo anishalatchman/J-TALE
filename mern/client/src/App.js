@@ -11,13 +11,18 @@ import RecoverSession from "./screens/RecoverSession/recoverSession";
 import UploadTranscript from "./screens/UploadTranscript/uploadTranscript";
 import StartingIntent from "./screens/StartingIntent/StartingIntent";
 import SavingSession from "./screens/SavingSession/savingSession";
-import NavbarButtons from "./Components/Navbar/navbarbuttons.component";
+import NavbarButtons from "./Components/Navbar/navbarButtons.component";
+import NavSelector from "./Components/Navbar/navSelector";
 
 function App() {
   return (
     <Router>
       <div>
+        {/* <NavSelector> */}
         <Navbar />
+        {/* <NavbarButtons /> */}
+        {/* </NavSelector> */}
+
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/recover" element={<RecoverSession />} />
