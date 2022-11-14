@@ -1,4 +1,4 @@
-import React, { Component, useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import GenericButton from "../Buttons/GenericButton";
@@ -8,7 +8,6 @@ import { NavStateContext } from "./navState";
 export default function NavbarButtons() {
   // define context var to show/hide nav buttons
   const [navState, setNavState] = useContext(NavStateContext)
-  // const showButtons = true;
   
   // Create session id var and setter function
   const sessionid = "12345";
@@ -29,7 +28,7 @@ export default function NavbarButtons() {
         </div>
       </Link>
 
-      {/* Conditionally show buttons div based on showButtons */}
+      {/* Conditionally show buttons div based on navState */}
       {navState &&
       <div className="flex items-center">
         <h2 className="font-nunito font-medium">

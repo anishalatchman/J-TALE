@@ -12,14 +12,14 @@
     src: url(../../fonts/Nunito-VariableFont_wght.ttf);
   }
   
-.title{
+.pageTitle{
     @apply text-center mt-20 mb-6 font-montserrat;
     font-size: 50px;
     font-weight: 800;
 }
 
-.subtitle{
-    @apply text-center mb-20 font-nunito;
+.pageSubtitle{
+    @apply text-center mb-10 font-nunito;
     /* font-family: 'Nunito', sans-serif; */
     font-size: 20px;
     font-weight: 400;

@@ -1,8 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import "./recoverSession.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { withRouter } from "../withRouter";
+import { NavStateContext } from "../../Components/Navbar/navState";
+
 class RecoverSession extends Component {
+
   constructor(props) {
     super(props);
 
