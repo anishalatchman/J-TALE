@@ -14,7 +14,7 @@ function Landing() {
       <h1 className="h1 title">
         Transcript to chatbot <br /> with a couple clicks
       </h1>
-      <h4 className="pageSubtitle">A flow-building plugin for Voiceflow</h4>
+      <h4 className="subtitle">A flow-building plugin for Voiceflow</h4>
       <div className="buttonContainer">
         <GenericButton
           buttonType="blue"

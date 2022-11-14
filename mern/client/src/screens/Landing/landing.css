@@ -18,7 +18,7 @@
     font-weight: 800;
 }
 
-.pageSubtitle{
+.subtitle{
     @apply text-center mb-10 font-nunito;
     /* font-family: 'Nunito', sans-serif; */
     font-size: 20px;
