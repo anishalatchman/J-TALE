@@ -5,10 +5,10 @@ import GenericButton from "../Buttons/GenericButton";
 import { NavState } from "../../App";
 
 
-export default function NavbarButtons({pageid}) {
+export default function NavbarButtons() {
   // define context var to show/hide nav buttons
-  const [showButtons, setShowButtons] = useContext(NavState)
-  
+  const [navState, setNavState] = useContext(NavState)
+  // const showButtons = true;
   
   // Create session id var and setter function
   const sessionid = "12345";
@@ -30,7 +30,7 @@ export default function NavbarButtons({pageid}) {
       </Link>
 
       {/* Conditionally show buttons div based on showButtons */}
-      {showButtons &&
+      {navState &&
       <div className="flex items-center">
         <h2 className="font-nunito font-medium">
           SESSION ID: {sessionid}  

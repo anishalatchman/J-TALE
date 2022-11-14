@@ -16,10 +16,12 @@ import NavbarButtons from "./Components/Navbar/navbarButtons.component";
 export const NavState = React.createContext()
 
 function App() {
+  const [navState, setNavState] = React.useState(false)
+
   return (
     <Router>
       <div>
-        <NavState.Provider value={false}>
+        <NavState.Provider value={[navState, setNavState]}>
         <NavbarButtons />
         </NavState.Provider>
 
