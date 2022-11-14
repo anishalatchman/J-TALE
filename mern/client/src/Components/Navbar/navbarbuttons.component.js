@@ -1,10 +1,17 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import GenericButton from "../Buttons/GenericButton";
+import { NavState } from "../../App";
+
 
 export default function NavbarButtons({pageid}) {
-  var sessionid = "12345";
+  // define context var to show/hide nav buttons
+  const [showButtons, setShowButtons] = useContext(NavState)
+  
+  
+  // Create session id var and setter function
+  const sessionid = "12345";
   const setSessionID = (id) => {
     sessionid = id;
   };
@@ -21,10 +28,12 @@ export default function NavbarButtons({pageid}) {
           | J TALE
         </div>
       </Link>
+
+      {/* Conditionally show buttons div based on showButtons */}
+      {showButtons &&
       <div className="flex items-center">
         <h2 className="font-nunito font-medium">
           SESSION ID: {sessionid}  
-          {/* NEED TO PASS IN SESSION ID VARIABLE HERE */}
         </h2>
         <GenericButton
         buttonType="nav"
@@ -39,6 +48,7 @@ export default function NavbarButtons({pageid}) {
         text={"DELETE SESSION"}
       />
       </div>
+      }
     </nav>
   );
 }

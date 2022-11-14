@@ -12,16 +12,16 @@ import UploadTranscript from "./screens/UploadTranscript/uploadTranscript";
 import StartingIntent from "./screens/StartingIntent/StartingIntent";
 import SavingSession from "./screens/SavingSession/savingSession";
 import NavbarButtons from "./Components/Navbar/navbarButtons.component";
-import NavSelector from "./Components/Navbar/navSelector";
+
+export const NavState = React.createContext()
 
 function App() {
   return (
     <Router>
       <div>
-        {/* <NavSelector> */}
-        <Navbar />
-        {/* <NavbarButtons /> */}
-        {/* </NavSelector> */}
+        <NavState.Provider value={false}>
+        <NavbarButtons />
+        </NavState.Provider>
 
         <Routes>
           <Route path="/" element={<Landing />} />
