@@ -2,12 +2,12 @@ import React, { Component, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import GenericButton from "../Buttons/GenericButton";
-import { NavState } from "../../App";
+import NavStateContext from "./navState";
 
 
 export default function NavbarButtons() {
   // define context var to show/hide nav buttons
-  const [navState, setNavState] = useContext(NavState)
+  const [navState, setNavState] = useContext(NavStateContext)
   // const showButtons = true;
   
   // Create session id var and setter function
