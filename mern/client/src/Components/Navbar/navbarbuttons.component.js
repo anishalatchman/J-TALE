@@ -2,7 +2,7 @@ import React, { Component, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import GenericButton from "../Buttons/GenericButton";
-import NavStateContext from "./navState";
+import { NavStateContext } from "./navState";
 
 
 export default function NavbarButtons() {
