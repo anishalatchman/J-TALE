@@ -11,9 +11,9 @@ export default function Navbar() {
   
   // Create session id var and setter function
   const sessionid = "12345";
-  const setSessionID = (id) => {
-    sessionid = id;
-  };
+  // const setSessionID = (id) => {
+  //   sessionid = id;
+  // };
 
   return (
     <nav className="navbar-bg">
