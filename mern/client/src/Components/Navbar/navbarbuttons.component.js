@@ -17,7 +17,7 @@ export default function NavbarButtons() {
 
   return (
     <nav className="navbar-bg">
-      <Link to="/" className="nav-link">
+      <Link to="/" className="nav-link" onClick={() => {setNavState(false)}}>
         <div className="navbar-links">
           <img
             src={require("../../assets/voiceflow.png")}

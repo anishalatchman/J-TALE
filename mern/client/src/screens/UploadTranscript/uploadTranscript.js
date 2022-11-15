@@ -80,6 +80,7 @@ function UploadTranscript() {
           buttonType="outline"
           onClick={() => {
             PageChange("/");
+            setNavState(false)
           }}
           disabled={false}
           text={"Go Back"}
