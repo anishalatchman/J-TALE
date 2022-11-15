@@ -1,14 +1,13 @@
 import React, { useState, useContext } from "react";
 import "./recoverSession.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
-import { withRouter } from "../withRouter";
 import { NavStateContext } from "../../Components/Navbar/navState";
 import { useNavigate } from "react-router-dom";
 
 export default function RecoverSession() {
   const Navigate = useNavigate();
   const [sessionid, setSessionID] = useState("");
-  // const sessionid = "";
+  const [navState, setNavState] = useContext(NavStateContext)
 
   const PageChange = (url) => {
   Navigate(url);
@@ -16,6 +15,8 @@ export default function RecoverSession() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // show navbar buttons for starting-intent page
+    setNavState(true) 
     alert(`The session ID you entered was: ${sessionid}`)
   }
 
@@ -49,7 +50,9 @@ export default function RecoverSession() {
           <GenericButton
             buttonType="outline"
             onClick={() => {
-              PageChange("/")}}
+              PageChange("/");
+              setNavState(false);
+            }}
             disabled={false}
             text={"Go Back"}
           />
