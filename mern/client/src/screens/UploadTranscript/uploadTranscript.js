@@ -19,7 +19,7 @@ function UploadTranscript() {
   const [fileName, setFileName] = useState("No files chosen");
   const [files, setFiles] = useState();
   const [openSuccessModal, setOpenSuccessModal] = useState(false)
-  const [navState, setNavState] = useContext(NavStateContext)
+  const [, setNavState] = useContext(NavStateContext)
 
   const handleClick = () => {
     // open file input box on click of button
