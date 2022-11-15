@@ -21,8 +21,7 @@ function App() {
       <div>
         <NavState>
           <NavbarButtons />
-        </NavState>
-
+        
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/recover" element={<RecoverSession />} />
@@ -33,6 +32,7 @@ function App() {
           <Route path="/save" element={<SavingSession />} />
           <Route path="/startingintent" element={<StartingIntent />} />
         </Routes>
+        </NavState>
       </div>
     </Router>
   );
