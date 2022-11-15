@@ -922,7 +922,8 @@
                     }
                 ]
 
-            },            {
+            },            
+            {
                 "id": "00100100",
                 "question": "What toppings would you like?",
                 "question_included": false,
@@ -969,23 +970,23 @@
                     {
                         "value": "credit",
                         "included": false,
-                        "children": [""]
+                        "children": []
 
                     },
                     {
                         "value": "debit",
                         "included": false,
-                        "children": [""]
+                        "children": []
                     },
                     {
                         "value": "paypal",
                         "included": false,
-                        "children": [""]
+                        "children": []
                     },
                     {
                         "value": "Apple Pay",
                         "included": false,
-                        "children": [""]
+                        "children": []
                     }
                 ]
 
