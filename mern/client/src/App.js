@@ -11,7 +11,6 @@ import RecoverSession from "./screens/RecoverSession/recoverSession";
 import UploadTranscript from "./screens/UploadTranscript/uploadTranscript";
 import StartingIntent from "./screens/StartingIntent/StartingIntent";
 import SavingSession from "./screens/SavingSession/savingSession";
-import NavbarButtons from "./Components/Navbar/navbarbuttons.component";
 import NavState from "./Components/Navbar/navState";
 
 function App() {
@@ -20,7 +19,7 @@ function App() {
     <Router>
       <div>
         <NavState>
-          <NavbarButtons />
+          <Navbar />
         
         <Routes>
           <Route path="/" element={<Landing />} />
