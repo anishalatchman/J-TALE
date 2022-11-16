@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', getQA);
 router.post('/add', createQA);
-router.put('/update/', updateQA);
+router.put('/update', updateQA);
 router.delete('/delete', deleteQA);
 
 export default router;
