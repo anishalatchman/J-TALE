@@ -1,5 +1,5 @@
 FROM node:14
-WORKDIR /usr/mern/server
+WORKDIR /usr/J-TALE/mern/server
 ENV NODE_ENV=production
 
 COPY package*.json ./
