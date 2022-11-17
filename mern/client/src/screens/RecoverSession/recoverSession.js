@@ -1,13 +1,13 @@
 import React, { useState, useContext } from "react";
 import "./recoverSession.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
-import { NavStateContext } from "../../Components/Navbar/navState";
+import { SessionContext } from "../../Components/sessionProvider";
 import { useNavigate } from "react-router-dom";
 
 export default function RecoverSession() {
   const Navigate = useNavigate();
   const [sessionid, setSessionID] = useState("");
-  const [, setNavState] = useContext(NavStateContext);
+  const [, setNavState] = useContext(SessionContext);
 
   const PageChange = (url) => {
   Navigate(url);

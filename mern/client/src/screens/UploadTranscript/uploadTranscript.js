@@ -6,7 +6,7 @@ import { useRef, useState, useContext } from "react";
 import { transcriptJSONConverter } from "../../utils/transcript";
 import { useNavigate } from "react-router-dom";
 import SuccessModal from "./SuccessModal";
-import { NavStateContext } from "../../Components/Navbar/navState";
+import { SessionContext } from "../../Components/sessionProvider";
 
 function UploadTranscript() {
   const Navigate = useNavigate();
@@ -19,7 +19,7 @@ function UploadTranscript() {
   const [fileName, setFileName] = useState("No files chosen");
   const [files, setFiles] = useState();
   const [openSuccessModal, setOpenSuccessModal] = useState(false)
-  const [, setNavState] = useContext(NavStateContext)
+  const [, setNavState] = useContext(SessionContext)
 
   const handleClick = () => {
     // open file input box on click of button
