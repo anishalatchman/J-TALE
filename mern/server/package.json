@@ -38,14 +38,18 @@
       "/node_modules/",
       "/server.js"
     ],
-    "collectCoverage":true,
-    "collectCoverageFrom":["./utils/**"],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "./utils/**"
+    ],
     "coverageThreshold": {
       "global": {
         "lines": 80
       }
     },
-    "setupFiles": ["dotenv/config"],
+    "setupFiles": [
+      "dotenv/config"
+    ],
     "coverageDirectory": "coverage"
   }
 }
