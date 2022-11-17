@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import GenericButton from "../Buttons/GenericButton";
-import { SessionContext } from "../sessionProvider";
+import { SessionContext } from "../Contexts/sessionProvider";
 
 
 export default function Navbar() {

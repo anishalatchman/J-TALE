@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import "./recoverSession.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
-import { SessionContext } from "../../Components/sessionProvider";
+import { SessionContext } from "../../Components/Contexts/sessionProvider";
 import { useNavigate } from "react-router-dom";
 
 export default function RecoverSession() {
