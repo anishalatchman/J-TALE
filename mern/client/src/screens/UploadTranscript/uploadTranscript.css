@@ -2,36 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-.title{
-    @apply text-center mt-40 mb-6;
-    font-size: 60px;
+.title {
+  @apply text-center mt-40 mb-6;
+  font-size: 60px;
 }
 
-.subtitle{
-    @apply text-center mb-10;
+.subtitle {
+  @apply text-center mb-10;
 }
 
-.buttonContainer1{
-    @apply px-20 mb-5 items-center flex flex-col;
+.buttonContainer1 {
+  @apply px-20 mb-5 items-center flex flex-col;
 }
 
-.buttonRow{
-    @apply mb-10  justify-center flex flex-row;
+.buttonRow {
+  @apply mb-10  justify-center flex flex-row;
 }
 
 .button1 {
-    @apply w-64 h-20 border-2 border-voiceflow-blue mb-5 rounded-full p-3 bg-voiceflow-blue text-white font-nunito; 
-    font-size: 27px;
+  @apply w-64 h-20 border-2 border-voiceflow-blue mt-5 mb-5 rounded-full p-3 bg-voiceflow-blue text-white font-nunito;
+  font-size: 27px;
 }
 
 .button2 {
-    @apply border-2 border-voiceflow-blue mb-5 rounded-full p-3 text-voiceflow-blue;
+  @apply border-2 border-voiceflow-blue mb-5 rounded-full p-3 text-voiceflow-blue;
 }
 
 .upload-icon {
-    display: inline-flex;
-    width:37px;
-    height:37px; 
-    top:10px;
-    @apply mr-2;
-  }
+  display: inline-flex;
+  width: 37px;
+  height: 37px;
+  top: 10px;
+  @apply mr-2;
+}
