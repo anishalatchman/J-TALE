@@ -16,3 +16,8 @@
   @apply h-24 bg-voiceflow-blue border-2 border-voiceflow-blue m-2 rounded-lg p-3 pl-6 pr-6 text-white font-nunito font-bold;
   width: 330px;
 }
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
