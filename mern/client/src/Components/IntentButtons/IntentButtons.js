@@ -12,25 +12,19 @@ import "./IntentButtons.module.css";
 **/
 
 export default function IntentButtons(props) {
+  function changeState() {}
   return (
     <div>
-      {intents.map((entry) => {
+      {props.intents.map((entry) => {
         return (
           <button
-            key={entry.value}
-            style={
-              entry.value === asyncStorageAdvancedTradeSettings.intents
-                ? StyleSheet.buttonSelected
-                : StyleSheet.buttonUnselected
-            }
+            key={props.intents.value}
             onClick={() => {
-              setAsyncStorageAdvancedTradeSettings((props) => {
-                props.intents = entry.value;
-
-                setItemInAsyncStore("intent", entry.value);
-
-                return { ...props };
-              });
+              //   (props) => {
+              //     props.intents = entry.value;
+              //     "intent", entry.value;
+              //     return { ...props };
+              //   };
             }}
           ></button>
         );

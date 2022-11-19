@@ -2,6 +2,7 @@ import React from "react";
 import "./StartingIntent.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
+import IntentButtons from "../../Components/IntentButtons/IntentButtons";
 import { useNavigate } from "react-router-dom";
 import Scrollbar from "../../Components/TranscriptScroller/transcript-scroller.component";
 
@@ -31,7 +32,14 @@ function StartingIntent() {
       <div className="intentContainer">
         <h1 className="h1 intentTitle">How can I help you today?</h1>
         <div>
-          <div className="buttons_div"></div>
+          <div>
+            <GenericButton buttonType="intent1" text={"Order Pizza"} />
+            <GenericButton buttonType="intent1" text={"Order Drink"} />
+          </div>
+          <div>
+            <GenericButton buttonType="intent1" text={"Order Side"} />
+            <GenericButton buttonType="intent1" text={"Delivery problem"} />
+          </div>
         </div>
         <div>
           <h4 className="instructions">
@@ -59,7 +67,6 @@ function StartingIntent() {
     </div>
   );
 }
-
 export default StartingIntent;
 
 // export default class Landing extends Component {
