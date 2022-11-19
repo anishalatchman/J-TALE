@@ -10,22 +10,28 @@ function StartingIntent() {
   const PageChange = () => {
     Navigate("/");
   };
+
+  // function changeToLightblue() {
+  //   button.style.color = "lighter-blue";
+  // }
+
+  // When the button is clicked once
+  const btn = document.getElementById("button1");
+  // btn.attachEvent('onclick', function() { btn.style.backgroundColor = "lighter-blue"; });
+  // btn.addEventListener("click", function onClick() {
+  //   btn.style.backgroundColor = "lighter-blue";
+  //   btn.style.color = "white";
+  // });
+
   return (
     <div className="container">
-        <div class="scroller">
-          <Scrollbar/>
-        </div>
+      <div class="scroller">
+        <Scrollbar />
+      </div>
       <div className="intentContainer">
         <h1 className="h1 intentTitle">How can I help you today?</h1>
         <div>
-          <div>
-            <GenericButton buttonType="intent1" text={"Order Pizza"} />
-            <GenericButton buttonType="intent1" text={"Order Drink"} />
-          </div>
-          <div>
-            <GenericButton buttonType="intent1" text={"Order Side"} />
-            <GenericButton buttonType="intent1" text={"Delivery problem"} />
-          </div>
+          <div className="buttons_div"></div>
         </div>
         <div>
           <h4 className="instructions">
@@ -53,6 +59,7 @@ function StartingIntent() {
     </div>
   );
 }
+
 export default StartingIntent;
 
 // export default class Landing extends Component {
@@ -85,3 +92,17 @@ export default StartingIntent;
 //     );
 //   }
 // }
+
+{
+  /* <GenericButton
+id="button1"
+buttonType="intent1"
+text={"Order Pizza"}
+onClick="changeToLightblue()"
+/>
+<GenericButton buttonType="intent1" text={"Order Drink"} />
+</div>
+<div>
+<GenericButton buttonType="intent1" text={"Order Side"} />
+<GenericButton buttonType="intent1" text={"Delivery problem"} /> */
+}
