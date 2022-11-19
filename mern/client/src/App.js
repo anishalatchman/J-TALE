@@ -9,7 +9,7 @@ import UploadTranscript from "./screens/UploadTranscript/uploadTranscript";
 import StartingIntent from "./screens/StartingIntent/StartingIntent";
 import SavingSession from "./screens/SavingSession/savingSession";
 import SessionProvider from "./Contexts/sessionProvider";
-import IntentsProvider from "./Contexts/intentsProvider";
+import IntentProvider from "./Contexts/intentsProvider";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
       <div>
         {/* SessionProvider contains all global vars (navstate, session id) */}
         <SessionProvider>
-          <IntentsProvider>
+          <IntentProvider>
             <Navbar />
 
             <Routes>
@@ -27,7 +27,7 @@ function App() {
               <Route path="/save" element={<SavingSession />} />
               <Route path="/startingintent" element={<StartingIntent />} />
             </Routes>
-          </IntentsProvider>
+          </IntentProvider>
         </SessionProvider>
       </div>
     </Router>

@@ -12,17 +12,24 @@ function StartingIntent() {
     Navigate("/");
   };
 
-  // function changeToLightblue() {
-  //   button.style.color = "lighter-blue";
-  // }
-
-  // When the button is clicked once
-  const btn = document.getElementById("button1");
-  // btn.attachEvent('onclick', function() { btn.style.backgroundColor = "lighter-blue"; });
-  // btn.addEventListener("click", function onClick() {
-  //   btn.style.backgroundColor = "lighter-blue";
-  //   btn.style.color = "white";
-  // });
+  // dummy intent for testing purposes
+  const intent = [
+    {
+      value: "cheese",
+      included: false,
+      children: ["00000001", "00000010"],
+    },
+    {
+      value: "pepperoni",
+      included: false,
+      children: ["00000011", "00000100"],
+    },
+    {
+      value: "hawaiian",
+      included: false,
+      children: ["00000101", "00000110"],
+    },
+  ];
 
   return (
     <div className="container">
@@ -32,14 +39,7 @@ function StartingIntent() {
       <div className="intentContainer">
         <h1 className="h1 intentTitle">How can I help you today?</h1>
         <div>
-          <div>
-            <GenericButton buttonType="intent1" text={"Order Pizza"} />
-            <GenericButton buttonType="intent1" text={"Order Drink"} />
-          </div>
-          <div>
-            <GenericButton buttonType="intent1" text={"Order Side"} />
-            <GenericButton buttonType="intent1" text={"Delivery problem"} />
-          </div>
+          <IntentButtons intents={intent}></IntentButtons>
         </div>
         <div>
           <h4 className="instructions">

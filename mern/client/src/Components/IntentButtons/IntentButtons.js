@@ -1,5 +1,7 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import "./IntentButtons.module.css";
+import { IntentContext } from "../../Contexts/intentsProvider";
+import GenericButton from "../Buttons/GenericButton";
 
 /**
  * A generic button component
@@ -12,13 +14,25 @@ import "./IntentButtons.module.css";
 **/
 
 export default function IntentButtons(props) {
+  // define context var to determine the state of the intent buttons
+  const [intentState, setIntentState] = useContext(IntentContext);
+
   function changeState() {}
+
   return (
     <div>
-      {props.intents.map((entry) => {
+      {props.intents.map(() => {
+        // sets the default state of current intent buttons to 0
+        // setIntentState(
+        //   intentState.push({ key: props.intents.values, value: 0 })
+        // );
         return (
-          <button
+          <GenericButton
             key={props.intents.value}
+            // className={`intent${intentState[props.intents.value]}`}
+            className={"intent0"}
+            text={props.intents.value}
+            disabled={false}
             onClick={() => {
               //   (props) => {
               //     props.intents = entry.value;
@@ -26,7 +40,7 @@ export default function IntentButtons(props) {
               //     return { ...props };
               //   };
             }}
-          ></button>
+          ></GenericButton>
         );
       })}
     </div>

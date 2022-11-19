@@ -1,14 +1,16 @@
 import React from "react";
 
-export const SessionContext = React.createContext();
+export const IntentContext = React.createContext();
 
-export default function SessionProvider({ children }) {
+export default function IntentProvider({ children }) {
   // states to control the background colour and logic of intent buttons
-  const [navState, setNavState] = React.useState(false);
+  const [intentState, setIntentState] = React.useState({});
+  // the dictionary is a mapping with values as the intents to the state of their buttons
+  // the length of the dictionary will depend on the number of intents
 
   return (
-    <SessionContext.Provider value={[navState, setNavState]}>
+    <IntentContext.Provider value={[intentState, setIntentState]}>
       {children}
-    </SessionContext.Provider>
+    </IntentContext.Provider>
   );
 }
