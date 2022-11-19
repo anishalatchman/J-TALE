@@ -1,47 +1,47 @@
-import React, { Component } from "react";
+import React, { useState, useContext } from "react";
 import "./recoverSession.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
-import { withRouter } from "../withRouter";
-class RecoverSession extends Component {
-  constructor(props) {
-    super(props);
+import { SessionContext } from "../../Components/Contexts/sessionProvider";
+import { useNavigate } from "react-router-dom";
 
-    this.state = { value: "" };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleBack = this.handleBack.bind(this);
+export default function RecoverSession() {
+  const Navigate = useNavigate();
+  const [sessionid, setSessionID] = useState("");
+  const [, setNavState] = useContext(SessionContext);
+
+  const PageChange = (url) => {
+  Navigate(url);
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
-  handleSubmit(event) {
-    alert("A name was submitted: " + this.state.value);
+  const handleSubmit = (event) => {
     event.preventDefault();
-  }
-  handleBack(event) {
-    this.props.navigate("/");
+    // show navbar buttons for starting-intent page
+    setNavState(true) 
+    alert(`The session ID you entered was: ${sessionid}`)
   }
 
-  render() {
+  const handleChange = (event) => {
+    // set sessionid to input text
+    setSessionID(event.target.value);
+  }
+
     return (
       <div className="container">
         <h1 className="pageTitle">Recover Session</h1>
-        <form className="inputForm w-1/3 mx-auto" onSubmit={this.handleSubmit}>
+        <form className="inputForm w-1/3 mx-auto" onSubmit={handleSubmit}>
           <label className="text-xl text-white font-nunito font-medium">
-            {" "}
-            Input Session ID{" "}
+            Input Session ID
           </label>
           <input
             className="m-6 w-3/4 pl-4 pr-2 pt-2 pb-2 block rounded-full text-black"
             type="text"
-            value={this.state.value}
-            onChange={this.handleChange}
+            value={sessionid}
+            onChange={handleChange}
             placeholder="Session ID"
           />
           <GenericButton
             buttonType="white"
-            onClick={() => this.handleChange}
+            onClick={() => handleSubmit}
             disabled={false}
             text={"Begin Session"}
           />
@@ -49,7 +49,10 @@ class RecoverSession extends Component {
         <div className="buttonContainer">
           <GenericButton
             buttonType="outline"
-            onClick={this.handleBack}
+            onClick={() => {
+              PageChange("/");
+              setNavState(false);
+            }}
             disabled={false}
             text={"Go Back"}
           />
@@ -57,49 +60,64 @@ class RecoverSession extends Component {
       </div>
     );
   }
-}
 
-export default withRouter(RecoverSession);
+// CLASS COMPONENT VRSN:
+// class RecoverSession extends Component {
 
-// FUNCTIONAL REACT VRSN:
-// function RecoverSession() {
-//   const Navigate = useNavigate();
-//   const PageChange = (url) => {
-//   Navigate(url);
+//   constructor(props) {
+//     super(props);
+
+//     this.state = { value: "" };
+//     this.handleChange = this.handleChange.bind(this);
+//     this.handleSubmit = this.handleSubmit.bind(this);
+//     this.handleBack = this.handleBack.bind(this);
 //   }
 
-//     const [name, setName] = useState(0);
+//   handleChange(event) {
+//     this.setState({ value: event.target.value });
+//   }
+//   handleSubmit(event) {
+//     alert("A name was submitted: " + this.state.value);
+//     event.preventDefault();
+//   }
+//   handleBack(event) {
+//     this.props.navigate("/");
+//   }
 
-//     const handleSubmit = (event) => {
-//       event.preventDefault();
-//       alert(`The name you entered was: ${name}`)
-//       console.log(name)
-//     }
-
+//   render() {
 //     return (
 //       <div className="container">
-//         <h1 className="pageTitle">
-//           Recover Session
-//         </h1>
-//       <form>
-//         <label>Enter your name:
+//         <h1 className="pageTitle">Recover Session</h1>
+//         <form className="inputForm w-1/3 mx-auto" onSubmit={this.handleSubmit}>
+//           <label className="text-xl text-white font-nunito font-medium">
+//             {" "}
+//             Input Session ID{" "}
+//           </label>
 //           <input
+//             className="m-6 w-3/4 pl-4 pr-2 pt-2 pb-2 block rounded-full text-black"
 //             type="text"
-//             value={name}
-//             onChange={(e) => setName(e.target.value)}
+//             value={this.state.value}
+//             onChange={this.handleChange}
+//             placeholder="Session ID"
 //           />
-//         </label>
-//         <input type="submit" />
-//       </form>
-//       <div className="buttonContainer">
-//         <GenericButton
-//               buttonType="outline"
-//               onClick={() => PageChange("/")}
-//               disabled={false}
-//               text={"Go Back"}
-//             />
-//       </div>
+//           <GenericButton
+//             buttonType="white"
+//             onClick={() => this.handleChange}
+//             disabled={false}
+//             text={"Begin Session"}
+//           />
+//         </form>
+//         <div className="buttonContainer">
+//           <GenericButton
+//             buttonType="outline"
+//             onClick={this.handleBack}
+//             disabled={false}
+//             text={"Go Back"}
+//           />
+//         </div>
 //       </div>
 //     );
 //   }
-//   export default RecoverSession
+// }
+
+// export default withRouter(RecoverSession);
