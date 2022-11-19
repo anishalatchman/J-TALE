@@ -3,6 +3,7 @@ import "./landing.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { useNavigate } from "react-router-dom";
 
+
 function Landing() {
   const Navigate = useNavigate();
   const PageChange = (url) => {

@@ -38,11 +38,15 @@
 }
 
 .intent2{
-  @apply h-24 bg-lighter-blue border-2 border-lighter-blue m-2 rounded-lg p-3 pl-6 pr-6 text-white font-nunito font-bold;
+  @apply h-24 bg-voiceflow-blue-light border-2 border-voiceflow-blue-light m-2 rounded-lg p-3 pl-6 pr-6 text-white font-nunito font-bold;
   width: 330px;
 }
 
 .intent3{
   @apply h-24 bg-voiceflow-blue border-2 border-voiceflow-blue m-2 rounded-lg p-3 pl-6 pr-6 text-white font-nunito font-bold;
   width: 330px;
+}
+
+.nav {
+  @apply min-w-15 rounded-full ml-3 p-1 px-6 text-white bg-voiceflow-blue-light font-nunito font-medium;
 }

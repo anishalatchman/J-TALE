@@ -9,6 +9,7 @@
 
 .subtitle {
   @apply text-center mb-10;
+  font-size: 20px;
 }
 
 .buttonContainer1 {
