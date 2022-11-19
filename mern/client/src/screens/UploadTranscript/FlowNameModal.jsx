@@ -8,6 +8,10 @@ function FlowNameModal({ closeModal }, filename) {
     Navigate(url);
   };
 
+  const NameSubmit = () => {
+    alert("Flow name set to: ");
+  };
+
   return (
     <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50">
       <div className="text-center w-auto my-6 mx-auto max-w-3xl">
@@ -20,7 +24,7 @@ function FlowNameModal({ closeModal }, filename) {
             </p>
             <input
               className="my-2 text-lg font-nunito border-2 rounded-lg p-2"
-              id="name"
+              type="text"
               placeholder="Enter flow name here"
             />
           </div>
@@ -37,6 +41,7 @@ function FlowNameModal({ closeModal }, filename) {
               className="text-green-500 px-6 py-2 text-base font-nunito font-bold"
               type="button"
               onClick={() => {
+                NameSubmit();
                 closeModal(false);
                 PageChange("/startingintent");
               }}
