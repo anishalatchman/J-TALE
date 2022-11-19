@@ -6,7 +6,7 @@ import { useRef, useState, useContext } from "react";
 import { transcriptJSONConverter } from "../../utils/transcript";
 import { useNavigate } from "react-router-dom";
 import SuccessModal from "./SuccessModal";
-import { SessionContext } from "../../Components/Contexts/sessionProvider";
+import { SessionContext } from "../../Contexts/sessionProvider";
 
 function UploadTranscript() {
   const Navigate = useNavigate();
