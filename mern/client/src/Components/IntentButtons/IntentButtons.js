@@ -21,17 +21,17 @@ export default function IntentButtons(props) {
 
   return (
     <div>
-      {props.intents.map(() => {
+      {props.intents.map((intent) => {
         // sets the default state of current intent buttons to 0
         // setIntentState(
         //   intentState.push({ key: props.intents.values, value: 0 })
         // );
         return (
           <GenericButton
-            key={props.intents.value}
+            key={intent.value}
             // className={`intent${intentState[props.intents.value]}`}
             className={"intent0"}
-            text={props.intents.value}
+            text={intent.value}
             disabled={false}
             onClick={() => {
               //   (props) => {
