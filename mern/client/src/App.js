@@ -8,7 +8,7 @@ import RecoverSession from "./screens/RecoverSession/recoverSession";
 import UploadTranscript from "./screens/UploadTranscript/uploadTranscript";
 import StartingIntent from "./screens/StartingIntent/StartingIntent";
 import SavingSession from "./screens/SavingSession/savingSession";
-import SessionProvider from "./Components/Contexts/sessionProvider";
+import SessionProvider from "./Contexts/sessionProvider";
 
 function App() {
   return (
