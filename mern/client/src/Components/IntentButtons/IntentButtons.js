@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import "./IntentButtons.module.css";
 import { IntentContext } from "../../Contexts/intentsProvider";
 import GenericButton from "../Buttons/GenericButton";
@@ -18,7 +18,6 @@ export default function IntentButtons(props) {
   const [intentState, setIntentState] = useContext(IntentContext);
 
   var values = [];
-  useEffect(() => {}, [JSON.stringify(values)]);
 
   return (
     <div className="container">
