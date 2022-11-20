@@ -32,7 +32,6 @@ export async function transcriptJSONConverter(fileName, body) {
     // Defines new obj transcript in form required by mongoose schemas
     const transcript = { name: fileName, data: body };
     res = await uploadFile(transcript);
-    console.log(res);
     return res;
   }
 }

@@ -74,7 +74,7 @@ function UploadTranscript() {
                 setOpenFlowNameModal(true);
                 setNavState(true);
               } else {
-                console.log("failure");
+                alert("Please upload a valid JSON file.");
               }
               // response
               //   ? setOpenFlowNameModal(true) && setNavState(true)
