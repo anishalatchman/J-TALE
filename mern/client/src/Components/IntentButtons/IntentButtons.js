@@ -32,12 +32,12 @@ export default function IntentButtons(props) {
   var values = [1, 2, 3];
   console.log(JSON.stringify(values), "hello2");
 
-  function ForceUpdate() {
-    const [value, setValue] = useState(0); // integer state
-    return () => setValue((value) => value + 1); // update state to force render
-    // An function that increment 👆🏻 the previous state like here
-    // is better than directly setting `value + 1`
-  }
+  //   function ForceUpdate() {
+  //     const [value, setValue] = useState(0); // integer state
+  //     return () => setValue((value) => value + 1); // update state to force render
+  //     // An function that increment 👆🏻 the previous state like here
+  //     // is better than directly setting `value + 1`
+  //   }
 
   return (
     <div className="container">
@@ -63,8 +63,9 @@ export default function IntentButtons(props) {
               //   for (var key in intentState) {
               //     newIntentState[key] = intentState[key];
               //   }
+              JSON.stringify(intentState);
               console.log(intentState[intent.value]);
-              ForceUpdate();
+              //   ForceUpdate();
               return;
               // return (intentState[intent.value] + 1) % 2;
             }
@@ -77,8 +78,9 @@ export default function IntentButtons(props) {
           //   for (var key in intentState) {
           //     newIntentState[key] = intentState[key];
           //   }
+          JSON.stringify(intentState);
           console.log(intentState[intent.value]);
-          ForceUpdate();
+          //   ForceUpdate();
           //   return (intentState[intent.value] + 1) % 3;
           //   console.log(intentState[intent.value]);
           //   console.log(intentState[intent.value]);
