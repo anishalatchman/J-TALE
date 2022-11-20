@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./IntentButtons.module.css";
 import { IntentContext } from "../../Contexts/intentsProvider";
 import GenericButton from "../Buttons/GenericButton";
@@ -31,7 +31,13 @@ export default function IntentButtons(props) {
   }, [JSON.stringify(values)]);
   var values = [1, 2, 3];
   console.log(JSON.stringify(values), "hello2");
-  //   const
+
+  function ForceUpdate() {
+    const [value, setValue] = useState(0); // integer state
+    return () => setValue((value) => value + 1); // update state to force render
+    // An function that increment 👆🏻 the previous state like here
+    // is better than directly setting `value + 1`
+  }
 
   return (
     <div className="container">
@@ -58,6 +64,8 @@ export default function IntentButtons(props) {
               //     newIntentState[key] = intentState[key];
               //   }
               console.log(intentState[intent.value]);
+              ForceUpdate();
+              return;
               // return (intentState[intent.value] + 1) % 2;
             }
           }
@@ -70,6 +78,7 @@ export default function IntentButtons(props) {
           //     newIntentState[key] = intentState[key];
           //   }
           console.log(intentState[intent.value]);
+          ForceUpdate();
           //   return (intentState[intent.value] + 1) % 3;
           //   console.log(intentState[intent.value]);
           //   console.log(intentState[intent.value]);
