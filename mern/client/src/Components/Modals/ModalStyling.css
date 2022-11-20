@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.placement {
+  @apply justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50;
+}
+
+.modal-outline {
+  @apply rounded-3xl shadow-lg relative flex flex-col w-full bg-white;
+}
+
+.body {
+  @apply relative p-6 flex-auto;
+}
+
+.black {
+  @apply min-w-15 border-2 border-black m-2 rounded-full p-3 pl-6 pr-6 text-black font-nunito font-bold;
+}

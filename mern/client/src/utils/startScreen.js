@@ -1,24 +1,15 @@
+// startScreen should contain function that creates starting flow:
+// after button is clicked, pass a transcript and flow name entered into function.
+// this function should contain axios call that creates the flow.
+// this axios call then gives a response that is a string of ids. this string of ids is the first set of questions
+// that we want to display to the users on the starting intent screen.
+
 import axios from "axios";
 // import { useCallback } from "react";
 
-var res;
-
-// Sends Transcript to Database
-// async function uploadFile(transcript) {
-//   axios
-//     .post("http://localhost:5000/transcript/add", transcript)
-//     .then(() => {
-//       console.log("Transcript Uploaded!");
-//       return true;
-//     })
-//     .catch((e) => {
-//       return e.response.data;
-//     });
-// }
-
-async function uploadFile(transcript) {
+async function uploadFile(name, transcript) {
   try {
-    await axios.post("http://localhost:5000/transcript/add", transcript);
+    await axios.post("http://localhost:5000/flow/add", { name, transcript });
     console.log("Transcript Uploaded!");
     return true;
   } catch (e) {

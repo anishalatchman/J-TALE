@@ -12,6 +12,11 @@
   font-size: 20px;
 }
 
+.successIndicator {
+  @apply text-center mb-2 font-nunito font-bold;
+  font-size: 20px;
+}
+
 .buttonContainer1 {
   @apply px-20 mb-5 items-center flex flex-col;
 }

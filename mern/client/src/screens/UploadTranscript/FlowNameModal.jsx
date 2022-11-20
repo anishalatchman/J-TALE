@@ -29,7 +29,7 @@ function FlowNameModal({ closeModal }, filename) {
             />
           </div>
           {/*footer*/}
-          <div className="flex items-center justify-end p-6 rounded-b">
+          <div className="relative p-6 flex-auto">
             <button
               className="text-red-500 px-6 py-2 text-base font-nunito font-bold"
               type="button"

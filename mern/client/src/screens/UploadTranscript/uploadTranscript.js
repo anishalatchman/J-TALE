@@ -68,9 +68,18 @@ function UploadTranscript() {
         <GenericButton
           buttonType={files ? "blue" : "disabled"}
           onClick={() => {
-            transcriptJSONConverter(fileName, files); // Checks if the transcript is a string, and then sends transcript to DB
-            setOpenFlowNameModal(true);
-            setNavState(true);
+            // Checks if the transcript is a string, and then sends transcript to DB
+            transcriptJSONConverter(fileName, files).then((response) => {
+              if (response) {
+                setOpenFlowNameModal(true);
+                setNavState(true);
+              } else {
+                console.log("failure");
+              }
+              // response
+              //   ? setOpenFlowNameModal(true) && setNavState(true)
+              //   : console.log("failure");
+            });
           }}
           disabled={files ? false : true}
           text={"Begin Session"}
