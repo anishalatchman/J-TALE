@@ -33,7 +33,7 @@ function StartingIntent() {
 
   return (
     <div className="container">
-      <div class="scroller">
+      <div className="scroller">
         <Scrollbar />
       </div>
       <div className="intentContainer">
