@@ -17,74 +17,42 @@ export default function IntentButtons(props) {
   // define context var to determine the state of the intent buttons
   const [intentState, setIntentState] = useContext(IntentContext);
 
-  //   const empty = {};
+  // for testing purposes
   const empty = {
     cheese: 2,
     pepperoni: 0,
     hawaiian: 0,
   };
-  //   console.log(empty, "test");
-  //   console.log(empty["hi"], "test2");
+
   useEffect(() => {
     // Update the document title using the browser API
     console.log(intentState, "hello");
   }, [JSON.stringify(values)]);
-  var values = [1, 2, 3];
-  console.log(JSON.stringify(values), "hello2");
-
-  //   function ForceUpdate() {
-  //     const [value, setValue] = useState(0); // integer state
-  //     return () => setValue((value) => value + 1); // update state to force render
-  //     // An function that increment 👆🏻 the previous state like here
-  //     // is better than directly setting `value + 1`
-  //   }
+  var values = [];
 
   return (
     <div className="container">
       {props.intents.map((intent) => {
         // sets the default state of current intent buttons to 0
         // we can directly mutate a dictionary
-        intentState[intent.value] = 0;
-        console.log(intentState);
+        // the code only runs if intentState[intent.value] is not initialized
+        if (!intentState[intent.value]) {
+          intentState[intent.value] = 0;
+        }
 
         function changeState() {
           values = Object.keys(intentState).map(function (key) {
             return intentState[key];
           });
-          console.log(values);
-          //   console.log(intentState[intent.value]);
+
           for (const item of values) {
+            // there can only be one intent that is double clicked
             if (item === 2 && intentState[intent.value] !== 2) {
               intentState[intent.value] = (intentState[intent.value] + 1) % 2;
-              //   var newValue = (intentState[intent.value] + 1) % 2;
-              //   // making a new dictionary so that React rerenders
-              //   var newIntentState = {};
-              //   newIntentState[intent.value] = newValue;
-              //   for (var key in intentState) {
-              //     newIntentState[key] = intentState[key];
-              //   }
-              JSON.stringify(intentState);
-              console.log(intentState[intent.value]);
-              //   ForceUpdate();
               return;
-              // return (intentState[intent.value] + 1) % 2;
             }
           }
           intentState[intent.value] = (intentState[intent.value] + 1) % 3;
-          //   var newValue = (intentState[intent.value] + 1) % 3;
-          //   // making a new dictionary so that React rerenders
-          //   var newIntentState = {};
-          //   newIntentState[intent.value] = newValue;
-          //   for (var key in intentState) {
-          //     newIntentState[key] = intentState[key];
-          //   }
-          JSON.stringify(intentState);
-          console.log(intentState[intent.value]);
-          //   ForceUpdate();
-          //   return (intentState[intent.value] + 1) % 3;
-          //   console.log(intentState[intent.value]);
-          //   console.log(intentState[intent.value]);
-          //   console.log(intentState);
         }
 
         return (
@@ -95,9 +63,9 @@ export default function IntentButtons(props) {
             disabled={false}
             onClick={() => {
               changeState();
-              //   setIntentState();
-              //   console.log(`intent${newIntentState[intent.value]}`);
-              //   console.log(changeState());
+              // deep copy that recreates the object
+              // this is able to trigger React to re-render
+              setIntentState(JSON.parse(JSON.stringify(intentState)));
             }}
           ></GenericButton>
         );
@@ -105,5 +73,3 @@ export default function IntentButtons(props) {
     </div>
   );
 }
-
-//       props.intents
