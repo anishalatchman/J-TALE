@@ -5,7 +5,6 @@ import GenericButton from "../../Components/Buttons/GenericButton";
 import { useRef, useState, useContext } from "react";
 import { transcriptJSONConverter } from "../../utils/transcript";
 import { useNavigate } from "react-router-dom";
-import FlowNameModal from "./FlowNameModal";
 import { SessionContext } from "../../Components/Contexts/sessionProvider";
 import Modal from "../../Components/Modals/GenericModal";
 
@@ -73,15 +72,16 @@ function UploadTranscript() {
             // Checks if the transcript is a string, and then sends transcript to DB
             transcriptJSONConverter(fileName, files).then((response) => {
               if (response) {
-                // setOpenFlowNameModal(true);
                 setShowModal(true);
                 setNavState(true);
               } else {
                 alert("Please upload a valid JSON file.");
               }
               // response
-              //   ? setOpenFlowNameModal(true) && setNavState(true)
-              //   : console.log("failure");
+              //   ? setShowModal(true) && setNavState(true)
+              //   : alert("Please upload a valid JSON file.");
+              // note: no clue on why this "&&"" doesn't work for "AND"??
+              // I can resort to if/else statements but it would be great to get this short line of code to work instead.
             });
           }}
           disabled={files ? false : true}
@@ -102,6 +102,8 @@ function UploadTranscript() {
             title="Name your flow to begin"
             body="Enter flow name here"
             onClose={() => setShowModal(false)}
+            // note: it would be good to have a function that deletes the uploaded transcript from the DB when user presses cancel
+            // since right now, if they accidentally press cancel, they cannot use the transcript they were going to use again
             onSubmit={() => PageChange("/startingintent")}
           />
         )}
