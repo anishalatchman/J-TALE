@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import "./IntentButtons.module.css";
 import { IntentContext } from "../../Contexts/intentsProvider";
 import GenericButton from "../Buttons/GenericButton";
@@ -17,18 +17,8 @@ export default function IntentButtons(props) {
   // define context var to determine the state of the intent buttons
   const [intentState, setIntentState] = useContext(IntentContext);
 
-  // for testing purposes
-  const empty = {
-    cheese: 2,
-    pepperoni: 0,
-    hawaiian: 0,
-  };
-
-  useEffect(() => {
-    // Update the document title using the browser API
-    console.log(intentState, "hello");
-  }, [JSON.stringify(values)]);
   var values = [];
+  useEffect(() => {}, [JSON.stringify(values)]);
 
   return (
     <div className="container">
