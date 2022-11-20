@@ -49,25 +49,27 @@ export default function IntentButtons(props) {
           //   console.log(intentState[intent.value]);
           for (const item of values) {
             if (item === 2 && intentState[intent.value] !== 2) {
-              //   intentState[intent.value] = (intentState[intent.value] + 1) % 2;
-              var newValue = (intentState[intent.value] + 1) % 2;
-              // making a new dictionary so that React rerenders
-              var newIntentState = {};
-              newIntentState.push({ key: intent.value, value: newValue });
-              for (var key in intentState) {
-                newIntentState[key] = intentState[key];
-              }
+              intentState[intent.value] = (intentState[intent.value] + 1) % 2;
+              //   var newValue = (intentState[intent.value] + 1) % 2;
+              //   // making a new dictionary so that React rerenders
+              //   var newIntentState = {};
+              //   newIntentState[intent.value] = newValue;
+              //   for (var key in intentState) {
+              //     newIntentState[key] = intentState[key];
+              //   }
+              console.log(intentState[intent.value]);
               // return (intentState[intent.value] + 1) % 2;
             }
           }
-          //   intentState[intent.value] = (intentState[intent.value] + 1) % 3;
-          var newValue = (intentState[intent.value] + 1) % 3;
-          // making a new dictionary so that React rerenders
-          var newIntentState = {};
-          newIntentState.push({ key: intent.value, value: newValue });
-          for (var key in intentState) {
-            newIntentState[key] = intentState[key];
-          }
+          intentState[intent.value] = (intentState[intent.value] + 1) % 3;
+          //   var newValue = (intentState[intent.value] + 1) % 3;
+          //   // making a new dictionary so that React rerenders
+          //   var newIntentState = {};
+          //   newIntentState[intent.value] = newValue;
+          //   for (var key in intentState) {
+          //     newIntentState[key] = intentState[key];
+          //   }
+          console.log(intentState[intent.value]);
           //   return (intentState[intent.value] + 1) % 3;
           //   console.log(intentState[intent.value]);
           //   console.log(intentState[intent.value]);
@@ -77,13 +79,13 @@ export default function IntentButtons(props) {
         return (
           <GenericButton
             key={intent.value}
-            buttonType={`intent${newIntentState[intent.value]}`} // gets the current state (initially it is 0)
+            buttonType={`intent${intentState[intent.value]}`} // gets the current state (initially it is 0)
             text={intent.value}
             disabled={false}
             onClick={() => {
               changeState();
               //   setIntentState();
-              console.log(`intent${newIntentState[intent.value]}`);
+              //   console.log(`intent${newIntentState[intent.value]}`);
               //   console.log(changeState());
             }}
           ></GenericButton>
