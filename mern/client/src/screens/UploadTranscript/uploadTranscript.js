@@ -7,6 +7,7 @@ import { transcriptJSONConverter } from "../../utils/transcript";
 import { useNavigate } from "react-router-dom";
 import FlowNameModal from "./FlowNameModal";
 import { SessionContext } from "../../Components/Contexts/sessionProvider";
+import Modal from "../../Components/Modals/GenericModal";
 
 function UploadTranscript() {
   const Navigate = useNavigate();
@@ -20,6 +21,7 @@ function UploadTranscript() {
   const [files, setFiles] = useState();
   const [openFlowNameModal, setOpenFlowNameModal] = useState(false);
   const [, setNavState] = useContext(SessionContext);
+  const [show, setShowModal] = useState(false);
 
   const handleClick = () => {
     // open file input box on click of button
@@ -71,7 +73,8 @@ function UploadTranscript() {
             // Checks if the transcript is a string, and then sends transcript to DB
             transcriptJSONConverter(fileName, files).then((response) => {
               if (response) {
-                setOpenFlowNameModal(true);
+                // setOpenFlowNameModal(true);
+                setShowModal(true);
                 setNavState(true);
               } else {
                 alert("Please upload a valid JSON file.");
@@ -93,10 +96,13 @@ function UploadTranscript() {
           disabled={false}
           text={"Go Back"}
         />
-        {openFlowNameModal && (
-          <FlowNameModal
-            closeModal={setOpenFlowNameModal}
-            fileName={fileName}
+        {setShowModal && (
+          <Modal
+            show={show}
+            title="Name your flow to begin"
+            body="Enter flow name here"
+            onClose={() => setShowModal(false)}
+            onSubmit={() => PageChange("/startingintent")}
           />
         )}
       </div>

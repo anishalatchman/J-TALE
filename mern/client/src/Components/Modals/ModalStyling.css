@@ -1,19 +1,24 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-.placement {
+.modal {
   @apply justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50;
 }
 
-.modal-outline {
-  @apply rounded-3xl shadow-lg relative flex flex-col w-full bg-white;
+.modal-content {
+  @apply rounded-3xl shadow-lg relative flex flex-col w-2/5 bg-white;
 }
 
-.body {
-  @apply relative p-6 flex-auto;
+.modal-header,
+.modal-footer {
+  @apply text-center w-auto my-2 mx-auto max-w-3xl;
 }
 
-.black {
-  @apply min-w-15 border-2 border-black m-2 rounded-full p-3 pl-6 pr-6 text-black font-nunito font-bold;
+.modal-title {
+  @apply text-center font-nunito font-bold text-xl;
+}
+
+.modal-body {
+  @apply items-center relative p-6 flex-auto text-center;
+}
+
+.modal-input {
+  @apply items-center my-2 text-lg font-nunito border-2 rounded-lg p-2;
 }

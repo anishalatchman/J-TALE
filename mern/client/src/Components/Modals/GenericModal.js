@@ -1,55 +1,48 @@
-import React, { Component } from "react";
-import { useNavigate } from "react-router-dom";
-import "./ModalStylig.css";
+import React from "react";
+import "./ModalStyling.css";
+import GenericButton from "../Buttons/GenericButton";
 
-export default function GenericModal({ closeModal }, filename) {
-  const Navigate = useNavigate();
-  const PageChange = (url) => {
-    Navigate(url);
-  };
-  const handleSubmit = () => {
-    alert("Flow name set to: ");
-  };
+/**
+ * A generic input modal component
+ * @module GenericModal
+ */
+/** @prop {boolean} [show] : whether the modal shows or not*/
+/** @prop {String} [title] : title of modal, possible instructions for user*/
+/** @prop {String} [body] : placeholder for text input box*/
+/** @prop {function} [onClose] : the function to be executed when CANCEL button is pressed*/
+/** @prop {fuction} [onSubmit] : the function to be executed when CONTINUE button is pressed*/
+
+const Modal = (props) => {
+  if (!props.show) {
+    return null;
+  }
 
   return (
-    <div className="placement">
-      <div className="text-center w-auto my-6 mx-auto max-w-3xl">
-        {/*content*/}
-        <div className="modal-outline">
-          {/*body*/}
-          <div className="relative p-6 flex-auto">
-            <p className="text-center font-nunito font-bold text-xl">
-              Name Your Flow
-            </p>
-            <input
-              className="my-2 text-lg font-nunito border-2 rounded-lg p-2"
-              type="text"
-              placeholder="Enter flow name here"
-            />
-          </div>
-          {/*footer*/}
-          <div className="relative p-6 flex-auto">
-            <button
-              className="text-red-500 px-6 py-2 text-base font-nunito font-bold"
-              type="button"
-              onClick={() => closeModal(false)}
-            >
-              CANCEL
-            </button>
-            <button
-              className="text-green-500 px-6 py-2 text-base font-nunito font-bold"
-              type="button"
-              onClick={() => {
-                handleSubmit();
-                closeModal(false);
-                PageChange("/startingintent");
-              }}
-            >
-              CONTINUE
-            </button>
-          </div>
+    <div className="modal">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h4 className="modal-title">{props.title}</h4>
+        </div>
+        <div className="modal-body">
+          <input className="modal-input" type="text" placeholder={props.body} />
+        </div>
+        <div className="modal-footer">
+          <GenericButton
+            buttonType="modalCancel"
+            onClick={props.onClose}
+            disabled={false}
+            text={"CANCEL"}
+          />
+          <GenericButton
+            buttonType="modalContinue"
+            onClick={props.onSubmit}
+            disabled={false}
+            text={"CONTINUE"}
+          />
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default Modal;
