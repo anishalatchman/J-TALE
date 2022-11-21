@@ -21,6 +21,10 @@
   @apply px-20 mb-5 items-center flex flex-col;
 }
 
+.buttonContainerNew {
+  @apply px-20 mb-5 items-center justify-center flex flex-row;
+}
+
 .button {
   @apply w-64 h-20 border-2 border-voiceflow-blue mt-5 mb-5 rounded-full p-3 bg-voiceflow-blue text-white font-nunito;
   font-size: 27px;

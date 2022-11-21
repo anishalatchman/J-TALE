@@ -82,7 +82,7 @@ function UploadTranscript() {
         </button>
       </div>
       <h4 className="subtitle"> {fileName} </h4>
-      <div className="buttonContainer2">
+      <div className="buttonContainerNew">
         <GenericButton
           buttonType={files ? "blue" : "disabled"}
           onClick={() => {
