@@ -1,25 +1,12 @@
 import axios from "axios";
-// import { useCallback } from "react";
 
 var res;
 
-// Sends Transcript to Database
-// async function uploadFile(transcript) {
-//   axios
-//     .post("http://localhost:5000/transcript/add", transcript)
-//     .then(() => {
-//       console.log("Transcript Uploaded!");
-//       return true;
-//     })
-//     .catch((e) => {
-//       return e.response.data;
-//     });
-// }
-
 async function uploadFile(transcript) {
   try {
-    await axios.post("http://localhost:5000/transcript/add", transcript);
+    res = await axios.post("http://localhost:5000/transcript/add", transcript);
     console.log("Transcript Uploaded!");
+    console.log(res);
     return true;
   } catch (e) {
     return false;
@@ -38,9 +25,9 @@ export async function transcriptJSONConverter(fileName, body) {
 
 // Currently does not work --- is there a way to delete transcripts based on file name?
 
-// async function deleteFile(transcript) {
+// async function deleteFile() {
 //   try {
-//     await axios.delete("http://localhost:5000/transcript/delete", transcript);
+//     await axios.delete("http://localhost:5000/transcript/delete");
 //     console.log("Transcript Deleted!");
 //     return true;
 //   } catch (e) {

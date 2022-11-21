@@ -20,8 +20,8 @@ function UploadTranscript() {
   const inputRef = useRef(null);
   const [fileName, setFileName] = useState("No files chosen");
   const [files, setFiles] = useState();
-  const [, setNavState] = useContext(SessionContext);
-  const [show, setShowModal] = useState(false);
+  const [navState, setNavState] = useContext(SessionContext);
+  const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
 
   const handleClick = () => {
@@ -42,11 +42,11 @@ function UploadTranscript() {
     const fileReader = new FileReader();
     fileReader.readAsText(fileObj, "UTF-8");
     fileReader.onload = (event) => {
-      setFiles(event.target.result);
+      setFiles(JSON.parse(event.target.result));
     };
   };
 
-  //help me
+  //Handling name change as user enters flow name
   const handleFlowNameChange = (event) => {
     setFlowName({ ...flowName, [event.target.name]: event.target.value });
   };
@@ -54,6 +54,11 @@ function UploadTranscript() {
   return (
     <div className="container">
       <h1 className="h1 title">Upload Transcripts</h1>
+      {!showModal && navState ? (
+        <h4 className="subtitle">Please upload a valid JSON file.</h4>
+      ) : (
+        <></>
+      )}
       <div className="buttonContainer1">
         <input
           style={{ display: "none" }}
@@ -80,16 +85,10 @@ function UploadTranscript() {
             transcriptJSONConverter(fileName, files).then((response) => {
               if (response) {
                 setShowModal(true);
-                setNavState(true);
               } else {
                 alert("Please upload a valid JSON file.");
                 // is there a way to make alert show up on page itself instead of it being a popup..?
               }
-              // response
-              //   ? setShowModal(true) && setNavState(true)
-              //   : alert("Please upload a valid JSON file.");
-              // note: no clue on why this "&&"" doesn't work for "AND"??
-              // I can resort to if/else statements but it would be great to get this short line of code to work instead.
             });
           }}
           disabled={files ? false : true}
@@ -106,9 +105,9 @@ function UploadTranscript() {
         />
         {setShowModal && (
           <Modal
-            show={show}
+            show={showModal}
             title="Name your flow to begin"
-            body="Test"
+            body="Enter your flow name here"
             value={flowName.name}
             onChange={handleFlowNameChange}
             onClose={() => {
@@ -119,12 +118,13 @@ function UploadTranscript() {
             // since right now, if they accidentally press cancel, they cannot use the transcript they were going to use again.
             // This current deleteFile does not work, look in transcript.js for more info
             onSubmit={() => {
+              setNavState(true);
               flowUploader(flowName.name, files).then((response) => {
                 if (response) {
                   alert("Your flow name has been set to: " + flowName.name);
                   PageChange("/startingintent");
                 } else {
-                  alert("Error");
+                  alert("Please enter a flow name.");
                 }
               });
             }}

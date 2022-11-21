@@ -8,6 +8,7 @@ export default function parse(transcript) {
     createQAs(transcript[i]);
     lst.push(initialQAID(transcript[i]));
   }
+  console.log(lst);
   return lst;
 }
 
