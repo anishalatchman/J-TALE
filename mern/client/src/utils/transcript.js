@@ -6,7 +6,6 @@ async function uploadFile(transcript) {
   try {
     res = await axios.post("http://localhost:5000/transcript/add", transcript);
     console.log("Transcript Uploaded!");
-    console.log(res.data.id);
     return res.data.id;
   } catch (e) {
     return false;
@@ -26,7 +25,7 @@ export async function transcriptJSONConverter(fileName, body) {
 export async function deleteFile(id) {
   console.log(id);
   try {
-    await axios.delete("http://localhost:5000/transcript/delete", id);
+    await axios.delete("http://localhost:5000/transcript/delete/" + id);
     console.log("Transcript Deleted!");
     return true;
   } catch (e) {

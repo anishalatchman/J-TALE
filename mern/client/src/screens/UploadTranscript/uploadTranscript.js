@@ -118,10 +118,7 @@ function UploadTranscript() {
             onChange={handleFlowNameChange}
             onClose={() => {
               setShowModal(false);
-              console.log(global.id);
               deleteFile(global.id);
-              // this global variable is correctly getting the id value, but deleteFile is not working
-              // for some reason, it cannot find the transcript even with id...
             }}
             onSubmit={() => {
               setNavState(true);
