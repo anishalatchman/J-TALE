@@ -9,6 +9,8 @@ import GenericButton from "../Buttons/GenericButton";
 /** @prop {boolean} [show] : whether the modal shows or not*/
 /** @prop {String} [title] : title of modal, possible instructions for user*/
 /** @prop {String} [body] : placeholder for text input box*/
+/** @prop {String} [value] : value of input user puts in form*/
+/** @prop {function} [onChange] : the function to be executed when changing input value on form*/
 /** @prop {function} [onClose] : the function to be executed when CANCEL button is pressed*/
 /** @prop {fuction} [onSubmit] : the function to be executed when CONTINUE button is pressed*/
 
@@ -24,7 +26,16 @@ const Modal = (props) => {
           <h4 className="modal-title">{props.title}</h4>
         </div>
         <div className="modal-body">
-          <input className="modal-input" type="text" placeholder={props.body} />
+          <form>
+            <input
+              className="modal-input"
+              type="text"
+              name="name"
+              placeholder={props.body}
+              value={props.value}
+              onChange={props.onChange}
+            />
+          </form>
         </div>
         <div className="modal-footer">
           <GenericButton

@@ -35,3 +35,15 @@ export async function transcriptJSONConverter(fileName, body) {
     return res;
   }
 }
+
+// Currently does not work --- is there a way to delete transcripts based on file name?
+
+// async function deleteFile(transcript) {
+//   try {
+//     await axios.delete("http://localhost:5000/transcript/delete", transcript);
+//     console.log("Transcript Deleted!");
+//     return true;
+//   } catch (e) {
+//     return false;
+//   }
+// }

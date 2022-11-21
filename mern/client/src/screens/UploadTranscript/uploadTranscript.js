@@ -4,6 +4,8 @@ import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { useRef, useState, useContext } from "react";
 import { transcriptJSONConverter } from "../../utils/transcript";
+import { flowUploader } from "../../utils/startScreen";
+// import { deleteFile } from "../../utils/transcript";
 import { useNavigate } from "react-router-dom";
 import { SessionContext } from "../../Components/Contexts/sessionProvider";
 import Modal from "../../Components/Modals/GenericModal";
@@ -18,9 +20,9 @@ function UploadTranscript() {
   const inputRef = useRef(null);
   const [fileName, setFileName] = useState("No files chosen");
   const [files, setFiles] = useState();
-  const [openFlowNameModal, setOpenFlowNameModal] = useState(false);
   const [, setNavState] = useContext(SessionContext);
   const [show, setShowModal] = useState(false);
+  const [flowName, setFlowName] = useState({ name: "" });
 
   const handleClick = () => {
     // open file input box on click of button
@@ -42,6 +44,11 @@ function UploadTranscript() {
     fileReader.onload = (event) => {
       setFiles(event.target.result);
     };
+  };
+
+  //help me
+  const handleFlowNameChange = (event) => {
+    setFlowName({ ...flowName, [event.target.name]: event.target.value });
   };
 
   return (
@@ -76,6 +83,7 @@ function UploadTranscript() {
                 setNavState(true);
               } else {
                 alert("Please upload a valid JSON file.");
+                // is there a way to make alert show up on page itself instead of it being a popup..?
               }
               // response
               //   ? setShowModal(true) && setNavState(true)
@@ -100,11 +108,26 @@ function UploadTranscript() {
           <Modal
             show={show}
             title="Name your flow to begin"
-            body="Enter flow name here"
-            onClose={() => setShowModal(false)}
+            body="Test"
+            value={flowName.name}
+            onChange={handleFlowNameChange}
+            onClose={() => {
+              setShowModal(false);
+              // deleteFile(fileName);
+            }}
             // note: it would be good to have a function that deletes the uploaded transcript from the DB when user presses cancel
-            // since right now, if they accidentally press cancel, they cannot use the transcript they were going to use again
-            onSubmit={() => PageChange("/startingintent")}
+            // since right now, if they accidentally press cancel, they cannot use the transcript they were going to use again.
+            // This current deleteFile does not work, look in transcript.js for more info
+            onSubmit={() => {
+              flowUploader(flowName.name, files).then((response) => {
+                if (response) {
+                  alert("Your flow name has been set to: " + flowName.name);
+                  PageChange("/startingintent");
+                } else {
+                  alert("Error");
+                }
+              });
+            }}
           />
         )}
       </div>

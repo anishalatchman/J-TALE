@@ -7,10 +7,12 @@
 import axios from "axios";
 // import { useCallback } from "react";
 
-async function uploadFile(name, transcript) {
+var res;
+
+async function uploadFlow(flow) {
   try {
-    await axios.post("http://localhost:5000/flow/add", { name, transcript });
-    console.log("Transcript Uploaded!");
+    await axios.post("http://localhost:5000/flow/add", flow);
+    console.log("Flow Uploaded!");
     return true;
   } catch (e) {
     return false;
@@ -18,12 +20,11 @@ async function uploadFile(name, transcript) {
 }
 
 // Checks if transcript file is a string and calls Upload Transcript
-export async function transcriptJSONConverter(fileName, body) {
-  if (typeof fileName === "string") {
-    // Defines new obj transcript in form required by mongoose schemas
-    const transcript = { name: fileName, data: body };
-    res = await uploadFile(transcript);
-    console.log(res);
+export async function flowUploader(flowName, file) {
+  if (typeof flowName === "string") {
+    // Defines new obj flow in form required by mongoose schemas
+    const flow = { name: flowName, questions: file };
+    res = await uploadFlow(flow);
     return res;
   }
 }
