@@ -1,14 +1,13 @@
 import React from "react";
-import "./uploadTranscript.css";
-import "./../../Components/Buttons/ButtonStyleSheet.css";
-import GenericButton from "../../Components/Buttons/GenericButton";
 import { useRef, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import "./uploadTranscript.css";
+import GenericButton from "../../Components/Buttons/GenericButton";
+import Modal from "../../Components/Modals/GenericModal";
 import { transcriptJSONConverter } from "../../utils/transcript";
 import { flowUploader } from "../../utils/startScreen";
 // import { deleteFile } from "../../utils/transcript";
-import { useNavigate } from "react-router-dom";
 import { SessionContext } from "../../Components/Contexts/sessionProvider";
-import Modal from "../../Components/Modals/GenericModal";
 
 function UploadTranscript() {
   const Navigate = useNavigate();
@@ -20,7 +19,7 @@ function UploadTranscript() {
   const inputRef = useRef(null);
   const [fileName, setFileName] = useState("No files chosen");
   const [files, setFiles] = useState();
-  const [navState, setNavState] = useContext(SessionContext);
+  const [, setNavState] = useContext(SessionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
 
@@ -42,7 +41,13 @@ function UploadTranscript() {
     const fileReader = new FileReader();
     fileReader.readAsText(fileObj, "UTF-8");
     fileReader.onload = (event) => {
-      setFiles(JSON.parse(event.target.result));
+      try {
+        setFiles(JSON.parse(event.target.result));
+      } catch (error) {
+        // for case when someone uploads a valid transcript at first, then switches to a bad one.
+        // it resets files to null to correctly display failure message.
+        setFiles(null);
+      }
     };
   };
 
@@ -54,8 +59,8 @@ function UploadTranscript() {
   return (
     <div className="container">
       <h1 className="h1 title">Upload Transcripts</h1>
-      {!showModal && navState ? (
-        <h4 className="subtitle">Please upload a valid JSON file.</h4>
+      {!files && fileName !== "No files chosen" ? (
+        <h4 className="failureIndicator">Please upload a valid JSON file.</h4>
       ) : (
         <></>
       )}
@@ -67,7 +72,7 @@ function UploadTranscript() {
           onChange={handleFileChange}
           accept=".json"
         />
-        <button className="button1" onClick={handleClick}>
+        <button className="button" onClick={handleClick}>
           <img
             src={require("../../assets/uploadicon.png")}
             alt={"upload"}
@@ -86,8 +91,8 @@ function UploadTranscript() {
               if (response) {
                 setShowModal(true);
               } else {
-                alert("Please upload a valid JSON file.");
-                // is there a way to make alert show up on page itself instead of it being a popup..?
+                // prompts alert when you try to upload a transcript that is already posted onto DB
+                alert("This file was already uploaded.");
               }
             });
           }}
@@ -107,16 +112,13 @@ function UploadTranscript() {
           <Modal
             show={showModal}
             title="Name your flow to begin"
-            body="Enter your flow name here"
+            body="Enter your flow name"
             value={flowName.name}
             onChange={handleFlowNameChange}
             onClose={() => {
               setShowModal(false);
               // deleteFile(fileName);
             }}
-            // note: it would be good to have a function that deletes the uploaded transcript from the DB when user presses cancel
-            // since right now, if they accidentally press cancel, they cannot use the transcript they were going to use again.
-            // This current deleteFile does not work, look in transcript.js for more info
             onSubmit={() => {
               setNavState(true);
               flowUploader(flowName.name, files).then((response) => {
