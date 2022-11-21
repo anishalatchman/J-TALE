@@ -6,8 +6,8 @@ async function uploadFile(transcript) {
   try {
     res = await axios.post("http://localhost:5000/transcript/add", transcript);
     console.log("Transcript Uploaded!");
-    console.log(res);
-    return true;
+    console.log(res.data.id);
+    return res.data.id;
   } catch (e) {
     return false;
   }
@@ -23,14 +23,13 @@ export async function transcriptJSONConverter(fileName, body) {
   }
 }
 
-// Currently does not work --- is there a way to delete transcripts based on file name?
-
-// async function deleteFile() {
-//   try {
-//     await axios.delete("http://localhost:5000/transcript/delete");
-//     console.log("Transcript Deleted!");
-//     return true;
-//   } catch (e) {
-//     return false;
-//   }
-// }
+export async function deleteFile(id) {
+  console.log(id);
+  try {
+    await axios.delete("http://localhost:5000/transcript/delete", id);
+    console.log("Transcript Deleted!");
+    return true;
+  } catch (e) {
+    return false;
+  }
+}

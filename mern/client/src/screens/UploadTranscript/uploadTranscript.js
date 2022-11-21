@@ -5,8 +5,8 @@ import "./uploadTranscript.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import Modal from "../../Components/Modals/GenericModal";
 import { transcriptJSONConverter } from "../../utils/transcript";
+import { deleteFile } from "../../utils/transcript";
 import { flowUploader } from "../../utils/startScreen";
-// import { deleteFile } from "../../utils/transcript";
 import { SessionContext } from "../../Components/Contexts/sessionProvider";
 
 function UploadTranscript() {
@@ -64,7 +64,7 @@ function UploadTranscript() {
       ) : (
         <></>
       )}
-      <div className="buttonContainer1">
+      <div className="buttonContainer">
         <input
           style={{ display: "none" }}
           ref={inputRef}
@@ -90,6 +90,7 @@ function UploadTranscript() {
             transcriptJSONConverter(fileName, files).then((response) => {
               if (response) {
                 setShowModal(true);
+                global.id = response;
               } else {
                 // prompts alert when you try to upload a transcript that is already posted onto DB
                 alert("This file was already uploaded.");
@@ -117,7 +118,10 @@ function UploadTranscript() {
             onChange={handleFlowNameChange}
             onClose={() => {
               setShowModal(false);
-              // deleteFile(fileName);
+              console.log(global.id);
+              deleteFile(global.id);
+              // this global variable is correctly getting the id value, but deleteFile is not working
+              // for some reason, it cannot find the transcript even with id...
             }}
             onSubmit={() => {
               setNavState(true);
