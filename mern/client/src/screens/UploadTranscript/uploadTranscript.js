@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./uploadTranscript.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import Modal from "../../Components/Modals/GenericModal";
-import { transcriptJSONConverter } from "../../utils/transcript";
-import { deleteFile } from "../../utils/transcript";
+import { transcriptJSONConverter, deleteFile } from "../../utils/transcript";
 import { flowUploader } from "../../utils/startScreen";
 import { SessionContext } from "../../Components/Contexts/sessionProvider";
 
@@ -19,7 +18,8 @@ function UploadTranscript() {
   const inputRef = useRef(null);
   const [fileName, setFileName] = useState("No files chosen");
   const [files, setFiles] = useState();
-  const [, setNavState] = useContext(SessionContext);
+  const [, setNavState, transcriptID, setTranscriptID] =
+    useContext(SessionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
 
@@ -58,7 +58,7 @@ function UploadTranscript() {
 
   return (
     <div className="container">
-      <h1 className="h1 title">Upload Transcripts</h1>
+      <h1 className="h1 title">Upload Transcript</h1>
       {!files && fileName !== "No files chosen" ? (
         <h4 className="failureIndicator">Please upload a valid JSON file.</h4>
       ) : (
@@ -90,7 +90,7 @@ function UploadTranscript() {
             transcriptJSONConverter(fileName, files).then((response) => {
               if (response) {
                 setShowModal(true);
-                global.id = response;
+                setTranscriptID(response);
               } else {
                 // prompts alert when you try to upload a transcript that is already posted onto DB
                 alert("This file was already uploaded.");
@@ -118,7 +118,7 @@ function UploadTranscript() {
             onChange={handleFlowNameChange}
             onClose={() => {
               setShowModal(false);
-              deleteFile(global.id);
+              deleteFile(transcriptID);
             }}
             onSubmit={() => {
               setNavState(true);
@@ -127,7 +127,7 @@ function UploadTranscript() {
                   alert("Your flow name has been set to: " + flowName.name);
                   PageChange("/startingintent");
                 } else {
-                  alert("Please enter a flow name.");
+                  alert("Please enter a valid flow name.");
                 }
               });
             }}

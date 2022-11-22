@@ -23,7 +23,6 @@ export async function transcriptJSONConverter(fileName, body) {
 }
 
 export async function deleteFile(id) {
-  console.log(id);
   try {
     await axios.delete("http://localhost:5000/transcript/delete/" + id);
     console.log("Transcript Deleted!");

@@ -5,9 +5,9 @@ var res;
 async function uploadFlow(flow) {
   try {
     res = await axios.post("http://localhost:5000/flow/add", flow);
-    console.log(res.config.data);
     console.log("Flow Uploaded!");
-    return res;
+    // return res;
+    return true;
   } catch (e) {
     return false;
   }
