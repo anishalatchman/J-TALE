@@ -1,24 +1,40 @@
-import Flow from "../DAO/flow_dao.js";
+import FlowDAO from "../DAO/flow_dao.js";
 import parse from "../utils/parse.js";
 
-export function getFlow(req) {
-  return Flow.getFlow(req);
-}
+//Interactor calling the Flow DAO functions after properly checking the inputs
+export default class FlowInteractor {
+  //Empty constructor
+  constructor(props) {
+    super(props);
+  }
 
-export function createFlow(req) {
-  const transcript = req.body.transcript;
+  //Gets the flow by ID
+  getFlow(req, res) {
+    FlowDAO.getFlowByID(req, res);
+  }
 
-  const name = req.body.name;
-  const questions = parse(transcript);
+  //If no flow name exists creates a new flow
+  createFlow(req, res) {
+    if (!FlowDAO.flowNameExists(req, res)) {
+      const transcript = req.body.transcript;
 
-  const request = { name: name, questions: questions };
-  return Flow.createFlow(request);
-}
+      const name = req.body.name;
+      const questions = parse(transcript);
 
-export function updateFlow(req) {
-  return Flow.updateFlow(req);
-}
+      const request = { name: name, questions: questions };
+      FlowDAO.createFlow(request, res);
+    }
+  }
 
-export function deleteFlow(req) {
-  return Flow.deleteFlow(req);
+  //If the flow exists already, then it is updated
+  updateFlow(req, res) {
+    if (FlowDAO.flowIDExists(req, res)) {
+      FlowDAO.updateFlow(req, res);
+    }
+  }
+
+  //Deletes flow
+  deleteFlow(req, res) {
+    FlowDAO.deleteTranscriptByID(req, res);
+  }
 }

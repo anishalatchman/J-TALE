@@ -1,27 +1,23 @@
-import Transcript from "../models/transcript.model.js";
+import TranscriptInteractor from "../interactor/transcript_interactor";
 import asyncHandler from "express-async-handler";
+//Controller for Transcript entity
 
+//Gets transcript
 export const getTranscript = asyncHandler(async (req, res) => {
-  val = Transcript.getTranscript(req);
-  res.status(val[0]).json(val[1]);
+  TranscriptInteractor.getTranscript(req, res);
 });
 
+//Creates transcript
 export const createTranscript = asyncHandler(async (req, res) => {
-  val = Transcript.createTranscript(req);
-  res.status(val[0]).json(val[1]);
+  TranscriptInteractor.createTranscript(req, res);
 });
 
-export const createTranscriptAPI = asyncHandler(async (req, res) => {
-  val = Transcript.createTranscripAPIt(req);
-  res.status(val[0]).json(val[1]);
-});
-
+//Updates transcript
 export const updateTranscript = asyncHandler(async (req, res) => {
-  val = Transcript.updateTranscriptAPI(req);
-  res.status(val[0]).json(val[1]);
+  TranscriptInteractor.updateTranscript(req, res);
 });
 
+//Deletes transcript
 export const deleteTranscript = asyncHandler(async (req, res) => {
-  val = Transcript.deleteTranscript(req);
-  res.status(val[0]).json(val[1]);
+  TranscriptInteractor.deleteTranscript(req, res);
 });

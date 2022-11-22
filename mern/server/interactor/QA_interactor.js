@@ -1,17 +1,37 @@
-import QA from "../DAO/QA_dao.js";
+import QA_DAO from "../DAO/QA_dao.js";
+//Interactor calling the QA DAO functions after properly checking the inputs
+export default class QA_Interactor {
+  //Empty constructor
+  constructor(props) {
+    super(props);
+  }
 
-export function getQA(req) {
-  return QA.getQA(req);
-}
+  //Gets the QA by ID
+  getQA(req, res) {
+    QA_DAO.getQAByID(req, res);
+  }
 
-export function createQA(req) {
-  return QA.createQA(req);
-}
+  //Creates a new QA
+  createQA(req, res) {
+    QA_DAO.createQA(req, res);
+  }
 
-export function updateQA(req) {
-  return QA.updateQA(req);
-}
+  //Updates QA if new QA object is valid and QA exists in collection
+  updateQA(req, res) {
+    const qa = QA_DAO.QAExists(req, res);
+    if (!qa) {
+      res.status(400, "QA not Found");
+    }
+    if (req.body.question && req.body.intents && req.body.question_included) {
+      qa.question = question;
+      qa.intents = intents;
+      qa.question_included = question_included;
+      QA_DAO.updateQA(qa, res);
+    }
+  }
 
-export function deleteQA(req) {
-  return QA.deleteQA(req);
+  //Deletes QA by ID
+  deleteQA(req, res) {
+    QA_DAO.deleteQAByID(req, res);
+  }
 }

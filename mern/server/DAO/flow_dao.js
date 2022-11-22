@@ -1,79 +1,73 @@
 import Flow from "../models/flow.model.js";
 
+//Class of DAO functions related to the Flow entities
 export default class FlowDAO {
-
-  constructor(props){
-    super(props)
+  //Empty constructor
+  constructor(props) {
+    super(props);
   }
 
-  getFlow(req) {
+  // Gets the flow by ID
+  async getFlowByID(req, res) {
     try {
       const flow = await Flow.findById(req.params.id);
-      return 200, { flow };
+      res.status(200, { flow });
     } catch (error) {
-      return 400, "No Flow Exist";
+      res.status(400, "No Flow Exist");
     }
   }
-  
-  createTranscript(req) {
-    const name = req.name;
-    const questions = req.questions;
-  
-    let flowExists = await Flow.findOne({ name });
-  
-    if (flowExists) {
-      return "Session already exists";
+
+  //Returns whether flow name already exists to prevent duplicate flow
+  async flowNameExists(req, res) {
+    if (await Flow.findOne({ name: req.body.name })) {
+      res.status(200, "Flow already exists");
+      return true;
     }
-  
-    const flow = await Flow.create({
-      name,
-      questions,
-    });
-    if (flow) {
-      return (
-        200,
-        {
-          id: transcript.id,
-          name: transcript.name,
-        }
-      );
-    } else {
-      return 400, "Invalid transcript Data";
-    }
+    return false;
   }
-  
-  updateTranscript(req) {
-    const flow = await Flow.findById(req.params.id);
-  
-    if (!flow) {
-      return 200, "No Flow Exists with Given ID";
-    }
-  
-    const name = req.body.name;
-    const questions = req.body.questions;
-  
-    // Move the ifs to interactor
+
+  //Creates new flow with a parsed transcript
+  async createFlow(req, res) {
     try {
-      if (name) {
-        flow.name = name;
-      }
-      if (questions) {
-        flow.questions = questions;
-      }
-      flow.save();
-      return 200, { id: flow.id };
-    } catch (error) {
-      return 400, "Invalid Input Fields";
+      const flow = await Flow.create({
+        name: req.name,
+        questions: req.questions,
+      });
+      res.status(200, { id: flow.id, name: flow.name });
+    } catch (e) {
+      res.status(400, "Invalid Flow Data");
     }
   }
-  
-  deleteTranscript(req) {
+
+  //Checks whether flow ID exists
+  async flowIDExists(req, res) {
+    if (await Flow.findById(req.params.id)) {
+      return true;
+    }
+    res.status(200, "No Flow Exists with Given ID");
+    return false;
+  }
+
+  //Updates the existing flow
+  async updateFlow(req, res) {
     try {
-      const flow = Flow.findByIdAndDelete(req.params.id);
-      return 200, { flow };
-    } catch {
-      return 400, "Unable to Delete Flow";
+      const flow = await Flow.create({
+        name: req.body.name,
+        questions: req.body.questions,
+      });
+      res.status(200, { id: flow.id });
+    } catch (e) {
+      res.status(400, "Invalid Input Fields");
+    }
+  }
+
+  //Deletes the flow by ID
+  async deleteTranscriptByID(req, res) {
+    try {
+      const flow = await Flow.findByIdAndDelete(req.params.id);
+      res.status(200, { flow });
+    } catch (e) {
+      res.status(400, "Unable to Delete Flow");
     }
   }
 }
-
