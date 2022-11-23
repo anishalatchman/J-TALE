@@ -1,3 +1,6 @@
+// DATA ACCESS OBJECT - This file makes get calls to the MongoDB, 
+// then sends retrieved data to the Interactor to modify it
+
 import QA from "../models/question_answer.js"
 import asyncHandler from "express-async-handler";
 

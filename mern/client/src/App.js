@@ -19,6 +19,7 @@ function App() {
     <Router>
       <div>
         {/* SessionProvider contains all global vars (navstate, session id) */}
+        
         <SessionProvider>
           <Navbar />
         
@@ -33,6 +34,7 @@ function App() {
           <Route path="/startingintent" element={<StartingIntent />} />
         </Routes>
         </SessionProvider>
+
       </div>
     </Router>
   );

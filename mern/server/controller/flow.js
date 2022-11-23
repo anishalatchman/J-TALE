@@ -1,3 +1,6 @@
+// DATA ACCESS OBJECT - This file makes get calls to the MongoDB, 
+// then sends retrieved data to the Interactor to modify it
+
 import Flow from "../models/flow.model.js"
 import parse from "../utils/parse.js";
 import asyncHandler from "express-async-handler";
