@@ -1,5 +1,5 @@
 { "name": "transcript test",
-"body":"name": "client",
+"body":"client",
 "version": "0.1.0",
 "private": true,
 "dependencies": {

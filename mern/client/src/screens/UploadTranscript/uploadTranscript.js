@@ -6,7 +6,7 @@ import GenericButton from "../../Components/Buttons/GenericButton";
 import Modal from "../../Components/Modals/GenericModal";
 import { transcriptJSONConverter, deleteFile } from "../../utils/transcript";
 import { flowUploader } from "../../utils/startScreen";
-import { SessionContext } from "../../Components/Contexts/sessionProvider";
+import { SessionContext } from "../../Contexts/sessionProvider";
 
 function UploadTranscript() {
   const Navigate = useNavigate();
