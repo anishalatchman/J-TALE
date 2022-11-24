@@ -1,7 +1,7 @@
 import React from "react";
 import { useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import "./uploadTranscript.css";
+import "./uploadTranscript.module.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import Modal from "../../Components/Modals/GenericModal";
 import { transcriptJSONConverter, deleteFile } from "../../utils/transcript";
