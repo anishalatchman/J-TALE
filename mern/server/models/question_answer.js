@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+//Creation of the QA entity
 const Schema = mongoose.Schema;
 
 const QASchema = new Schema({
