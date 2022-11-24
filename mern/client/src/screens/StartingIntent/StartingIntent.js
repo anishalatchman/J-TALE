@@ -1,5 +1,5 @@
 import React from "react";
-import "./StartingIntent.module.css";
+import styles from "./StartingIntent.module.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { useNavigate } from "react-router-dom";
@@ -12,11 +12,11 @@ function StartingIntent() {
   };
   return (
     <div className="container">
-      <div class="scroller">
+      <div className={styles.scroller}>
         <Scrollbar />
       </div>
-      <div className="intentContainer">
-        <h1 className="h1 intentTitle">How can I help you today?</h1>
+      <div className={styles.intentContainer}>
+        <h1 className={styles.intentTitle}>How can I help you today?</h1>
         <div>
           <div>
             <GenericButton buttonType="intent1" text={"Order Pizza"} />
@@ -28,10 +28,10 @@ function StartingIntent() {
           </div>
         </div>
         <div>
-          <h4 className="instructions">
+          <h4 className={styles.instructions}>
             Select intents you would like to include by clicking once.
           </h4>
-          <h4 className="instructions1">
+          <h4 className={styles.instructions1}>
             Choose a specific path by clicking again and selecting next.
           </h4>
         </div>
@@ -54,34 +54,3 @@ function StartingIntent() {
   );
 }
 export default StartingIntent;
-
-// export default class Landing extends Component {
-
-//     render() {
-//     return (
-//       <div className="container">
-//         <h1 className="h1 title">
-//           Upload Transcript
-//         </h1>
-//         <div className="buttonContainer">
-//         <button className="button1">Choose File</button>
-//         </div>
-//         <h4 className="subtitle">No file chosen</h4>
-//         <div className="buttonContainer">
-//         <GenericButton
-//             buttonType="outline"
-//             onClick={() => null}
-//             disabled={false}
-//             text={"Begin Session"}
-//           />
-//           <GenericButton
-//             buttonType="outline"
-//             onClick={() => null}
-//             disabled={false}
-//             text={"Go Back"}
-//           />
-//         </div>
-//       </div>
-//     );
-//   }
-// }
