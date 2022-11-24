@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./savingSession.css";
+import "./savingSession.module.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { withRouter } from "../withRouter";
 

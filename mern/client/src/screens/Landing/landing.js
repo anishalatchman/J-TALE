@@ -1,5 +1,5 @@
 import React from "react";
-import "./landing.css";
+import * as landingStyles from "./landing.module.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +11,7 @@ function Landing() {
 
   return (
     <div className="container">
-      <h1 className="h1 title">
+      <h1 className={landingStyles.title}>
         Transcript to chatbot <br /> with a couple clicks
       </h1>
       <h4 className="subtitle">A flow-building plugin for Voiceflow</h4>

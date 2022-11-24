@@ -1,5 +1,5 @@
 import React from "react";
-import "./StartingIntent.css";
+import "./StartingIntent.module.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { useNavigate } from "react-router-dom";
@@ -12,9 +12,9 @@ function StartingIntent() {
   };
   return (
     <div className="container">
-        <div class="scroller">
-          <Scrollbar/>
-        </div>
+      <div class="scroller">
+        <Scrollbar />
+      </div>
       <div className="intentContainer">
         <h1 className="h1 intentTitle">How can I help you today?</h1>
         <div>
