@@ -59,7 +59,7 @@ function UploadTranscript() {
   return (
     <div className="container">
       <h1 className="h1 title">Upload Transcript</h1>
-      {!files && fileName !== "No files chosen" ? (
+      {fileName !== "No files chosen" && files && !files.questions ? (
         <h4 className="failureIndicator">Please upload a valid JSON file.</h4>
       ) : (
         <></>
@@ -84,7 +84,7 @@ function UploadTranscript() {
       <h4 className="subtitle"> {fileName} </h4>
       <div className="buttonContainerNew">
         <GenericButton
-          buttonType={files ? "blue" : "disabled"}
+          buttonType={files && files.questions ? "blue" : "disabled"}
           onClick={() => {
             // Checks if the transcript is a string, and then sends transcript to DB
             transcriptJSONConverter(fileName, files).then((response) => {
@@ -97,7 +97,7 @@ function UploadTranscript() {
               }
             });
           }}
-          disabled={files ? false : true}
+          disabled={files && files.questions ? false : true}
           text={"Begin Session"}
         />
         <GenericButton
@@ -121,11 +121,11 @@ function UploadTranscript() {
               deleteFile(transcriptID);
             }}
             onSubmit={() => {
-              setNavState(true);
               flowUploader(flowName.name, files).then((response) => {
                 if (response) {
                   alert("Your flow name has been set to: " + flowName.name);
                   PageChange("/startingintent");
+                  setNavState(true);
                 } else {
                   alert("Please enter a valid flow name.");
                 }
