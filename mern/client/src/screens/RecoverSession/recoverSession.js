@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import "./recoverSession.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import { useNavigate } from "react-router-dom";
+import { recoverFlow } from "../../Controller/recoverSessionController"
 
 export default function RecoverSession() {
   const Navigate = useNavigate();
@@ -13,10 +14,14 @@ export default function RecoverSession() {
   }
 
   const handleSubmit = (event) => {
+    // prevent page reload
     event.preventDefault();
     // show navbar buttons for starting-intent page
     setNavState(true) 
     alert(`The session ID you entered was: ${sessionid}`)
+    // send session id to frontend controller which sends down to frontedn dao which does axios call to backend
+    const startingQA = recoverFlow(sessionid);
+    console.log("this is startingQA", startingQA);
   }
 
   const handleChange = (event) => {
