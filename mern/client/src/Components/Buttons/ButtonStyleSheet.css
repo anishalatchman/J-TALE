@@ -48,5 +48,5 @@
 }
 
 .nav {
-  @apply min-w-15 rounded-full ml-3 p-1 px-6 text-white bg-voiceflow-blue-light font-nunito font-medium;
+  @apply justify-center rounded-full ml-3 p-1 px-6 text-white bg-voiceflow-blue-light font-nunito font-medium;
 }

@@ -17,7 +17,7 @@ function StartingIntent() {
   // send session id to frontend controller which sends down to frontend dao which does axios call to backend
   // need to wait for async recoverFlow to return startingQA
 
-  const LoadPage = async () => {
+  const LoadSession = async () => {
     // retrieve starting qa's if session id is set
     if (sessionid) {
       console.log("this is the session id", sessionid)
@@ -26,7 +26,7 @@ function StartingIntent() {
     }
   };
 
-  LoadPage();
+  LoadSession();
 
   return (
     <div className="container">

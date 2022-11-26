@@ -17,7 +17,6 @@ export default function RecoverSession() {
     event.preventDefault();
     // show navbar buttons for starting-intent page
     setNavState(true);
-    alert(`The session ID you entered was: ${sessionid}`)
     PageChange("/startingintent")
     }
 

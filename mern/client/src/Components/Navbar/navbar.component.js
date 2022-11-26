@@ -29,14 +29,14 @@ export default function Navbar() {
       {/* Conditionally show buttons div based on navState */}
       {navState &&
       <div className="flex items-center">
-        <h2 className="font-nunito font-medium">
+        <h2 className="font-nunito font-medium justify-center">
           SESSION ID: {sessionid}  
         </h2>
         <GenericButton
         buttonType="nav"
         onClick={() => null}
         disabled={false}
-        text={"SAVE"}
+        text={"SAVE SESSION"}
       />
         <GenericButton
         buttonType="nav"
