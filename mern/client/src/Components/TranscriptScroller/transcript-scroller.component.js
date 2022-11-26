@@ -5,7 +5,7 @@ import "./transcript-scroller.component.css";
 export default class Scrollbar extends Component {
     render(){ 
         return (
-        <div class="scroller">
+        <div className="scroller">
 
         <h1 className="scrollerTitle">Transcript</h1>
 

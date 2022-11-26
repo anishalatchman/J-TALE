@@ -13,10 +13,6 @@ export async function sendToDAO(sessionID) {
 
 // returns first QA pair from given flow promise object
 export function getQAFromFlow(flowPromise) {
-    console.log("this is the QA from teh flow", flowPromise.flow.questions[0]); 
     return flowPromise.flow.questions[0];
 }
 
-    // flowPromise.then(
-    //     function returnStartingQA(flowObject) {
-    //         // this flowObject is undefined :/

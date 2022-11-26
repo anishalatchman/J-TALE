@@ -1,18 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./StartingIntent.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { useNavigate } from "react-router-dom";
 import Scrollbar from "../../Components/TranscriptScroller/transcript-scroller.component";
+import { SessionContext } from "../../Contexts/sessionProvider";
+import { recoverFlow } from "../../Controller/recoverSessionController"
 
 function StartingIntent() {
   const Navigate = useNavigate();
+  const [, , sessionid, ] = useContext(SessionContext);
+
   const PageChange = () => {
     Navigate("/");
   };
+  // send session id to frontend controller which sends down to frontend dao which does axios call to backend
+  // need to wait for async recoverFlow to return startingQA
+
+  const LoadPage = async () => {
+    if (sessionid) {
+      console.log("this is the session id", sessionid)
+      const startingQA = await recoverFlow(sessionid);
+      console.log("this is the first question", startingQA);
+    }
+  };
+
+  LoadPage();
+
   return (
     <div className="container">
-        <div class="scroller">
+        <div className="scroller">
           <Scrollbar/>
         </div>
       <div className="intentContainer">
@@ -55,33 +72,3 @@ function StartingIntent() {
 }
 export default StartingIntent;
 
-// export default class Landing extends Component {
-
-//     render() {
-//     return (
-//       <div className="container">
-//         <h1 className="h1 title">
-//           Upload Transcript
-//         </h1>
-//         <div className="buttonContainer">
-//         <button className="button1">Choose File</button>
-//         </div>
-//         <h4 className="subtitle">No file chosen</h4>
-//         <div className="buttonContainer">
-//         <GenericButton
-//             buttonType="outline"
-//             onClick={() => null}
-//             disabled={false}
-//             text={"Begin Session"}
-//           />
-//           <GenericButton
-//             buttonType="outline"
-//             onClick={() => null}
-//             disabled={false}
-//             text={"Go Back"}
-//           />
-//         </div>
-//       </div>
-//     );
-//   }
-// }

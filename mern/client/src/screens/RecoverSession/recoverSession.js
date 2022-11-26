@@ -3,7 +3,6 @@ import "./recoverSession.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import { useNavigate } from "react-router-dom";
-import { recoverFlow } from "../../Controller/recoverSessionController"
 
 export default function RecoverSession() {
   const Navigate = useNavigate();
@@ -13,17 +12,14 @@ export default function RecoverSession() {
   Navigate(url);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     // prevent page reload
     event.preventDefault();
     // show navbar buttons for starting-intent page
     setNavState(true);
     alert(`The session ID you entered was: ${sessionid}`)
-    // send session id to frontend controller which sends down to frontedn dao which does axios call to backend
-    // need to wait for async recoverFlow to return startingQA
-    const startingQA = await recoverFlow(sessionid);
-    console.log("this is startingQA", startingQA);
-  }
+    PageChange("/startingintent")
+    }
 
   const handleChange = (event) => {
     // set sessionid to input text
@@ -39,6 +35,7 @@ export default function RecoverSession() {
           </label>
           <input
             className="m-6 w-3/4 pl-4 pr-2 pt-2 pb-2 block rounded-full text-black"
+            id="inputField"
             type="text"
             value={sessionid}
             onChange={handleChange}
@@ -57,6 +54,8 @@ export default function RecoverSession() {
             onClick={() => {
               PageChange("/");
               setNavState(false);
+              // clear input field and sessionid
+              setSessionID("")
             }}
             disabled={false}
             text={"Go Back"}
