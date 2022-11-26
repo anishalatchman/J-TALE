@@ -11,16 +11,17 @@ export default function RecoverSession() {
 
   const PageChange = (url) => {
   Navigate(url);
-  }
+  };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     // prevent page reload
     event.preventDefault();
     // show navbar buttons for starting-intent page
-    setNavState(true) 
+    setNavState(true);
     alert(`The session ID you entered was: ${sessionid}`)
     // send session id to frontend controller which sends down to frontedn dao which does axios call to backend
-    const startingQA = recoverFlow(sessionid);
+    // need to wait for async recoverFlow to return startingQA
+    const startingQA = await recoverFlow(sessionid);
     console.log("this is startingQA", startingQA);
   }
 

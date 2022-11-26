@@ -3,24 +3,20 @@ import { getFlowBySessionID } from "../DAO/recoverSessionDAO"
 // manipulate data
 
 // sessionID does not need to be manipulated so this function sends it straight to DAO
-export function sendToDAO(sessionID) {
+export async function sendToDAO(sessionID) {
     // returns a flow promise object
-    getFlowBySessionID(sessionID).then(
-        function returnStuff(flowObject) {
-            console.log("this is the life", flowObject);
-            return flowObject.data.flow.questions[0];
-        }
-    );
-    // console.log("this is the QA pairs", flow.data.flow.questions)
+    const flow = await getFlowBySessionID(sessionID);
+    console.log("this is the flow", flow);
+    return flow;
 
 }
 
-// returns first QA pair from given flow object
+// returns first QA pair from given flow promise object
 export function getQAFromFlow(flowPromise) {
-    flowPromise.then(
-        function returnStartingQA(flowObject) {
-            console.log("this is the flow object", flowObject);
-            return flowObject.data.flow.questions[0];
-        }
-    );
+    console.log("this is the QA from teh flow", flowPromise.flow.questions[0]); 
+    return flowPromise.flow.questions[0];
 }
+
+    // flowPromise.then(
+    //     function returnStartingQA(flowObject) {
+    //         // this flowObject is undefined :/
