@@ -46,6 +46,14 @@
   width: 330px;
 }
 
+.modalCancel {
+  @apply text-red-500 px-6 py-2 text-base font-nunito font-bold;
+}
+
+.modalContinue {
+  @apply text-green-500 px-6 py-2 text-base font-nunito font-bold;
+}
+
 .nav {
   @apply min-w-15 rounded-full ml-3 p-1 px-6 text-white bg-voiceflow-blue-light font-nunito font-medium;
 }

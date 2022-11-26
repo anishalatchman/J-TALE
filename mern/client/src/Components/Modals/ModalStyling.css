@@ -1,0 +1,24 @@
+.modal {
+  @apply justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50;
+}
+
+.modal-content {
+  @apply rounded-3xl shadow-lg relative flex flex-col w-2/5 bg-white;
+}
+
+.modal-header,
+.modal-footer {
+  @apply text-center w-auto my-2 mx-auto max-w-3xl;
+}
+
+.modal-title {
+  @apply text-center font-nunito font-bold text-xl;
+}
+
+.modal-body {
+  @apply items-center relative p-6 flex-auto text-center;
+}
+
+.modal-input {
+  @apply items-center my-2 text-lg font-nunito border-2 rounded-lg p-2;
+}

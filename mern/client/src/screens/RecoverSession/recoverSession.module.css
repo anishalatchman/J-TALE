@@ -17,5 +17,13 @@
 }
 
 .inputForm{
-    @apply m-10 pt-8 pb-8 flex flex-col justify-center items-center bg-voiceflow-blue rounded-3xl;
+    @apply m-10 pt-8 pb-8 flex flex-col justify-center items-center bg-voiceflow-blue rounded-3xl w-1/3 mx-auto;
+}
+
+.inputContainer{
+    @apply m-6 w-3/4 pl-4 pr-2 pt-2 pb-2 block rounded-full text-black;
+}
+
+.label{
+    @apply text-xl text-white font-nunito font-medium;
 }

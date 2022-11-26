@@ -1,5 +1,5 @@
 import React from "react";
-import "./StartingIntent.css";
+import styles from "./StartingIntent.module.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import IntentButtons from "../../Components/IntentButtons/IntentButtons";
@@ -33,19 +33,21 @@ function StartingIntent() {
 
   return (
     <div className="container">
+
       <div className="scroller">
         <Scrollbar />
       </div>
       <div className="intentContainer">
         <h1 className="h1 intentTitle">How can I help you today?</h1>
+
         <div>
           <IntentButtons intents={intent}></IntentButtons>
         </div>
         <div>
-          <h4 className="instructions">
+          <h4 className={styles.instructions}>
             Select intents you would like to include by clicking once.
           </h4>
-          <h4 className="instructions1">
+          <h4 className={styles.instructions1}>
             Choose a specific path by clicking again and selecting next.
           </h4>
         </div>
