@@ -18,7 +18,7 @@ function UploadTranscript() {
   const inputRef = useRef(null);
   const [fileName, setFileName] = useState("No files chosen");
   const [files, setFiles] = useState();
-  const [, setNavState, transcriptID, setTranscriptID] =
+  const [, setNavState, transcriptID, setTranscriptID, setfirstQuestions] =
     useContext(SessionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
@@ -128,6 +128,7 @@ function UploadTranscript() {
                   alert("Your flow name has been set to: " + flowName.name);
                   PageChange("/startingintent");
                   setNavState(true);
+                  setfirstQuestions(response);
                 } else {
                   alert("Please enter a valid flow name.");
                 }

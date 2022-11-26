@@ -1,13 +1,12 @@
 import axios from "axios";
 
-var res;
-
 async function uploadFlow(flow) {
   try {
-    res = await axios.post("http://localhost:5000/flow/add", flow);
+    const res = await axios.post("http://localhost:5000/flow/add", flow);
     console.log("Flow Uploaded!");
-    // return res;
-    return true;
+    // this is going to return undefined because we can't access the response properly right now
+    // but it will soon be fixed in the backend
+    return res.data.questions;
   } catch (e) {
     return false;
   }
@@ -18,7 +17,7 @@ export async function flowUploader(flowName, file) {
   if (typeof flowName === "string" && flowName !== "") {
     // Defines new obj flow in form required by mongoose schemas
     const flow = { name: flowName, questions: file.questions };
-    res = await uploadFlow(flow);
+    const res = await uploadFlow(flow);
     return res;
   }
 }
