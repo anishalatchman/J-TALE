@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.title {
+  @apply text-center mt-40 mb-6;
+  font-size: 60px;
+}
+
+.subtitle {
+  @apply text-center mb-10;
+  font-size: 20px;
+}
+
+.failureIndicator {
+  @apply text-red-500 text-center mb-2 font-nunito font-bold;
+  font-size: 20px;
+}
+
+.buttonContainer {
+  @apply px-20 mb-5 items-center flex flex-col;
+}
+
+.buttonContainerNew {
+  @apply px-20 mb-5 items-center justify-center flex flex-row;
+}
+
+.button {
+  @apply w-64 h-20 border-2 border-voiceflow-blue mt-5 mb-5 rounded-full p-3 bg-voiceflow-blue text-white font-nunito;
+  font-size: 27px;
+}
+
+.uploadIcon {
+  display: inline-flex;
+  width: 37px;
+  height: 37px;
+  top: 10px;
+  @apply mr-2;
+}
