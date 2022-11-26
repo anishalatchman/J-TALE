@@ -1,7 +1,7 @@
 import React from "react";
 import { useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import "./uploadTranscript.css";
+import styles from "./uploadTranscript.module.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import Modal from "../../Components/Modals/GenericModal";
 import { transcriptJSONConverter, deleteFile } from "../../utils/transcript";
@@ -58,13 +58,15 @@ function UploadTranscript() {
 
   return (
     <div className="container">
-      <h1 className="h1 title">Upload Transcript</h1>
+      <h1 className={styles.title}>Upload Transcript</h1>
       {fileName !== "No files chosen" && files && !files.questions ? (
-        <h4 className="failureIndicator">Please upload a valid JSON file.</h4>
+        <h4 className={styles.failureIndicator}>
+          Please upload a valid JSON file.
+        </h4>
       ) : (
         <></>
       )}
-      <div className="buttonContainer">
+      <div className={styles.buttonContainer}>
         <input
           style={{ display: "none" }}
           ref={inputRef}
@@ -72,17 +74,17 @@ function UploadTranscript() {
           onChange={handleFileChange}
           accept=".json"
         />
-        <button className="button" onClick={handleClick}>
+        <button className={styles.button} onClick={handleClick}>
           <img
             src={require("../../assets/uploadicon.png")}
             alt={"upload"}
-            className="upload-icon"
+            className={styles.uploadIcon}
           />
           Choose File
         </button>
       </div>
-      <h4 className="subtitle"> {fileName} </h4>
-      <div className="buttonContainerNew">
+      <h4 className={styles.subtitle}> {fileName} </h4>
+      <div className={styles.buttonContainerNew}>
         <GenericButton
           buttonType={files && files.questions ? "blue" : "disabled"}
           onClick={() => {
