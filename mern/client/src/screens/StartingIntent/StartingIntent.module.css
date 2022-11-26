@@ -12,11 +12,11 @@
 }
 
 .instructions {
-  @apply text-gray text-left ml-4 mt-2;
+  @apply text-gray text-left ml-4 mt-2 p-2;
 }
 
 .instructions1 {
-  @apply text-gray text-left ml-4 mb-10;
+  @apply text-gray text-left ml-4 mb-10 p-2;
 }
 
 .buttonContainer1 {
