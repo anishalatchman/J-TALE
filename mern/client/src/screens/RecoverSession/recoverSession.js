@@ -55,7 +55,7 @@ export default function RecoverSession() {
               PageChange("/");
               setNavState(false);
               // clear input field and sessionid
-              setSessionID("")
+              setSessionID()
             }}
             disabled={false}
             text={"Go Back"}

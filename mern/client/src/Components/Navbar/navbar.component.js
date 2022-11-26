@@ -7,17 +7,15 @@ import { SessionContext } from "../../Contexts/sessionProvider";
 
 export default function Navbar() {
   // define context var to show/hide nav buttons
-  const [navState, setNavState] = useContext(SessionContext)
-  
-  // Create session id var and setter function
-  const sessionid = "12345";
-  // const setSessionID = (id) => {
-  //   sessionid = id;
-  // };
+  const [navState, setNavState, sessionid, setSessionID] = useContext(SessionContext)
 
   return (
     <nav className="navbar-bg">
-      <Link to="/" className="nav-link" onClick={() => {setNavState(false)}}>
+      <Link to="/" className="nav-link" onClick={() => {
+        setNavState(false)
+        // reset sessionid on return to home page
+        setSessionID()
+      }}>
         <div className="navbar-links">
           <img
             src={require("../../assets/voiceflow.png")}

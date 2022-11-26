@@ -18,6 +18,7 @@ function StartingIntent() {
   // need to wait for async recoverFlow to return startingQA
 
   const LoadPage = async () => {
+    // retrieve starting qa's if session id is set
     if (sessionid) {
       console.log("this is the session id", sessionid)
       const startingQA = await recoverFlow(sessionid);
