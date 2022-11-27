@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .intentTitle {
-  @apply text-left mt-16 mb-6 font-montserrat font-bold;
+  @apply text-left mb-3 ml-4 font-montserrat font-bold;
   font-size: 58px;
 }
 
@@ -11,12 +11,24 @@
   @apply w-3/4;
 }
 
+.buttonContainer {
+  @apply ml-4 mb-5 items-center justify-start flex flex-row;
+}
+
 .instructions {
-  @apply text-gray text-left ml-4 mt-2 p-2;
+  @apply text-gray text-left ml-4 mt-2;
 }
 
 .instructions1 {
-  @apply text-gray text-left ml-4 mb-10 p-2;
+  @apply text-gray text-left ml-4 mb-10;
+}
+
+.speaker1 {
+  @apply text-gray text-left ml-4 mt-12;
+}
+
+.speaker2 {
+  @apply text-gray text-left ml-4;
 }
 
 .buttonContainer1 {

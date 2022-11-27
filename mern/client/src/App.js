@@ -9,6 +9,7 @@ import UploadTranscript from "./screens/UploadTranscript/uploadTranscript";
 import StartingIntent from "./screens/StartingIntent/StartingIntent";
 import SavingSession from "./screens/SavingSession/savingSession";
 import SessionProvider from "./Contexts/sessionProvider";
+import SpeakerProvider from "./Contexts/speakerProvider";
 import IntentProvider from "./Contexts/intentsProvider";
 // import QuestionProvider, { QuestionContext } from "./Contexts/questionProvider";
 
@@ -19,17 +20,19 @@ function App() {
         {/* SessionProvider contains all global vars (navstate, session id) */}
         <SessionProvider>
           <IntentProvider>
-            {/* <QuestionProvider> */}
-            <Navbar />
+            <SpeakerProvider>
+              {/* <QuestionProvider> */}
+              <Navbar />
 
-            <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="/recover" element={<RecoverSession />} />
-              <Route path="/upload" element={<UploadTranscript />} />
-              <Route path="/save" element={<SavingSession />} />
-              <Route path="/startingintent" element={<StartingIntent />} />
-            </Routes>
-            {/* </QuestionProvider> */}
+              <Routes>
+                <Route path="/" element={<Landing />} />
+                <Route path="/recover" element={<RecoverSession />} />
+                <Route path="/upload" element={<UploadTranscript />} />
+                <Route path="/save" element={<SavingSession />} />
+                <Route path="/startingintent" element={<StartingIntent />} />
+              </Routes>
+              {/* </QuestionProvider> */}
+            </SpeakerProvider>
           </IntentProvider>
         </SessionProvider>
       </div>
