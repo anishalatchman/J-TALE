@@ -10,6 +10,7 @@ import StartingIntent from "./screens/StartingIntent/StartingIntent";
 import SavingSession from "./screens/SavingSession/savingSession";
 import SessionProvider from "./Contexts/sessionProvider";
 import IntentProvider from "./Contexts/intentsProvider";
+import QuestionProvider, { QuestionContext } from "./Contexts/questionProvider";
 
 function App() {
   return (
@@ -17,19 +18,19 @@ function App() {
       <div>
         {/* SessionProvider contains all global vars (navstate, session id) */}
         <SessionProvider>
-
           <IntentProvider>
-            <Navbar />
+            <QuestionProvider>
+              <Navbar />
 
-            <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="/recover" element={<RecoverSession />} />
-              <Route path="/upload" element={<UploadTranscript />} />
-              <Route path="/save" element={<SavingSession />} />
-              <Route path="/startingintent" element={<StartingIntent />} />
-            </Routes>
+              <Routes>
+                <Route path="/" element={<Landing />} />
+                <Route path="/recover" element={<RecoverSession />} />
+                <Route path="/upload" element={<UploadTranscript />} />
+                <Route path="/save" element={<SavingSession />} />
+                <Route path="/startingintent" element={<StartingIntent />} />
+              </Routes>
+            </QuestionProvider>
           </IntentProvider>
-
         </SessionProvider>
       </div>
     </Router>
