@@ -12,19 +12,11 @@
 }
 
 .instructions {
-  @apply text-gray text-left ml-3 mt-2;
+  @apply text-gray text-left ml-3 mt-2 p-2;
 }
 
 .instructions1 {
-  @apply text-gray text-left ml-3 mb-10;
-}
-
-.speaker1 {
-  @apply text-gray text-left ml-3 mt-12;
-}
-
-.speaker2 {
-  @apply text-gray text-left ml-3;
+  @apply text-gray text-left ml-4 mb-10 p-2;
 }
 
 .buttonContainer1 {
