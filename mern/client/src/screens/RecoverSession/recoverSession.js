@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function RecoverSession() {
   const Navigate = useNavigate();
   const [sessionID, setSessionID, , ] = useContext(SessionContext);
-  var inputText = ""
+  const [inputText, setInputText] = useState("")
 
   const PageChange = (url) => {
     Navigate(url);
@@ -23,7 +23,7 @@ export default function RecoverSession() {
 
   const handleChange = (event) => {
     // set sessionID to input text
-    inputText = event.target.value;
+    setInputText(event.target.value);
   };
 
   return (
@@ -52,7 +52,7 @@ export default function RecoverSession() {
           onClick={() => {
             PageChange("/");
             // clear input field and sessionID
-            inputText = "";
+            setInputText("");
             setSessionID();
           }}
           disabled={false}
