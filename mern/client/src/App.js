@@ -10,6 +10,7 @@ import StartingIntent from "./screens/StartingIntent/StartingIntent";
 import SavingSession from "./screens/SavingSession/savingSession";
 import SessionProvider from "./Contexts/sessionProvider";
 import IntentProvider from "./Contexts/intentsProvider";
+// import QuestionProvider, { QuestionContext } from "./Contexts/questionProvider";
 
 function App() {
   return (
@@ -17,8 +18,8 @@ function App() {
       <div>
         {/* SessionProvider contains all global vars (navstate, session id) */}
         <SessionProvider>
-
           <IntentProvider>
+            {/* <QuestionProvider> */}
             <Navbar />
 
             <Routes>
@@ -28,8 +29,8 @@ function App() {
               <Route path="/save" element={<SavingSession />} />
               <Route path="/startingintent" element={<StartingIntent />} />
             </Routes>
+            {/* </QuestionProvider> */}
           </IntentProvider>
-
         </SessionProvider>
       </div>
     </Router>
