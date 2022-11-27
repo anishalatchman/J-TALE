@@ -23,7 +23,8 @@ function StartingIntent() {
 
   const handleSpeakerChange = () => {
     const prev = prevSpeaker;
-    setPrevSpeaker({ currSpeaker });
+    const curr = currSpeaker;
+    setPrevSpeaker(curr);
     setSpeaker(prev);
   };
 
