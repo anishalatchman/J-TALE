@@ -13,14 +13,13 @@
 
 .blue {
   @apply min-w-15 border-2 border-voiceflow-blue m-2 rounded-full p-3 pl-6 pr-6 text-white bg-voiceflow-blue font-nunito font-bold;
-
 }
 
 .outline {
   @apply min-w-15 border-2 border-voiceflow-blue m-2 rounded-full p-3 pl-6 pr-6 text-voiceflow-blue font-nunito font-bold;
 }
 
-.disabled{
+.disabled {
   @apply min-w-15 border-2 opacity-25 border-voiceflow-blue m-2 rounded-full p-3 pl-6 pr-6 text-voiceflow-blue font-nunito font-bold;
 }
 
@@ -32,19 +31,27 @@
   @apply min-w-15 border-2 border-voiceflow-blue m-2 rounded-full p-3 pl-6 pr-6 text-voiceflow-blue bg-white font-nunito font-bold;
 }
 
-.intent1{
+.intent1 {
   @apply h-24 border-2 border-voiceflow-blue m-2 rounded-lg p-3 pl-6 pr-6 text-voiceflow-blue font-nunito font-bold;
   width: 330px;
 }
 
-.intent2{
+.intent2 {
   @apply h-24 bg-voiceflow-blue-light border-2 border-voiceflow-blue-light m-2 rounded-lg p-3 pl-6 pr-6 text-white font-nunito font-bold;
   width: 330px;
 }
 
-.intent3{
+.intent3 {
   @apply h-24 bg-voiceflow-blue border-2 border-voiceflow-blue m-2 rounded-lg p-3 pl-6 pr-6 text-white font-nunito font-bold;
   width: 330px;
+}
+
+.modalCancel {
+  @apply text-red-500 px-6 py-2 text-base font-nunito font-bold;
+}
+
+.modalContinue {
+  @apply text-green-500 px-6 py-2 text-base font-nunito font-bold;
 }
 
 .nav {
