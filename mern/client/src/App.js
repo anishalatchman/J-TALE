@@ -10,7 +10,7 @@ import StartingIntent from "./screens/StartingIntent/StartingIntent";
 import SavingSession from "./screens/SavingSession/savingSession";
 import SessionProvider from "./Contexts/sessionProvider";
 import IntentProvider from "./Contexts/intentsProvider";
-import QuestionProvider, { QuestionContext } from "./Contexts/questionProvider";
+// import QuestionProvider, { QuestionContext } from "./Contexts/questionProvider";
 
 function App() {
   return (

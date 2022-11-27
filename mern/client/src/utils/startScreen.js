@@ -7,6 +7,7 @@ async function uploadFlow(flow) {
     // the res.data.questions doesnt work right now due to bug in createFlow
     // we can uncomment and replace return true once it's functional
     // return res.data.questions;
+    console.log(res);
     return true;
   } catch (e) {
     return false;
