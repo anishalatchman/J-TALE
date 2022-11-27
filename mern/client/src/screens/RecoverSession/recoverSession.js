@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./recoverSession.module.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { SessionContext } from "../../Contexts/sessionProvider";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function RecoverSession() {
   const Navigate = useNavigate();
   const [sessionID, setSessionID, , ] = useContext(SessionContext);
+  var inputText = ""
 
   const PageChange = (url) => {
     Navigate(url);
@@ -16,13 +17,13 @@ export default function RecoverSession() {
     // prevent page reload
     event.preventDefault();
     // show navbar buttons for starting-intent page
-    setSessionID(true);
+    setSessionID(inputText);
     PageChange("/startingintent")
     }
 
   const handleChange = (event) => {
     // set sessionID to input text
-    setSessionID(event.target.value);
+    inputText = event.target.value;
   };
 
   return (
@@ -34,7 +35,7 @@ export default function RecoverSession() {
           className={styles.inputContainer}
           id="inputField"
           type="text"
-          value={sessionID}
+          value={inputText}
           onChange={handleChange}
           placeholder="Session ID"
         />
@@ -50,9 +51,9 @@ export default function RecoverSession() {
           buttonType="outline"
           onClick={() => {
             PageChange("/");
-            setSessionID(false);
             // clear input field and sessionID
-            setSessionID()
+            inputText = "";
+            setSessionID();
           }}
           disabled={false}
           text={"Go Back"}

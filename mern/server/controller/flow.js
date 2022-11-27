@@ -49,7 +49,7 @@ export const updateFlow = asyncHandler(async(req, res) => {
     const flow = await Flow.findById(req.params.id)
 
     if(!flow){
-        res.status(401).json("No Flow Exists with Given ID")
+        res.status(401).json("No Session Exists with Given ID")
     }
 
     const name = req.body.name
@@ -64,7 +64,7 @@ export const updateFlow = asyncHandler(async(req, res) => {
         }
         flow.save()
         res.status(200).json(
-            "Flow Updated",
+            "Session Updated",
             flow.id
         )
     } catch (error) {
