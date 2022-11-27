@@ -12,11 +12,9 @@ const flowschema = new Schema({
       type: String,
     },
   ],
-  current_question: [
-    {
-      type: String,
-    },
-  ],
+  current_question: {
+    type: String,
+  },
 });
 
 const Flow = mongoose.model("Flow", flowschema);

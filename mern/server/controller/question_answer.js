@@ -1,7 +1,9 @@
-import QA_Interactor from "../interactor/QA_interactor";
 import asyncHandler from "express-async-handler";
+import qa_Interactor from "../interactor/QA_interactor.js";
 
 //Controllers for REST APIs for the QA entity
+
+let QA_Interactor = new qa_Interactor();
 
 //Gets QA by ID
 export const getQA = asyncHandler(async (req, res) => {

@@ -1,19 +1,17 @@
 import QA from "../models/question_answer.js";
 
 //Class of DAO functions related to the QA entities
-export default class QA_DAO {
+export default class qa_DAO {
   //Empty constructor
-  constructor(props) {
-    super(props);
-  }
+  constructor() {}
 
   //Gets the QA by ID
   async getQAByID(req, res) {
-    try {
-      const qa = await QA.findOne({ id: req.body.id });
-      res.status(200, { qa });
-    } catch (e) {
-      res.status(400, "No Qa Exists with Given Session ID");
+    const qa = await QA.findOne({ id: req.body.id });
+    if (qa) {
+      res.status(200).json(qa);
+    } else {
+      res.status(400).json("No Qa Exists");
     }
   }
 
@@ -23,12 +21,12 @@ export default class QA_DAO {
       const qa = await QA.create({
         id: req.body.id,
         question: req.body.question,
-        intent: req.body.intent,
+        intents: req.body.intents,
         question_included: req.body.question_included,
       });
-      res.status(200, { id: qa.id });
+      res.status(200).json(qa.id);
     } catch (e) {
-      res.status(400, "Invalid QA Data");
+      res.status(400).json("Invalid QA Data");
     }
   }
 
@@ -42,9 +40,9 @@ export default class QA_DAO {
   async updateQA(qa, res) {
     try {
       qa.save();
-      res.status(200, { id: qa.id });
+      res.status(200).json(qa.id);
     } catch (e) {
-      res.status(400, "Invalid Input Fields");
+      res.status(400).json("Invalid Input Fields");
     }
   }
 
@@ -52,9 +50,9 @@ export default class QA_DAO {
   async deleteQAByID(req, res) {
     try {
       const qa = await QA.findOneAndDelete({ id: req.body.id });
-      res.status(200, { qa });
+      res.status(200).json(qa);
     } catch (error) {
-      res.status(400, "Unable to Delete QA");
+      res.status(400).json("Unable to Delete QA");
     }
   }
 }

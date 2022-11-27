@@ -14,6 +14,7 @@ const QASchema = new Schema({
   },
   question_included: {
     type: Boolean,
+    require: true,
   },
   intents: [
     {

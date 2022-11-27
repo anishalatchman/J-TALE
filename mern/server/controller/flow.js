@@ -1,7 +1,9 @@
-import FlowInteractor from "../interactor/flow_interactor.js";
+import flowInteractor from "../interactor/flow_interactor.js";
 import asyncHandler from "express-async-handler";
 
 //Controllers for REST APIs for the Flow entity
+
+let FlowInteractor = new flowInteractor();
 
 //Controller for get request
 export const getFlow = asyncHandler(async (req, res) => {
