@@ -11,6 +11,10 @@
   @apply w-3/4;
 }
 
+.buttonContainer {
+  @apply ml-4 mb-5 items-center justify-start flex flex-row;
+}
+
 .instructions {
   @apply text-gray text-left ml-4 mt-2;
 }

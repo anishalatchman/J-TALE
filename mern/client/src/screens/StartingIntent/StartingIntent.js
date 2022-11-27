@@ -9,11 +9,13 @@ import Scrollbar from "../../Components/TranscriptScroller/transcript-scroller.c
 import { deleteFile } from "../../utils/transcript";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
+import { IntentContext } from "../../Contexts/intentsProvider";
 
 function StartingIntent() {
   const [, , transcriptID] = useContext(SessionContext);
   const [currSpeaker, setSpeaker, prevSpeaker, setPrevSpeaker] =
     useContext(SpeakerContext);
+  const [intentState] = useContext(IntentContext);
   const Navigate = useNavigate();
   const PageChange = (url) => {
     Navigate(url);
@@ -65,7 +67,7 @@ function StartingIntent() {
             Choose a specific path by clicking again and selecting next.
           </h4>
         </div>
-        <div>
+        <div className={styles.buttonContainer}>
           <GenericButton
             buttonType="outline"
             text={"Go Back"}
@@ -76,11 +78,16 @@ function StartingIntent() {
             }}
           />
           <GenericButton
-            buttonType="disabled"
+            buttonType={
+              Object.values(intentState).some((x) => x === 2)
+                ? "blue"
+                : "disabled"
+            }
             text={"Next"}
-            disabled={true}
+            disabled={
+              Object.values(intentState).some((x) => x === 2) ? false : true
+            }
             onClick={() => {
-              PageChange("/");
               handleSpeakerChange();
             }}
           />
