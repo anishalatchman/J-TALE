@@ -15,7 +15,7 @@ function App() {
   return (
     <Router>
       <div>
-        {/* SessionProvider contains all global vars (navstate, session id) */}
+        {/* SessionProvider contains all global vars (session id, transcript id) */}
         
         <SessionProvider>
 
