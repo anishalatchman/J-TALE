@@ -23,7 +23,7 @@
   background: rgb(155, 155, 155);
 }
 
-.scroller { 
+.scroller {
   background-color: rgb(221, 221, 221);
   float: right;
   height: 550px;
@@ -32,22 +32,15 @@
   overflow-y: auto;
   overflow-x: auto;
   padding-left: 20px;
- }
+}
 
-.scrollerTitle{
+.scrollerTitle {
   @apply mt-6 mb-6 font-montserrat;
   /* font-family: 'Montserrat', sans-serif; */
   font-size: 35px;
   font-weight: 800;
 }
 
-
-.blue {
-  @apply w-40 border-2 items-center flex flex-col border-voiceflow-blue m-3 rounded-full p-3 text-white bg-voiceflow-blue;
-  font-weight: 700;
-  text-align: center;
-}
-
-.buttonContainer{
+.buttonContainer {
   @apply mb-5 items-center flex flex-col;
 }
