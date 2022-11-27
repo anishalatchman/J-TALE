@@ -19,17 +19,17 @@ function App() {
         {/* SessionProvider contains all global vars (navstate, session id) */}
         <SessionProvider>
           <IntentProvider>
-            <QuestionProvider>
-              <Navbar />
+            {/* <QuestionProvider> */}
+            <Navbar />
 
-              <Routes>
-                <Route path="/" element={<Landing />} />
-                <Route path="/recover" element={<RecoverSession />} />
-                <Route path="/upload" element={<UploadTranscript />} />
-                <Route path="/save" element={<SavingSession />} />
-                <Route path="/startingintent" element={<StartingIntent />} />
-              </Routes>
-            </QuestionProvider>
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route path="/recover" element={<RecoverSession />} />
+              <Route path="/upload" element={<UploadTranscript />} />
+              <Route path="/save" element={<SavingSession />} />
+              <Route path="/startingintent" element={<StartingIntent />} />
+            </Routes>
+            {/* </QuestionProvider> */}
           </IntentProvider>
         </SessionProvider>
       </div>

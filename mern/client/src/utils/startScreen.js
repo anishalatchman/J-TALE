@@ -4,9 +4,10 @@ async function uploadFlow(flow) {
   try {
     const res = await axios.post("http://localhost:5000/flow/add", flow);
     console.log("Flow Uploaded!");
-    // this is going to return undefined because we can't access the response properly right now
-    // but it will soon be fixed in the backend
-    return res.data.questions;
+    // the res.data.questions doesnt work right now due to bug in createFlow
+    // we can uncomment and replace return true once it's functional
+    // return res.data.questions;
+    return true;
   } catch (e) {
     return false;
   }

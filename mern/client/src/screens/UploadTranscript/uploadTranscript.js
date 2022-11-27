@@ -7,7 +7,7 @@ import Modal from "../../Components/Modals/GenericModal";
 import { transcriptJSONConverter, deleteFile } from "../../utils/transcript";
 import { flowUploader } from "../../utils/startScreen";
 import { SessionContext } from "../../Contexts/sessionProvider";
-import { QuestionContext } from "../../Contexts/questionProvider";
+// import { QuestionContext } from "../../Contexts/questionProvider";
 
 function UploadTranscript() {
   const Navigate = useNavigate();
@@ -21,7 +21,7 @@ function UploadTranscript() {
   const [files, setFiles] = useState();
   const [, setNavState, transcriptID, setTranscriptID] =
     useContext(SessionContext);
-  const [, setQuestion] = useContext(QuestionContext);
+  // const [, setQuestion] = useContext(QuestionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
 
@@ -131,7 +131,7 @@ function UploadTranscript() {
                   PageChange("/startingintent");
                   setNavState(true);
                   // this setQuestion is not functional right now as the createFlow function has a bug which will be fixed later
-                  setQuestion(response);
+                  // setQuestion(response);
                 } else {
                   alert("Please enter a valid flow name.");
                 }
