@@ -18,10 +18,9 @@ function App() {
       <div>
         {/* SessionProvider contains all global vars (navstate, session id) */}
         <SessionProvider>
-
           <IntentProvider>
             <SpeakerProvider>
-            <Navbar />
+              <Navbar />
 
               <Routes>
                 <Route path="/" element={<Landing />} />
@@ -30,9 +29,8 @@ function App() {
                 <Route path="/save" element={<SavingSession />} />
                 <Route path="/startingintent" element={<StartingIntent />} />
               </Routes>
+            </SpeakerProvider>
           </IntentProvider>
-
-          </SpeakerProvider>
         </SessionProvider>
       </div>
     </Router>

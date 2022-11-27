@@ -24,6 +24,26 @@ function StartingIntent() {
     setPrevSpeaker({ currSpeaker });
     setSpeaker(prev);
   };
+
+  // dummy intent for testing purposes
+  const intent = [
+    {
+      value: "cheese",
+      included: false,
+      children: ["00000001", "00000010"],
+    },
+    {
+      value: "pepperoni",
+      included: false,
+      children: ["00000011", "00000100"],
+    },
+    {
+      value: "hawaiian",
+      included: false,
+      children: ["00000101", "00000110"],
+    },
+  ];
+
   return (
     <div className="container">
       <div className="scroller">
@@ -33,7 +53,6 @@ function StartingIntent() {
         <h4 className={styles.speaker1}>{prevSpeaker}</h4>
         <h1 className={styles.intentTitle}>"How can I help you today?"</h1>
         <h4 className={styles.speaker2}>{currSpeaker}</h4>
-        <h1 className={styles.intentTitle}>How can I help you today?</h1>
 
         <div>
           <IntentButtons intents={intent}></IntentButtons>
