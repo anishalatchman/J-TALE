@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function RecoverSession() {
   const Navigate = useNavigate();
-  const [sessionID, setSessionID, , ] = useContext(SessionContext);
+  const [, setSessionID, , ] = useContext(SessionContext);
   const [inputText, setInputText] = useState("")
 
   const PageChange = (url) => {

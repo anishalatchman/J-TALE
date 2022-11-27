@@ -3,24 +3,24 @@ import styles from "./StartingIntent.module.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import IntentButtons from "../../Components/IntentButtons/IntentButtons";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import Scrollbar from "../../Components/TranscriptScroller/transcript-scroller.component";
 import { recoverFlow } from "../../Controller/recoverSessionController"
-import { deleteFile } from "../../utils/transcript";
+// import { deleteFile } from "../../utils/transcript";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
 import { IntentContext } from "../../Contexts/intentsProvider";
 
 function StartingIntent() {
-  const [sessionID, , transcriptID] = useContext(SessionContext);
+  const [sessionID, , ] = useContext(SessionContext);
   const [currSpeaker, setSpeaker, prevSpeaker, setPrevSpeaker] =
     useContext(SpeakerContext);
   const [intentState] = useContext(IntentContext);
-  const Navigate = useNavigate();
+  // const Navigate = useNavigate();
 
-  const PageChange = (url) => {
-    Navigate(url);
-  };
+  // const PageChange = (url) => {
+  //   Navigate(url);
+  // };
 
   const handleSpeakerChange = () => {
     const prev = prevSpeaker;
@@ -34,14 +34,12 @@ function StartingIntent() {
   const LoadSession = async () => {
     // retrieve starting qa's if session id is set
     if (sessionID) {
-      // console.log("this is the session id", sessionID)
       const startingQA = await recoverFlow(sessionID);
-      // console.log("this is the first question", startingQA);
+      console.log("This is the current QA from RecoverSession: ", startingQA);
     }
   };
 
   LoadSession();
-
 
   // dummy intent for testing purposes
   const intent = [
@@ -89,8 +87,9 @@ function StartingIntent() {
             text={"Go Back"}
             disabled={false}
             onClick={() => {
-              PageChange("/upload");
-              deleteFile(transcriptID);
+              // need to delete file and reset sessionID on navbar logo click, not on back button
+              // setSessionID();
+              // deleteFile(transcriptID);
             }}
           />
           <GenericButton

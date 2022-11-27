@@ -19,7 +19,7 @@ function UploadTranscript() {
   const inputRef = useRef(null);
   const [fileName, setFileName] = useState("No files chosen");
   const [files, setFiles] = useState();
-  const [sessionID, setSessionID, transcriptID, setTranscriptID] = useContext(SessionContext);
+  const [, setSessionID, transcriptID, setTranscriptID] = useContext(SessionContext);
   // const [, setQuestion] = useContext(QuestionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
