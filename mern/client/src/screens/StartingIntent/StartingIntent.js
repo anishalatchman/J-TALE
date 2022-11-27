@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./StartingIntent.module.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
+import IntentButtons from "../../Components/IntentButtons/IntentButtons";
 import { useNavigate } from "react-router-dom";
 import Scrollbar from "../../Components/TranscriptScroller/transcript-scroller.component";
 
@@ -10,22 +11,36 @@ function StartingIntent() {
   const PageChange = () => {
     Navigate("/");
   };
+
+  // dummy intent for testing purposes
+  const intent = [
+    {
+      value: "cheese",
+      included: false,
+      children: ["00000001", "00000010"],
+    },
+    {
+      value: "pepperoni",
+      included: false,
+      children: ["00000011", "00000100"],
+    },
+    {
+      value: "hawaiian",
+      included: false,
+      children: ["00000101", "00000110"],
+    },
+  ];
+
   return (
     <div className="container">
-      <div className={styles.scroller}>
+      <div className="scroller">
         <Scrollbar />
       </div>
       <div className={styles.intentContainer}>
         <h1 className={styles.intentTitle}>How can I help you today?</h1>
+
         <div>
-          <div>
-            <GenericButton buttonType="intent1" text={"Order Pizza"} />
-            <GenericButton buttonType="intent1" text={"Order Drink"} />
-          </div>
-          <div>
-            <GenericButton buttonType="intent1" text={"Order Side"} />
-            <GenericButton buttonType="intent1" text={"Delivery problem"} />
-          </div>
+          <IntentButtons intents={intent}></IntentButtons>
         </div>
         <div>
           <h4 className={styles.instructions}>
