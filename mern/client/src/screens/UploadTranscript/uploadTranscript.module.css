@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 .title {
-  @apply text-center mt-40 mb-6;
+  @apply text-center mt-40 mb-6 font-montserrat;
   font-size: 60px;
+  font-weight: 800;
 }
 
 .subtitle {

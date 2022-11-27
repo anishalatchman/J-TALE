@@ -1,22 +1,38 @@
 import React from "react";
+import { useContext } from "react";
 import styles from "./StartingIntent.module.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { useNavigate } from "react-router-dom";
 import Scrollbar from "../../Components/TranscriptScroller/transcript-scroller.component";
+import { deleteFile } from "../../utils/transcript";
+import { SessionContext } from "../../Contexts/sessionProvider";
+import { SpeakerContext } from "../../Contexts/speakerProvider";
 
 function StartingIntent() {
+  const [, , transcriptID] = useContext(SessionContext);
+  const [currSpeaker, setSpeaker, prevSpeaker, setPrevSpeaker] =
+    useContext(SpeakerContext);
   const Navigate = useNavigate();
-  const PageChange = () => {
-    Navigate("/");
+  const PageChange = (url) => {
+    Navigate(url);
   };
+
+  const handleSpeakerChange = () => {
+    const prev = prevSpeaker;
+    setPrevSpeaker({ currSpeaker });
+    setSpeaker(prev);
+  };
+
   return (
     <div className="container">
       <div className={styles.scroller}>
         <Scrollbar />
       </div>
       <div className={styles.intentContainer}>
-        <h1 className={styles.intentTitle}>How can I help you today?</h1>
+        <h4 className={styles.speaker1}>{prevSpeaker}</h4>
+        <h1 className={styles.intentTitle}>"How can I help you today?"</h1>
+        <h4 className={styles.speaker2}>{currSpeaker}</h4>
         <div>
           <div>
             <GenericButton buttonType="intent1" text={"Order Pizza"} />
@@ -36,17 +52,23 @@ function StartingIntent() {
           </h4>
         </div>
         <div>
-          <GenericButton buttonType="outline" text={"Save"} />
           <GenericButton
             buttonType="outline"
             text={"Go Back"}
-            disabled={true}
+            disabled={false}
+            onClick={() => {
+              PageChange("/upload");
+              deleteFile(transcriptID);
+            }}
           />
           <GenericButton
             buttonType="disabled"
             text={"Next"}
             disabled={true}
-            onClick={PageChange}
+            onClick={() => {
+              PageChange("/");
+              handleSpeakerChange();
+            }}
           />
         </div>
       </div>

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .intentTitle {
-  @apply text-left mt-16 mb-6 font-montserrat font-bold;
+  @apply text-left mb-3 font-montserrat font-bold;
   font-size: 58px;
 }
 
@@ -12,11 +12,19 @@
 }
 
 .instructions {
-  @apply text-gray text-left ml-4 mt-2;
+  @apply text-gray text-left ml-3 mt-2;
 }
 
 .instructions1 {
-  @apply text-gray text-left ml-4 mb-10;
+  @apply text-gray text-left ml-3 mb-10;
+}
+
+.speaker1 {
+  @apply text-gray text-left ml-3 mt-12;
+}
+
+.speaker2 {
+  @apply text-gray text-left ml-3;
 }
 
 .buttonContainer1 {
