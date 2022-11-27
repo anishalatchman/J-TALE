@@ -11,6 +11,7 @@ import SavingSession from "./screens/SavingSession/savingSession";
 import SessionProvider from "./Contexts/sessionProvider";
 import SpeakerProvider from "./Contexts/speakerProvider";
 import IntentProvider from "./Contexts/intentsProvider";
+// import QuestionProvider, { QuestionContext } from "./Contexts/questionProvider";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <SessionProvider>
           <IntentProvider>
             <SpeakerProvider>
+              {/* <QuestionProvider> */}
               <Navbar />
 
               <Routes>
@@ -29,6 +31,7 @@ function App() {
                 <Route path="/save" element={<SavingSession />} />
                 <Route path="/startingintent" element={<StartingIntent />} />
               </Routes>
+              {/* </QuestionProvider> */}
             </SpeakerProvider>
           </IntentProvider>
         </SessionProvider>

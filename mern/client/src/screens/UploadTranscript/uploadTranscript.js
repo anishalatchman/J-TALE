@@ -7,6 +7,7 @@ import Modal from "../../Components/Modals/GenericModal";
 import { transcriptJSONConverter, deleteFile } from "../../utils/transcript";
 import { flowUploader } from "../../utils/startScreen";
 import { SessionContext } from "../../Contexts/sessionProvider";
+// import { QuestionContext } from "../../Contexts/questionProvider";
 
 function UploadTranscript() {
   const Navigate = useNavigate();
@@ -20,6 +21,7 @@ function UploadTranscript() {
   const [files, setFiles] = useState();
   const [, setNavState, transcriptID, setTranscriptID] =
     useContext(SessionContext);
+  // const [, setQuestion] = useContext(QuestionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
 
@@ -59,7 +61,7 @@ function UploadTranscript() {
   return (
     <div className="container">
       <h1 className={styles.title}>Upload Transcript</h1>
-      {!files && fileName !== "No files chosen" ? (
+      {fileName !== "No files chosen" && files && !files.questions ? (
         <h4 className={styles.failureIndicator}>
           Please upload a valid JSON file.
         </h4>
@@ -86,7 +88,7 @@ function UploadTranscript() {
       <h4 className={styles.subtitle}> {fileName} </h4>
       <div className={styles.buttonContainerNew}>
         <GenericButton
-          buttonType={files ? "blue" : "disabled"}
+          buttonType={files && files.questions ? "blue" : "disabled"}
           onClick={() => {
             // Checks if the transcript is a string, and then sends transcript to DB
             transcriptJSONConverter(fileName, files).then((response) => {
@@ -99,7 +101,7 @@ function UploadTranscript() {
               }
             });
           }}
-          disabled={files ? false : true}
+          disabled={files && files.questions ? false : true}
           text={"Begin Session"}
         />
         <GenericButton
@@ -123,11 +125,13 @@ function UploadTranscript() {
               deleteFile(transcriptID);
             }}
             onSubmit={() => {
-              setNavState(true);
               flowUploader(flowName.name, files).then((response) => {
                 if (response) {
                   alert("Your flow name has been set to: " + flowName.name);
                   PageChange("/startingintent");
+                  setNavState(true);
+                  // this setQuestion is not functional right now as the createFlow function has a bug which will be fixed later
+                  // setQuestion(response);
                 } else {
                   alert("Please enter a valid flow name.");
                 }
