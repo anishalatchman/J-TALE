@@ -18,7 +18,7 @@ function UploadTranscript() {
   const inputRef = useRef(null);
   const [fileName, setFileName] = useState("No files chosen");
   const [files, setFiles] = useState();
-  const [, setNavState, transcriptID, setTranscriptID] =
+  const [, setSessionID, transcriptID, setTranscriptID] =
     useContext(SessionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
@@ -106,7 +106,7 @@ function UploadTranscript() {
           buttonType="outline"
           onClick={() => {
             PageChange("/");
-            setNavState(false);
+            setSessionID(false);
           }}
           disabled={false}
           text={"Go Back"}
@@ -123,7 +123,7 @@ function UploadTranscript() {
               deleteFile(transcriptID);
             }}
             onSubmit={() => {
-              setNavState(true);
+              setSessionID(true);
               flowUploader(flowName.name, files).then((response) => {
                 if (response) {
                   alert("Your flow name has been set to: " + flowName.name);

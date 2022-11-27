@@ -10,7 +10,7 @@ import { recoverFlow } from "../../Controller/recoverSessionController"
 
 function StartingIntent() {
   const Navigate = useNavigate();
-  const [, , sessionid, ] = useContext(SessionContext);
+  const [sessionID, , , ] = useContext(SessionContext);
 
   const PageChange = () => {
     Navigate("/");
@@ -20,9 +20,9 @@ function StartingIntent() {
 
   const LoadSession = async () => {
     // retrieve starting qa's if session id is set
-    if (sessionid) {
-      console.log("this is the session id", sessionid)
-      const startingQA = await recoverFlow(sessionid);
+    if (sessionID) {
+      console.log("this is the session id", sessionID)
+      const startingQA = await recoverFlow(sessionID);
       console.log("this is the first question", startingQA);
     }
   };
