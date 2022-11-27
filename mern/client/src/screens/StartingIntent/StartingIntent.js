@@ -36,7 +36,7 @@ function StartingIntent() {
       <div className="scroller">
         <Scrollbar />
       </div>
-      <div className="intentContainer">
+      <div className={styles.intentContainer}>
         <h1 className={styles.intentTitle}>How can I help you today?</h1>
 
         <div>
