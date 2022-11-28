@@ -14,7 +14,7 @@ module.exports = {
     extend: {
       colors: {
         "voiceflow-blue": "#1C4EFF",
-        "lighter-blue": "#5AA6FF",
+        "voiceflow-blue-light": "#749bff", // Was overriding tailwind default colours with lighter-blue so renamed
         gray: "rgba(0,0,0,0.5)",
       },
       // fontFamily: {
