@@ -1,6 +1,8 @@
-import TranscriptInteractor from "../interactor/transcript_interactor";
 import asyncHandler from "express-async-handler";
+import transcriptInteractor from "../interactor/transcript_interactor.js";
 //Controller for Transcript entity
+
+let TranscriptInteractor = new transcriptInteractor();
 
 //Gets transcript
 export const getTranscript = asyncHandler(async (req, res) => {
