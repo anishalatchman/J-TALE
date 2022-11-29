@@ -12,7 +12,6 @@ export default function Navbar() {
   return (
     <nav className="navbar-bg">
       <Link to="/" className="nav-link" onClick={() => {
-        setSessionID(false)
         // reset sessionID on return to home page
         setSessionID()
       }}>
