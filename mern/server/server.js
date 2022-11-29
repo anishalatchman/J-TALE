@@ -28,14 +28,10 @@ app.use("/qa", qaRouter);
 app.use("/transcript", transcriptRouter);
 app.use("/flow", flowRouter);
 
-app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
-});
+if (process.env.NODE_ENV !== "test") {
+  app.listen(port, () => {
+    console.log(`Server is running on port: ${port}`);
+  });
+}
 
-// get driver connection
-// const dbo = require("./db/conn");
-
-// perform a database connection when server starts
-// dbo.connectToServer(function (err) {
-//   if (err) console.error(err);
-// });
+export default app;

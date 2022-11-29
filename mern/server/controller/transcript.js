@@ -1,93 +1,25 @@
-// DATA ACCESS OBJECT - This file makes get calls to the MongoDB, 
-// then sends retrieved data to the Interactor to modify it
-
-import Transcript from "../models/transcript.model.js";
 import asyncHandler from "express-async-handler";
+import transcriptInteractor from "../interactor/transcript_interactor.js";
+//Controller for Transcript entity
 
+let TranscriptInteractor = new transcriptInteractor();
+
+//Gets transcript
 export const getTranscript = asyncHandler(async (req, res) => {
-  try {
-    const transcript = await Transcript.findById(req.params.id);
-    res.status(200).json(transcript);
-  } catch (error) {
-    res.status(400).json("No Transcripts Exist");
-  }
+  TranscriptInteractor.getTranscript(req, res);
 });
 
+//Creates transcript
 export const createTranscript = asyncHandler(async (req, res) => {
-  const data = req.body.data;
-  const name = req.body.name;
-
-  const transcriptExists = await Transcript.findOne({ name });
-
-  if (transcriptExists) {
-    res.status(400).json("Card already exists");
-  }
-  const transcript = await Transcript.create({
-    name,
-    data,
-  });
-  if (transcript) {
-    res.status(200).json({
-      id: transcript.id,
-      name: transcript.name
-    });
-  } else {
-    res.status(400).json("Invalid transcript Data");
-  }
+  TranscriptInteractor.createTranscript(req, res);
 });
 
-export const createTranscriptAPI = asyncHandler(async (req, res) => {
-  const VOICEFLOW_API_KEY = process.env.VOICEFLOW_API_KEY;
-  const VERSION_ID = process.env.VERSION_ID;
-  const url = `https://api-dm-test.voiceflow.fr/exportraw/${VOICEFLOW_API_KEY}?versionID=${VERSION_ID}`;
-
-  let vf_transcript;
-
-  try {
-    new Transcript({ name: req.body.name, data: body.toString() })
-      .save()
-      .then(() => res.json({ id }));
-  } catch (error) {
-    res.status(400).json("Error: " + err);
-
-    // Reporting the Error Message
-    if (err) {
-      console.log("Error Inserting New Data");
-      if (err.name == "ValidationError") {
-        for (field in err.errors) {
-          console.log(err.errors[field].message);
-        }
-      }
-    }
-  }
-});
-
-export const deleteTranscript = asyncHandler(async (req, res) => {
-  try {
-    const transcript = await Transcript.findByIdAndDelete(req.params.id);
-    res.status(200).json(transcript);
-  } catch (error) {
-    res.status(400).json("Unable to Delete Transcript");
-  }
-});
-
+//Updates transcript
 export const updateTranscript = asyncHandler(async (req, res) => {
-  const transcript = await Transcript.findById(user.params.id);
-  const name = req.body.name;
-  const data = req.body.data;
+  TranscriptInteractor.updateTranscript(req, res);
+});
 
-  if (!transcript) {
-    res.status(401).json("Transcript not Found");
-  }
-
-  try {
-    if (name) {
-      transcript.name = name;
-    }
-    if (data) {
-      transcript.data = data;
-    }
-  } catch (error) {
-    res.status(400).json("Invalid Input Fields");
-  }
+//Deletes transcript
+export const deleteTranscript = asyncHandler(async (req, res) => {
+  TranscriptInteractor.deleteTranscript(req, res);
 });
