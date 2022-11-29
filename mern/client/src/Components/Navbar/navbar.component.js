@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 import styles from "./navbar.module.css";
 import GenericButton from "../Buttons/GenericButton";
 import { SessionContext } from "../../Contexts/sessionProvider";
+import { qaContext } from "../../Contexts/qaProvider";
+import deleteFlow from "../../utils/delete";
+import saveFlow from "../../utils/save";
 
 export default function Navbar() {
   // define context var to show/hide nav buttons
   const [sessionID, setSessionID] = useContext(SessionContext);
+  const [currQA] = useContext(qaContext);
 
   // Create session id var and setter function
   // const sessionid = "12345";
@@ -41,13 +45,13 @@ export default function Navbar() {
           </h2>
           <GenericButton
             buttonType="nav"
-            onClick={() => null}
+            onClick={() => saveFlow(currQA, sessionID)}
             disabled={false}
             text={"SAVE"}
           />
           <GenericButton
             buttonType="nav"
-            onClick={() => null}
+            onClick={() => deleteFlow(sessionID)}
             disabled={false}
             text={"DELETE SESSION"}
           />
