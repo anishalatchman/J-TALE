@@ -11,7 +11,7 @@ import SavingSession from "./screens/SavingSession/savingSession";
 import SessionProvider from "./Contexts/sessionProvider";
 import SpeakerProvider from "./Contexts/speakerProvider";
 import IntentProvider from "./Contexts/intentsProvider";
-import qaProvider from "./Contexts/qaProvider";
+import QAProvider from "./Contexts/qaProvider";
 
 // import QuestionProvider, { QuestionContext } from "./Contexts/questionProvider";
 
@@ -23,10 +23,9 @@ function App() {
         <SessionProvider>
           <IntentProvider>
             <SpeakerProvider>
-              <qaProvider>
+              <QAProvider>
                 {/* <QuestionProvider> */}
                 <Navbar />
-
                 <Routes>
                   <Route path="/" element={<Landing />} />
                   <Route path="/recover" element={<RecoverSession />} />
@@ -35,7 +34,7 @@ function App() {
                   <Route path="/startingintent" element={<StartingIntent />} />
                 </Routes>
                 {/* </QuestionProvider> */}
-              </qaProvider>
+              </QAProvider>
             </SpeakerProvider>
           </IntentProvider>
         </SessionProvider>

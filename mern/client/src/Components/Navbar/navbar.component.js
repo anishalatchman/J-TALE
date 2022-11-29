@@ -4,8 +4,8 @@ import styles from "./navbar.module.css";
 import GenericButton from "../Buttons/GenericButton";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import { qaContext } from "../../Contexts/qaProvider";
-import { deleteFlow } from "../../utils/delete";
-import { saveFlow } from "../../utils/save";
+import deleteFlow from "../../utils/delete";
+import saveFlow from "../../utils/save";
 
 export default function Navbar() {
   // define context var to show/hide nav buttons

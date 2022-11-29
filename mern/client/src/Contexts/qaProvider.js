@@ -2,13 +2,13 @@ import React from "react";
 
 export const qaContext = React.createContext();
 
-export default function qaProvider({ children }) {
+export default function QAProvider({ children }) {
   // Stores the current QA object that the user is working with.
-  const [currQA, setIntentState] = React.useState({});
+  const [currQA, setcurrQAState] = React.useState();
 
   return (
-    <IntentContext.Provider value={[currQA, setIntentState]}>
+    <qaContext.Provider value={[currQA, setcurrQAState]}>
       {children}
-    </IntentContext.Provider>
+    </qaContext.Provider>
   );
 }
