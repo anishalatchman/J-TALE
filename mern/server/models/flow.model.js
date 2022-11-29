@@ -10,6 +10,7 @@ const flowschema = new Schema({
   questions: [
     {
       type: String,
+      type: mongoose.SchemaTypes.Mixed,
     },
   ],
   current_question: {

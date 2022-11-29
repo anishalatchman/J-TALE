@@ -7,6 +7,7 @@ import Modal from "../../Components/Modals/GenericModal";
 import { transcriptJSONConverter, deleteFile } from "../../utils/transcript";
 import { flowUploader } from "../../utils/startScreen";
 import { SessionContext } from "../../Contexts/sessionProvider";
+import Parser from "../../utils/QA";
 // import { QuestionContext } from "../../Contexts/questionProvider";
 
 function UploadTranscript() {
@@ -21,9 +22,9 @@ function UploadTranscript() {
   const [files, setFiles] = useState();
   const [, setNavState, transcriptID, setTranscriptID] =
     useContext(SessionContext);
-  // const [, setQuestion] = useContext(QuestionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
+  const [flow, setFlow] = useState();
 
   const handleClick = () => {
     // open file input box on click of button
@@ -58,6 +59,43 @@ function UploadTranscript() {
     setFlowName({ ...flowName, [event.target.name]: event.target.value });
   };
 
+  //Uploads flow to the backend
+  const uploadFlow = (flowName, flow) => {
+    flowUploader(flowName, flow).then((response) => {
+      //If response is successful, change to next page and show the additional navbar info
+      if (response) {
+        PageChange("/startingintent");
+        setNavState(true);
+      } else {
+        alert("Please enter a valid flow name.");
+      }
+    });
+  };
+
+  //Uploads the transcript
+  const uploadTranscript = (fileName, files) => {
+    // Checks if the transcript is a string, and then sends transcript to DB
+    transcriptJSONConverter(fileName, files).then((response) => {
+      if (response) {
+        setShowModal(true);
+        setTranscriptID(response);
+      } else {
+        // prompts alert when you try to upload a transcript that is already posted onto DB
+        alert("This file was already uploaded.");
+      }
+    });
+  };
+
+  //Parses through the question and sets flow a list of the initial question IDs
+  const parseQAs = (questions) => {
+    try {
+      const parse = new Parser();
+      setFlow(parse.parse(questions));
+    } catch (e) {
+      alert("PARSE FAILED", e.response);
+    }
+  };
+
   return (
     <div className="container">
       <h1 className={styles.title}>Upload Transcript</h1>
@@ -90,16 +128,8 @@ function UploadTranscript() {
         <GenericButton
           buttonType={files && files.questions ? "blue" : "disabled"}
           onClick={() => {
-            // Checks if the transcript is a string, and then sends transcript to DB
-            transcriptJSONConverter(fileName, files).then((response) => {
-              if (response) {
-                setShowModal(true);
-                setTranscriptID(response);
-              } else {
-                // prompts alert when you try to upload a transcript that is already posted onto DB
-                alert("This file was already uploaded.");
-              }
-            });
+            uploadTranscript(fileName, files);
+            parseQAs(files.questions);
           }}
           disabled={files && files.questions ? false : true}
           text={"Begin Session"}
@@ -125,17 +155,7 @@ function UploadTranscript() {
               deleteFile(transcriptID);
             }}
             onSubmit={() => {
-              flowUploader(flowName.name, files).then((response) => {
-                if (response) {
-                  alert("Your flow name has been set to: " + flowName.name);
-                  PageChange("/startingintent");
-                  setNavState(true);
-                  // this setQuestion is not functional right now as the createFlow function has a bug which will be fixed later
-                  // setQuestion(response);
-                } else {
-                  alert("Please enter a valid flow name.");
-                }
-              });
+              uploadFlow(flowName.name, flow);
             }}
           />
         )}

@@ -2,12 +2,8 @@ import axios from "axios";
 
 async function uploadFlow(flow) {
   try {
-    const res = await axios.post("http://localhost:5000/flow/add", flow);
+    await axios.post("http://localhost:5000/flow/add", flow);
     console.log("Flow Uploaded!");
-    // the res.data.questions doesnt work right now due to bug in createFlow
-    // we can uncomment and replace return true once it's functional
-    // return res.data.questions;
-    console.log(res);
     return true;
   } catch (e) {
     return false;
@@ -18,7 +14,7 @@ async function uploadFlow(flow) {
 export async function flowUploader(flowName, file) {
   if (typeof flowName === "string" && flowName !== "") {
     // Defines new obj flow in form required by mongoose schemas
-    const flow = { name: flowName, questions: file.questions };
+    const flow = { name: flowName, questions: file };
     const res = await uploadFlow(flow);
     return res;
   }

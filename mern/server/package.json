@@ -39,7 +39,9 @@
     ],
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "./utils/**"
+      "./controller/**",
+      "./DAO/**",
+      "./interactor/**"
     ],
     "coverageThreshold": {
       "global": {
