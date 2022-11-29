@@ -2,11 +2,11 @@ import axios from "axios";
 
 async function uploadFlow(flow) {
   try {
-    await axios.post("http://localhost:5000/flow/add", flow);
+    const res = await axios.post("http://localhost:5000/flow/add", flow);
     console.log("Flow Uploaded!");
-    return true;
+    return { status: true, res: res };
   } catch (e) {
-    return false;
+    return { status: false };
   }
 }
 

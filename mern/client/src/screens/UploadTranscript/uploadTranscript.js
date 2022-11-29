@@ -20,7 +20,7 @@ function UploadTranscript() {
   const inputRef = useRef(null);
   const [fileName, setFileName] = useState("No files chosen");
   const [files, setFiles] = useState();
-  const [, setNavState, transcriptID, setTranscriptID] =
+  const [, setSessionID, transcriptID, setTranscriptID] =
     useContext(SessionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
@@ -63,9 +63,11 @@ function UploadTranscript() {
   const uploadFlow = (flowName, flow) => {
     flowUploader(flowName, flow).then((response) => {
       //If response is successful, change to next page and show the additional navbar info
-      if (response) {
+      if (response.status) {
         PageChange("/startingintent");
-        setNavState(true);
+        console.log(response.res);
+        console.log(response.res?.data._id, "RESPONSE ID");
+        setSessionID(response.res?.data._id);
       } else {
         alert("Please enter a valid flow name.");
       }
@@ -138,7 +140,7 @@ function UploadTranscript() {
           buttonType="outline"
           onClick={() => {
             PageChange("/");
-            setNavState(false);
+            setSessionID();
           }}
           disabled={false}
           text={"Go Back"}

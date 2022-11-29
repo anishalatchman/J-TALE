@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function RecoverSession() {
   const Navigate = useNavigate();
-  const [sessionid, setSessionID] = useState("");
-  const [, setNavState] = useContext(SessionContext);
+  const [id, setID] = useState();
+  const [, setSessionID] = useContext(SessionContext);
 
   const PageChange = (url) => {
     Navigate(url);
@@ -16,13 +16,13 @@ export default function RecoverSession() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // show navbar buttons for starting-intent page
-    setNavState(true);
-    alert(`The session ID you entered was: ${sessionid}`);
+    setSessionID(id);
+    alert(`The session ID you entered was: ${id}`);
   };
 
   const handleChange = (event) => {
     // set sessionid to input text
-    setSessionID(event.target.value);
+    setID(event.target.value);
   };
 
   return (
@@ -33,7 +33,7 @@ export default function RecoverSession() {
         <input
           className={styles.inputContainer}
           type="text"
-          value={sessionid}
+          value={id}
           onChange={handleChange}
           placeholder="Session ID"
         />
@@ -49,7 +49,7 @@ export default function RecoverSession() {
           buttonType="outline"
           onClick={() => {
             PageChange("/");
-            setNavState(false);
+            setSessionID();
           }}
           disabled={false}
           text={"Go Back"}
