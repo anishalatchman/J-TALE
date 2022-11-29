@@ -3,10 +3,8 @@ import styles from "./StartingIntent.module.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import IntentButtons from "../../Components/IntentButtons/IntentButtons";
-// import { useNavigate } from "react-router-dom";
 import Scrollbar from "../../Components/TranscriptScroller/transcript-scroller.component";
 import { recoverFlow } from "../../Controller/recoverSessionController"
-// import { deleteFile } from "../../utils/transcript";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
 import { IntentContext } from "../../Contexts/intentsProvider";
@@ -16,11 +14,6 @@ function StartingIntent() {
   const [currSpeaker, setSpeaker, prevSpeaker, setPrevSpeaker] =
     useContext(SpeakerContext);
   const [intentState] = useContext(IntentContext);
-  // const Navigate = useNavigate();
-
-  // const PageChange = (url) => {
-  //   Navigate(url);
-  // };
 
   const handleSpeakerChange = () => {
     const prev = prevSpeaker;
@@ -28,9 +21,9 @@ function StartingIntent() {
     setPrevSpeaker(curr);
     setSpeaker(prev);
   };
+
   // send session id to frontend controller which sends down to frontend dao which does axios call to backend
   // need to wait for async recoverFlow to return startingQA
-
   const LoadSession = async () => {
     // retrieve starting qa's if session id is set
     if (sessionID) {
@@ -87,9 +80,6 @@ function StartingIntent() {
             text={"Go Back"}
             disabled={false}
             onClick={() => {
-              // need to delete file and reset sessionID on navbar logo click, not on back button
-              // setSessionID();
-              // deleteFile(transcriptID);
             }}
           />
           <GenericButton
