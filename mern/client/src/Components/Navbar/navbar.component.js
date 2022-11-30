@@ -5,7 +5,7 @@ import GenericButton from "../Buttons/GenericButton";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import { qaContext } from "../../Contexts/qaProvider";
 import { FlowContext } from "../../Contexts/flow.Provider";
-import deleteFlow from "../../utils/delete";
+import { deleteFlow } from "../../utils/delete";
 import { saveFlow, saveQA } from "../../utils/save";
 
 export default function Navbar() {
@@ -33,6 +33,8 @@ export default function Navbar() {
   const tryDelete = (currFlow, sessionID) => {
     if (!deleteFlow(currFlow, sessionID)) {
       alert("Unable to Delete");
+    } else {
+      console.log("Success");
     }
   };
 
