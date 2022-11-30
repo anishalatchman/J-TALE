@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .pageTitle{
-    @apply text-center mx-auto text-4xl font-montserrat font-bold mt-20;
+    @apply text-center mx-auto text-4xl font-montserrat font-bold mt-20 mb-10;
     font-size: 60px;
 }
 
@@ -17,7 +17,7 @@
 }
 
 .inputForm{
-    @apply m-10 pt-8 pb-8 flex flex-col justify-center items-center bg-voiceflow-blue rounded-3xl w-1/3 mx-auto;
+    @apply m-10 mt-5 pt-8 pb-8 flex flex-col justify-center items-center bg-voiceflow-blue rounded-3xl w-1/3 mx-auto;
 }
 
 .inputContainer{
@@ -26,4 +26,8 @@
 
 .label{
     @apply text-xl text-white font-nunito font-medium;
+}
+
+.errorLabel{
+    @apply text-xl text-red-500 font-nunito font-bold text-center;
 }

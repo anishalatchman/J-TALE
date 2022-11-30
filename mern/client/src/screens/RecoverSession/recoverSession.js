@@ -12,6 +12,7 @@ export default function RecoverSession() {
   const [, setSessionID, , ] = useContext(SessionContext);
   const [, setCurrQA] = useContext(qaContext);
   const [inputText, setInputText] = useState("")
+  const [showError, setShowError] = useState(false)
 
   const PageChange = (url) => {
     Navigate(url);
@@ -21,16 +22,22 @@ export default function RecoverSession() {
     // prevent page reload
     event.preventDefault();
     // set sessionid before loading starting-intent page 
-    setSessionID(inputText);
     LoadSession();
-    PageChange("/startingintent")
     }
     
   // recovers flow from DB and sets current_qa context state
   const LoadSession = async () => {
     const flow = await recoverFlow(inputText);
-    const startingQA = await recoverStartingQA(flow);
-    setCurrQA(startingQA)
+    if (flow) {
+      setShowError(false)
+      const startingQA = await recoverStartingQA(flow);
+      setSessionID(inputText);
+      setCurrQA(startingQA)
+      PageChange("/startingintent")
+     }
+    else {
+      setShowError(true)
+    }
   };
 
   const handleChange = (event) => {
@@ -41,6 +48,11 @@ export default function RecoverSession() {
   return (
     <div className="container">
       <h1 className={styles.pageTitle}>Recover Session</h1>
+      {showError ? (
+        <h2 className={styles.errorLabel}>Invalid Session ID. Please try again.</h2>
+      ) : (
+        <></>
+      )}
       <form className={styles.inputForm} onSubmit={handleSubmit}>
         <label className={styles.label}>Input Session ID</label>
         <input
