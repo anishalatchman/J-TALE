@@ -4,7 +4,7 @@
 
 .intentTitle {
   @apply text-left mb-3 ml-4 font-montserrat font-bold;
-  font-size: 58px;
+  font-size: 50px;
 }
 
 .intentContainer {

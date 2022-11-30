@@ -9,8 +9,8 @@ import { recoverStartingQA } from "../../Controller/QAController"
 
 export default function RecoverSession() {
   const Navigate = useNavigate();
-  const [sessionID, setSessionID, , ] = useContext(SessionContext);
-  const [currQA, setCurrQA] = useContext(qaContext);
+  const [, setSessionID, , ] = useContext(SessionContext);
+  const [, setCurrQA] = useContext(qaContext);
   const [inputText, setInputText] = useState("")
 
   const PageChange = (url) => {
@@ -22,16 +22,15 @@ export default function RecoverSession() {
     event.preventDefault();
     // set sessionid before loading starting-intent page 
     setSessionID(inputText);
-    PageChange("/startingintent")
     LoadSession();
+    PageChange("/startingintent")
     }
     
-  // This function only needs to run for Recover Session, need a different one for Begin Session
+  // recovers flow from DB and sets current_qa context state
   const LoadSession = async () => {
     const flow = await recoverFlow(inputText);
     const startingQA = await recoverStartingQA(flow);
     setCurrQA(startingQA)
-    console.log("This is the curr_qa json object: ", startingQA);
   };
 
   const handleChange = (event) => {

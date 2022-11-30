@@ -65,8 +65,8 @@ function UploadTranscript() {
       //If response is successful, change to next page and show the additional navbar info
       if (response.status) {
         PageChange("/startingintent");
-        console.log(response.res);
-        console.log(response.res?.data._id, "RESPONSE ID");
+        // console.log(response.res);
+        // console.log(response.res?.data._id, "RESPONSE ID");
         setSessionID(response.res?.data._id);
       } else {
         alert("Please enter a valid flow name.");

@@ -4,12 +4,13 @@ import axios from 'axios';
 // Returns QA json object with matching ID
 export async function getQAFromID(qaID) {
     try {
-      const response = await axios.get(`http://localhost:5000/qa/`, { id: qaID });
+      const response = await axios.get(`http://localhost:5000/qa/`, { params: { id: qaID }, });
       const { data } = response;
       // return the QA object
       return data;
 
     } catch (e) {
+      console.log(e.response)
       return false;
     }
 }
