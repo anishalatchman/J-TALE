@@ -89,7 +89,7 @@ describe("Transcript Tests", () => {
       .send({ name: ["test"], data: ["testing"] });
 
     expect(res.statusCode).toBe(400);
-    expect(res.body).toEqual("Invalid transcript Data");
+    expect(res.body).toEqual("Invalid Input Field");
   });
 
   test("Existing Transcript", async () => {

@@ -4,19 +4,37 @@ import styles from "./navbar.module.css";
 import GenericButton from "../Buttons/GenericButton";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import { qaContext } from "../../Contexts/qaProvider";
+import { FlowContext } from "../../Contexts/flow.Provider";
 import deleteFlow from "../../utils/delete";
-import saveFlow from "../../utils/save";
+import { saveFlow, saveQA } from "../../utils/save";
 
 export default function Navbar() {
   // define context var to show/hide nav buttons
   const [sessionID, setSessionID] = useContext(SessionContext);
   const [currQA] = useContext(qaContext);
+  const [currFlow] = useContext(FlowContext);
 
   // Create session id var and setter function
   // const sessionid = "12345";
   // const setSessionID = (id) => {
   //   sessionid = id;
   // };
+
+  const trySave = (currFlow, currQA, sessionID) => {
+    if (!saveQA(currFlow, currQA, sessionID)) {
+      alert("Unable to save the current page");
+    } else if (!saveFlow(currQA, sessionID)) {
+      alert("Save FAILED");
+    } else {
+      alert("Saved Successfully");
+    }
+  };
+
+  const tryDelete = (currFlow, sessionID) => {
+    if (!deleteFlow(currFlow, sessionID)) {
+      alert("Unable to Delete");
+    }
+  };
 
   return (
     <nav className={styles.navbarBG}>
@@ -45,13 +63,15 @@ export default function Navbar() {
           </h2>
           <GenericButton
             buttonType="nav"
-            onClick={() => saveFlow(currQA, sessionID)}
+            onClick={() => {
+              trySave(currFlow, currQA, sessionID);
+            }}
             disabled={false}
             text={"SAVE"}
           />
           <GenericButton
             buttonType="nav"
-            onClick={() => deleteFlow(sessionID)}
+            onClick={() => tryDelete(currFlow, sessionID)}
             disabled={false}
             text={"DELETE SESSION"}
           />
