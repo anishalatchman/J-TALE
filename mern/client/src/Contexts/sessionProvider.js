@@ -8,7 +8,6 @@ export default function SessionProvider({ children }) {
   // Stores the transcript ID when beginning/resuming session so we can pass it onto other functions like deleting the transcript
   const [transcriptID, setTranscriptID] = React.useState();
 
-
   return (
     <SessionContext.Provider
       value={[sessionID, setSessionID, transcriptID, setTranscriptID]}

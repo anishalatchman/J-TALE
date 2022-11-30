@@ -11,18 +11,18 @@
   src: url(../../fonts/Nunito-VariableFont_wght.ttf);
 }
 
-.navbar-bg {
+.navbarBG {
     @apply flex bg-voiceflow-blue text-white p-3 px-20 justify-between;
   }
-.navbar-links {
+.navbarLinks {
   @apply flex flex-row text-3xl items-center font-nunito font-medium;
 }
 
-.nav-link {
+.navLink {
   @apply flex justify-start pl-10;
 }
 
-.nav-icon {
+.navIcon {
   display: flex;
   width:37px;
   height:37px; 
