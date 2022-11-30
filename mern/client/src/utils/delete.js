@@ -43,8 +43,9 @@ async function removeTranscript(flow) {
 
 // Loops through the questions list in flow and deletes each item
 async function removeQAs(flow) {
-  // console.log(flow.allQuestions);
-  // console.log(flow.allQuestions.length);
+  console.log(flow);
+  console.log(flow.allQuestions);
+  console.log(flow.allQuestions.length);
   await flow.allQuestions.forEach((item) => {
     deleteqa(item).then((response) => {
       if (response.status === 400) {
