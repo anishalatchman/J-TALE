@@ -6,6 +6,6 @@ import { getFlowBySessionID } from "../DAO/flowDAO"
 export async function sendToDAO(sessionID) {
     // returns a flow object
     const flow = await getFlowBySessionID(sessionID);
-    console.log("this is the flow object", flow);
+    // console.log("this is the flow object", flow);
     return flow;
 }

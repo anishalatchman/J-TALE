@@ -4,8 +4,6 @@ import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import IntentButtons from "../../Components/IntentButtons/IntentButtons";
 import Scrollbar from "../../Components/TranscriptScroller/transcript-scroller.component";
-import { recoverFlow } from "../../Controller/flowController"
-import { recoverStartingQA } from "../../Controller/QAController"
 import { SessionContext } from "../../Contexts/sessionProvider";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
 import { IntentContext } from "../../Contexts/intentsProvider";
@@ -22,18 +20,6 @@ function StartingIntent() {
     setPrevSpeaker(curr);
     setSpeaker(prev);
   };
-
-  // This function only needs to run for Recover Session, need a different one for Begin Session
-  const LoadSession = async () => {
-    // retrieve starting qa's if session id is set
-    if (sessionID) {
-      const flow = await recoverFlow(sessionID);
-      const startingQA = await recoverStartingQA(flow);
-      console.log("This is the current QA Object from RecoverSession: ", startingQA);
-    }
-  };
-
-  LoadSession();
 
   // dummy intent for testing purposes
   const intent = [

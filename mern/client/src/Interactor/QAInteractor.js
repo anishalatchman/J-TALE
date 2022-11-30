@@ -4,7 +4,7 @@ import { getQAFromID } from "../DAO/QADAO"
 
 // returns first QA pair from given flow json object
 export function getQAIDFromFlow(flowObject) {
-    return flowObject.flow.current_question;
+    return flowObject.current_question;
 }
 
 // qaID does not need to be manipulated so this function sends it straight to DAO
