@@ -107,10 +107,10 @@ function UploadTranscript() {
     try {
       const parse = new Parser();
       const res = parse.parse(questions);
-      console.log(res.allQuestionList, "is this working");
+      console.log(res.allQuestionList, "before setting");
       setFlowStartingQuestions(res.startingList);
       setFlowAllQuestions(res.allQuestionList);
-      // console.log(flowAllQuestions.length);
+      console.log(flowAllQuestions, "after setting");
     } catch (e) {
       alert("PARSE FAILED", e.response);
     }
@@ -149,9 +149,7 @@ function UploadTranscript() {
           buttonType={files && files.questions ? "blue" : "disabled"}
           onClick={() => {
             uploadTranscript(fileName, files);
-            console.log(files.questions.length, "before parsing");
             parseQAs(files.questions);
-            console.log(flowAllQuestions, "all q length after parsing");
           }}
           disabled={files && files.questions ? false : true}
           text={"Begin Session"}

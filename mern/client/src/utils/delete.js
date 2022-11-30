@@ -57,7 +57,7 @@ async function removeQAs(flow) {
 
 // Axios call to delete a single QA object
 async function deleteqa(qa) {
-  return await axios.delete("http://localhost:5000/qa/delete", {
+  return axios.delete("http://localhost:5000/qa/delete", {
     params: { id: qa },
   });
 }
