@@ -23,23 +23,23 @@ function StartingIntent() {
 
   // dummy intent for testing purposes
   // EQUIV to currQA.intents
-  const intent = [
-    {
-      value: "cheese",
-      included: false,
-      children: ["00000001", "00000010"],
-    },
-    {
-      value: "pepperoni",
-      included: false,
-      children: ["00000011", "00000100"],
-    },
-    {
-      value: "hawaiian",
-      included: false,
-      children: ["00000101", "00000110"],
-    },
-  ];
+  // const intent = [
+  //   {
+  //     value: "cheese",
+  //     included: false,
+  //     children: ["00000001", "00000010"],
+  //   },
+  //   {
+  //     value: "pepperoni",
+  //     included: false,
+  //     children: ["00000011", "00000100"],
+  //   },
+  //   {
+  //     value: "hawaiian",
+  //     included: false,
+  //     children: ["00000101", "00000110"],
+  //   },
+  // ];
 
   return (
     <div className="container">
@@ -48,11 +48,11 @@ function StartingIntent() {
       </div>
       <div className={styles.intentContainer}>
         <h4 className={styles.speaker1}>{prevSpeaker}</h4>
-        <h1 className={styles.intentTitle}>"How can I help you?"</h1>
+        <h1 className={styles.intentTitle}>{currQA.question}</h1>
         <h4 className={styles.speaker2}>{currSpeaker}</h4>
 
         <div>
-          <IntentButtons intents={intent}></IntentButtons>
+          <IntentButtons intents={currQA.intents}></IntentButtons>
         </div>
         <div>
           <h4 className={styles.instructions}>
