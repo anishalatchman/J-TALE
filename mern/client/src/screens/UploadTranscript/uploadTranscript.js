@@ -25,6 +25,7 @@ function UploadTranscript() {
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
   const [flow, setFlow] = useState();
+  const [failureAlert, setFailureAlert] = useState("nothing");
 
   const handleClick = () => {
     // open file input box on click of button
@@ -83,9 +84,18 @@ function UploadTranscript() {
         setTranscriptID(response);
       } else {
         // prompts alert when you try to upload a transcript that is already posted onto DB
-        alert("This file was already uploaded.");
+        setFailureAlert("This file was already uploaded");
+        // alert("This file was already uploaded.");
       }
     });
+  };
+
+  const errorIndicator = (fileName, files) => {
+    if (fileName !== "No files chosen" && files && !files.questions) {
+      setFailureAlert("Please upload a valid JSON file");
+      return failureAlert;
+    } else {
+    }
   };
 
   //Parses through the question and sets flow a list of the initial question IDs
@@ -101,12 +111,16 @@ function UploadTranscript() {
   return (
     <div className="container">
       <h1 className={styles.title}>Upload Transcript</h1>
+
+      {/* <h4 className={styles.failureIndicator}>
+        {errorIndicator(fileName, files)}
+      </h4> */}
+
       {fileName !== "No files chosen" && files && !files.questions ? (
-        <h4 className={styles.failureIndicator}>
-          Please upload a valid JSON file.
-        </h4>
+        <h4 className={styles.failureIndicator}>{failureAlert}</h4>
       ) : (
-        <></>
+        // <></>
+        <h4 className={styles.failureIndicator}>{failureAlert}</h4>
       )}
       <div className={styles.buttonContainer}>
         <input
@@ -132,6 +146,8 @@ function UploadTranscript() {
           onClick={() => {
             uploadTranscript(fileName, files);
             parseQAs(files.questions);
+            errorIndicator(fileName, files);
+            console.log({ failureAlert });
           }}
           disabled={files && files.questions ? false : true}
           text={"Begin Session"}
