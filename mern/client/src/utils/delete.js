@@ -12,7 +12,10 @@ export async function deleteFlow(flow, sessionID) {
   });
 
   // Delete QAs associated with flow
-  var qaDeleted = await removeQAs(flow);
+  var qaDeleted = false;
+  await removeQAs(flow).then((res) => {
+    qaDeleted = res;
+  });
 
   // Delete the flow itself
   var flowDeleted = false;
@@ -42,22 +45,20 @@ async function removeTranscript(flow) {
 
 // Loops through the questions list in flow and deletes each item
 async function removeQAs(flow) {
-  console.log(flow);
-  console.log(flow.allQuestions);
-  console.log(flow.allQuestions.length);
-  flow.allQuestions.forEach(async (item) => {
-    await deleteqa(item).then((response) => {
-      if (response.status === 400) {
-        return false;
-      }
-    });
-  });
+  for (var i = 0; i < flow.allQuestions.length; i++) {
+    console.log(flow.allQuestions[i]);
+    try {
+      await deleteqa(flow.allQuestions[i]);
+    } catch {
+      return false;
+    }
+  }
   return true;
 }
 
 // Axios call to delete a single QA object
 async function deleteqa(qa) {
-  return axios.delete("http://localhost:5000/qa/delete", {
-    params: { id: qa },
+  await axios.delete("http://localhost:5000/qa/delete", {
+    data: { id: qa },
   });
 }

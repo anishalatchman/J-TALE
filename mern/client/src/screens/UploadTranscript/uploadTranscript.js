@@ -25,9 +25,14 @@ function UploadTranscript() {
     useContext(SessionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
-  const [flowStartingQuestions, setFlowStartingQuestions] = useState();
-  const [flowAllQuestions, setFlowAllQuestions] = useState();
-  const [currFlow, setFlowState] = useContext(FlowContext);
+  const [
+    ,
+    setFlowState,
+    flowStartingQuestions,
+    setFlowStartingQuestions,
+    flowAllQuestions,
+    setFlowAllQuestions,
+  ] = useContext(FlowContext);
 
   const handleClick = () => {
     // open file input box on click of button
@@ -107,10 +112,9 @@ function UploadTranscript() {
     try {
       const parse = new Parser();
       const res = parse.parse(questions);
-      console.log(res.allQuestionList, "before setting");
+      console.log(res.allQuestionList);
       setFlowStartingQuestions(res.startingList);
       setFlowAllQuestions(res.allQuestionList);
-      console.log(flowAllQuestions, "after setting");
     } catch (e) {
       alert("PARSE FAILED", e.response);
     }

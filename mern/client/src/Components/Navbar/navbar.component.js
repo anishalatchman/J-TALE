@@ -12,7 +12,8 @@ export default function Navbar() {
   // define context var to show/hide nav buttons
   const [sessionID, setSessionID] = useContext(SessionContext);
   const [currQA] = useContext(qaContext);
-  const [currFlow] = useContext(FlowContext);
+  const [currFlow, , , setFlowStartingQuestions, , setFlowAllQuestions] =
+    useContext(FlowContext);
 
   // Create session id var and setter function
   // const sessionid = "12345";
@@ -31,11 +32,15 @@ export default function Navbar() {
   };
 
   const tryDelete = (currFlow, sessionID) => {
-    if (!deleteFlow(currFlow, sessionID)) {
-      alert("Unable to Delete");
-    } else {
-      console.log("Success");
-    }
+    deleteFlow(currFlow, sessionID).then((res) => {
+      if (!res) {
+        alert("Unable to Delete");
+      } else {
+        alert("Successfully Deleted");
+      }
+    });
+    setFlowAllQuestions(null);
+    setFlowStartingQuestions(null);
   };
 
   return (

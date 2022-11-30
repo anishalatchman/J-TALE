@@ -49,7 +49,7 @@ export default class qa_DAO {
   //Deletes QA by id
   async deleteQAByID(req, res) {
     try {
-      const qa = await QA.findOneAndDelete({ id: req.query.id });
+      const qa = await QA.findOneAndDelete({ id: req.body.id });
       res.status(200).json(qa);
     } catch (error) {
       res.status(400).json("Unable to Delete QA");
