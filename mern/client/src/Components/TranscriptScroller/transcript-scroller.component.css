@@ -24,14 +24,13 @@
 }
 
 .scroller {
-  background-color: rgb(221, 221, 221);
+  background-color: #e6e6e6;
   float: right;
   height: 550px;
   width: 450px;
   border-radius: 20px;
   overflow-y: auto;
   overflow-x: auto;
-  padding-left: 20px;
 }
 
 .scrollerTitle {
@@ -41,6 +40,12 @@
   font-weight: 800;
 }
 
-.buttonContainer {
-  @apply mb-5 items-center flex flex-col;
+.transcriptHeader{
+  @apply flex w-full items-center justify-between bg-voiceflow-grey pl-10;
+  position: sticky;
+  top:0;
+}
+
+.transcriptText{
+  @apply pl-10 pb-10 pt-6;
 }
