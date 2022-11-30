@@ -12,7 +12,6 @@ export async function deleteFlow(flow, sessionID) {
   });
 
   // Delete QAs associated with flow
-  await removeQAs(flow);
   var qaDeleted = await removeQAs(flow);
 
   // Delete the flow itself
@@ -46,8 +45,8 @@ async function removeQAs(flow) {
   console.log(flow);
   console.log(flow.allQuestions);
   console.log(flow.allQuestions.length);
-  await flow.allQuestions.forEach((item) => {
-    deleteqa(item).then((response) => {
+  flow.allQuestions.forEach(async (item) => {
+    await deleteqa(item).then((response) => {
       if (response.status === 400) {
         return false;
       }
