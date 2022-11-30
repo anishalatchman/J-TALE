@@ -18,6 +18,10 @@
   @apply flex flex-row text-3xl items-center font-nunito font-medium;
 }
 
+.navbarLinks:hover {
+  @apply text-white
+}
+
 .navLink {
   @apply flex justify-start pl-10;
 }
