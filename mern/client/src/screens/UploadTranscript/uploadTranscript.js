@@ -164,6 +164,9 @@ function UploadTranscript() {
             PageChange("/");
             setSessionID();
             // Check if there is a transcript uploaded, if yes delete from DB
+            if (transcriptID) {
+              deleteFile(transcriptID);
+            }
           }}
           disabled={false}
           text={"Go Back"}
