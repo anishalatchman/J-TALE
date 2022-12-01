@@ -10,7 +10,7 @@ import { SessionContext } from "../../Contexts/sessionProvider";
 import Parser from "../../utils/parser";
 import { FlowContext } from "../../Contexts/flow.Provider";
 import { QuestionContext } from "../../Contexts/questionProvider";
-import QA from "../../../../server/models/question_answer";
+import QA from "../../utils/QA";
 
 function UploadTranscript() {
   const Navigate = useNavigate();
@@ -24,7 +24,7 @@ function UploadTranscript() {
   const [files, setFiles] = useState();
   const [, setSessionID, transcriptID, setTranscriptID] =
     useContext(SessionContext);
-  const [, , setQuestions, setAllQuestions] = useContext(QuestionContext);
+  const [, , , setQuestions, , setAllQuestions] = useContext(QuestionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
   const [
@@ -124,6 +124,11 @@ function UploadTranscript() {
     return question.getQAList(idList);
   };
 
+  const populatingQuestionContet = async () => {
+    await setQuestions(getQAs(flowStartingQuestions));
+    await setAllQuestions(getQAs(flowAllQuestions));
+  };
+
   return (
     <div className="container">
       <h1 className={styles.title}>Upload Transcript</h1>
@@ -183,13 +188,13 @@ function UploadTranscript() {
               deleteFile(transcriptID);
             }}
             onSubmit={() => {
+              populatingQuestionContet();
               uploadFlow(
                 flowName.name,
                 flowStartingQuestions,
                 flowAllQuestions,
                 transcriptID
               );
-              setAllQuestions(getQAs(flowAllQuestions));
             }}
           />
         )}

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./StartingIntent.module.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
@@ -21,7 +21,8 @@ function StartingIntent() {
     Navigate(url);
   };
   const [currIntents, setCurrIntents] = useState();
-  const [questions, setQuestions, allQuestions] = useContext(QuestionContext);
+  const [, , questions, setQuestions, allQuestions] =
+    useContext(QuestionContext);
   const [buttons, setButtons] = useState(false);
 
   const handleSpeakerChange = () => {
@@ -32,6 +33,11 @@ function StartingIntent() {
     setButtons(!buttons);
   };
 
+  useEffect(() => {
+    console.log(questions, "STARTING QUESTIONS");
+    console.log(allQuestions, "STARTING ALL QUESTIONS");
+    console.log(buttons, "BUTTONS");
+  }, [questions, buttons, allQuestions]);
   const handleQAChange = () => {
     //Gets the speech of the button that is selected
     const speech = Object.keys(intentState).find((x) => intentState[x] === 2);
@@ -70,7 +76,10 @@ function StartingIntent() {
         <h4 className={styles.speaker2}>{currSpeaker}</h4>
 
         <div>
-          <IntentButtons intents={intent}></IntentButtons>
+          <IntentButtons
+            intents={buttons ? currIntents.intents : questions}
+            user={buttons}
+          />
         </div>
         <div>
           <h4 className={styles.instructions}>
