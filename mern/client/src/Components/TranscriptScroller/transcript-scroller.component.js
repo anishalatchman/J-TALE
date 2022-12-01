@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import GenericButton from "../Buttons/GenericButton";
 import "./transcript-scroller.component.css";
 
