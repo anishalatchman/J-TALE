@@ -3,7 +3,7 @@ import styles from "./StartingIntent.module.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import IntentButtons from "../../Components/IntentButtons/IntentButtons";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import Scrollbar from "../../Components/TranscriptScroller/transcript-scroller.component";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
 import { IntentContext } from "../../Contexts/intentsProvider";
@@ -14,10 +14,10 @@ function StartingIntent() {
   const [currSpeaker, setSpeaker, prevSpeaker, setPrevSpeaker] =
     useContext(SpeakerContext);
   const [intentState] = useContext(IntentContext);
-  const Navigate = useNavigate();
-  const PageChange = (url) => {
-    Navigate(url);
-  };
+  // const Navigate = useNavigate();
+  // const PageChange = (url) => {
+  //   Navigate(url);
+  // };
   const [currIntents, setCurrIntents] = useState();
   const [
     ,
@@ -70,7 +70,7 @@ function StartingIntent() {
 
   return (
     <div className="container">
-      <div className="scroller">
+      <div className={styles.scroller}>
         <Scrollbar />
       </div>
       <div className={styles.intentContainer}>
