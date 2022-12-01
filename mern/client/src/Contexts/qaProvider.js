@@ -4,10 +4,11 @@ export const qaContext = React.createContext();
 
 export default function QAProvider({ children }) {
   // Stores the current QA object that the user is working with.
-  const [currQA, setcurrQAState] = React.useState();
+  const [currQA, setcurrQA] = React.useState();
+
 
   return (
-    <qaContext.Provider value={[currQA, setcurrQAState]}>
+    <qaContext.Provider value={[currQA, setcurrQA]}>
       {children}
     </qaContext.Provider>
   );
