@@ -9,7 +9,7 @@ import { IntentContext } from "../../Contexts/intentsProvider";
 import { qaContext } from "../../Contexts/qaProvider";
 
 function StartingIntent() {
-  const [currQA, ] = useContext(qaContext)
+  const [currQA] = useContext(qaContext);
   const [currSpeaker, setSpeaker, prevSpeaker, setPrevSpeaker] =
     useContext(SpeakerContext);
   const [intentState] = useContext(IntentContext);
@@ -44,7 +44,7 @@ function StartingIntent() {
   return (
     <div className="container">
       <div className="scroller">
-        <Scrollbar />
+        <Scrollbar></Scrollbar>
       </div>
       <div className={styles.intentContainer}>
         <h4 className={styles.speaker1}>{prevSpeaker}</h4>
@@ -57,10 +57,12 @@ function StartingIntent() {
         </div>
         <div>
           <h4 className={styles.instructions}>
-            Select intents you would like to include by <strong>clicking once</strong>.
+            Select intents you would like to include by{" "}
+            <strong>clicking once</strong>.
           </h4>
           <h4 className={styles.instructions1}>
-            Choose a specific path by <strong>clicking again</strong> and selecting next.
+            Choose a specific path by <strong>clicking again</strong> and
+            selecting next.
           </h4>
         </div>
         <div className={styles.buttonContainer}>
@@ -68,8 +70,7 @@ function StartingIntent() {
             buttonType="outline"
             text={"Go Back"}
             disabled={false}
-            onClick={() => {
-            }}
+            onClick={() => {}}
           />
           <GenericButton
             buttonType={
