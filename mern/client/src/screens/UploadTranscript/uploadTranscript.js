@@ -7,9 +7,10 @@ import Modal from "../../Components/Modals/GenericModal";
 import { transcriptJSONConverter, deleteFile } from "../../utils/transcript";
 import { flowUploader } from "../../utils/startScreen";
 import { SessionContext } from "../../Contexts/sessionProvider";
-import Parser from "../../utils/QA";
+import Parser from "../../utils/parser";
 import { FlowContext } from "../../Contexts/flow.Provider";
-// import { QuestionContext } from "../../Contexts/questionProvider";
+import { QuestionContext } from "../../Contexts/questionProvider";
+import QA from "../../../../server/models/question_answer";
 
 function UploadTranscript() {
   const Navigate = useNavigate();
@@ -23,6 +24,7 @@ function UploadTranscript() {
   const [files, setFiles] = useState();
   const [, setSessionID, transcriptID, setTranscriptID] =
     useContext(SessionContext);
+  const [, , setQuestions, setAllQuestions] = useContext(QuestionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
   const [
@@ -117,6 +119,11 @@ function UploadTranscript() {
     }
   };
 
+  const getQAs = (idList) => {
+    const question = new QA();
+    return question.getQAList(idList);
+  };
+
   return (
     <div className="container">
       <h1 className={styles.title}>Upload Transcript</h1>
@@ -150,7 +157,6 @@ function UploadTranscript() {
           buttonType={files && files.questions ? "blue" : "disabled"}
           onClick={() => {
             uploadTranscript(fileName, files);
-
             parseQAs(files.questions);
           }}
           disabled={files && files.questions ? false : true}
@@ -183,6 +189,7 @@ function UploadTranscript() {
                 flowAllQuestions,
                 transcriptID
               );
+              setAllQuestions(getQAs(flowAllQuestions));
             }}
           />
         )}

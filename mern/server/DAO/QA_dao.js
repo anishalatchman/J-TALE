@@ -7,7 +7,7 @@ export default class qa_DAO {
 
   //Gets the QA by ID
   async getQAByID(req, res) {
-    const qa = await QA.findOne({ id: req.body.id });
+    const qa = await QA.findOne({ id: req.query.id });
     if (qa) {
       res.status(200).json(qa);
     } else {
