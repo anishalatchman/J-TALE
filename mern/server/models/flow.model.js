@@ -8,6 +8,7 @@ const flowschema = new Schema({
     type: String,
     require: true,
   },
+  // stores first 5 qs, all_questions stores all qs
   questions: [
     {
       type: String,
