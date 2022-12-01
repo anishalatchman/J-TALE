@@ -18,9 +18,9 @@ export default function IntentButtons(props) {
   const [intentState, setIntentState] = useContext(IntentContext);
 
   var values = [];
-  console.log(props.intents, "INTENTS");
   return (
     <div className="container items-center">
+      {/* To be displayed when flow is completed */}
       {props.intents.map((intent) => {
         //Constant to check whether the object is a user or a bot and access their speech accordingly
         const speech = props.user ? intent.value : intent.question;

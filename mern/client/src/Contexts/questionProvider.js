@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 export const QuestionContext = React.createContext();
 
@@ -7,11 +7,10 @@ export default function QuestionProvider({ children }) {
   const [QuestionState, setQuestionState] = React.useState([]);
   const [questions, setQuestions] = React.useState([]);
   const [allQuestions, setAllQuestions] = React.useState([]);
+  const [prevPrompt, setPrevPrompt] = React.useState(
+    '"How can I help you today?"'
+  );
 
-  useEffect(() => {
-    console.log(questions, "QUESTIONS");
-    console.log(allQuestions, "ALLQUESTIONS");
-  }, [questions, allQuestions]);
   return (
     <QuestionContext.Provider
       value={[
@@ -21,6 +20,8 @@ export default function QuestionProvider({ children }) {
         setQuestions,
         allQuestions,
         setAllQuestions,
+        prevPrompt,
+        setPrevPrompt,
       ]}
     >
       {children}

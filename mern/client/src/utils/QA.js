@@ -18,7 +18,6 @@ export default class QA {
 
   async getQAByID(id) {
     try {
-      console.log(id, "ID");
       const res = await axios.get("http://localhost:5000/qa/", {
         params: { id: id },
       });
