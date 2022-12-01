@@ -25,6 +25,7 @@ export default function Navbar() {
     Navigate(url);
   };
 
+  // This function is called when user clicks save button and saves the current question
   const trySave = (currFlow, currQA, sessionID) => {
     if (!saveQA(currFlow, currQA, sessionID)) {
       alert("Unable to save the current page");
@@ -35,6 +36,7 @@ export default function Navbar() {
     }
   };
 
+  // This function is called when user clicks deletes and deletes the flow
   const tryDelete = (currFlow, sessionID) => {
     deleteFlow(currFlow, sessionID).then((res) => {
       if (!res) {
@@ -43,7 +45,6 @@ export default function Navbar() {
         alert("Successfully Deleted");
       }
     });
-
     setSessionID(null);
     PageChange("/");
   };

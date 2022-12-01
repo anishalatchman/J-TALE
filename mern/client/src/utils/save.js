@@ -11,6 +11,8 @@ export async function saveQA(qa) {
   return saved;
 }
 
+// Takes in the flow object, current question and session id to update the flow parameter with
+// the current question
 export async function saveFlow(flow, qa, sessionID) {
   flow.current_question = qa.id;
   var saved = false;
