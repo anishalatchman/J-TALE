@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styles from "./navbar.module.css";
 import GenericButton from "../Buttons/GenericButton";
@@ -19,6 +20,10 @@ export default function Navbar() {
   // const setSessionID = (id) => {
   //   sessionid = id;
   // };
+  const Navigate = useNavigate();
+  const PageChange = (url) => {
+    Navigate(url);
+  };
 
   const trySave = (currFlow, currQA, sessionID) => {
     if (!saveQA(currFlow, currQA, sessionID)) {
@@ -38,6 +43,9 @@ export default function Navbar() {
         alert("Successfully Deleted");
       }
     });
+
+    setSessionID(null);
+    PageChange("/");
   };
 
   return (
