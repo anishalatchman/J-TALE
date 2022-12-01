@@ -9,6 +9,7 @@ import { flowUploader } from "../../utils/startScreen";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import Parser from "../../utils/QA";
 // import { qaContext } from "../../Contexts/qaProvider";
+import { FlowContext } from "../../Contexts/flow.Provider";
 // import { QuestionContext } from "../../Contexts/questionProvider";
 
 function UploadTranscript() {
@@ -25,8 +26,14 @@ function UploadTranscript() {
     useContext(SessionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
-  const [flow, setFlow] = useState();
-  // const [, setCurrQA] = useContext(qaContext);
+  const [
+    ,
+    setFlowState,
+    flowStartingQuestions,
+    setFlowStartingQuestions,
+    flowAllQuestions,
+    setFlowAllQuestions,
+  ] = useContext(FlowContext);
 
   const handleClick = () => {
     // open file input box on click of button
@@ -62,14 +69,23 @@ function UploadTranscript() {
   };
 
   //Uploads flow to the backend
-  const uploadFlow = (flowName, flow) => {
-    flowUploader(flowName, flow).then((response) => {
+  const uploadFlow = (
+    flowName,
+    flowStartingQuestions,
+    flowAllQuestions,
+    transcriptID
+  ) => {
+    flowUploader(
+      flowName,
+      flowStartingQuestions,
+      flowAllQuestions,
+      transcriptID
+    ).then((response) => {
       //If response is successful, change to next page and show the additional navbar info
       if (response.status) {
         PageChange("/startingintent");
-        // console.log(response.res);
-        // console.log(response.res?.data._id, "RESPONSE ID");
         setSessionID(response.res?.data._id);
+        setFlowState(response.res?.data);
       } else {
         alert("Unable to create session. Please try again.");
       }
@@ -94,7 +110,9 @@ function UploadTranscript() {
   const parseQAs = (questions) => {
     try {
       const parse = new Parser();
-      setFlow(parse.parse(questions));
+      const res = parse.parse(questions);
+      setFlowStartingQuestions(res.startingList);
+      setFlowAllQuestions(res.allQuestionList);
     } catch (e) {
       alert("PARSE FAILED", e.response);
     }
@@ -133,6 +151,7 @@ function UploadTranscript() {
           buttonType={files && files.questions ? "blue" : "disabled"}
           onClick={() => {
             uploadTranscript(fileName, files);
+
             parseQAs(files.questions);
             // setCurrQA(files.question[0][0])
             console.log("this is da curr_q object", files.questions[0][0])
@@ -162,7 +181,12 @@ function UploadTranscript() {
               deleteFile(transcriptID);
             }}
             onSubmit={() => {
-              uploadFlow(flowName.name, flow);
+              uploadFlow(
+                flowName.name,
+                flowStartingQuestions,
+                flowAllQuestions,
+                transcriptID
+              );
             }}
           />
         )}

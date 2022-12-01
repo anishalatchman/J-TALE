@@ -1,16 +1,55 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styles from "./navbar.module.css";
 import GenericButton from "../Buttons/GenericButton";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import { qaContext } from "../../Contexts/qaProvider";
-import deleteFlow from "../../utils/delete";
-import saveFlow from "../../utils/save";
+import { FlowContext } from "../../Contexts/flow.Provider";
+import { deleteFlow } from "../../utils/delete";
+import { saveFlow, saveQA } from "../../utils/save";
 
 export default function Navbar() {
   // define context var to show/hide nav buttons
   const [sessionID, setSessionID] = useContext(SessionContext);
   const [currQA] = useContext(qaContext);
+  const [currFlow, , , , ,] = useContext(FlowContext);
+
+
+  const Navigate = useNavigate();
+  const PageChange = (url) => {
+    Navigate(url);
+  };
+
+  // This function is called when user clicks save button and saves the current question
+  const trySave = (currFlow, currQA, sessionID) => {
+    saveQA(currFlow, currQA, sessionID).then((res) => {
+      if (!res) {
+        alert("Unable to Delete");
+      }
+    });
+
+    saveFlow(currFlow, sessionID).then((res) => {
+      if (!res) {
+        alert("Unable to Delete");
+      }
+    });
+
+    alert("Saved Successfully");
+  };
+
+  // This function is called when user clicks deletes and deletes the flow
+  const tryDelete = (currFlow, sessionID) => {
+    deleteFlow(currFlow, sessionID).then((res) => {
+      if (!res) {
+        alert("Unable to Delete");
+      } else {
+        alert("Successfully Deleted");
+      }
+    });
+    setSessionID(null);
+    PageChange("/");
+  };
 
   return (
     <nav className={styles.navbarBG}>
@@ -39,13 +78,15 @@ export default function Navbar() {
           </h2>
           <GenericButton
             buttonType="nav"
-            onClick={() => saveFlow(currQA, sessionID)}
+            onClick={() => {
+              trySave(currFlow, currQA, sessionID);
+            }}
             disabled={false}
             text={"SAVE"}
           />
           <GenericButton
             buttonType="nav"
-            onClick={() => deleteFlow(sessionID)}
+            onClick={() => tryDelete(currFlow, sessionID)}
             disabled={false}
             text={"DELETE SESSION"}
           />
