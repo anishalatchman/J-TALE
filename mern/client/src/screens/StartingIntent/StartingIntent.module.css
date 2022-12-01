@@ -12,7 +12,7 @@
 }
 
 .buttonContainer {
-  @apply ml-4 mb-5 items-center justify-start flex flex-row;
+  @apply ml-4 mb-5 items-center justify-end px-12 flex flex-row;
 }
 
 .instructions {
@@ -20,7 +20,11 @@
 }
 
 .instructions1 {
-  @apply text-gray text-left ml-4 mb-10;
+  @apply text-gray text-left ml-4 mb-4;
+}
+
+.scroller{
+  @apply ml-8;
 }
 
 .speaker1 {
@@ -54,4 +58,9 @@
   height: 37px;
   top: 10px;
   @apply mr-2;
+}
+
+.completed{
+  @apply text-left mb-3 ml-4 font-montserrat font-bold pt-8;
+  font-size: 38px;
 }
