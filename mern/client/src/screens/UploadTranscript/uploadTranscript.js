@@ -8,7 +8,7 @@ import { transcriptJSONConverter, deleteFile } from "../../utils/transcript";
 import { flowUploader } from "../../utils/startScreen";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import Parser from "../../utils/QA";
-import { qaContext } from "../../Contexts/qaProvider";
+// import { qaContext } from "../../Contexts/qaProvider";
 // import { QuestionContext } from "../../Contexts/questionProvider";
 
 function UploadTranscript() {
@@ -26,7 +26,7 @@ function UploadTranscript() {
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
   const [flow, setFlow] = useState();
-  const [, setCurrQA] = useContext(qaContext);
+  // const [, setCurrQA] = useContext(qaContext);
 
   const handleClick = () => {
     // open file input box on click of button
@@ -71,7 +71,7 @@ function UploadTranscript() {
         // console.log(response.res?.data._id, "RESPONSE ID");
         setSessionID(response.res?.data._id);
       } else {
-        alert("Please enter a valid flow name.");
+        alert("Unable to create session. Please try again.");
       }
     });
   };
@@ -133,10 +133,9 @@ function UploadTranscript() {
           buttonType={files && files.questions ? "blue" : "disabled"}
           onClick={() => {
             uploadTranscript(fileName, files);
-            // TESTSSSS
-            console.log("this is da curr_q object", files.questions[0][0])
-            setCurrQA(files.question[0][0])
             parseQAs(files.questions);
+            // setCurrQA(files.question[0][0])
+            console.log("this is da curr_q object", files.questions[0][0])
           }}
           disabled={files && files.questions ? false : true}
           text={"Begin Session"}

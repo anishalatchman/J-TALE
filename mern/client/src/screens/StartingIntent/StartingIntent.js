@@ -48,6 +48,7 @@ function StartingIntent() {
       </div>
       <div className={styles.intentContainer}>
         <h4 className={styles.speaker1}>{prevSpeaker}</h4>
+        { console.log("this should be the strating q", currQA.question) }
         <h1 className={styles.intentTitle}>{currQA.question}</h1>
         <h4 className={styles.speaker2}>{currSpeaker}</h4>
 
@@ -82,6 +83,10 @@ function StartingIntent() {
             }
             onClick={() => {
               handleSpeakerChange();
+              // console.log("here's intent state", intentState)
+              // const clickedBttn = Object.keys(intentState).find(key => intentState[key] === 2);
+              // const intentObj = currQA.intents.find((x) => x.value === clickedBttn);
+              // setCurrQA(currQA.intents[clickedBttn])
             }}
           />
         </div>
