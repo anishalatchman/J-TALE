@@ -21,7 +21,7 @@ export async function deleteFlow(flow, sessionID) {
   var flowDeleted = false;
   await removeFlow(sessionID).then((response) => {
     if (response.status === 200) {
-      FlowDeleted = true;
+      flowDeleted = true;
     }
   });
 
@@ -48,7 +48,6 @@ async function removeTranscript(flow) {
 // Loops through the questions list in flow and deletes each item
 async function removeQAs(flow) {
   for (var i = 0; i < flow.allQuestions.length; i++) {
-    console.log(flow.allQuestions[i]);
     try {
       await deleteqa(flow.allQuestions[i]);
     } catch {
