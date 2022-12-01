@@ -1,32 +1,29 @@
 import axios from "axios";
 
-export default class Parser {
-  parse(transcript) {
+export default class QA {
+  getQAList(idList) {
     const lst = [];
-    for (var i = 0; i < transcript.length; i++) {
-      this.createQAs(transcript[i]);
-      lst.push(this.initialQAID(transcript[i]));
+    for (var i = 0; i < idList.length; i++) {
+      this.getQAByID(idList[i]).then((response) => {
+        //If response is successful, change to next page and show the additional navbar info
+        if (response.status) {
+          lst.push(response.data);
+        } else {
+          console.log("ERROR GETTING QA OBJECT");
+        }
+      });
     }
     return lst;
   }
 
-  //Loops through all questions in the JSON object qlist, making them into objects in the databse
-  async createQAs(qlist) {
-    //qlist is a list of JSON objects that exists as questions/answer pairs
-    for (var i = 0; i < qlist.length; i++) {
-      try {
-        await axios.post("http://localhost:5000/qa/add", qlist[i]);
-      } catch (e) {
-        console.log(e.response.data);
-      }
+  async getQAByID(id) {
+    try {
+      const res = await axios.get("http://localhost:5000/qa/", {
+        params: { id: id },
+      });
+      return res;
+    } catch (e) {
+      console.log(e.response.data);
     }
-  }
-
-  // Returns a list of the initial QA ids
-  initialQAID(qlist) {
-    if (qlist.length === 0) {
-      return null;
-    }
-    return qlist[0].id; // Return the first item in the list which should be the top level question
   }
 }

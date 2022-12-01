@@ -27,7 +27,9 @@ export default class flowDAO {
       const flow = await Flow.create({
         name: req.body.name,
         questions: req.body.questions,
+        allQuestions: req.body.allQuestions,
         current_question: "",
+        transcriptID: req.body.transcriptID,
       });
       res.status(200).json(flow);
     } catch (e) {

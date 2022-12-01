@@ -7,8 +7,10 @@ import Modal from "../../Components/Modals/GenericModal";
 import { transcriptJSONConverter, deleteFile } from "../../utils/transcript";
 import { flowUploader } from "../../utils/startScreen";
 import { SessionContext } from "../../Contexts/sessionProvider";
-import Parser from "../../utils/QA";
-// import { QuestionContext } from "../../Contexts/questionProvider";
+import Parser from "../../utils/parser";
+import { FlowContext } from "../../Contexts/flow.Provider";
+import { QuestionContext } from "../../Contexts/questionProvider";
+import QA from "../../utils/QA";
 
 function UploadTranscript() {
   const Navigate = useNavigate();
@@ -22,9 +24,17 @@ function UploadTranscript() {
   const [files, setFiles] = useState();
   const [, setSessionID, transcriptID, setTranscriptID] =
     useContext(SessionContext);
+  const [, , , setQuestions, , setAllQuestions] = useContext(QuestionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
-  const [flow, setFlow] = useState();
+  const [
+    ,
+    setFlowState,
+    flowStartingQuestions,
+    setFlowStartingQuestions,
+    flowAllQuestions,
+    setFlowAllQuestions,
+  ] = useContext(FlowContext);
   const [failureAlert, setFailureAlert] = useState("nothing");
 
   const handleClick = () => {
@@ -61,14 +71,23 @@ function UploadTranscript() {
   };
 
   //Uploads flow to the backend
-  const uploadFlow = (flowName, flow) => {
-    flowUploader(flowName, flow).then((response) => {
+  const uploadFlow = (
+    flowName,
+    flowStartingQuestions,
+    flowAllQuestions,
+    transcriptID
+  ) => {
+    flowUploader(
+      flowName,
+      flowStartingQuestions,
+      flowAllQuestions,
+      transcriptID
+    ).then((response) => {
       //If response is successful, change to next page and show the additional navbar info
       if (response.status) {
         PageChange("/startingintent");
-        console.log(response.res);
-        console.log(response.res?.data._id, "RESPONSE ID");
         setSessionID(response.res?.data._id);
+        setFlowState(response.res?.data);
       } else {
         alert("Please enter a valid flow name.");
       }
@@ -102,10 +121,22 @@ function UploadTranscript() {
   const parseQAs = (questions) => {
     try {
       const parse = new Parser();
-      setFlow(parse.parse(questions));
+      const res = parse.parse(questions);
+      setFlowStartingQuestions(res.startingList);
+      setFlowAllQuestions(res.allQuestionList);
     } catch (e) {
       alert("PARSE FAILED", e.response);
     }
+  };
+
+  const getQAs = (idList) => {
+    const question = new QA();
+    return question.getQAList(idList);
+  };
+
+  const populatingQuestionContet = async () => {
+    await setQuestions(getQAs(flowStartingQuestions));
+    await setAllQuestions(getQAs(flowAllQuestions));
   };
 
   return (
@@ -173,7 +204,13 @@ function UploadTranscript() {
               deleteFile(transcriptID);
             }}
             onSubmit={() => {
-              uploadFlow(flowName.name, flow);
+              populatingQuestionContet();
+              uploadFlow(
+                flowName.name,
+                flowStartingQuestions,
+                flowAllQuestions,
+                transcriptID
+              );
             }}
           />
         )}

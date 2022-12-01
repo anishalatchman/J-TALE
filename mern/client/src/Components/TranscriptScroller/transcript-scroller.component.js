@@ -1,155 +1,41 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import GenericButton from "../Buttons/GenericButton";
-import "./transcript-scroller.component.css";
+import styles from "./transcript-scroller.component.module.css";
+import { ScrollerContext } from "../../Contexts/scrollerProvider";
 
-export default class Scrollbar extends Component {
-  render() {
-    return (
-      <div className="scroller">
-        <h1 className="scrollerTitle">Transcript</h1>
-
-        <p>This is where the text of the transcript will be </p>
-        <p>Bot: What can I help you with today?</p>
-
-        <br></br>
-
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-        <p>
-          Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-          ipsum{" "}
-        </p>
-
-        <div className="buttonContainer">
-          <GenericButton
-            buttonType="blue"
-            // class="btn-bot"
-            onClick={() => null}
-            disabled={false}
-            text={"Export Transcript"}
-          />
+export default function Scrollbar() {
+  const [speechList] = useContext(ScrollerContext);
+  return (
+    <div className={styles.scroller}>
+      <div className={styles.transcriptContainer}>
+        <div className={styles.transcriptHeader}>
+          <h1 className={styles.scrollerTitle}>Transcript</h1>
         </div>
+        {speechList.length === 0 ? (
+          <></>
+        ) : (
+          <div className={styles.transcriptText}>
+            {speechList.map((speech) => {
+              return (
+                <p key={speech.text} className={styles.bolded}>
+                  {speech.source + " " + speech.text}{" "}
+                </p>
+              );
+            })}
+
+            <p className="indent">3 intents available</p>
+            <br></br>
+          </div>
+        )}
       </div>
-    );
-  }
+      <div className={styles.buttonContainer}>
+        <GenericButton
+          buttonType="white"
+          onClick={() => null}
+          disabled={false}
+          text={"Export Transcript"}
+        />
+      </div>
+    </div>
+  );
 }

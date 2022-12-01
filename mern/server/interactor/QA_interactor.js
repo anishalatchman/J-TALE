@@ -14,12 +14,10 @@ export default class qa_Interactor {
 
   //Creates a new QA
   createQA(req, res) {
-    if (
-      !req.body.hasOwnProperty("id") ||
-      !req.body.hasOwnProperty("question") ||
-      !req.body.hasOwnProperty("question_included")
-    ) {
-      res.status(400).json("Missing Input Field");
+    if (this.checkProperty(req, res)) {
+      return;
+    }
+    if (this.isValid(req, res)) {
       return;
     }
 
@@ -34,12 +32,10 @@ export default class qa_Interactor {
 
   //Updates QA if new QA object is valid and QA exists in collection
   updateQA(req, res) {
-    if (
-      !req.body.hasOwnProperty("id") ||
-      !req.body.hasOwnProperty("question") ||
-      !req.body.hasOwnProperty("question_included")
-    ) {
-      res.status(400).json("Missing Input Field");
+    if (this.checkProperty(req, res)) {
+      return;
+    }
+    if (this.isValid(req, res)) {
       return;
     }
 
@@ -60,5 +56,43 @@ export default class qa_Interactor {
   //Deletes QA by ID
   deleteQA(req, res) {
     QA_DAO.deleteQAByID(req, res);
+  }
+
+  checkProperty(req, res) {
+    if (
+      !req.body.hasOwnProperty("id") ||
+      !req.body.hasOwnProperty("question") ||
+      !req.body.hasOwnProperty("question_included")
+    ) {
+      res.status(400).json("Missing Input Field");
+      return true;
+    }
+
+    return false;
+  }
+
+  isValid(req, res) {
+    if (
+      typeof req.body.id !== "string" ||
+      typeof req.body.question !== "string" ||
+      typeof req.body.question_included !== "boolean"
+    ) {
+      res.status(400).json("Invalid Input Field");
+      return true;
+    }
+
+    if (req.body.intents && req.body.intents !== []) {
+      const intent = req.body.intents[0];
+      if (
+        typeof intent.value !== "string" ||
+        typeof intent.included !== "boolean" ||
+        !Array.isArray(intent.children)
+      ) {
+        res.status(400).json("Invalid Input Field");
+        return true;
+      }
+    }
+
+    return false;
   }
 }

@@ -12,8 +12,9 @@ import SessionProvider from "./Contexts/sessionProvider";
 import SpeakerProvider from "./Contexts/speakerProvider";
 import IntentProvider from "./Contexts/intentsProvider";
 import QAProvider from "./Contexts/qaProvider";
-
-// import QuestionProvider, { QuestionContext } from "./Contexts/questionProvider";
+import FlowProvider from "./Contexts/flow.Provider";
+import QuestionProvider from "./Contexts/questionProvider";
+import ScrollerProvider from "./Contexts/scrollerProvider";
 
 function App() {
   return (
@@ -24,16 +25,23 @@ function App() {
           <IntentProvider>
             <SpeakerProvider>
               <QAProvider>
-                {/* <QuestionProvider> */}
-                <Navbar />
-                <Routes>
-                  <Route path="/" element={<Landing />} />
-                  <Route path="/recover" element={<RecoverSession />} />
-                  <Route path="/upload" element={<UploadTranscript />} />
-                  <Route path="/save" element={<SavingSession />} />
-                  <Route path="/startingintent" element={<StartingIntent />} />
-                </Routes>
-                {/* </QuestionProvider> */}
+                <FlowProvider>
+                  <QuestionProvider>
+                    <ScrollerProvider>
+                      <Navbar />
+                      <Routes>
+                        <Route path="/" element={<Landing />} />
+                        <Route path="/recover" element={<RecoverSession />} />
+                        <Route path="/upload" element={<UploadTranscript />} />
+                        <Route path="/save" element={<SavingSession />} />
+                        <Route
+                          path="/startingintent"
+                          element={<StartingIntent />}
+                        />
+                      </Routes>
+                    </ScrollerProvider>
+                  </QuestionProvider>
+                </FlowProvider>
               </QAProvider>
             </SpeakerProvider>
           </IntentProvider>

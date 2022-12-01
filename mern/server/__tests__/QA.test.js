@@ -83,7 +83,7 @@ describe("QA Tests", () => {
       });
 
     expect(res.statusCode).toBe(400);
-    expect(res.body).toBe("Invalid QA Data");
+    expect(res.body).toBe("Invalid Input Field");
   });
 
   test("Invalid Question", async () => {
@@ -97,7 +97,7 @@ describe("QA Tests", () => {
       });
 
     expect(res.statusCode).toBe(400);
-    expect(res.body).toBe("Invalid QA Data");
+    expect(res.body).toBe("Invalid Input Field");
   });
 
   test("Invalid Question Included Type", async () => {
@@ -111,7 +111,7 @@ describe("QA Tests", () => {
       });
 
     expect(res.statusCode).toBe(400);
-    expect(res.body).toBe("Invalid QA Data");
+    expect(res.body).toBe("Invalid Input Field");
   });
 
   test("Invalid Intents", async () => {
@@ -125,7 +125,7 @@ describe("QA Tests", () => {
       });
 
     expect(res.statusCode).toBe(400);
-    expect(res.body).toBe("Invalid QA Data");
+    expect(res.body).toBe("Invalid Input Field");
   });
 
   test("Existing QA", async () => {
@@ -146,7 +146,13 @@ describe("QA Tests", () => {
         id: "00000000",
         question: "Test",
         question_included: false,
-        intents: ["Testing"],
+        intents: [
+          {
+            value: "cheese",
+            included: false,
+            children: ["00000001", "00000010"],
+          },
+        ],
       });
 
     expect(res.statusCode).toBe(400);
@@ -169,9 +175,7 @@ describe("QA Tests", () => {
 
   test("Get by ID", async () => {
     await request(app).post("/qa/add").send(qa);
-    const res = await request(app).get("/qa/").send({
-      id: "00000000",
-    });
+    const res = await await request(app).get("/qa/").query({ id: "00000000" });
 
     expect(res.statusCode).toBe(200);
     expect(res.body.id).toBe(qa.id);

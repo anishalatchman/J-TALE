@@ -11,10 +11,20 @@ async function uploadFlow(flow) {
 }
 
 // Checks if flowName exists and is a string and uploads flow
-export async function flowUploader(flowName, file) {
+export async function flowUploader(
+  flowName,
+  flowStartingQuestions,
+  flowAllQuestions,
+  transcriptID
+) {
   if (typeof flowName === "string" && flowName !== "") {
     // Defines new obj flow in form required by mongoose schemas
-    const flow = { name: flowName, questions: file };
+    const flow = {
+      name: flowName,
+      questions: flowStartingQuestions,
+      allQuestions: flowAllQuestions,
+      transcriptID: transcriptID,
+    };
     const res = await uploadFlow(flow);
     return res;
   }
