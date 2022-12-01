@@ -175,9 +175,7 @@ describe("QA Tests", () => {
 
   test("Get by ID", async () => {
     await request(app).post("/qa/add").send(qa);
-    const res = await request(app).get("/qa/").send({
-      id: "00000000",
-    });
+    const res = await await request(app).get("/qa/").query({ id: "00000000" });
 
     expect(res.statusCode).toBe(200);
     expect(res.body.id).toBe(qa.id);
