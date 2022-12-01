@@ -23,6 +23,10 @@
   @apply text-gray text-left ml-4 mb-4;
 }
 
+.scroller{
+  @apply ml-8;
+}
+
 .speaker1 {
   @apply text-gray text-left ml-4 mt-12;
 }
