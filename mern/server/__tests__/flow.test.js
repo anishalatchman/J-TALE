@@ -5,6 +5,8 @@ import app from "../server";
 const flow = {
   name: "Testing",
   questions: ["00000000", "00000001"],
+  allQuestions: ["00000000", "00000001", "00000010", "00000011"],
+  transcriptID: "551137c2f9e1fac808a5f572",
 };
 
 describe("Flow Tests", () => {
@@ -19,7 +21,48 @@ describe("Flow Tests", () => {
     const res = await request(app)
       .post("/flow/add")
       .send({
-        questions: ["Testing"],
+        questions: ["00000000", "00000001"],
+        allQuestions: ["00000000", "00000001", "00000010", "00000011"],
+        transcriptID: "551137c2f9e1fac808a5f572",
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body).toBe("Missing Input Field");
+  });
+
+  test("Flow Missing Starting Questions", async () => {
+    const res = await request(app)
+      .post("/flow/add")
+      .send({
+        name: "Testing",
+        allQuestions: ["00000000", "00000001", "00000010", "00000011"],
+        transcriptID: "551137c2f9e1fac808a5f572",
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body).toBe("Missing Input Field");
+  });
+
+  test("Flow Missing All Questions", async () => {
+    const res = await request(app)
+      .post("/flow/add")
+      .send({
+        name: "Testing",
+        questions: ["00000000", "00000001"],
+        transcriptID: "551137c2f9e1fac808a5f572",
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body).toBe("Missing Input Field");
+  });
+
+  test("Flow Missing Transcript ID", async () => {
+    const res = await request(app)
+      .post("/flow/add")
+      .send({
+        name: "Testing",
+        questions: ["00000000", "00000001"],
+        allQuestions: ["00000000", "00000001", "00000010", "00000011"],
       });
 
     expect(res.statusCode).toBe(400);
@@ -31,19 +74,51 @@ describe("Flow Tests", () => {
       .post("/flow/add")
       .send({
         name: 1234,
-        questions: ["testing"],
+        questions: ["00000000", "00000001"],
+        allQuestions: ["00000000", "00000001", "00000010", "00000011"],
+        transcriptID: "551137c2f9e1fac808a5f572",
       });
 
     expect(res.statusCode).toBe(400);
     expect(res.body).toBe("Invalid Input Field");
   });
 
-  test("Invalid Questions", async () => {
+  test("Invalid Starting Questions", async () => {
     const res = await request(app)
       .post("/flow/add")
       .send({
-        name: "test",
+        name: "Testing",
         questions: [1234],
+        allQuestions: ["00000000", "00000001", "00000010", "00000011"],
+        transcriptID: "551137c2f9e1fac808a5f572",
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body).toBe("Invalid Input Field");
+  });
+
+  test("Invalid Questions List", async () => {
+    const res = await request(app)
+      .post("/flow/add")
+      .send({
+        name: "Testing",
+        questions: ["00000000", "00000001"],
+        allQuestions: [1234],
+        transcriptID: "551137c2f9e1fac808a5f572",
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body).toBe("Invalid Input Field");
+  });
+
+  test("Invalid TranscriptID", async () => {
+    const res = await request(app)
+      .post("/flow/add")
+      .send({
+        name: "Testing",
+        questions: ["00000000", "00000001"],
+        allQuestions: ["00000000", "00000001", "00000010", "00000011"],
+        transcriptID: 1234,
       });
 
     expect(res.statusCode).toBe(400);
@@ -84,6 +159,8 @@ describe("Flow Tests", () => {
         name: "Testing",
         questions: ["00000000", "00000001"],
         current_question: "00000000",
+        allQuestions: ["00000000", "00000001", "00000010", "00000011"],
+        transcriptID: "551137c2f9e1fac808a5f572",
       });
 
     expect(res.statusCode).toBe(200);
@@ -97,20 +174,50 @@ describe("Flow Tests", () => {
       .put(`/flow/update/${response.body._id}`)
       .send({
         questions: ["00000000", "00000001"],
-        current_question: "00000000",
+        allQuestions: ["00000000", "00000001", "00000010", "00000011"],
+        transcriptID: "551137c2f9e1fac808a5f572",
       });
 
     expect(res.statusCode).toBe(400);
     expect(res.body).toBe("Missing Input Field");
   });
 
-  test("Invalid Update Missing Questions", async () => {
+  test("Invalid Update Missing Starting Questions", async () => {
     const response = await request(app).post("/flow/add").send(flow);
     const res = await request(app)
       .put(`/flow/update/${response.body._id}`)
       .send({
-        name: "test",
-        current_question: "00000000",
+        name: "Testing",
+        allQuestions: ["00000000", "00000001", "00000010", "00000011"],
+        transcriptID: "551137c2f9e1fac808a5f572",
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body).toBe("Missing Input Field");
+  });
+
+  test("Invalid Update Missing All Questions", async () => {
+    const response = await request(app).post("/flow/add").send(flow);
+    const res = await request(app)
+      .put(`/flow/update/${response.body._id}`)
+      .send({
+        name: "Testing",
+        questions: ["00000000", "00000001"],
+        transcriptID: "551137c2f9e1fac808a5f572",
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body).toBe("Missing Input Field");
+  });
+
+  test("Invalid Update Missing TranscriptID", async () => {
+    const response = await request(app).post("/flow/add").send(flow);
+    const res = await request(app)
+      .put(`/flow/update/${response.body._id}`)
+      .send({
+        name: "Testing",
+        questions: ["00000000", "00000001"],
+        allQuestions: ["00000000", "00000001", "00000010", "00000011"],
       });
 
     expect(res.statusCode).toBe(400);
