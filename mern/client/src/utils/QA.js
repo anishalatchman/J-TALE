@@ -1,22 +1,31 @@
 import axios from "axios";
 
-const allQuestionList = [];
+var allQuestionList = [];
 
 export default class Parser {
   parse(transcript) {
     const startingList = [];
 
+    if (allQuestionList !== []) {
+      allQuestionList = [];
+    }
+
+    console.log(transcript.length, "this is the transcript length");
+
     for (var i = 0; i < transcript.length; i++) {
+      console.log(transcript[i], "This is the " + i + " list");
       this.createQAs(transcript[i]);
       startingList.push(this.initialQAID(transcript[i]));
     }
-
+    console.log(allQuestionList);
     return { startingList, allQuestionList };
   }
 
   //Loops through all questions in the JSON object qlist, making them into objects in the databse
   async createQAs(qlist) {
     //qlist is a list of JSON objects that exists as questions/answer pairs
+
+    console.log(qlist);
     for (var i = 0; i < qlist.length; i++) {
       try {
         await axios.post("http://localhost:5000/qa/add", qlist[i]);

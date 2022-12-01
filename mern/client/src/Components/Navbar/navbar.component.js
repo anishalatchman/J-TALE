@@ -12,8 +12,7 @@ export default function Navbar() {
   // define context var to show/hide nav buttons
   const [sessionID, setSessionID] = useContext(SessionContext);
   const [currQA] = useContext(qaContext);
-  const [currFlow, , , setFlowStartingQuestions, , setFlowAllQuestions] =
-    useContext(FlowContext);
+  const [currFlow, , , , ,] = useContext(FlowContext);
 
   // Create session id var and setter function
   // const sessionid = "12345";
@@ -39,8 +38,6 @@ export default function Navbar() {
         alert("Successfully Deleted");
       }
     });
-    setFlowAllQuestions(null);
-    setFlowStartingQuestions(null);
   };
 
   return (

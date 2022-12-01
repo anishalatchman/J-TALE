@@ -83,8 +83,6 @@ function UploadTranscript() {
       //If response is successful, change to next page and show the additional navbar info
       if (response.status) {
         PageChange("/startingintent");
-        console.log(response.res.data);
-        console.log(response.res?.data._id, "RESPONSE ID");
         setSessionID(response.res?.data._id);
         setFlowState(response.res?.data);
       } else {
@@ -112,7 +110,6 @@ function UploadTranscript() {
     try {
       const parse = new Parser();
       const res = parse.parse(questions);
-      console.log(res.allQuestionList);
       setFlowStartingQuestions(res.startingList);
       setFlowAllQuestions(res.allQuestionList);
     } catch (e) {
@@ -153,6 +150,7 @@ function UploadTranscript() {
           buttonType={files && files.questions ? "blue" : "disabled"}
           onClick={() => {
             uploadTranscript(fileName, files);
+            console.log(files.questions);
             parseQAs(files.questions);
           }}
           disabled={files && files.questions ? false : true}
@@ -163,10 +161,6 @@ function UploadTranscript() {
           onClick={() => {
             PageChange("/");
             setSessionID();
-            // Check if there is a transcript uploaded, if yes delete from DB
-            if (transcriptID) {
-              deleteFile(transcriptID);
-            }
           }}
           disabled={false}
           text={"Go Back"}
