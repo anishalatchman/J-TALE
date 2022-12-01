@@ -27,13 +27,19 @@ export default function Navbar() {
 
   // This function is called when user clicks save button and saves the current question
   const trySave = (currFlow, currQA, sessionID) => {
-    if (!saveQA(currFlow, currQA, sessionID)) {
-      alert("Unable to save the current page");
-    } else if (!saveFlow(currQA, sessionID)) {
-      alert("Save FAILED");
-    } else {
-      alert("Saved Successfully");
-    }
+    saveQA(currFlow, currQA, sessionID).then((res) => {
+      if (!res) {
+        alert("Unable to Delete");
+      }
+    });
+
+    saveFlow(currFlow, sessionID).then((res) => {
+      if (!res) {
+        alert("Unable to Delete");
+      }
+    });
+
+    alert("Saved Successfully");
   };
 
   // This function is called when user clicks deletes and deletes the flow

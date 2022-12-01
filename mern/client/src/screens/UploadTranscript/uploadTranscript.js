@@ -150,7 +150,7 @@ function UploadTranscript() {
           buttonType={files && files.questions ? "blue" : "disabled"}
           onClick={() => {
             uploadTranscript(fileName, files);
-            console.log(files.questions);
+
             parseQAs(files.questions);
           }}
           disabled={files && files.questions ? false : true}

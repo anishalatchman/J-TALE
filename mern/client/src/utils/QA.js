@@ -10,14 +10,11 @@ export default class Parser {
       allQuestionList = [];
     }
 
-    console.log(transcript.length, "this is the transcript length");
-
     for (var i = 0; i < transcript.length; i++) {
-      console.log(transcript[i], "This is the " + i + " list");
       this.createQAs(transcript[i]);
       startingList.push(this.initialQAID(transcript[i]));
     }
-    console.log(allQuestionList);
+
     return { startingList, allQuestionList };
   }
 
@@ -25,7 +22,6 @@ export default class Parser {
   async createQAs(qlist) {
     //qlist is a list of JSON objects that exists as questions/answer pairs
 
-    console.log(qlist);
     for (var i = 0; i < qlist.length; i++) {
       try {
         await axios.post("http://localhost:5000/qa/add", qlist[i]);

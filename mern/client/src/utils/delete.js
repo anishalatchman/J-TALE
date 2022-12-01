@@ -20,7 +20,9 @@ export async function deleteFlow(flow, sessionID) {
   // Delete the flow itself
   var flowDeleted = false;
   await removeFlow(sessionID).then((response) => {
-    flowDeleted = response;
+    if (response.status === 200) {
+      FlowDeleted = true;
+    }
   });
 
   return transcriptDeleted && qaDeleted && flowDeleted;
