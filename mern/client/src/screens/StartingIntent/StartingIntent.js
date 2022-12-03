@@ -56,6 +56,9 @@ function StartingIntent() {
       // Then make an call to DB to update
       setCurrQuestions(questions.find((x) => x.question === speech));
     } else {
+      // Change the intent_included to be true for all selected intents
+      // Then make call to DB
+
       const intent = currQuestions.intents.find((x) => x.value === speech);
       try {
         const lst = [];
