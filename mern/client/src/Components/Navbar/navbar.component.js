@@ -27,7 +27,6 @@ export default function Navbar() {
 
   // This function is called when user clicks save button and saves the current question
   const trySave = (currFlow, currQA, sessionID) => {
-    console.log(currQA);
     saveQA(currQA).then((res) => {
       if (!res) {
         alert("Unable to Delete");
