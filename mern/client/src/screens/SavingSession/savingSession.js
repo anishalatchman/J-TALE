@@ -26,7 +26,7 @@ export default function SavingSession() {
   useEffect(() => {
     const validEmailRegex =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if (!email.match(validEmailRegex)) {
+    if (email !== "" && !email.match(validEmailRegex)) {
       setValidEmail(false);
     } else {
       setValidEmail(true);
@@ -87,13 +87,13 @@ export default function SavingSession() {
                 title="Please Enter Your Email"
                 body=""
                 value={email}
-                valid={validEmail}
+                valid={email === "" && validEmail}
                 onChange={handleEmailNameChange}
                 onClose={() => {
                   setShowModal(false);
                 }}
                 onSubmit={() => {
-                  if (validEmail) {
+                  if (email !== "" && validEmail) {
                     sendMail();
                     setShowModal(false);
                   }
