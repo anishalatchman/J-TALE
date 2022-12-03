@@ -65,7 +65,7 @@ function StartingIntent() {
       ]);
 
       const temp = [];
-      // Find the currQuestions in allQuestions and update
+      // Goes through all questions and updates the list with the intents of the current question to be true
       allQuestions.forEach((x) => {
         if (x.id === currQA.id) {
           temp.push(currQA);
