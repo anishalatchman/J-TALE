@@ -26,4 +26,14 @@ export default class QA {
       console.log(e.response.data);
     }
   }
+
+  // This function updates the QA object in the DB
+  async updateQA(qa) {
+    try {
+      const res = await axios.put("http://localhost:5000/qa/update", qa);
+      return res;
+    } catch (e) {
+      console.log(e.response.data);
+    }
+  }
 }

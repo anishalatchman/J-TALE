@@ -4,12 +4,16 @@ import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import IntentButtons from "../../Components/IntentButtons/IntentButtons";
 import Scrollbar from "../../Components/TranscriptScroller/transcript-scroller.component";
+import QA from "../../utils/QA";
+import { qaContext } from "../../Contexts/qaProvider";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
 import { IntentContext } from "../../Contexts/intentsProvider";
 import { QuestionContext } from "../../Contexts/questionProvider";
 import { ScrollerContext } from "../../Contexts/scrollerProvider";
 
 function StartingIntent() {
+  // Defining contexts and usestates
+  const [, setcurrQAState] = useContext(qaContext);
   const [currSpeaker, setSpeaker, prevSpeaker, setPrevSpeaker] =
     useContext(SpeakerContext);
   const [intentState] = useContext(IntentContext);
@@ -20,11 +24,14 @@ function StartingIntent() {
     nextQuestions,
     setNextQuestions,
     allQuestions,
-    ,
+    setAllQuestions,
     prevPrompt,
     setPrevPrompt,
   ] = useContext(QuestionContext);
   const [speechList, setSpeechList] = useContext(ScrollerContext);
+
+  // Creating an instance of the QA class
+  const QAdata = new QA();
 
   //Boolean for whether intents are being selected
   const [isIntents, setIsIntents] = useState(false);
@@ -42,15 +49,9 @@ function StartingIntent() {
     //Speech is used as an identifier for selected question/intent
     const speech = getSpeech();
 
-    // Identify whether we are on a questions or intents
-    // If questions -> Update current QA context with seelcted QA.
-
     // This if statement differentiates between whether we are choosing questions or intents
     // If !buttons, we are choosing questions and if buttons we are choosing intents
     if (isIntents) {
-      // Change the intent_included to be true for all selected intents
-      // Then make call to DB
-
       const intent = currQuestion.intents.find((x) => x.value === speech);
       const lst = findNextQuestions(intent);
       setNextQuestions(lst);
@@ -63,12 +64,41 @@ function StartingIntent() {
           optionsLength: currQuestion.intents.length,
         },
       ]);
+
+      const temp = [];
+      // Find the currQuestions in allQuestions and update
+      allQuestions.forEach((x) => {
+        if (x.id === currQuestion.id) {
+          temp.push(currQuestion);
+        } else {
+          temp.push(x);
+        }
+      });
+      setAllQuestions(temp);
+
+      // Then make call to DB
+      setcurrQAState(currQuestion);
+      QAdata.updateQA(currQuestion);
     } else {
-      // First find the QA object for list allQuestions
-      // Should be changing currQA and then change the question_included value to be true
-      // Then make an call to DB to update
+      // Finds the QA from list of next questions
       const nextQA = nextQuestions.find((x) => x.question === speech);
+
       setCurrQuestion(nextQA); //Setting current question object
+      setcurrQAState(nextQA);
+
+      const temp = [];
+      // Find the currQuestions in allQuestions and update the question included boolean
+      allQuestions.forEach((x) => {
+        if (x.id === currQuestion) {
+          temp.push(currQuestion);
+        }
+        temp.push(x);
+      });
+      setAllQuestions(temp);
+
+      // Makes Call to DB to update QA
+      QAdata.updateQA(nextQA);
+
       setSpeechList([
         ...speechList,
         {
