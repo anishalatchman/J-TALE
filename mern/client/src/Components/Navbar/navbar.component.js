@@ -36,10 +36,12 @@ export default function Navbar() {
     saveFlow(currFlow, sessionID).then((res) => {
       if (!res) {
         alert("Unable to Delete");
+        return;
       }
     });
 
     alert("Saved Successfully");
+    PageChange("/save");
   };
 
   // This function is called when user clicks deletes and deletes the flow

@@ -18,7 +18,7 @@ function StartingIntent() {
   // const PageChange = (url) => {
   //   Navigate(url);
   // };
-  const [currIntents, setCurrIntents] = useState();
+  const [currQuestions, setCurrQuestions] = useState();
   const [
     ,
     ,
@@ -44,10 +44,22 @@ function StartingIntent() {
   const handleQAChange = () => {
     //Gets the speech of the button that is selected
     const speech = Object.keys(intentState).find((x) => intentState[x] === 2);
+
+    // Identify whether we are on a questions or intents
+    // If questions -> Update current QA context with seelcted QA.
+
+    // This if statement differentiates between whether we are choosing questions or intents
+    // If !buttons, we are choosing questions and if buttons we are choosing intents
     if (!buttons) {
-      setCurrIntents(questions.find((x) => x.question === speech));
+      // First find the QA object for list allQuestions
+      // Should be changing currQA and then change the question_included value to be true
+      // Then make an call to DB to update
+      setCurrQuestions(questions.find((x) => x.question === speech));
     } else {
-      const intent = currIntents.intents.find((x) => x.value === speech);
+      // Change the intent_included to be true for all selected intents
+      // Then make call to DB
+
+      const intent = currQuestions.intents.find((x) => x.value === speech);
       try {
         const lst = [];
         allQuestions.forEach((x) => {
@@ -60,6 +72,7 @@ function StartingIntent() {
         alert("ERROR GETTING QUESTIONS. PLEASE TRY AGAIN");
       }
     }
+
     // After successful change resets intentState values to 0
     Object.keys(intentState).forEach((key) => {
       intentState[key] = 0;
@@ -78,7 +91,7 @@ function StartingIntent() {
         <h1 className={styles.intentTitle}>{prevPrompt}</h1>
 
         <div>
-          {questions.length === 0 || currIntents?.intents?.length === 0 ? (
+          {questions.length === 0 || currQuestions?.intents?.length === 0 ? (
             <>
               <h3 className={styles.completed}>
                 Your flow has been completed! Click the transcript to jump back.
@@ -89,7 +102,7 @@ function StartingIntent() {
               <h4 className={styles.speaker2}>{currSpeaker}</h4>
 
               <IntentButtons
-                intents={buttons ? currIntents.intents : questions}
+                intents={buttons ? currQuestions.intents : questions}
                 user={buttons}
               />
               <div>
