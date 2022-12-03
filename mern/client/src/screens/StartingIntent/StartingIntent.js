@@ -13,11 +13,10 @@ import { ScrollerContext } from "../../Contexts/scrollerProvider";
 
 function StartingIntent() {
   // Defining contexts and usestates
-  const [, setcurrQAState] = useContext(qaContext);
+  const [currQA, setcurrQAState] = useContext(qaContext);
   const [currSpeaker, setSpeaker, prevSpeaker, setPrevSpeaker] =
     useContext(SpeakerContext);
   const [intentState] = useContext(IntentContext);
-  const [currQuestion, setCurrQuestion] = useState();
   const [
     ,
     ,
@@ -52,7 +51,7 @@ function StartingIntent() {
     // This if statement differentiates between whether we are choosing questions or intents
     // If !buttons, we are choosing questions and if buttons we are choosing intents
     if (isIntents) {
-      const intent = currQuestion.intents.find((x) => x.value === speech);
+      const intent = currQA.intents.find((x) => x.value === speech);
       const lst = findNextQuestions(intent);
       setNextQuestions(lst);
       setSpeechList([
@@ -61,15 +60,15 @@ function StartingIntent() {
           source: prevSpeaker,
           text: speech,
           question: intent,
-          optionsLength: currQuestion.intents.length,
+          optionsLength: currQA.intents.length,
         },
       ]);
 
       const temp = [];
       // Find the currQuestions in allQuestions and update
       allQuestions.forEach((x) => {
-        if (x.id === currQuestion.id) {
-          temp.push(currQuestion);
+        if (x.id === currQA.id) {
+          temp.push(currQA);
         } else {
           temp.push(x);
         }
@@ -77,20 +76,19 @@ function StartingIntent() {
       setAllQuestions(temp);
 
       // Then make call to DB
-      setcurrQAState(currQuestion);
-      QAdata.updateQA(currQuestion);
+      setcurrQAState(currQA);
+      QAdata.updateQA(currQA);
     } else {
       // Finds the QA from list of next questions
       const nextQA = nextQuestions.find((x) => x.question === speech);
 
-      setCurrQuestion(nextQA); //Setting current question object
-      setcurrQAState(nextQA);
+      setcurrQAState(nextQA); //Setting current question object
 
       const temp = [];
       // Find the currQuestions in allQuestions and update the question included boolean
       allQuestions.forEach((x) => {
-        if (x.id === currQuestion) {
-          temp.push(currQuestion);
+        if (x.id === currQA) {
+          temp.push(currQA);
         }
         temp.push(x);
       });
@@ -144,7 +142,7 @@ function StartingIntent() {
         <h1 className={styles.intentTitle}>{prevPrompt}</h1>
 
         <div>
-          {nextQuestions.length === 0 || currQuestion?.intents?.length === 0 ? (
+          {nextQuestions.length === 0 || currQA?.intents?.length === 0 ? (
             <>
               <h3 className={styles.completed}>
                 Your flow has been completed! Click the transcript to jump back.
@@ -155,7 +153,7 @@ function StartingIntent() {
               <h4 className={styles.speaker2}>{currSpeaker}</h4>
 
               <IntentButtons
-                intents={isIntents ? currQuestion.intents : nextQuestions}
+                intents={isIntents ? currQA.intents : nextQuestions}
                 user={isIntents}
               />
               <div>

@@ -31,7 +31,6 @@ export default function SavingSession() {
     } else {
       setValidEmail(true);
     }
-    console.log(validEmail && email !== "");
   }, [email, validEmail]);
 
   const sendMail = () => {
