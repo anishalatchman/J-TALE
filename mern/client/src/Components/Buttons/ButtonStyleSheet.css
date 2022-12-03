@@ -31,6 +31,10 @@
   @apply min-w-15 border-2 border-voiceflow-blue m-2 rounded-full p-3 pl-6 pr-6 text-voiceflow-blue bg-white font-nunito font-bold;
 }
 
+.white:active {
+  @apply text-white bg-voiceflow-blue;
+}
+
 .intent0 {
   @apply h-24 border-2 border-voiceflow-blue m-2 rounded-lg p-3 pl-6 pr-6 text-voiceflow-blue font-nunito font-bold;
   width: 330px;

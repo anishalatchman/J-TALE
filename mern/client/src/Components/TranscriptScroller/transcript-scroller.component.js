@@ -1,158 +1,37 @@
 import React, { useContext } from "react";
 import GenericButton from "../Buttons/GenericButton";
-import getFlowData from "../../utils/export";
-import "./transcript-scroller.component.css";
-import { FlowContext } from "../../Contexts/flow.Provider";
+import styles from "./transcript-scroller.component.module.css";
+import { ScrollerContext } from "../../Contexts/scrollerProvider";
 
 export default function Scrollbar() {
-  const [, , , , flowAllQuestions, ,] = useContext(FlowContext);
-  // Exports the Current Flow the User is on
-  const exportFlow = () => {
-    // Creates a JSON object the is a tree of the creator's flor
-
-    const getData = new getFlowData();
-    const lst = getData.getFlowData(flowAllQuestions);
-
-    console.log(lst);
-
-    console.log(typeof lst, "list");
-    console.log(lst.length, "length");
-    console.log(lst[0], "First index");
-
-    // Downloads the JSON file
-    const fileName = "flow.json";
-    const data = new Blob([JSON.stringify(lst)], {
-      type: "text/json",
-    });
-    const jsonURL = window.URL.createObjectURL(data);
-    const link = document.createElement("a");
-    document.body.appendChild(link);
-    link.href = jsonURL;
-    link.setAttribute("download", fileName);
-    link.click();
-    document.body.removeChild(link);
-  };
-
+  const [speechList] = useContext(ScrollerContext);
   return (
-    <div className="scroller">
-      <h1 className="scrollerTitle">Transcript</h1>
+    <div className={styles.scroller}>
+      <div className={styles.transcriptContainer}>
+        <div className={styles.transcriptHeader}>
+          <h1 className={styles.scrollerTitle}>Transcript</h1>
+        </div>
+        {speechList.length === 0 ? (
+          <></>
+        ) : (
+          <div className={styles.transcriptText}>
+            {speechList.map((speech) => {
+              return (
+                <p key={speech.text} className={styles.bolded}>
+                  {speech.source + " " + speech.text}{" "}
+                </p>
+              );
+            })}
 
-      <p>This is where the text of the transcript will be </p>
-      <p>Bot: What can I help you with today?</p>
-
-      <br></br>
-
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-      <p>
-        Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{" "}
-      </p>
-
-      <div className="buttonContainer">
+            <p className="indent">3 intents available</p>
+            <br></br>
+          </div>
+        )}
+      </div>
+      <div className={styles.buttonContainer}>
         <GenericButton
-          buttonType="blue"
-          // class="btn-bot"
-          onClick={exportFlow}
+          buttonType="white"
+          onClick={() => null}
           disabled={false}
           text={"Export Transcript"}
         />
