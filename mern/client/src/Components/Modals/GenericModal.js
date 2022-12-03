@@ -13,6 +13,7 @@ import GenericButton from "../Buttons/GenericButton";
 /** @prop {function} [onChange] : the function to be executed when changing input value on form*/
 /** @prop {function} [onClose] : the function to be executed when CANCEL button is pressed*/
 /** @prop {fuction} [onSubmit] : the function to be executed when CONTINUE button is pressed*/
+/** @prop {boolean} [valid] : whether the inputted text is valid */
 
 const Modal = (props) => {
   if (!props.show) {
@@ -27,6 +28,11 @@ const Modal = (props) => {
         </div>
         <div className="modal-body">
           <form>
+            {props.valid ? (
+              <></>
+            ) : (
+              <div className="modal-alert"> Please Enter a Valid Email </div>
+            )}
             <input
               className="modal-input"
               type="text"
