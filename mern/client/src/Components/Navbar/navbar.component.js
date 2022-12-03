@@ -5,7 +5,7 @@ import styles from "./navbar.module.css";
 import GenericButton from "../Buttons/GenericButton";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import { qaContext } from "../../Contexts/qaProvider";
-import { FlowContext } from "../../Contexts/flow.Provider";
+import { FlowContext } from "../../Contexts/flowProvider";
 import { deleteFlow } from "../../utils/delete";
 import { saveFlow, saveQA } from "../../utils/save";
 

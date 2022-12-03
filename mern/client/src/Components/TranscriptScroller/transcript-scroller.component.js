@@ -46,13 +46,17 @@ export default function Scrollbar() {
           <div className={styles.transcriptText}>
             {speechList.map((speech) => {
               return (
-                <p key={speech.text} className={styles.bolded}>
-                  {speech.source + " " + speech.text}{" "}
-                </p>
+                <>
+                  <p key={speech.text} className={styles.bolded}>
+                    {speech.source + " " + speech.text}{" "}
+                    <p className={styles.indent}>
+                      {speech.optionsLength} intents available
+                    </p>
+                  </p>
+                </>
               );
             })}
 
-            <p className="indent">3 intents available</p>
             <br></br>
           </div>
         )}

@@ -3,7 +3,6 @@ import styles from "./StartingIntent.module.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import IntentButtons from "../../Components/IntentButtons/IntentButtons";
-// import { useNavigate } from "react-router-dom";
 import Scrollbar from "../../Components/TranscriptScroller/transcript-scroller.component";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
 import { IntentContext } from "../../Contexts/intentsProvider";
@@ -14,16 +13,12 @@ function StartingIntent() {
   const [currSpeaker, setSpeaker, prevSpeaker, setPrevSpeaker] =
     useContext(SpeakerContext);
   const [intentState] = useContext(IntentContext);
-  // const Navigate = useNavigate();
-  // const PageChange = (url) => {
-  //   Navigate(url);
-  // };
-  const [currQuestions, setCurrQuestions] = useState();
+  const [currQuestion, setCurrQuestion] = useState();
   const [
     ,
     ,
-    questions,
-    setQuestions,
+    nextQuestions,
+    setNextQuestions,
     allQuestions,
     ,
     prevPrompt,
@@ -31,54 +26,82 @@ function StartingIntent() {
   ] = useContext(QuestionContext);
   const [speechList, setSpeechList] = useContext(ScrollerContext);
 
-  const [buttons, setButtons] = useState(false);
+  //Boolean for whether intents are being selected
+  const [isIntents, setIsIntents] = useState(false);
 
+  //Changes the states and identifiers of who's speech is being selected
   const handleSpeakerChange = () => {
     const prev = prevSpeaker;
     const curr = currSpeaker;
     setPrevSpeaker(curr);
     setSpeaker(prev);
-    setButtons(!buttons);
+    setIsIntents(!isIntents);
   };
 
   const handleQAChange = () => {
-    //Gets the speech of the button that is selected
-    const speech = Object.keys(intentState).find((x) => intentState[x] === 2);
+    //Speech is used as an identifier for selected question/intent
+    const speech = getSpeech();
 
     // Identify whether we are on a questions or intents
     // If questions -> Update current QA context with seelcted QA.
 
     // This if statement differentiates between whether we are choosing questions or intents
     // If !buttons, we are choosing questions and if buttons we are choosing intents
-    if (!buttons) {
-      // First find the QA object for list allQuestions
-      // Should be changing currQA and then change the question_included value to be true
-      // Then make an call to DB to update
-      setCurrQuestions(questions.find((x) => x.question === speech));
-    } else {
+    if (isIntents) {
       // Change the intent_included to be true for all selected intents
       // Then make call to DB
 
-      const intent = currQuestions.intents.find((x) => x.value === speech);
-      try {
-        const lst = [];
-        allQuestions.forEach((x) => {
-          if (intent.children.includes(x.id)) {
-            lst.push(x);
-          }
-        });
-        setQuestions(lst);
-      } catch (e) {
-        alert("ERROR GETTING QUESTIONS. PLEASE TRY AGAIN");
-      }
+      const intent = currQuestion.intents.find((x) => x.value === speech);
+      const lst = findNextQuestions(intent);
+      setNextQuestions(lst);
+      setSpeechList([
+        ...speechList,
+        {
+          source: prevSpeaker,
+          text: speech,
+          question: intent,
+          optionsLength: currQuestion.intents.length,
+        },
+      ]);
+    } else {
+      // First find the QA object for list allQuestions
+      // Should be changing currQA and then change the question_included value to be true
+      // Then make an call to DB to update
+      const nextQA = nextQuestions.find((x) => x.question === speech);
+      setCurrQuestion(nextQA); //Setting current question object
+      setSpeechList([
+        ...speechList,
+        {
+          source: prevSpeaker,
+          text: speech,
+          question: nextQA,
+          optionsLength: nextQuestions.length,
+        },
+      ]);
     }
 
-    // After successful change resets intentState values to 0
+    // Disables continue button by resets intentState values to 0
     Object.keys(intentState).forEach((key) => {
       intentState[key] = 0;
     });
+  };
+
+  //Find the list of next questions, depending on the selected intent
+  const findNextQuestions = (intent) => {
+    const lst = [];
+    allQuestions.forEach((x) => {
+      if (intent.children.includes(x.id)) {
+        lst.push(x);
+      }
+    });
+    return lst;
+  };
+
+  //Gets the speech of the selected button
+  const getSpeech = () => {
+    const speech = Object.keys(intentState).find((x) => intentState[x] === 2);
     setPrevPrompt(speech);
-    setSpeechList([...speechList, { source: currSpeaker, text: speech }]);
+    return speech;
   };
 
   return (
@@ -91,7 +114,7 @@ function StartingIntent() {
         <h1 className={styles.intentTitle}>{prevPrompt}</h1>
 
         <div>
-          {questions.length === 0 || currQuestions?.intents?.length === 0 ? (
+          {nextQuestions.length === 0 || currQuestion?.intents?.length === 0 ? (
             <>
               <h3 className={styles.completed}>
                 Your flow has been completed! Click the transcript to jump back.
@@ -102,8 +125,8 @@ function StartingIntent() {
               <h4 className={styles.speaker2}>{currSpeaker}</h4>
 
               <IntentButtons
-                intents={buttons ? currQuestions.intents : questions}
-                user={buttons}
+                intents={isIntents ? currQuestion.intents : nextQuestions}
+                user={isIntents}
               />
               <div>
                 <h4 className={styles.instructions}>

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import Modal from "../../Components/Modals/GenericModal";
 import emailjs from "emailjs-com";
-import { FlowContext } from "../../Contexts/flow.Provider";
+import { FlowContext } from "../../Contexts/flowProvider";
 
 export default function SavingSession() {
   const [currFlow, , , , , ,] = useContext(FlowContext);
