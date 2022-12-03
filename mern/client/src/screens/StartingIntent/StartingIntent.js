@@ -80,7 +80,7 @@ function StartingIntent() {
       ]);
     }
 
-    // After successful change resets intentState values to 0
+    // Disables continue button by resets intentState values to 0
     Object.keys(intentState).forEach((key) => {
       intentState[key] = 0;
     });
