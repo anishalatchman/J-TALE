@@ -5,7 +5,7 @@ export const QuestionContext = React.createContext();
 export default function QuestionProvider({ children }) {
   // stores the id of the set of questions to pass onto the following intent page
   const [QuestionState, setQuestionState] = React.useState([]);
-  const [questions, setQuestions] = React.useState([]);
+  const [nextQuestions, setNextQuestions] = React.useState([]);
   const [allQuestions, setAllQuestions] = React.useState([]);
   const [prevPrompt, setPrevPrompt] = React.useState(
     '"How can I help you today?"'
@@ -16,8 +16,8 @@ export default function QuestionProvider({ children }) {
       value={[
         QuestionState,
         setQuestionState,
-        questions,
-        setQuestions,
+        nextQuestions,
+        setNextQuestions,
         allQuestions,
         setAllQuestions,
         prevPrompt,

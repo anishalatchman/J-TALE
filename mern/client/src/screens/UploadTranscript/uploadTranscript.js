@@ -8,7 +8,7 @@ import { transcriptJSONConverter, deleteFile } from "../../utils/transcript";
 import { flowUploader } from "../../utils/startScreen";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import Parser from "../../utils/parser";
-import { FlowContext } from "../../Contexts/flow.Provider";
+import { FlowContext } from "../../Contexts/flowProvider";
 import { QuestionContext } from "../../Contexts/questionProvider";
 import QA from "../../utils/QA";
 
@@ -24,7 +24,8 @@ function UploadTranscript() {
   const [files, setFiles] = useState();
   const [, setSessionID, transcriptID, setTranscriptID] =
     useContext(SessionContext);
-  const [, , , setQuestions, , setAllQuestions] = useContext(QuestionContext);
+  const [, , , setNextQuestions, , setAllQuestions] =
+    useContext(QuestionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
   const [
@@ -125,7 +126,7 @@ function UploadTranscript() {
   };
 
   const populatingQuestionContet = async () => {
-    await setQuestions(getQAs(flowStartingQuestions));
+    await setNextQuestions(getQAs(flowStartingQuestions));
     await setAllQuestions(getQAs(flowAllQuestions));
   };
 

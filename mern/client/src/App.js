@@ -12,7 +12,7 @@ import SessionProvider from "./Contexts/sessionProvider";
 import SpeakerProvider from "./Contexts/speakerProvider";
 import IntentProvider from "./Contexts/intentsProvider";
 import QAProvider from "./Contexts/qaProvider";
-import FlowProvider from "./Contexts/flow.Provider";
+import FlowProvider from "./Contexts/flowProvider";
 import QuestionProvider from "./Contexts/questionProvider";
 import ScrollerProvider from "./Contexts/scrollerProvider";
 
