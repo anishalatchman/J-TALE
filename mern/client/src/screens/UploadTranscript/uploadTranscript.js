@@ -88,7 +88,7 @@ function UploadTranscript() {
         setSessionID(response.res?.data._id);
         setFlowState(response.res?.data);
       } else {
-        alert("Please enter a valid flow name.");
+        alert("Error");
       }
     });
   };
@@ -182,6 +182,7 @@ function UploadTranscript() {
             title="Name your flow to begin"
             body="Enter your flow name"
             value={flowName.name}
+            valid={true}
             onChange={handleFlowNameChange}
             onClose={() => {
               setShowModal(false);
