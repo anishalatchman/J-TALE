@@ -1,3 +1,4 @@
+// Sorts through list of all questiosn and finds questions with included property
 export default function GetFlowData(allQuestions) {
   const lst = [];
 
@@ -12,6 +13,7 @@ export default function GetFlowData(allQuestions) {
   return lst;
 }
 
+// Sorts through question.intents and returns object with intent.included property to be true
 function sortQA(qa) {
   const intents = [];
   for (var i = 0; i < qa.intents.length; i++) {
