@@ -2,6 +2,7 @@ export default function GetFlowData(allQuestions) {
   const lst = [];
 
   console.log(allQuestions);
+
   for (var i = 0; i < allQuestions.length; i++) {
     if (allQuestions[i].question_included === true) {
       lst.push(sortQA(allQuestions[i]));
@@ -19,5 +20,7 @@ function sortQA(qa) {
     }
   }
   qa.intents = intents;
+  delete qa._id;
+  delete qa.__v;
   return qa;
 }
