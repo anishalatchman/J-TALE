@@ -87,7 +87,7 @@ export default function SavingSession() {
                 title="Please Enter Your Email"
                 body=""
                 value={email}
-                valid={email === "" && validEmail}
+                valid={email === "" || validEmail}
                 onChange={handleEmailNameChange}
                 onClose={() => {
                   setShowModal(false);

@@ -8,12 +8,14 @@ import { qaContext } from "../../Contexts/qaProvider";
 import { FlowContext } from "../../Contexts/flowProvider";
 import { deleteFlow } from "../../utils/delete";
 import { saveFlow, saveQA } from "../../utils/save";
+import { IntentContext } from "../../Contexts/intentsProvider";
 
 export default function Navbar() {
   // define context var to show/hide nav buttons
   const [sessionID, setSessionID] = useContext(SessionContext);
   const [currQA] = useContext(qaContext);
   const [currFlow, , , , ,] = useContext(FlowContext);
+  const [intentState] = useContext(IntentContext);
 
   // Create session id var and setter function
   // const sessionid = "12345";
@@ -27,13 +29,13 @@ export default function Navbar() {
 
   // This function is called when user clicks save button and saves the current question
   const trySave = (currFlow, currQA, sessionID) => {
-    saveQA(currFlow, currQA, sessionID).then((res) => {
+    saveQA(currQA).then((res) => {
       if (!res) {
         alert("Unable to Delete");
       }
     });
 
-    saveFlow(currFlow, sessionID).then((res) => {
+    saveFlow(currFlow, currQA, sessionID).then((res) => {
       if (!res) {
         alert("Unable to Delete");
         return;
@@ -41,7 +43,13 @@ export default function Navbar() {
     });
 
     alert("Saved Successfully");
+
     PageChange("/save");
+
+    // Disables continue button by resets intentState values to 0
+    Object.keys(intentState).forEach((key) => {
+      intentState[key] = 0;
+    });
   };
 
   // This function is called when user clicks deletes and deletes the flow
@@ -55,6 +63,11 @@ export default function Navbar() {
     });
     setSessionID(null);
     PageChange("/");
+
+    // Disables continue button by resets intentState values to 0
+    Object.keys(intentState).forEach((key) => {
+      intentState[key] = 0;
+    });
   };
 
   return (
