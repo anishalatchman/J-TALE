@@ -102,7 +102,6 @@ export default function SavingSession() {
     if (currSpeaker === "Bot:") {
       speechList.pop();
       const temp = speechList;
-      console.log(temp);
       setSpeechList(temp);
       setPrevSpeaker("Bot:");
     }
