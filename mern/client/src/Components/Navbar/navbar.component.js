@@ -6,7 +6,7 @@ import GenericButton from "../Buttons/GenericButton";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import { qaContext } from "../../Contexts/qaProvider";
 import { FlowContext } from "../../Contexts/flowProvider";
-import { deleteFlow } from "../../utils/delete";
+import deleteController from "../../utils/Controller/deleteSessionController";
 import { saveFlow, saveQA } from "../../utils/save";
 import { IntentContext } from "../../Contexts/intentsProvider";
 
@@ -54,7 +54,8 @@ export default function Navbar() {
 
   // This function is called when user clicks deletes and deletes the flow
   const tryDelete = (currFlow, sessionID) => {
-    deleteFlow(currFlow, sessionID).then((res) => {
+    const deleteFlow = new deleteController();
+    deleteFlow.deleteFlow(currFlow, sessionID).then((res) => {
       if (!res) {
         alert("Unable to Delete");
       } else {
