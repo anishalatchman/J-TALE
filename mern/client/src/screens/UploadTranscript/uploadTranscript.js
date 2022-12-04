@@ -188,6 +188,7 @@ function UploadTranscript() {
             onClose={() => {
               setShowModal(false);
               deleteFile(transcriptID);
+              //TODO: Make delete QAs call
             }}
             onSubmit={() => {
               populatingQuestionContet();
