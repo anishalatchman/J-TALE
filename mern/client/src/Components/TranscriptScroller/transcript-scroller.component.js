@@ -3,18 +3,16 @@ import GenericButton from "../Buttons/GenericButton";
 import styles from "./transcript-scroller.component.module.css";
 import { ScrollerContext } from "../../Contexts/scrollerProvider";
 import GetFlowData from "../../utils/export";
+import exportController from "../../utils/Controller/exportController";
 import { QuestionContext } from "../../Contexts/questionProvider";
 
 export default function Scrollbar() {
   const [, , , , allQuestions, , , ,] = useContext(QuestionContext);
-
+  const exportClass = new exportController();
   const downloadFile = () => {
     // Gets the flow data as a list of JSON object of QA pairs
 
-    console.log(allQuestions);
-    const myData = GetFlowData(allQuestions);
-    console.log(myData);
-
+    const myData = exportClass.exportTranscript(allQuestions);
     // create file in browser
     const fileName = "flow_data";
     const json = JSON.stringify(myData, null, 2);
