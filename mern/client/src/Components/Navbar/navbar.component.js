@@ -70,22 +70,10 @@ export default function Navbar() {
       } else {
         alert("Successfully Deleted");
 
-        // Resets all contexts to original value
-        setSessionID(null);
-        setcurrQAState({});
-        setFlowState({});
-        setFlowStartingQuestions([]);
-        setFlowAllQuestions([]);
-        setSpeaker("User:");
-        setPrevSpeaker("Bot:");
-        setQuestionState([]);
-        setNextQuestions([]);
-        setAllQuestions([]);
-        setPrevPrompt('"How can I help you today?"');
-        setSpeechList([]);
-        setTranscriptID(null);
-        setIntentState({});
         PageChange("/");
+
+        // Resets all contexts to original value\
+        resetContext();
 
         // Disables continue button by resets intentState values to 0
         Object.keys(intentState).forEach((key) => {
@@ -93,6 +81,23 @@ export default function Navbar() {
         });
       }
     });
+  };
+
+  const resetContext = () => {
+    setSessionID(null);
+    setcurrQAState({});
+    setFlowState({});
+    setFlowStartingQuestions([]);
+    setFlowAllQuestions([]);
+    setSpeaker("User:");
+    setPrevSpeaker("Bot:");
+    setQuestionState([]);
+    setNextQuestions([]);
+    setAllQuestions([]);
+    setPrevPrompt('"How can I help you today?"');
+    setSpeechList([]);
+    setTranscriptID(null);
+    setIntentState({});
   };
 
   return (

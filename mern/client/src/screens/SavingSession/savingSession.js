@@ -81,6 +81,21 @@ export default function SavingSession() {
   };
 
   const resetEnd = () => {
+    resetContext();
+  };
+
+  const resetGoBack = () => {
+    // Need to pop the most recent item from the transcript list if it is a question
+    if (currSpeaker === "Bot:") {
+      speechList.pop();
+      const temp = speechList;
+      setSpeechList(temp);
+      setSpeaker("User:");
+      setPrevSpeaker("Bot:");
+    }
+  };
+
+  const resetContext = () => {
     setSessionID(null);
     setcurrQAState({});
     setFlowState({});
@@ -95,16 +110,6 @@ export default function SavingSession() {
     setSpeechList([]);
     setTranscriptID(null);
     setIntentState({});
-  };
-
-  const resetGoBack = () => {
-    // Need to pop the most recent item from the transcript list if it is a question
-    if (currSpeaker === "Bot:") {
-      speechList.pop();
-      const temp = speechList;
-      setSpeechList(temp);
-      setPrevSpeaker("Bot:");
-    }
   };
 
   return (
