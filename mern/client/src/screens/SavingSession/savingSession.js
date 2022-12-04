@@ -2,14 +2,42 @@ import React, { useContext, useState, useEffect } from "react";
 import styles from "./savingSession.module.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { useNavigate } from "react-router-dom";
-import { SessionContext } from "../../Contexts/sessionProvider";
 import Modal from "../../Components/Modals/GenericModal";
 import emailjs from "emailjs-com";
 import { FlowContext } from "../../Contexts/flowProvider";
+import { SessionContext } from "../../Contexts/sessionProvider";
+import { qaContext } from "../../Contexts/qaProvider";
+import { IntentContext } from "../../Contexts/intentsProvider";
+import { QuestionContext } from "../../Contexts/questionProvider";
+import { ScrollerContext } from "../../Contexts/scrollerProvider";
+import { SpeakerContext } from "../../Contexts/speakerProvider";
 
 export default function SavingSession() {
-  const [currFlow, , , , , ,] = useContext(FlowContext);
-  const [sessionID, , ,] = useContext(SessionContext);
+  const [
+    currFlow,
+    setFlowState,
+    ,
+    setFlowStartingQuestions,
+    ,
+    setFlowAllQuestions,
+  ] = useContext(FlowContext);
+  const [, setcurrQAState] = useContext(qaContext);
+  const [, setIntentState] = useContext(IntentContext);
+  const [currSpeaker, setSpeaker, , setPrevSpeaker] =
+    useContext(SpeakerContext);
+  const [
+    ,
+    setQuestionState,
+    ,
+    setNextQuestions,
+    ,
+    setAllQuestions,
+    ,
+    setPrevPrompt,
+  ] = useContext(QuestionContext);
+  const [speechList, setSpeechList] = useContext(ScrollerContext);
+  const [sessionID, setSessionID, , setTranscriptID] =
+    useContext(SessionContext);
   const [showModal, setShowModal] = useState(false);
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(true);
@@ -50,6 +78,34 @@ export default function SavingSession() {
           console.log(error.text);
         }
       );
+  };
+
+  const resetEnd = () => {
+    setSessionID(null);
+    setcurrQAState({});
+    setFlowState({});
+    setFlowStartingQuestions([]);
+    setFlowAllQuestions([]);
+    setSpeaker("User:");
+    setPrevSpeaker("Bot:");
+    setQuestionState([]);
+    setNextQuestions([]);
+    setAllQuestions([]);
+    setPrevPrompt('"How can I help you today?"');
+    setSpeechList([]);
+    setTranscriptID(null);
+    setIntentState({});
+  };
+
+  const resetGoBack = () => {
+    // Need to pop the most recent item from the transcript list if it is a question
+    if (currSpeaker === "Bot:") {
+      speechList.pop();
+      const temp = speechList;
+      console.log(temp);
+      setSpeechList(temp);
+      setPrevSpeaker("Bot:");
+    }
   };
 
   return (
@@ -106,15 +162,18 @@ export default function SavingSession() {
         <div className={styles.buttonRow}>
           <GenericButton
             buttonType="blue"
-            onClick={() => PageChange("/")}
+            onClick={() => {
+              PageChange("/");
+              resetEnd();
+            }}
             disabled={false}
             text={"End Session"}
           />
           <GenericButton
             buttonType="outline"
             onClick={() => {
-              // Logic goes here if
               PageChange("/startingintent");
+              resetGoBack();
             }}
             disabled={false}
             text={"Go Back"}
