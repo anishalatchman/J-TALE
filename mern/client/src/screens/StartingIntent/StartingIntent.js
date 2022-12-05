@@ -114,15 +114,15 @@ function StartingIntent() {
       <div className={styles.intentContainer}>
         <h4 className={styles.speaker1}>{prevSpeaker}</h4>
         {console.log("this should be the strating q", currQA.question)}
-        <h1 className={styles.intentTitle}>{currQA.question}</h1>
-        {/* <h1 className={styles.intentTitle}>{prevPrompt}</h1> */}
+        {/* <h1 className={styles.intentTitle}>{currQA.question}</h1> */}
+        <h1 className={styles.intentTitle}>{prevPrompt}</h1>
 
         <h4 className={styles.speaker2}>{currSpeaker}</h4>
 
         <div>
           {nextQuestions.length === 0 || currQuestion?.intents?.length === 0 ? (
             <>
-              <h3 className={currQA.styles.completed}>
+              <h3 className={styles.completed}>
                 Your flow has been completed! Click the transcripts to jump back.
               </h3>
             </>
