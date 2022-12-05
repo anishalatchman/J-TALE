@@ -4,12 +4,12 @@ import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import IntentButtons from "../../Components/IntentButtons/IntentButtons";
 import Scrollbar from "../../Components/TranscriptScroller/transcript-scroller.component";
-import QA from "../../utils/QA";
 import { qaContext } from "../../Contexts/qaProvider";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
 import { IntentContext } from "../../Contexts/intentsProvider";
 import { QuestionContext } from "../../Contexts/questionProvider";
 import { ScrollerContext } from "../../Contexts/scrollerProvider";
+import selectIntentController from "../../utils/Controller/selectIntentController";
 
 function StartingIntent() {
   // Defining contexts and usestates
@@ -30,7 +30,7 @@ function StartingIntent() {
   const [speechList, setSpeechList] = useContext(ScrollerContext);
 
   // Creating an instance of the QA class
-  const QAdata = new QA();
+  const selectIntent = new selectIntentController();
 
   //Boolean for whether intents are being selected
   const [isIntents, setIsIntents] = useState(false);
@@ -77,7 +77,7 @@ function StartingIntent() {
 
       // Then make call to DB
       setcurrQAState(currQA);
-      QAdata.updateQA(currQA);
+      selectIntent.updateQA(currQA);
     } else {
       // Finds the QA from list of next questions
       const nextQA = nextQuestions.find((x) => x.question === speech);
@@ -95,7 +95,7 @@ function StartingIntent() {
       setAllQuestions(temp);
 
       // Makes Call to DB to update QA
-      QAdata.updateQA(nextQA);
+      selectIntent.updateQA(nextQA);
 
       setSpeechList([
         ...speechList,

@@ -7,7 +7,6 @@ import Modal from "../../Components/Modals/GenericModal";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import { FlowContext } from "../../Contexts/flowProvider";
 import { QuestionContext } from "../../Contexts/questionProvider";
-import QA from "../../utils/QA";
 import createFlowController from "../../utils/Controller/createFlowController";
 import uploadFileController from "../../utils/Controller/uploadFileController";
 

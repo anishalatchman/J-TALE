@@ -1,5 +1,4 @@
 import deleteSessionInteractor from "../Interactor/deleteSessionInteractor";
-import { flowUploader } from "../startScreen";
 
 //new instance of interactor class
 const deleteInteractor = new deleteSessionInteractor();
@@ -13,7 +12,7 @@ export default class deleteController {
     const res =
       deleteInteractor.flowDeleted(sessionID) &&
       deleteInteractor.transcriptDeleted(transcriptID) &&
-      deleteInteractor.qaDeleted(flowUploader);
+      deleteInteractor.qaDeleted(flow);
     return res;
   }
 }
