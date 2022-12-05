@@ -9,19 +9,37 @@ import { FlowContext } from "../../Contexts/flowProvider";
 import deleteController from "../../utils/Controller/deleteSessionController";
 import { IntentContext } from "../../Contexts/intentsProvider";
 import saveSessionController from "../../utils/Controller/saveSessionController";
+import { QuestionContext } from "../../Contexts/questionProvider";
+import { ScrollerContext } from "../../Contexts/scrollerProvider";
+import { SpeakerContext } from "../../Contexts/speakerProvider";
 
 export default function Navbar() {
   // define context var to show/hide nav buttons
-  const [sessionID, setSessionID] = useContext(SessionContext);
-  const [currQA] = useContext(qaContext);
-  const [currFlow, , , , ,] = useContext(FlowContext);
-  const [intentState] = useContext(IntentContext);
+  const [currQA, setcurrQAState] = useContext(qaContext);
+  const [
+    currFlow,
+    setFlowState,
+    ,
+    setFlowStartingQuestions,
+    ,
+    setFlowAllQuestions,
+  ] = useContext(FlowContext);
+  const [intentState, setIntentState] = useContext(IntentContext);
+  const [, setSpeaker, , setPrevSpeaker] = useContext(SpeakerContext);
+  const [
+    ,
+    setQuestionState,
+    ,
+    setNextQuestions,
+    ,
+    setAllQuestions,
+    ,
+    setPrevPrompt,
+  ] = useContext(QuestionContext);
+  const [, setSpeechList] = useContext(ScrollerContext);
+  const [sessionID, setSessionID, , setTranscriptID] =
+    useContext(SessionContext);
 
-  // Create session id var and setter function
-  // const sessionid = "12345";
-  // const setSessionID = (id) => {
-  //   sessionid = id;
-  // };
   const Navigate = useNavigate();
   const PageChange = (url) => {
     Navigate(url);
@@ -55,15 +73,35 @@ export default function Navbar() {
         alert("Unable to Delete");
       } else {
         alert("Successfully Deleted");
+
+        PageChange("/");
+
+        // Resets all contexts to original value\
+        resetContext();
+
+        // Disables continue button by resets intentState values to 0
+        Object.keys(intentState).forEach((key) => {
+          intentState[key] = 0;
+        });
       }
     });
-    setSessionID(null);
-    PageChange("/");
+  };
 
-    // Disables continue button by resets intentState values to 0
-    Object.keys(intentState).forEach((key) => {
-      intentState[key] = 0;
-    });
+  const resetContext = () => {
+    setSessionID(null);
+    setcurrQAState({});
+    setFlowState({});
+    setFlowStartingQuestions([]);
+    setFlowAllQuestions([]);
+    setSpeaker("User:");
+    setPrevSpeaker("Bot:");
+    setQuestionState([]);
+    setNextQuestions([]);
+    setAllQuestions([]);
+    setPrevPrompt('"How can I help you today?"');
+    setSpeechList([]);
+    setTranscriptID(null);
+    setIntentState({});
   };
 
   return (
