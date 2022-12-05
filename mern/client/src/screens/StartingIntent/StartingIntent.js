@@ -4,29 +4,34 @@ import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import IntentButtons from "../../Components/IntentButtons/IntentButtons";
 import Scrollbar from "../../Components/TranscriptScroller/transcript-scroller.component";
+import { qaContext } from "../../Contexts/qaProvider";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
 import { IntentContext } from "../../Contexts/intentsProvider";
 import { qaContext } from "../../Contexts/qaProvider";
 import { QuestionContext } from "../../Contexts/questionProvider";
 import { ScrollerContext } from "../../Contexts/scrollerProvider";
+import selectIntentController from "../../utils/Controller/selectIntentController";
 
 function StartingIntent() {
-  const [currQA] = useContext(qaContext);
+  // Defining contexts and usestates
+  const [currQA, setcurrQAState] = useContext(qaContext);
   const [currSpeaker, setSpeaker, prevSpeaker, setPrevSpeaker] =
     useContext(SpeakerContext);
   const [intentState] = useContext(IntentContext);
-  const [currQuestion, setCurrQuestion] = useState();
   const [
     ,
     ,
     nextQuestions,
     setNextQuestions,
     allQuestions,
-    ,
+    setAllQuestions,
     prevPrompt,
     setPrevPrompt,
   ] = useContext(QuestionContext);
   const [speechList, setSpeechList] = useContext(ScrollerContext);
+
+  // Creating an instance of the QA class
+  const selectIntent = new selectIntentController();
 
   //Boolean for whether intents are being selected
   const [isIntents, setIsIntents] = useState(false);
@@ -44,16 +49,10 @@ function StartingIntent() {
     //Speech is used as an identifier for selected question/intent
     const speech = getSpeech();
 
-    // Identify whether we are on a questions or intents
-    // If questions -> Update current QA context with seelcted QA.
-
     // This if statement differentiates between whether we are choosing questions or intents
     // If !buttons, we are choosing questions and if buttons we are choosing intents
     if (isIntents) {
-      // Change the intent_included to be true for all selected intents
-      // Then make call to DB
-
-      const intent = currQuestion.intents.find((x) => x.value === speech);
+      const intent = currQA.intents.find((x) => x.value === speech);
       const lst = findNextQuestions(intent);
       setNextQuestions(lst);
       setSpeechList([
@@ -62,15 +61,43 @@ function StartingIntent() {
           source: prevSpeaker,
           text: speech,
           question: intent,
-          optionsLength: currQuestion.intents.length,
+          optionsLength: currQA.intents.length,
         },
       ]);
+
+      const temp = [];
+      // Goes through all questions and updates the list with the intents of the current question to be true
+      allQuestions.forEach((x) => {
+        if (x.id === currQA.id) {
+          temp.push(currQA);
+        } else {
+          temp.push(x);
+        }
+      });
+      setAllQuestions(temp);
+
+      // Then make call to DB
+      setcurrQAState(currQA);
+      selectIntent.updateQA(currQA);
     } else {
-      // First find the QA object for list allQuestions
-      // Should be changing currQA and then change the question_included value to be true
-      // Then make an call to DB to update
+      // Finds the QA from list of next questions
       const nextQA = nextQuestions.find((x) => x.question === speech);
-      setCurrQuestion(nextQA); //Setting current question object
+
+      setcurrQAState(nextQA); //Setting current question object
+
+      const temp = [];
+      // Find the currQuestions in allQuestions and update the question included boolean
+      allQuestions.forEach((x) => {
+        if (x.id === currQA) {
+          temp.push(currQA);
+        }
+        temp.push(x);
+      });
+      setAllQuestions(temp);
+
+      // Makes Call to DB to update QA
+      selectIntent.updateQA(nextQA);
+
       setSpeechList([
         ...speechList,
         {
@@ -113,14 +140,14 @@ function StartingIntent() {
       </div>
       <div className={styles.intentContainer}>
         <h4 className={styles.speaker1}>{prevSpeaker}</h4>
-        {console.log("this should be the strating q", currQA.question)}
+        {/* {console.log("this should be the strating q", currQA.question)} */}
         {/* <h1 className={styles.intentTitle}>{currQA.question}</h1> */}
         <h1 className={styles.intentTitle}>{prevPrompt}</h1>
 
         <h4 className={styles.speaker2}>{currSpeaker}</h4>
 
         <div>
-          {nextQuestions.length === 0 || currQuestion?.intents?.length === 0 ? (
+          {nextQuestions.length === 0 || currQA?.intents?.length === 0 ? (
             <>
               <h3 className={styles.completed}>
                 Your flow has been completed! Click the transcripts to jump back.
@@ -131,7 +158,7 @@ function StartingIntent() {
               <h4 className={styles.speaker2}>{currSpeaker}</h4>
 
               <IntentButtons
-                intents={isIntents ? currQuestion.intents : nextQuestions}
+                intents={isIntents ? currQA.intents : nextQuestions}
                 user={isIntents}
               />
               <div>

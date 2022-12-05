@@ -1,28 +1,34 @@
 import axios from "axios";
 
-// Takes in a qa object and sessionID and updates the flow object
-export async function saveQA(qa) {
-  var saved = false;
-  await axios.put("http://localhost:5000/qa/update/", qa).then((res) => {
+export async function saveSession(flow, qa, sessionID) {
+  var checkFlow = false;
+  await saveFlow(flow, qa, sessionID).then((res) => {
     if (res.status === 200) {
-      saved = true;
+      checkFlow = true;
     }
   });
-  return saved;
+
+  var checkQA = false;
+  await saveQA(qa).then((res) => {
+    if (res.status === 200) {
+      checkQA = true;
+    }
+  });
+
+  return checkFlow && checkQA;
+}
+
+// Takes in a qa object and sessionID and updates the flow object
+export async function saveQA(qa) {
+  return await axios.put("http://localhost:5000/qa/update", qa);
 }
 
 // Takes in the flow object, current question and session id to update the flow parameter with
 // the current question
 export async function saveFlow(flow, qa, sessionID) {
   flow.current_question = qa.id;
-  var saved = false;
-  await axios
-    .put(`http://locahost:5000/flow/update/${sessionID}`, flow)
-    .then((res) => {
-      if (res.status === 200) {
-        saved = true;
-      }
-    });
-
-  return saved;
+  return await axios.put(
+    `http://localhost:5000/flow/update/${sessionID}`,
+    flow
+  );
 }
