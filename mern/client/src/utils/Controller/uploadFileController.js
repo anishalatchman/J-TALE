@@ -12,11 +12,16 @@ export default class uploadFileController {
     return uploadInteractor.deleteFile(id);
   }
 
+  //Parses transcript and then creates QA pairs in the DB
   createQAs(transcript) {
     return uploadInteractor.parse(transcript);
   }
 
   getQAList(idList) {
     return uploadInteractor.getQAList(idList);
+  }
+
+  deleteQAs(flow) {
+    return uploadInteractor.qaDeleted(flow);
   }
 }

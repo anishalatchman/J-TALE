@@ -4,13 +4,12 @@ import { useNavigate } from "react-router-dom";
 import styles from "./uploadTranscript.module.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import Modal from "../../Components/Modals/GenericModal";
-import { transcriptJSONConverter, deleteFile } from "../../utils/transcript";
 import { SessionContext } from "../../Contexts/sessionProvider";
-import Parser from "../../utils/parser";
 import { FlowContext } from "../../Contexts/flowProvider";
 import { QuestionContext } from "../../Contexts/questionProvider";
 import QA from "../../utils/QA";
 import createFlowController from "../../utils/Controller/createFlowController";
+import uploadFileController from "../../utils/Controller/uploadFileController";
 
 function UploadTranscript() {
   const Navigate = useNavigate();
@@ -18,6 +17,8 @@ function UploadTranscript() {
   const PageChange = (url) => {
     Navigate(url);
   };
+
+  const uploadFile = new uploadFileController();
 
   const inputRef = useRef(null);
   const [fileName, setFileName] = useState("No files chosen");
@@ -29,7 +30,7 @@ function UploadTranscript() {
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
   const [
-    ,
+    currFlow,
     setFlowState,
     flowStartingQuestions,
     setFlowStartingQuestions,
@@ -100,7 +101,7 @@ function UploadTranscript() {
   //Uploads the transcript
   const uploadTranscript = (fileName, files) => {
     // Checks if the transcript is a string, and then sends transcript to DB
-    transcriptJSONConverter(fileName, files).then((response) => {
+    uploadFile.uploadFile(fileName, files).then((response) => {
       if (response) {
         setShowModal(true);
         setTranscriptID(response);
@@ -114,8 +115,7 @@ function UploadTranscript() {
   //Parses through the question and sets flow a list of the initial question IDs
   const parseQAs = (questions) => {
     try {
-      const parse = new Parser();
-      const res = parse.parse(questions);
+      const res = uploadFile.createQAs(questions);
       setFlowStartingQuestions(res.startingList);
       setFlowAllQuestions(res.allQuestionList);
     } catch (e) {
@@ -124,8 +124,7 @@ function UploadTranscript() {
   };
 
   const getQAs = (idList) => {
-    const question = new QA();
-    return question.getQAList(idList);
+    return uploadFile.getQAList(idList);
   };
 
   const populatingQuestionContet = async () => {
@@ -190,8 +189,8 @@ function UploadTranscript() {
             onChange={handleFlowNameChange}
             onClose={() => {
               setShowModal(false);
-              deleteFile(transcriptID);
-              //TODO: Make delete QAs call
+              uploadFile.deleteFile(transcriptID);
+              uploadFile.deleteQAs(currFlow);
             }}
             onSubmit={() => {
               populatingQuestionContet();

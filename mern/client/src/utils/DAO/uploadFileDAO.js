@@ -11,16 +11,6 @@ export default class uploadFileDAO {
     }
   }
 
-  // Checks if transcript file is a string and calls Upload Transcript
-  async transcriptJSONConverter(fileName, body) {
-    if (typeof fileName === "string") {
-      // Defines new obj transcript in form required by mongoose schemas
-      const transcript = { name: fileName, data: body };
-      const res = await this.uploadFile(transcript);
-      return res;
-    }
-  }
-
   async deleteFile(id) {
     try {
       await server.delete("/transcript/delete/" + id);
@@ -50,5 +40,12 @@ export default class uploadFileDAO {
     } catch (e) {
       console.log(e.response.data);
     }
+  }
+
+  // Axios call to delete a single QA object
+  async deleteqa(qa) {
+    await server.delete("/qa/delete", {
+      data: { id: qa },
+    });
   }
 }

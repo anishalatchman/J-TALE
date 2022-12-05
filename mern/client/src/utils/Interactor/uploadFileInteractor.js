@@ -39,7 +39,6 @@ export default class uploadFileInteractor {
 
     for (var i = 0; i < transcript.length; i++) {
       this.questionLoop(transcript[i]);
-      uploadDAO.createQAs(transcript[i]); //Creates QAs and adds them to
       startingList.push(this.initialQAID(transcript[i])); //Finds the ids of the starting question and pushes it to the list
     }
 
@@ -71,5 +70,27 @@ export default class uploadFileInteractor {
       });
     }
     return lst;
+  }
+
+  // Loops through the questions list in flow and deletes each item (helper to qaDeleted)
+  async removeQAs(flow) {
+    for (var i = 0; i < flow.allQuestions.length; i++) {
+      try {
+        await uploadDAO.deleteqa(flow.allQuestions[i]);
+      } catch {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  //Deletes QAs and returns status of success
+  async qaDeleted(flow) {
+    // Delete QAs associated with flow
+    var qaDeleted = false;
+    await this.removeQAs(flow).then((res) => {
+      qaDeleted = res;
+    });
+    return qaDeleted;
   }
 }
