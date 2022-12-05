@@ -7,8 +7,8 @@ import { SessionContext } from "../../Contexts/sessionProvider";
 import { qaContext } from "../../Contexts/qaProvider";
 import { FlowContext } from "../../Contexts/flowProvider";
 import deleteController from "../../utils/Controller/deleteSessionController";
-import { saveFlow, saveQA } from "../../utils/save";
 import { IntentContext } from "../../Contexts/intentsProvider";
+import saveSessionController from "../../utils/Controller/saveSessionController";
 
 export default function Navbar() {
   // define context var to show/hide nav buttons
@@ -29,13 +29,8 @@ export default function Navbar() {
 
   // This function is called when user clicks save button and saves the current question
   const trySave = (currFlow, currQA, sessionID) => {
-    saveQA(currQA).then((res) => {
-      if (!res) {
-        alert("Unable to Delete");
-      }
-    });
-
-    saveFlow(currFlow, currQA, sessionID).then((res) => {
+    const saveSession = new saveSessionController();
+    saveSession.saveFlow(currFlow, currQA, sessionID).then((res) => {
       if (!res) {
         alert("Unable to Delete");
         return;
