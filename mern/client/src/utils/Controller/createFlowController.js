@@ -4,7 +4,7 @@ const flowInteractor = new createFlowInteractor();
 
 export default class createFlowController {
   // Creates flow object, checks if flowName exists and is a string and uploads flow
-  async flowUploader(
+  flowUploader(
     flowName,
     flowStartingQuestions,
     flowAllQuestions,

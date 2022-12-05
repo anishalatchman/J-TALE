@@ -6,9 +6,9 @@ export default class uploadFileInteractor {
     this.allQuestionList = [];
   }
   // Checks if transcript file is a string and calls Upload Transcript
-  async uploadFile(transcript) {
-    if (typeof transcript.fileName === "string") {
-      const res = await uploadDAO.uploadFile(transcript);
+  uploadFile(transcript) {
+    if (typeof transcript.name === "string") {
+      const res = uploadDAO.uploadFile(transcript);
       return res;
     }
   }
@@ -41,7 +41,6 @@ export default class uploadFileInteractor {
       this.questionLoop(transcript[i]);
       startingList.push(this.initialQAID(transcript[i])); //Finds the ids of the starting question and pushes it to the list
     }
-
     return {
       startingList: startingList,
       allQuestionList: this.allQuestionList,
@@ -52,7 +51,7 @@ export default class uploadFileInteractor {
   questionLoop(qlist) {
     //qlist is a list of JSON objects that exists as questions/answer pairs
     for (var i = 0; i < qlist.length; i++) {
-      uploadDAO.createQAs(qlist[i]);
+      uploadDAO.createQA(qlist[i]);
       this.allQuestionList.push(qlist[i].id);
     }
   }
