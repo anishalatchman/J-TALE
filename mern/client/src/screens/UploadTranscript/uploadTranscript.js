@@ -7,10 +7,10 @@ import Modal from "../../Components/Modals/GenericModal";
 import { transcriptJSONConverter, deleteFile } from "../../utils/transcript";
 import { flowUploader } from "../../utils/startScreen";
 import { SessionContext } from "../../Contexts/sessionProvider";
-import Parser from "../../utils/QA";
-// import { qaContext } from "../../Contexts/qaProvider";
-import { FlowContext } from "../../Contexts/flow.Provider";
-// import { QuestionContext } from "../../Contexts/questionProvider";
+import Parser from "../../utils/parser";
+import { FlowContext } from "../../Contexts/flowProvider";
+import { QuestionContext } from "../../Contexts/questionProvider";
+import QA from "../../utils/QA";
 
 function UploadTranscript() {
   const Navigate = useNavigate();
@@ -24,6 +24,8 @@ function UploadTranscript() {
   const [files, setFiles] = useState();
   const [, setSessionID, transcriptID, setTranscriptID] =
     useContext(SessionContext);
+  const [, , , setNextQuestions, , setAllQuestions] =
+    useContext(QuestionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
   const [
@@ -118,6 +120,16 @@ function UploadTranscript() {
     }
   };
 
+  const getQAs = (idList) => {
+    const question = new QA();
+    return question.getQAList(idList);
+  };
+
+  const populatingQuestionContet = async () => {
+    await setNextQuestions(getQAs(flowStartingQuestions));
+    await setAllQuestions(getQAs(flowAllQuestions));
+  };
+
   return (
     <div className="container">
       <h1 className={styles.title}>Upload Transcript</h1>
@@ -151,7 +163,6 @@ function UploadTranscript() {
           buttonType={files && files.questions ? "blue" : "disabled"}
           onClick={() => {
             uploadTranscript(fileName, files);
-
             parseQAs(files.questions);
             // setCurrQA(files.question[0][0])
             console.log("this is da curr_q object", files.questions[0][0])
@@ -175,12 +186,14 @@ function UploadTranscript() {
             title="Name your flow to begin"
             body="Enter your flow name"
             value={flowName.name}
+            valid={true}
             onChange={handleFlowNameChange}
             onClose={() => {
               setShowModal(false);
               deleteFile(transcriptID);
             }}
             onSubmit={() => {
+              populatingQuestionContet();
               uploadFlow(
                 flowName.name,
                 flowStartingQuestions,
