@@ -50,18 +50,17 @@ export default function Navbar() {
     const saveSession = new saveSessionController();
     saveSession.saveFlow(currFlow, currQA, sessionID).then((res) => {
       if (!res) {
-        alert("Unable to Delete");
+        alert("Unable to Save");
         return;
+      } else {
+        alert("Saved Successfully");
+
+        PageChange("/save");
+        // Disables continue button by resets intentState values to 0
+        Object.keys(intentState).forEach((key) => {
+          intentState[key] = 0;
+        });
       }
-    });
-
-    alert("Saved Successfully");
-
-    PageChange("/save");
-
-    // Disables continue button by resets intentState values to 0
-    Object.keys(intentState).forEach((key) => {
-      intentState[key] = 0;
     });
   };
 

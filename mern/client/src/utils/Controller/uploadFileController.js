@@ -21,7 +21,7 @@ export default class uploadFileController {
     return uploadInteractor.getQAList(idList);
   }
 
-  deleteQAs(flow) {
-    return uploadInteractor.qaDeleted(flow);
+  deleteQAs(flowAllQuestions) {
+    return uploadInteractor.qaDeleted(flowAllQuestions);
   }
 }

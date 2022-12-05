@@ -29,7 +29,7 @@ function UploadTranscript() {
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
   const [
-    currFlow,
+    ,
     setFlowState,
     flowStartingQuestions,
     setFlowStartingQuestions,
@@ -189,7 +189,7 @@ function UploadTranscript() {
             onClose={() => {
               setShowModal(false);
               uploadFile.deleteFile(transcriptID);
-              uploadFile.deleteQAs(currFlow);
+              uploadFile.deleteQAs(flowAllQuestions);
             }}
             onSubmit={() => {
               populatingQuestionContet();

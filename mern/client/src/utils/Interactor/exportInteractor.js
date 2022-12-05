@@ -3,8 +3,6 @@ export default class exportInteractor {
   getFlowData(allQuestions) {
     const lst = [];
 
-    console.log(allQuestions);
-
     for (var i = 0; i < allQuestions.length; i++) {
       if (allQuestions[i].question_included === true) {
         lst.push(this.sortQA(allQuestions[i]));

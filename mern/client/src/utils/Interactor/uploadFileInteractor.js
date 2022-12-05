@@ -72,22 +72,24 @@ export default class uploadFileInteractor {
   }
 
   // Loops through the questions list in flow and deletes each item (helper to qaDeleted)
-  async removeQAs(flow) {
-    for (var i = 0; i < flow.allQuestions.length; i++) {
+  async removeQAs(flowAllQuestions) {
+    console.log(flowAllQuestions);
+    var removed = true;
+    for (var i = 0; i < flowAllQuestions.length; i++) {
       try {
-        await uploadDAO.deleteqa(flow.allQuestions[i]);
+        await uploadDAO.deleteqa(flowAllQuestions[i]);
       } catch {
-        return false;
+        removed = false;
       }
     }
-    return true;
+    return removed;
   }
 
   //Deletes QAs and returns status of success
-  async qaDeleted(flow) {
+  async qaDeleted(flowAllQuestions) {
     // Delete QAs associated with flow
     var qaDeleted = false;
-    await this.removeQAs(flow).then((res) => {
+    await this.removeQAs(flowAllQuestions).then((res) => {
       qaDeleted = res;
     });
     return qaDeleted;
