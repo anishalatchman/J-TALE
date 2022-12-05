@@ -7,7 +7,6 @@ import Scrollbar from "../../Components/TranscriptScroller/transcript-scroller.c
 import { qaContext } from "../../Contexts/qaProvider";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
 import { IntentContext } from "../../Contexts/intentsProvider";
-import { qaContext } from "../../Contexts/qaProvider";
 import { QuestionContext } from "../../Contexts/questionProvider";
 import { ScrollerContext } from "../../Contexts/scrollerProvider";
 import selectIntentController from "../../utils/Controller/selectIntentController";
