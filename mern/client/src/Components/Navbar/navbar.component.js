@@ -6,9 +6,9 @@ import GenericButton from "../Buttons/GenericButton";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import { qaContext } from "../../Contexts/qaProvider";
 import { FlowContext } from "../../Contexts/flowProvider";
-import { deleteFlow } from "../../utils/delete";
-import { saveSession } from "../../utils/save";
+import deleteController from "../../utils/Controller/deleteSessionController";
 import { IntentContext } from "../../Contexts/intentsProvider";
+import saveSessionController from "../../utils/Controller/saveSessionController";
 import { QuestionContext } from "../../Contexts/questionProvider";
 import { ScrollerContext } from "../../Contexts/scrollerProvider";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
@@ -47,24 +47,27 @@ export default function Navbar() {
 
   // This function is called when user clicks save button and saves the current question
   const trySave = (currFlow, currQA, sessionID) => {
-    saveSession(currFlow, currQA, sessionID).then((res) => {
+    const saveSession = new saveSessionController();
+    saveSession.saveFlow(currFlow, currQA, sessionID).then((res) => {
       if (!res) {
         alert("Unable to Save");
+        return;
       } else {
         alert("Saved Successfully");
-        PageChange("/save");
-      }
-    });
 
-    // Disables continue button by resets intentState values to 0
-    Object.keys(intentState).forEach((key) => {
-      intentState[key] = 0;
+        PageChange("/save");
+        // Disables continue button by resets intentState values to 0
+        Object.keys(intentState).forEach((key) => {
+          intentState[key] = 0;
+        });
+      }
     });
   };
 
   // This function is called when user clicks deletes and deletes the flow
   const tryDelete = (currFlow, sessionID) => {
-    deleteFlow(currFlow, sessionID).then((res) => {
+    const deleteFlow = new deleteController();
+    deleteFlow.deleteFlow(currFlow, sessionID).then((res) => {
       if (!res) {
         alert("Unable to Delete");
       } else {
