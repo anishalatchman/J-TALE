@@ -5,12 +5,12 @@ import styles from "./uploadTranscript.module.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import Modal from "../../Components/Modals/GenericModal";
 import { transcriptJSONConverter, deleteFile } from "../../utils/transcript";
-import { flowUploader } from "../../utils/startScreen";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import Parser from "../../utils/parser";
 import { FlowContext } from "../../Contexts/flowProvider";
 import { QuestionContext } from "../../Contexts/questionProvider";
 import QA from "../../utils/QA";
+import createFlowController from "../../utils/Controller/createFlowController";
 
 function UploadTranscript() {
   const Navigate = useNavigate();
@@ -77,21 +77,24 @@ function UploadTranscript() {
     flowAllQuestions,
     transcriptID
   ) => {
-    flowUploader(
-      flowName,
-      flowStartingQuestions,
-      flowAllQuestions,
-      transcriptID
-    ).then((response) => {
-      //If response is successful, change to next page and show the additional navbar info
-      if (response.status) {
-        PageChange("/startingintent");
-        setSessionID(response.res?.data._id);
-        setFlowState(response.res?.data);
-      } else {
-        alert("Error");
-      }
-    });
+    const createFlow = new createFlowController();
+    createFlow
+      .flowUploader(
+        flowName,
+        flowStartingQuestions,
+        flowAllQuestions,
+        transcriptID
+      )
+      .then((response) => {
+        //If response is successful, change to next page and show the additional navbar info
+        if (response.status) {
+          PageChange("/startingintent");
+          setSessionID(response.res?.data._id);
+          setFlowState(response.res?.data);
+        } else {
+          alert("Error");
+        }
+      });
   };
 
   //Uploads the transcript
