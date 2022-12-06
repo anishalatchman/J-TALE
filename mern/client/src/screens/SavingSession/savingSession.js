@@ -87,11 +87,8 @@ export default function SavingSession() {
   const resetGoBack = () => {
     // Need to pop the most recent item from the transcript list if it is a question
     if (currSpeaker === "Bot:") {
-      speechList.pop();
       const temp = speechList;
       setSpeechList(temp);
-      setSpeaker("User:");
-      setPrevSpeaker("Bot:");
     }
   };
 
@@ -106,7 +103,7 @@ export default function SavingSession() {
     setIsFirstQuestion(true);
     setNextQuestions([]);
     setAllQuestions([]);
-    setPrevPrompt('This is the start of your flow.');
+    setPrevPrompt("This is the start of your flow.");
     setSpeechList([]);
     setTranscriptID(null);
     setIntentState({});
@@ -125,7 +122,7 @@ export default function SavingSession() {
           <div className={styles.input}>
             <p>{sessionID}</p>
           </div>
-          <div className>
+          <div>
             <GenericButton
               buttonType="white"
               onClick={() => {

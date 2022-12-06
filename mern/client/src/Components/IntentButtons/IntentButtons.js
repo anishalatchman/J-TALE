@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "./IntentButtons.module.css";
+import styles from "./IntentButtons.module.css";
 import { IntentContext } from "../../Contexts/intentsProvider";
 import GenericButton from "../Buttons/GenericButton";
 
@@ -18,7 +18,7 @@ export default function IntentButtons(props) {
   const [intentState, setIntentState] = useContext(IntentContext);
   var values = [];
   return (
-    <div className="container">
+    <div className={styles.container}>
       {/* To be displayed when flow is completed */}
       {props.intents.map((intent) => {
         //Constant to check whether the object is a user or a bot and access their speech accordingly
@@ -28,7 +28,9 @@ export default function IntentButtons(props) {
         // the code only runs if intentState[intent.value] is not initialized
         if (!intentState[speech]) {
           // Assign intentState to 0 or 1 depending on if the QA is set to included or not
-          const intentIncluded = props.user ? intent.included : intent.question_included;
+          const intentIncluded = props.user
+            ? intent.included
+            : intent.question_included;
           intentState[speech] = intentIncluded ? 1 : 0;
         }
 

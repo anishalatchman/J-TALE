@@ -38,11 +38,11 @@ export default function Scrollbar() {
     document.body.removeChild(link);
     URL.revokeObjectURL(href);
   };
-
   const goBack = (currSpeaker, intents) => {
     poppingList(intents, currSpeaker);
     setIsIntents(currSpeaker === "User:");
 
+    console.log(speechList, "POPPED LIST");
     if (currSpeaker === "Bot:") {
       resetQuestion(intents);
     }
@@ -63,7 +63,7 @@ export default function Scrollbar() {
   const resetQuestion = (intents) => {
     //If going back to starting questions list
     if (speechList.length === 0) {
-      setPrevPrompt("How can I help you today?");
+      setPrevPrompt("This is the start of your flow.");
       setNextQuestions(findNextQuestions(intents, true));
       setPrevSpeaker("Bot:");
       setSpeaker("User:");

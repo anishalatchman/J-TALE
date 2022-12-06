@@ -18,5 +18,5 @@
 }
 
 .container {
-  @apply flex flex-wrap items-start justify-start;
+  @apply flex flex-wrap items-start justify-start items-center;
 }

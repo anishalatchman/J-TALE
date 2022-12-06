@@ -9,6 +9,7 @@ import { recoverStartingQA } from "../../Controller/QAController";
 import { FlowContext } from "../../Contexts/flowProvider";
 import { QuestionContext } from "../../Contexts/questionProvider";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
+import { ScrollerContext } from "../../Contexts/scrollerProvider";
 import uploadFileController from "../../utils/Controller/uploadFileController";
 
 export default function RecoverSession() {
@@ -17,7 +18,7 @@ export default function RecoverSession() {
   const [, setCurrQA] = useContext(qaContext);
   const [inputText, setInputText] = useState("");
   const [showError, setShowError] = useState(false);
-
+  const [speechList, setSpeechList] = useContext(ScrollerContext);
   // CONTEXTS TO IMPLEMENT FROM STARTING-INTENT
   const [, setFlowState, , setFlowStartingQuestions, , setFlowAllQuestions] =
     useContext(FlowContext);
@@ -73,8 +74,10 @@ export default function RecoverSession() {
       // flowContext is question ID's, questionContext is json objects
 
       setIsIntents(true);
-      setSpeaker("User:");
-      setPrevSpeaker("Bot:");
+      setSpeaker("Bot:");
+      setPrevSpeaker("User:");
+      console.log(flow.speechList, "SPEECH LISt");
+      console.log(speechList, "SPEECH LIST 2");
 
       // Show User: and Bot: labels if not on first question
       if (flow.current_question !== "") {
@@ -95,6 +98,11 @@ export default function RecoverSession() {
     setFlowAllQuestions(flow.allQuestions);
     setTranscriptID(flow.transcriptID);
     setFlowState(flow);
+    //Pops the last intent from the scroller if it is there
+    if (flow.speechList[flow.speechList.length - 1]?.source === "User:") {
+      flow.speechList.pop();
+    }
+    setSpeechList(flow.speechList);
     return startingQA;
   };
 
