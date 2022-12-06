@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "./StartingIntent.module.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
@@ -14,8 +14,14 @@ import selectIntentController from "../../utils/Controller/selectIntentControlle
 function StartingIntent() {
   // Defining contexts and usestates
   const [currQA, setcurrQAState] = useContext(qaContext);
-  const [currSpeaker, setSpeaker, prevSpeaker, setPrevSpeaker, isIntents, setIsIntents] =
-    useContext(SpeakerContext);
+  const [
+    currSpeaker,
+    setSpeaker,
+    prevSpeaker,
+    setPrevSpeaker,
+    isIntents,
+    setIsIntents,
+  ] = useContext(SpeakerContext);
   const [intentState] = useContext(IntentContext);
   const [
     isFirstQuestion,
@@ -129,12 +135,23 @@ function StartingIntent() {
     return speech;
   };
 
+  console.log(currQA, "STARTING QA");
+
+  useEffect(() => {
+    console.log(currQA, "USEEFFECT QA");
+  }, [currQA]);
+
   return (
     <div className="container">
       <div className={styles.scroller}>
         <Scrollbar />
       </div>
       <div className={styles.intentContainer}>
+        {console.log("This is StartingIntent nextQuestions: ", nextQuestions)}
+        {console.log(
+          "This is StartingIntent currQA.intents: ",
+          currQA?.intents
+        )}
         {nextQuestions.length === 0 || currQA?.intents?.length === 0 ? (
           <>
             <h3 className={styles.intentTitle}>
@@ -148,7 +165,11 @@ function StartingIntent() {
           </>
         ) : (
           <>
-            {isFirstQuestion ? (<></>) : (<h4 className={styles.speaker1}>{prevSpeaker}</h4>)}
+            {isFirstQuestion ? (
+              <></>
+            ) : (
+              <h4 className={styles.speaker1}>{prevSpeaker}</h4>
+            )}
 
             <h1 className={styles.intentTitle}>{prevPrompt}</h1>
 
