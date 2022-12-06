@@ -91,8 +91,4 @@ describe("DAO Tests", () => {
   });
 });
 
-describe("Interactor Tests", () => {
-  // afterEach(() => {
-  //   jest.resetAllMocks();
-  // });
-});
+describe("Interactor Tests", () => {});
