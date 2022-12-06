@@ -1,8 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App.js";
-import jestConfig from "./jest.config";
 import "@testing-library/jest-dom";
-import axios from "axios";
 
 jest.mock("axios");
 

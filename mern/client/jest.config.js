@@ -1,14 +1,14 @@
 module.exports = {
   collectCoverage: true,
-  collectCoverageFrom: [
-    "src/components/**/*.{js,jsx}",
-    "src/services/*.{js,jsx}",
-  ],
+  collectCoverageFrom: ["src/utils/**/*.{js}", "src/services/*.{js}"],
   coverageDirectory: "coverage",
   testEnvironment: "jsdom",
   setUpFilesAfterEnv: ["src/jest.setup.js"],
   moduleNameMapper: {
     axios: "axios/dist/node/axios.cjs",
+    "\\.(css|sass|png)$": "<rootDir>/src/mock/fileMock.js",
   },
-  transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
+  transform: {
+    "\\.js$": "<rootDir>/node_modules/babel-jest",
+  },
 };
