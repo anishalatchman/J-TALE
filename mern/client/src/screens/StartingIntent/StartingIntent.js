@@ -13,14 +13,13 @@ import selectIntentController from "../../utils/Controller/selectIntentControlle
 
 function StartingIntent() {
   // Defining contexts and usestates
-  const [showSpeakerLabels, setShowSpeakerLabels] = useState(false);
   const [currQA, setcurrQAState] = useContext(qaContext);
-  const [currSpeaker, setSpeaker, prevSpeaker, setPrevSpeaker] =
+  const [currSpeaker, setSpeaker, prevSpeaker, setPrevSpeaker, isIntents, setIsIntents] =
     useContext(SpeakerContext);
   const [intentState] = useContext(IntentContext);
   const [
-    ,
-    ,
+    isFirstQuestion,
+    setIsFirstQuestion,
     nextQuestions,
     setNextQuestions,
     allQuestions,
@@ -32,9 +31,6 @@ function StartingIntent() {
 
   // Creating an instance of the QA class
   const selectIntent = new selectIntentController();
-
-  //Boolean for whether intents are being selected
-  const [isIntents, setIsIntents] = useState(false);
 
   //Changes the states and identifiers of who's speech is being selected
   const handleSpeakerChange = () => {
@@ -152,11 +148,11 @@ function StartingIntent() {
           </>
         ) : (
           <>
-            {showSpeakerLabels ? (<h4 className={styles.speaker1}>{prevSpeaker}</h4>) : (<></>)}
+            {isFirstQuestion ? (<></>) : (<h4 className={styles.speaker1}>{prevSpeaker}</h4>)}
 
             <h1 className={styles.intentTitle}>{prevPrompt}</h1>
 
-            {showSpeakerLabels ? (<h4 className={styles.speaker2}>{currSpeaker}</h4>) : (<></>)}
+            <h4 className={styles.speaker2}>{currSpeaker}</h4>
 
             <IntentButtons
               intents={isIntents ? currQA.intents : nextQuestions}
@@ -190,12 +186,8 @@ function StartingIntent() {
           onClick={() => {
             handleQAChange();
             handleSpeakerChange();
-            // hide labels on first load, then show on all sequential
-            setShowSpeakerLabels(true);
-            // console.log("here's intent state", intentState)
-            // const clickedBttn = Object.keys(intentState).find(key => intentState[key] === 2);
-            // const intentObj = currQA.intents.find((x) => x.value === clickedBttn);
-            // setCurrQA(currQA.intents[clickedBttn])
+            // Show User: and Bot: labels
+            setIsFirstQuestion(false);
           }}
         />
       </div>
