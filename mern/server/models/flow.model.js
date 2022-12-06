@@ -26,6 +26,7 @@ const flowschema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     require: true,
   },
+  speechList: [{ type: mongoose.Schema.Types.Mixed }],
 });
 
 const Flow = mongoose.model("Flow", flowschema);
