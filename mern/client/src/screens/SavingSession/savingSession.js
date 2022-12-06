@@ -1,78 +1,189 @@
-import React, { Component } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styles from "./savingSession.module.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
-import { withRouter } from "../withRouter";
+import { useNavigate } from "react-router-dom";
+import Modal from "../../Components/Modals/GenericModal";
+import emailjs from "emailjs-com";
+import { FlowContext } from "../../Contexts/flowProvider";
+import { SessionContext } from "../../Contexts/sessionProvider";
+import { qaContext } from "../../Contexts/qaProvider";
+import { IntentContext } from "../../Contexts/intentsProvider";
+import { QuestionContext } from "../../Contexts/questionProvider";
+import { ScrollerContext } from "../../Contexts/scrollerProvider";
+import { SpeakerContext } from "../../Contexts/speakerProvider";
 
-class SavingSession extends Component {
-  constructor(props) {
-    super(props);
+export default function SavingSession() {
+  const [
+    currFlow,
+    setFlowState,
+    ,
+    setFlowStartingQuestions,
+    ,
+    setFlowAllQuestions,
+  ] = useContext(FlowContext);
+  const [, setcurrQAState] = useContext(qaContext);
+  const [, setIntentState] = useContext(IntentContext);
+  const [currSpeaker, setSpeaker, , setPrevSpeaker] =
+    useContext(SpeakerContext);
+  const [
+    ,
+    setQuestionState,
+    ,
+    setNextQuestions,
+    ,
+    setAllQuestions,
+    ,
+    setPrevPrompt,
+  ] = useContext(QuestionContext);
+  const [speechList, setSpeechList] = useContext(ScrollerContext);
+  const [sessionID, setSessionID, , setTranscriptID] =
+    useContext(SessionContext);
+  const [showModal, setShowModal] = useState(false);
+  const [email, setEmail] = useState("");
+  const [validEmail, setValidEmail] = useState(true);
 
-    this.state = { value: "17A540" };
-    this.handleBack = this.handleBack.bind(this);
-  }
+  const Navigate = useNavigate();
+  const PageChange = (url) => {
+    Navigate(url);
+  };
 
-  setSessionID(id) {
-    this.setState({ value: id });
-  }
-  handleBack(event) {
-    this.props.navigate("/");
-  }
-  copyText(event) {
-    event.preventDefault();
-    // Get the text field
-    var textToCopy = document.getElementById("sessionID");
+  const handleEmailNameChange = (event) => {
+    setEmail(event.target.value);
+  };
 
-    // Select the text field
-    textToCopy.select();
-    textToCopy.setSelectionRange(0, 99999); // For mobile devices
+  useEffect(() => {
+    const validEmailRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (email !== "" && !email.match(validEmailRegex)) {
+      setValidEmail(false);
+    } else {
+      setValidEmail(true);
+    }
+  }, [email, validEmail]);
 
-    // Copy the text inside the text field
-    navigator.clipboard.writeText(textToCopy.value);
-  }
+  const sendMail = () => {
+    const data = {
+      flow: currFlow.name,
+      session: sessionID,
+      email: email,
+    };
 
-  render() {
-    return (
-      <div>
-        <div className="container">
-          <h1 className={styles.pageTitle}> Session Saved </h1>
-          <h4 className={styles.subTitle}>
-            You will need your session ID to continue next time.
-          </h4>
-          <form className={styles.inputForm}>
-            <label className={styles.label}> Your Session ID </label>
-            <input
-              className={styles.input}
-              id="sessionID"
-              type="text"
-              readonly
-              value={this.state.value}
-            />
+    emailjs
+      .send("service_3mrwlug", "template_xesdddp", data, "8MLzKnR9kn5hriP6p")
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
+
+  const resetEnd = () => {
+    resetContext();
+  };
+
+  const resetGoBack = () => {
+    // Need to pop the most recent item from the transcript list if it is a question
+    if (currSpeaker === "Bot:") {
+      speechList.pop();
+      const temp = speechList;
+      setSpeechList(temp);
+      setSpeaker("User:");
+      setPrevSpeaker("Bot:");
+    }
+  };
+
+  const resetContext = () => {
+    setSessionID(null);
+    setcurrQAState({});
+    setFlowState({});
+    setFlowStartingQuestions([]);
+    setFlowAllQuestions([]);
+    setSpeaker("User:");
+    setPrevSpeaker("Bot:");
+    setQuestionState([]);
+    setNextQuestions([]);
+    setAllQuestions([]);
+    setPrevPrompt('"How can I help you today?"');
+    setSpeechList([]);
+    setTranscriptID(null);
+    setIntentState({});
+  };
+
+  return (
+    <div>
+      <div className="container">
+        <h1 className={styles.pageTitle}> Session Saved </h1>
+        <h4 className={styles.subTitle}>
+          You will need your session ID to continue next time.
+        </h4>
+        <div className={styles.inputForm}>
+          <label className={styles.label}> Your Session ID </label>
+          <div className={styles.input}>
+            <p>{sessionID}</p>
+          </div>
+          <div className>
             <GenericButton
               buttonType="white"
-              onClick={this.copyText}
+              onClick={() => {
+                navigator.clipboard.writeText(sessionID);
+              }}
               disabled={false}
               text={"Copy to Clipboard"}
             />
-          </form>
-
-          <div className={styles.buttonRow}>
             <GenericButton
-              buttonType="blue"
-              onClick={() => null}
+              buttonType="white"
+              onClick={() => {
+                setShowModal(true);
+              }}
               disabled={false}
-              text={"End Session"}
+              text={"Email Session ID"}
             />
-            <GenericButton
-              buttonType="outline"
-              onClick={this.handleBack}
-              disabled={false}
-              text={"Go Back"}
-            />
+            {setShowModal && (
+              <Modal
+                show={showModal}
+                title="Please Enter Your Email"
+                body=""
+                value={email}
+                valid={email === "" || validEmail}
+                onChange={handleEmailNameChange}
+                onClose={() => {
+                  setShowModal(false);
+                }}
+                onSubmit={() => {
+                  if (email !== "" && validEmail) {
+                    sendMail();
+                    setShowModal(false);
+                  }
+                }}
+              />
+            )}
           </div>
         </div>
-      </div>
-    );
-  }
-}
 
-export default withRouter(SavingSession);
+        <div className={styles.buttonRow}>
+          <GenericButton
+            buttonType="blue"
+            onClick={() => {
+              PageChange("/");
+              resetEnd();
+            }}
+            disabled={false}
+            text={"End Session"}
+          />
+          <GenericButton
+            buttonType="outline"
+            onClick={() => {
+              PageChange("/startingintent");
+              resetGoBack();
+            }}
+            disabled={false}
+            text={"Go Back"}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
