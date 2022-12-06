@@ -28,6 +28,7 @@ function UploadTranscript() {
     useContext(QuestionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
+  const [alert, setAlert] = useState();
   const [
     ,
     setFlowState,
@@ -36,7 +37,6 @@ function UploadTranscript() {
     flowAllQuestions,
     setFlowAllQuestions,
   ] = useContext(FlowContext);
-  const [failureAlert, setFailureAlert] = useState("nothing");
 
   const handleClick = () => {
     // open file input box on click of button
@@ -62,6 +62,7 @@ function UploadTranscript() {
         // for case when someone uploads a valid transcript at first, then switches to a bad one.
         // it resets files to null to correctly display failure message.
         setFiles(null);
+        setAlert("Please upload a valid JSON file");
       }
     };
   };
@@ -93,7 +94,7 @@ function UploadTranscript() {
           setSessionID(response.res?.data._id);
           setFlowState(response.res?.data);
         } else {
-          alert("Error");
+          setAlert("Error");
         }
       });
   };
@@ -105,20 +106,12 @@ function UploadTranscript() {
       if (response) {
         setShowModal(true);
         setTranscriptID(response);
+        setAlert();
       } else {
         // prompts alert when you try to upload a transcript that is already posted onto DB
-        setFailureAlert("This file was already uploaded");
-        // alert("This file was already uploaded.");
+        setAlert("This file was already uploaded.");
       }
     });
-  };
-
-  const errorIndicator = (fileName, files) => {
-    if (fileName !== "No files chosen" && files && !files.questions) {
-      setFailureAlert("Please upload a valid JSON file");
-      return failureAlert;
-    } else {
-    }
   };
 
   //Parses through the question and sets flow a list of the initial question IDs
@@ -128,7 +121,7 @@ function UploadTranscript() {
       setFlowStartingQuestions(res.startingList);
       setFlowAllQuestions(res.allQuestionList);
     } catch (e) {
-      alert("PARSE FAILED", e.response);
+      setAlert("PARSE FAILED", e.response);
     }
   };
 
@@ -144,17 +137,7 @@ function UploadTranscript() {
   return (
     <div className="container">
       <h1 className={styles.title}>Upload Transcript</h1>
-
-      {/* <h4 className={styles.failureIndicator}>
-        {errorIndicator(fileName, files)}
-      </h4> */}
-
-      {fileName !== "No files chosen" && files && !files.questions ? (
-        <h4 className={styles.failureIndicator}>{failureAlert}</h4>
-      ) : (
-        // <></>
-        <h4 className={styles.failureIndicator}>{failureAlert}</h4>
-      )}
+      <h4 className={styles.failureIndicator}>{alert}</h4>
       <div className={styles.buttonContainer}>
         <input
           style={{ display: "none" }}
@@ -163,7 +146,13 @@ function UploadTranscript() {
           onChange={handleFileChange}
           accept=".json"
         />
-        <button className={styles.button} onClick={handleClick}>
+        <button
+          className={styles.button}
+          onClick={() => {
+            setAlert();
+            handleClick();
+          }}
+        >
           <img
             src={require("../../assets/uploadicon.png")}
             alt={"upload"}
@@ -179,8 +168,6 @@ function UploadTranscript() {
           onClick={() => {
             uploadTranscript(fileName, files);
             parseQAs(files.questions);
-            errorIndicator(fileName, files);
-            console.log({ failureAlert });
           }}
           disabled={files && files.questions ? false : true}
           text={"Begin Session"}
