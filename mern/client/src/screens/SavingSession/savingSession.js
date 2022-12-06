@@ -106,7 +106,7 @@ export default function SavingSession() {
     setIsFirstQuestion(true);
     setNextQuestions([]);
     setAllQuestions([]);
-    setPrevPrompt('This is the start of your flow.');
+    setPrevPrompt("This is the start of your flow.");
     setSpeechList([]);
     setTranscriptID(null);
     setIntentState({});
@@ -121,9 +121,15 @@ export default function SavingSession() {
         </h4>
         <div className={styles.inputForm}>
           <label className={styles.label}> Your Session ID </label>
-          <div className={styles.input}>
+          <input
+            className={styles.input}
+            type="text"
+            readonly
+            value={sessionID}
+          />
+          {/* <div className={styles.input}>
             <p>{sessionID}</p>
-          </div>
+          </div> */}
           <div className>
             <GenericButton
               buttonType="white"
