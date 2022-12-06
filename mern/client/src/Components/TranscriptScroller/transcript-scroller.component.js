@@ -50,10 +50,14 @@ export default function Scrollbar() {
     else {
       setPrevSpeaker("User:");
       setSpeaker("Bot:");
-      setcurrQAState(speechList[speechList.length - 1].question);
+      const q = speechList[speechList.length - 1].question;
+      setcurrQAState(q);
+      setNextQuestions([1]); // So that intent buttons are loaded when even though no next question list
     }
     //Sets the current speaker to the speaker
-    setPrevPrompt(speechList[speechList.length - 1].text);
+    if (speechList.length !== 0) {
+      setPrevPrompt(speechList[speechList.length - 1].text);
+    }
   };
 
   //Sets values for properly reselecting questions
