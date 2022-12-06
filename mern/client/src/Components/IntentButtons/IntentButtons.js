@@ -16,7 +16,7 @@ import GenericButton from "../Buttons/GenericButton";
 export default function IntentButtons(props) {
   // define context var to determine the state of the intent buttons
   const [intentState, setIntentState] = useContext(IntentContext);
-
+  console.log(props.intents, "INTENT PROP");
   var values = [];
   return (
     <div className="container items-center">
