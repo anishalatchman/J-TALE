@@ -1,8 +1,11 @@
 module.exports = {
   collectCoverage: true,
-  collectCoverageFrom: [
-    "./src/utils/Controller/**/*.js, ./src/utils/Interactor/**/*.js",
-  ],
+  collectCoverageFrom: ["src/utils/Controller/**, src/utils/Interactor/**"],
+  coverageThreshold: {
+    global: {
+      lines: 80,
+    },
+  },
   coverageDirectory: "coverage",
   testEnvironment: "jsdom",
   setUpFilesAfterEnv: ["src/jest.setup.js"],
