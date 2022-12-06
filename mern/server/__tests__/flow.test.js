@@ -161,6 +161,7 @@ describe("Flow Tests", () => {
         current_question: "00000000",
         allQuestions: ["00000000", "00000001", "00000010", "00000011"],
         transcriptID: "551137c2f9e1fac808a5f572",
+        speechList: [{ test: "testing" }],
       });
 
     expect(res.statusCode).toBe(200);

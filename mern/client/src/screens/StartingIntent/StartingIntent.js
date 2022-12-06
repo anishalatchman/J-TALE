@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import styles from "./StartingIntent.module.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
@@ -10,9 +10,11 @@ import { IntentContext } from "../../Contexts/intentsProvider";
 import { QuestionContext } from "../../Contexts/questionProvider";
 import { ScrollerContext } from "../../Contexts/scrollerProvider";
 import selectIntentController from "../../utils/Controller/selectIntentController";
+import { FlowContext } from "../../Contexts/flowProvider";
 
 function StartingIntent() {
-  // Defining contexts and usestates
+  // Defining contexts
+  const [currFlow, setFlowState, , , ,] = useContext(FlowContext);
   const [currQA, setcurrQAState] = useContext(qaContext);
   const [
     currSpeaker,
@@ -67,6 +69,10 @@ function StartingIntent() {
         },
       ]);
 
+      // Sets speech list to currFlow
+      currFlow.speechList = speechList;
+      setFlowState(currFlow);
+
       const temp = [];
       // Goes through all questions and updates the list with the intents of the current question to be true
       allQuestions.forEach((x) => {
@@ -85,8 +91,6 @@ function StartingIntent() {
       // Finds the QA from list of next questions
       const nextQA = nextQuestions.find((x) => x.question === speech);
 
-      setcurrQAState(nextQA); //Setting current question object
-
       const temp = [];
       // Find the currQuestions in allQuestions and update the question included boolean
       allQuestions.forEach((x) => {
@@ -96,6 +100,8 @@ function StartingIntent() {
         temp.push(x);
       });
       setAllQuestions(temp);
+
+      setcurrQAState(nextQA); //Setting current question object
 
       // Makes Call to DB to update QA
       selectIntent.updateQA(nextQA);
@@ -109,6 +115,10 @@ function StartingIntent() {
           optionsLength: nextQuestions.length,
         },
       ]);
+
+      // Sets speech list to currFlow
+      currFlow.speechList = speechList;
+      setFlowState(currFlow);
     }
 
     // Disables continue button by resets intentState values to 0
@@ -134,12 +144,6 @@ function StartingIntent() {
     setPrevPrompt(speech);
     return speech;
   };
-
-  console.log(currQA, "STARTING QA");
-
-  useEffect(() => {
-    console.log(currQA, "USEEFFECT QA");
-  }, [currQA]);
 
   return (
     <div className="container">

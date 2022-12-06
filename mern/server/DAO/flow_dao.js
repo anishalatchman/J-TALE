@@ -30,6 +30,7 @@ export default class flowDAO {
         allQuestions: req.body.allQuestions,
         current_question: "",
         transcriptID: req.body.transcriptID,
+        speechList: [],
       });
       res.status(200).json(flow);
     } catch (e) {

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styles from "./recoverSession.module.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { SessionContext } from "../../Contexts/sessionProvider";
@@ -14,27 +14,21 @@ import uploadFileController from "../../utils/Controller/uploadFileController";
 export default function RecoverSession() {
   const Navigate = useNavigate();
   const [, setSessionID, , setTranscriptID] = useContext(SessionContext);
-  const [currQA, setCurrQA] = useContext(qaContext);
+  const [, setCurrQA] = useContext(qaContext);
   const [inputText, setInputText] = useState("");
   const [showError, setShowError] = useState(false);
 
   // CONTEXTS TO IMPLEMENT FROM STARTING-INTENT
-  const [
-    ,
-    setFlowState,
-    flowStartingQuestions,
-    setFlowStartingQuestions,
-    flowAllQuestions,
-    setFlowAllQuestions,
-  ] = useContext(FlowContext);
+  const [, setFlowState, , setFlowStartingQuestions, , setFlowAllQuestions] =
+    useContext(FlowContext);
   const [
     ,
     setIsFirstQuestion,
-    ,
+    nextQuestions,
     setNextQuestions,
     ,
     setAllQuestions,
-    ,
+    prevPrompt,
     setPrevPrompt,
   ] = useContext(QuestionContext);
   const uploadFile = new uploadFileController();
@@ -46,51 +40,55 @@ export default function RecoverSession() {
     Navigate(url);
   };
 
+  useEffect(() => {
+    if (
+      nextQuestions?.length !== 0 &&
+      prevPrompt !== "This is the start of your flow."
+    ) {
+    }
+  }, [nextQuestions, prevPrompt]);
+
   const handleSubmit = async (event) => {
     // prevent page reload
     event.preventDefault();
     // set sessionid before loading starting-intent page
     const flow = await recoverFlow(inputText);
     const startingQA = await setFlowVars(flow);
-    await LoadSession(startingQA);
-    PageChange("/startingintent");
+    const questionsObj = {
+      next: await getQAs(flow.questions),
+      all: await getQAs(flow.allQuestions),
+    };
+    LoadSession(startingQA, flow, questionsObj);
   };
 
   // recovers flow from DB and sets current_qa context state
-  const LoadSession = async (startingQA) => {
+  const LoadSession = (startingQA, flow, questionsObj) => {
     if (flow) {
       setShowError(false);
       // console.log("Starting QA: ", startingQA);
-
-      console.log(flowStartingQuestions, "FLOW STARTING");
-      await setNextQuestions(getQAs(flowStartingQuestions));
-      console.log(flowStartingQuestions, "FLOW ENDING");
+      setNextQuestions(questionsObj.next);
+      setAllQuestions(questionsObj.all);
 
       setCurrQA(startingQA);
       // flowContext is question ID's, questionContext is json objects
-      console.log(flowAllQuestions, "FLOW ALL STARTING");
-
-      await setAllQuestions(getQAs(flowAllQuestions));
-      console.log(flowAllQuestions, "FLOW ALL STARTING");
 
       setIsIntents(true);
       setSpeaker("User:");
       setPrevSpeaker("Bot:");
-      // console.log("This is nextQuestions: ", nextQuestions)
-      // console.log("This is currQA.intents: ", currQA.intents)
 
       // Show User: and Bot: labels if not on first question
       if (flow.current_question !== "") {
         setIsFirstQuestion(false);
-        setPrevPrompt(currQA.question);
+        setPrevPrompt(startingQA.question);
       }
     } else {
       setShowError(true);
     }
+    PageChange("/startingintent");
   };
 
-  const setFlowVars = async (flow) => {
-    const startingQA = await recoverStartingQA(flow);
+  const setFlowVars = (flow) => {
+    const startingQA = recoverStartingQA(flow);
     // SET VARS FOR STARTING-INTENT
     setSessionID(inputText);
     setFlowStartingQuestions(flow.questions);
@@ -105,8 +103,7 @@ export default function RecoverSession() {
     setInputText(event.target.value);
   };
 
-  const getQAs = (idList) => {
-    // converts list of QA ids to QA objects
+  const getQAs = async (idList) => {
     return uploadFile.getQAList(idList);
   };
 
