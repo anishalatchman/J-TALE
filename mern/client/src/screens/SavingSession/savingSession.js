@@ -101,12 +101,12 @@ export default function SavingSession() {
     setFlowState({});
     setFlowStartingQuestions([]);
     setFlowAllQuestions([]);
-    setSpeaker("User:");
-    setPrevSpeaker("Bot:");
+    setSpeaker("Bot:");
+    setPrevSpeaker("User:");
     setQuestionState([]);
     setNextQuestions([]);
     setAllQuestions([]);
-    setPrevPrompt('"How can I help you today?"');
+    setPrevPrompt('This is the start of your flow.');
     setSpeechList([]);
     setTranscriptID(null);
     setIntentState({});

@@ -21,7 +21,7 @@ function App() {
     <Router>
       <div>
         {/* SessionProvider contains all global vars (session id, transcript id) */}
-        
+
         <SessionProvider>
           <IntentProvider>
             <SpeakerProvider>

@@ -8,7 +8,7 @@ export default function QuestionProvider({ children }) {
   const [nextQuestions, setNextQuestions] = React.useState([]);
   const [allQuestions, setAllQuestions] = React.useState([]);
   const [prevPrompt, setPrevPrompt] = React.useState(
-    '"How can I help you today?"'
+    'This is the start of your flow.'
   );
 
   return (

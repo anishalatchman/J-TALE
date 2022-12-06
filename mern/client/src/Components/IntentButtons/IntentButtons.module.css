@@ -18,6 +18,5 @@
 }
 
 .container {
-  display: flex;
-  flex-wrap: wrap;
+  @apply flex flex-wrap items-start justify-start;
 }

@@ -92,12 +92,12 @@ export default function Navbar() {
     setFlowState({});
     setFlowStartingQuestions([]);
     setFlowAllQuestions([]);
-    setSpeaker("User:");
-    setPrevSpeaker("Bot:");
+    setSpeaker("Bot:");
+    setPrevSpeaker("User:");
     setQuestionState([]);
     setNextQuestions([]);
     setAllQuestions([]);
-    setPrevPrompt('"How can I help you today?"');
+    setPrevPrompt('This is the start of your flow.');
     setSpeechList([]);
     setTranscriptID(null);
     setIntentState({});
@@ -107,7 +107,7 @@ export default function Navbar() {
     <nav className={styles.navbarBG}>
       <Link
         to="/"
-        className={styles.navLink}
+        className={styles.navLinks}
         onClick={() => {
           setSessionID();
         }}
@@ -134,7 +134,7 @@ export default function Navbar() {
               trySave(currFlow, currQA, sessionID);
             }}
             disabled={false}
-            text={"SAVE"}
+            text={"SAVE SESSION"}
           />
           <GenericButton
             buttonType="nav"

@@ -13,6 +13,7 @@ import selectIntentController from "../../utils/Controller/selectIntentControlle
 
 function StartingIntent() {
   // Defining contexts and usestates
+  const [showSpeakerLabels, setShowSpeakerLabels] = useState(false);
   const [currQA, setcurrQAState] = useContext(qaContext);
   const [currSpeaker, setSpeaker, prevSpeaker, setPrevSpeaker] =
     useContext(SpeakerContext);
@@ -138,63 +139,65 @@ function StartingIntent() {
         <Scrollbar />
       </div>
       <div className={styles.intentContainer}>
-        <h4 className={styles.speaker1}>{prevSpeaker}</h4>
-        {/* {console.log("this should be the strating q", currQA.question)} */}
-        {/* <h1 className={styles.intentTitle}>{currQA.question}</h1> */}
-        <h1 className={styles.intentTitle}>{prevPrompt}</h1>
+        {nextQuestions.length === 0 || currQA?.intents?.length === 0 ? (
+          <>
+            <h3 className={styles.intentTitle}>
+              This flow has been completed!
+            </h3>
+            <div className={styles.instructionsContainer}>
+              <h4 className={styles.instructions}>
+                Click through the transcript to complete another path.
+              </h4>
+            </div>
+          </>
+        ) : (
+          <>
+            {showSpeakerLabels ? (<h4 className={styles.speaker1}>{prevSpeaker}</h4>) : (<></>)}
 
-        <h4 className={styles.speaker2}>{currSpeaker}</h4>
+            <h1 className={styles.intentTitle}>{prevPrompt}</h1>
 
-        <div>
-          {nextQuestions.length === 0 || currQA?.intents?.length === 0 ? (
-            <>
-              <h3 className={styles.completed}>
-                Your flow has been completed! Click the transcripts to jump back.
-              </h3>
-            </>
-          ) : (
-            <>
-              <h4 className={styles.speaker2}>{currSpeaker}</h4>
+            {showSpeakerLabels ? (<h4 className={styles.speaker2}>{currSpeaker}</h4>) : (<></>)}
 
-              <IntentButtons
-                intents={isIntents ? currQA.intents : nextQuestions}
-                user={isIntents}
-              />
-              <div>
-                <h4 className={styles.instructions}>
-                  Select intents you would like to include by{" "}
-                  <strong>clicking once</strong>.
-                </h4>
-                <h4 className={styles.instructions1}>
-                  Choose a specific path by <strong>clicking again</strong> and
-                  selecting next.
-                </h4>
-              </div>
-            </>
-          )}
-        </div>
+            <IntentButtons
+              intents={isIntents ? currQA.intents : nextQuestions}
+              user={isIntents}
+            />
+            <div className={styles.instructionsContainer}>
+              <h4 className={styles.instructions}>
+                Select intents you would like to include by{" "}
+                <strong>clicking once</strong>.
+              </h4>
+              <h4 className={styles.instructions}>
+                Choose a specific path by <strong>clicking again</strong> and
+                selecting next.
+              </h4>
+            </div>
+          </>
+        )}
+      </div>
 
-        <div className={styles.buttonContainer}>
-          <GenericButton
-            buttonType={
-              Object.values(intentState).some((x) => x === 2)
-                ? "blue"
-                : "disabled"
-            }
-            text={"Continue"}
-            disabled={
-              Object.values(intentState).some((x) => x === 2) ? false : true
-            }
-            onClick={() => {
-              handleQAChange();
-              handleSpeakerChange();
-              // console.log("here's intent state", intentState)
-              // const clickedBttn = Object.keys(intentState).find(key => intentState[key] === 2);
-              // const intentObj = currQA.intents.find((x) => x.value === clickedBttn);
-              // setCurrQA(currQA.intents[clickedBttn])
-            }}
-          />
-        </div>
+      <div className={styles.buttonContainer}>
+        <GenericButton
+          buttonType={
+            Object.values(intentState).some((x) => x === 2)
+              ? "blue"
+              : "disabled"
+          }
+          text={"Continue"}
+          disabled={
+            Object.values(intentState).some((x) => x === 2) ? false : true
+          }
+          onClick={() => {
+            handleQAChange();
+            handleSpeakerChange();
+            // hide labels on first load, then show on all sequential
+            setShowSpeakerLabels(true);
+            // console.log("here's intent state", intentState)
+            // const clickedBttn = Object.keys(intentState).find(key => intentState[key] === 2);
+            // const intentObj = currQA.intents.find((x) => x.value === clickedBttn);
+            // setCurrQA(currQA.intents[clickedBttn])
+          }}
+        />
       </div>
     </div>
   );

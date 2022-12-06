@@ -4,8 +4,8 @@ export const SpeakerContext = React.createContext();
 
 export default function SpeakerProvider({ children }) {
   // Keeping track of who the speaker is when choosing intent & in transcript
-  const [currSpeaker, setSpeaker] = React.useState("User:");
-  const [prevSpeaker, setPrevSpeaker] = React.useState("Bot:");
+  const [currSpeaker, setSpeaker] = React.useState("Bot:");
+  const [prevSpeaker, setPrevSpeaker] = React.useState("User:");
 
   return (
     <SpeakerContext.Provider
