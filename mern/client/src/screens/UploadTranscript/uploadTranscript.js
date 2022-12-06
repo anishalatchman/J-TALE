@@ -126,7 +126,7 @@ function UploadTranscript() {
     return uploadFile.getQAList(idList);
   };
 
-  const populatingQuestionContet = async () => {
+  const populatingQuestionContext = async () => {
     await setNextQuestions(getQAs(flowStartingQuestions));
     await setAllQuestions(getQAs(flowAllQuestions));
   };
@@ -165,8 +165,6 @@ function UploadTranscript() {
           onClick={() => {
             uploadTranscript(fileName, files);
             parseQAs(files.questions);
-            // setCurrQA(files.question[0][0])
-            console.log("this is da curr_q object", files.questions[0][0])
           }}
           disabled={files && files.questions ? false : true}
           text={"Begin Session"}
@@ -195,7 +193,7 @@ function UploadTranscript() {
               uploadFile.deleteQAs(flowAllQuestions);
             }}
             onSubmit={() => {
-              populatingQuestionContet();
+              populatingQuestionContext();
               uploadFlow(
                 flowName.name,
                 flowStartingQuestions,

@@ -6,10 +6,11 @@ export default function SpeakerProvider({ children }) {
   // Keeping track of who the speaker is when choosing intent & in transcript
   const [currSpeaker, setSpeaker] = React.useState("Bot:");
   const [prevSpeaker, setPrevSpeaker] = React.useState("User:");
+  const [isIntents, setIsIntents] = React.useState(false)
 
   return (
     <SpeakerContext.Provider
-      value={[currSpeaker, setSpeaker, prevSpeaker, setPrevSpeaker]}
+      value={[currSpeaker, setSpeaker, prevSpeaker, setPrevSpeaker, isIntents, setIsIntents]}
     >
       {children}
     </SpeakerContext.Provider>

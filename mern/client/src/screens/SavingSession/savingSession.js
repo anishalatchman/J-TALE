@@ -27,7 +27,7 @@ export default function SavingSession() {
     useContext(SpeakerContext);
   const [
     ,
-    setQuestionState,
+    setIsFirstQuestion,
     ,
     setNextQuestions,
     ,
@@ -103,7 +103,7 @@ export default function SavingSession() {
     setFlowAllQuestions([]);
     setSpeaker("Bot:");
     setPrevSpeaker("User:");
-    setQuestionState([]);
+    setIsFirstQuestion(true);
     setNextQuestions([]);
     setAllQuestions([]);
     setPrevPrompt('This is the start of your flow.');

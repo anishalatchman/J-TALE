@@ -28,7 +28,9 @@ export default function IntentButtons(props) {
         // we can directly mutate a dictionary
         // the code only runs if intentState[intent.value] is not initialized
         if (!intentState[speech]) {
-          intentState[speech] = 0;
+          // Assign intentState to 0 or 1 depending on if the QA is set to included or not
+          const intentIncluded = props.user ? intent.included : intent.question_included;
+          intentState[speech] = intentIncluded ? 1 : 0;
         }
 
         function changeState() {

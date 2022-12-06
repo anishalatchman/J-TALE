@@ -57,6 +57,7 @@ export default class uploadFileInteractor {
   }
 
   getQAList(idList) {
+    // given a list of QA ids, returns list of QA objects
     const lst = [];
     for (var i = 0; i < idList.length; i++) {
       uploadDAO.getQAByID(idList[i]).then((response) => {

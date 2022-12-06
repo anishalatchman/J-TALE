@@ -28,7 +28,7 @@ export default function Navbar() {
   const [, setSpeaker, , setPrevSpeaker] = useContext(SpeakerContext);
   const [
     ,
-    setQuestionState,
+    setIsFirstQuestion,
     ,
     setNextQuestions,
     ,
@@ -94,7 +94,7 @@ export default function Navbar() {
     setFlowAllQuestions([]);
     setSpeaker("Bot:");
     setPrevSpeaker("User:");
-    setQuestionState([]);
+    setIsFirstQuestion(true);
     setNextQuestions([]);
     setAllQuestions([]);
     setPrevPrompt('This is the start of your flow.');
