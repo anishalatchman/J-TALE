@@ -131,9 +131,8 @@ export default function Scrollbar() {
           <div className={styles.transcriptText}>
             {speechList.map((speech) => {
               return (
-                <>
+                <div key={speech.text}>
                   <p
-                    key={speech.text}
                     className={styles.bolded}
                     onClick={() => goBack(speech.source, speech.question)}
                   >
@@ -142,7 +141,7 @@ export default function Scrollbar() {
                   <p className={styles.indent}>
                     {speech.optionsLength} intents available
                   </p>
-                </>
+                </div>
               );
             })}
 

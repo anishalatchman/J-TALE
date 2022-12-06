@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import styles from "./StartingIntent.module.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
@@ -47,9 +47,6 @@ function StartingIntent() {
     setIsIntents(!isIntents);
   };
 
-  useEffect(() => {
-    console.log(isIntents, "ISINTENTS");
-  }, [isIntents]);
   const handleQAChange = () => {
     //Speech is used as an identifier for selected question/intent
     const speech = getSpeech();
