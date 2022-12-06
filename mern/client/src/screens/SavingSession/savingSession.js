@@ -23,7 +23,7 @@ export default function SavingSession() {
   ] = useContext(FlowContext);
   const [, setcurrQAState] = useContext(qaContext);
   const [, setIntentState] = useContext(IntentContext);
-  const [currSpeaker, setSpeaker, , setPrevSpeaker] =
+  const [currSpeaker, setSpeaker, , setPrevSpeaker, , setIsIntents] =
     useContext(SpeakerContext);
   const [
     ,
@@ -110,6 +110,7 @@ export default function SavingSession() {
     setSpeechList([]);
     setTranscriptID(null);
     setIntentState({});
+    setIsIntents(false);
   };
 
   return (

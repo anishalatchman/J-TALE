@@ -25,7 +25,8 @@ export default function Navbar() {
     setFlowAllQuestions,
   ] = useContext(FlowContext);
   const [intentState, setIntentState] = useContext(IntentContext);
-  const [, setSpeaker, , setPrevSpeaker] = useContext(SpeakerContext);
+  const [, setSpeaker, , setPrevSpeaker, , setIsIntents] =
+    useContext(SpeakerContext);
   const [
     ,
     setQuestionState,
@@ -101,6 +102,7 @@ export default function Navbar() {
     setSpeechList([]);
     setTranscriptID(null);
     setIntentState({});
+    setIsIntents(false);
   };
 
   return (

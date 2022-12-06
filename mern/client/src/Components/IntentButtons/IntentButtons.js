@@ -16,7 +16,6 @@ import GenericButton from "../Buttons/GenericButton";
 export default function IntentButtons(props) {
   // define context var to determine the state of the intent buttons
   const [intentState, setIntentState] = useContext(IntentContext);
-
   var values = [];
   return (
     <div className="container items-center">
@@ -72,7 +71,7 @@ export default function IntentButtons(props) {
               // this is able to trigger React to re-render
               setIntentState(JSON.parse(JSON.stringify(intentState)));
             }}
-          ></GenericButton>
+          />
         );
       })}
     </div>

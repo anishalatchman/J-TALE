@@ -76,4 +76,5 @@
 .bolded {
   @apply font-nunito;
   font-weight: 800;
+  cursor: pointer;
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import styles from "./StartingIntent.module.css";
 import "./../../Components/Buttons/ButtonStyleSheet.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
@@ -12,10 +12,16 @@ import { ScrollerContext } from "../../Contexts/scrollerProvider";
 import selectIntentController from "../../utils/Controller/selectIntentController";
 
 function StartingIntent() {
-  // Defining contexts and usestates
+  // Defining contexts
   const [currQA, setcurrQAState] = useContext(qaContext);
-  const [currSpeaker, setSpeaker, prevSpeaker, setPrevSpeaker] =
-    useContext(SpeakerContext);
+  const [
+    currSpeaker,
+    setSpeaker,
+    prevSpeaker,
+    setPrevSpeaker,
+    isIntents,
+    setIsIntents,
+  ] = useContext(SpeakerContext);
   const [intentState] = useContext(IntentContext);
   const [
     ,
@@ -31,9 +37,6 @@ function StartingIntent() {
 
   // Creating an instance of the QA class
   const selectIntent = new selectIntentController();
-
-  //Boolean for whether intents are being selected
-  const [isIntents, setIsIntents] = useState(false);
 
   //Changes the states and identifiers of who's speech is being selected
   const handleSpeakerChange = () => {
