@@ -190,7 +190,7 @@ function StartingIntent() {
               </h4>
               <h4 className={styles.instructions}>
                 Choose a specific path by <strong>clicking again</strong> and
-                selecting next.
+                selecting continue.
               </h4>
             </div>
           </>

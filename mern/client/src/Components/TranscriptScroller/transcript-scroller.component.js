@@ -127,6 +127,9 @@ export default function Scrollbar() {
       <div className={styles.transcriptContainer}>
         <div className={styles.transcriptHeader}>
           <h1 className={styles.scrollerTitle}>Transcript</h1>
+          <p className={styles.transcriptSubtitle}>
+            Click on a previous response to return to it.
+          </p>
         </div>
         {speechList.length === 0 ? (
           <></>
