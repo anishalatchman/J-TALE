@@ -127,6 +127,7 @@ function UploadTranscript() {
   };
 
   const populatingQuestionContext = async () => {
+    console.log("Here's the flowStartingQuestions", flowStartingQuestions);
     await setNextQuestions(getQAs(flowStartingQuestions));
     await setAllQuestions(getQAs(flowAllQuestions));
   };

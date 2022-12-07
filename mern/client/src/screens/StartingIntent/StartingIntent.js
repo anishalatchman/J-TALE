@@ -135,12 +135,6 @@ function StartingIntent() {
     return speech;
   };
 
-  console.log(currQA, "STARTING QA");
-
-  useEffect(() => {
-    console.log(currQA, "USEEFFECT QA");
-  }, [currQA]);
-
   return (
     <div className="container">
       <div className={styles.scroller}>

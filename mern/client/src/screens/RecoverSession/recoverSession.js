@@ -50,54 +50,41 @@ export default function RecoverSession() {
     // prevent page reload
     event.preventDefault();
     // set sessionid before loading starting-intent page
-    const flow = await recoverFlow(inputText);
-    const startingQA = await setFlowVars(flow);
-    await LoadSession(startingQA);
-    PageChange("/startingintent");
+    LoadSession();
   };
 
   // recovers flow from DB and sets current_qa context state
-  const LoadSession = async (startingQA) => {
+  const LoadSession = async () => {
+    const flow = await recoverFlow(inputText);
     if (flow) {
       setShowError(false);
-      // console.log("Starting QA: ", startingQA);
+      const startingQA = await recoverStartingQA(flow);
 
-      console.log(flowStartingQuestions, "FLOW STARTING");
-      await setNextQuestions(getQAs(flowStartingQuestions));
-      console.log(flowStartingQuestions, "FLOW ENDING");
-
-      setCurrQA(startingQA);
-      // flowContext is question ID's, questionContext is json objects
-      console.log(flowAllQuestions, "FLOW ALL STARTING");
-
-      await setAllQuestions(getQAs(flowAllQuestions));
-      console.log(flowAllQuestions, "FLOW ALL STARTING");
-
+      // SET VARS FOR STARTING-INTENT
+      setSessionID(inputText);
+      await setCurrQA(startingQA);
+      setTranscriptID(flow.transcriptID);
+      setFlowState(flow);
       setIsIntents(true);
       setSpeaker("User:");
       setPrevSpeaker("Bot:");
-      // console.log("This is nextQuestions: ", nextQuestions)
-      // console.log("This is currQA.intents: ", currQA.intents)
+      await setFlowStartingQuestions(flow.questions);
+      await setNextQuestions(getQAs(flowStartingQuestions));
+      await setAllQuestions(getQAs(flowAllQuestions));
+      // flowContext is question ID's, questionContext is json objects
+      setFlowAllQuestions(flow.allQuestions);
+      setAllQuestions(flow.allQuestions);
 
       // Show User: and Bot: labels if not on first question
       if (flow.current_question !== "") {
         setIsFirstQuestion(false);
         setPrevPrompt(currQA.question);
       }
+
+      PageChange("/startingintent");
     } else {
       setShowError(true);
     }
-  };
-
-  const setFlowVars = async (flow) => {
-    const startingQA = await recoverStartingQA(flow);
-    // SET VARS FOR STARTING-INTENT
-    setSessionID(inputText);
-    setFlowStartingQuestions(flow.questions);
-    setFlowAllQuestions(flow.allQuestions);
-    setTranscriptID(flow.transcriptID);
-    setFlowState(flow);
-    return startingQA;
   };
 
   const handleChange = (event) => {
