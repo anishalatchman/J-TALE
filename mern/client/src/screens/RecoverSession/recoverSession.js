@@ -18,7 +18,7 @@ export default function RecoverSession() {
   const [, setCurrQA] = useContext(qaContext);
   const [inputText, setInputText] = useState("");
   const [showError, setShowError] = useState(false);
-  const [speechList, setSpeechList] = useContext(ScrollerContext);
+  const [, setSpeechList] = useContext(ScrollerContext);
   // CONTEXTS TO IMPLEMENT FROM STARTING-INTENT
   const [, setFlowState, , setFlowStartingQuestions, , setFlowAllQuestions] =
     useContext(FlowContext);
@@ -84,12 +84,10 @@ export default function RecoverSession() {
         setIsFirstQuestion(false);
         setPrevPrompt(startingQA.question);
       }
-
       PageChange("/startingintent");
     } else {
       setShowError(true);
     }
-    PageChange("/startingintent");
   };
 
   const setFlowVars = (flow) => {
