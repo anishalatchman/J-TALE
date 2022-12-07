@@ -17,7 +17,8 @@ export default function RecoverSession() {
   const [, setSessionID, , setTranscriptID] = useContext(SessionContext);
   const [, setCurrQA] = useContext(qaContext);
   const [inputText, setInputText] = useState("");
-  const [showError, setShowError] = useState(false);
+  // const [showError, setShowError] = useState(false);
+  const [infoMsg, setInfoMsg] = useState("");
   const [, setSpeechList] = useContext(ScrollerContext);
   // CONTEXTS TO IMPLEMENT FROM STARTING-INTENT
   const [, setFlowState, , setFlowStartingQuestions, , setFlowAllQuestions] =
@@ -54,44 +55,45 @@ export default function RecoverSession() {
     event.preventDefault();
     // set sessionid before loading starting-intent page
     const flow = await recoverFlow(inputText);
-    const startingQA = await setFlowVars(flow);
-    const questionsObj = {
-      next: await getQAs(flow.questions),
-      all: await getQAs(flow.allQuestions),
-    };
-    LoadSession(startingQA, flow, questionsObj);
+    if (flow) {
+      setInfoMsg("Loading your session...");
+      const startingQA = await setFlowVars(flow);
+      const questionsObj = {
+        next: await getQAs(flow.questions),
+        all: await getQAs(flow.allQuestions),
+      };
+      LoadSession(startingQA, flow, questionsObj);
+    } else {
+      setInfoMsg("Invalid Session ID. Please try again.");
+    }
   };
 
   // recovers flow from DB and sets current_qa context state
   const LoadSession = (startingQA, flow, questionsObj) => {
-    if (flow) {
-      setShowError(false);
-      // console.log("Starting QA: ", startingQA);
-      setNextQuestions(questionsObj.next);
-      setAllQuestions(questionsObj.all);
+    setInfoMsg("");
+    // console.log("Starting QA: ", startingQA);
+    setNextQuestions(questionsObj.next);
+    setAllQuestions(questionsObj.all);
 
-      setCurrQA(startingQA);
-      // flowContext is question ID's, questionContext is json objects
+    setCurrQA(startingQA);
+    // flowContext is question ID's, questionContext is json objects
 
-      setIsIntents(true);
-      setSpeaker("Bot:");
-      setPrevSpeaker("User:");
+    setIsIntents(true);
+    setSpeaker("Bot:");
+    setPrevSpeaker("User:");
 
-      // Show User: and Bot: labels if not on first question
-      if (flow.current_question !== "") {
-        setIsFirstQuestion(false);
-        setPrevPrompt(startingQA.question);
-      }
-    } else {
-      setShowError(true);
+    // Show User: and Bot: labels if not on first question
+    if (flow.current_question !== "") {
+      setIsFirstQuestion(false);
+      setPrevPrompt(startingQA.question);
     }
+    setSessionID(inputText);
     PageChange("/startingintent");
   };
 
   const setFlowVars = (flow) => {
     const startingQA = recoverStartingQA(flow);
     // SET VARS FOR STARTING-INTENT
-    setSessionID(inputText);
     setFlowStartingQuestions(flow.questions);
     setFlowAllQuestions(flow.allQuestions);
     setTranscriptID(flow.transcriptID);
@@ -116,9 +118,15 @@ export default function RecoverSession() {
   return (
     <div className="container">
       <h1 className={styles.pageTitle}>Recover Session</h1>
-      {showError ? (
-        <h2 className={styles.errorLabel}>
-          Invalid Session ID. Please try again.
+      {infoMsg !== "" ? (
+        <h2
+          className={
+            infoMsg === "Loading your session..."
+              ? styles.loadingLabel
+              : styles.errorLabel
+          }
+        >
+          {infoMsg}
         </h2>
       ) : (
         <></>

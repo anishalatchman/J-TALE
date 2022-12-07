@@ -15,7 +15,7 @@
 }
 
 .buttonRow {
-  @apply mb-10 items-center justify-center flex flex-row;
+  @apply items-center justify-center flex flex-row;
   /* @apply px-20 mb-5 justify-center flex flex-row; */
 }
 

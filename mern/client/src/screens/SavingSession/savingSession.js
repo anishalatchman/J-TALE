@@ -122,27 +122,29 @@ export default function SavingSession() {
           <input
             className={styles.input}
             type="text"
-            readonly
+            readOnly
             placeholder={sessionID}
           />
+          <div className={styles.buttonRow}>
+            <GenericButton
+              buttonType="white"
+              onClick={() => {
+                navigator.clipboard.writeText(sessionID);
+              }}
+              disabled={false}
+              text={"Copy to Clipboard"}
+            />
+            <GenericButton
+              buttonType="white"
+              onClick={() => {
+                setShowModal(true);
+              }}
+              disabled={false}
+              text={"Email Session ID"}
+            />
+          </div>
         </div>
         <div>
-          <GenericButton
-            buttonType="white"
-            onClick={() => {
-              navigator.clipboard.writeText(sessionID);
-            }}
-            disabled={false}
-            text={"Copy to Clipboard"}
-          />
-          <GenericButton
-            buttonType="white"
-            onClick={() => {
-              setShowModal(true);
-            }}
-            disabled={false}
-            text={"Email Session ID"}
-          />
           {setShowModal && (
             <Modal
               show={showModal}
