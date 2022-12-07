@@ -4,14 +4,14 @@
   right: 40px;
 }
 .success {
-  @apply bg-green-500 rounded-3xl shadow-lg relative flex justify-center flex-col;
+  @apply bg-green-500 rounded-3xl shadow-lg relative flex justify-center flex-col z-10;
   width: 240px;
   min-height: 60px;
   height: auto;
 }
 
 .failure {
-  @apply bg-red-500 rounded-3xl shadow-lg relative flex justify-center flex-col;
+  @apply bg-red-500 rounded-3xl shadow-lg relative flex justify-center flex-col z-10;
   width: 240px;
   min-height: 60px;
   height: auto;

@@ -129,7 +129,7 @@ function UploadTranscript() {
     return uploadFile.getQAList(idList);
   };
 
-  const populatingQuestionContet = async () => {
+  const populatingQuestionContent = async () => {
     await setNextQuestions(getQAs(flowStartingQuestions));
     await setAllQuestions(getQAs(flowAllQuestions));
   };
@@ -196,7 +196,7 @@ function UploadTranscript() {
               uploadFile.deleteQAs(flowAllQuestions);
             }}
             onSubmit={() => {
-              populatingQuestionContet();
+              populatingQuestionContent();
               uploadFlow(
                 flowName.name,
                 flowStartingQuestions,
