@@ -1,5 +1,5 @@
 import React from "react";
-import { useRef, useState, useContext } from "react";
+import { useRef, useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./uploadTranscript.module.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
@@ -133,6 +133,29 @@ function UploadTranscript() {
     await setNextQuestions(getQAs(flowStartingQuestions));
     await setAllQuestions(getQAs(flowAllQuestions));
   };
+
+  useEffect(() => {
+    const keyDownHandler = (event) => {
+      console.log("User pressed: ", event.key);
+
+      if (event.key === "Enter") {
+        event.preventDefault();
+        populatingQuestionContent();
+        uploadFlow(
+          flowName.name,
+          flowStartingQuestions,
+          flowAllQuestions,
+          transcriptID
+        );
+      }
+    };
+
+    document.addEventListener("keydown", keyDownHandler);
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
+  }, []);
 
   return (
     <div className="container">

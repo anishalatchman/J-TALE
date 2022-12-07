@@ -29,13 +29,13 @@ const Modal = (props) => {
           <h4 className="modal-title">{props.title}</h4>
         </div>
         <div className="modal-body">
-          <form>
-            {props.valid ? (
-              <></>
-            ) : (
-              <div className="modal-alert"> {props.alert} </div>
-            )}
-            {props.input ? (
+          {props.valid ? (
+            <></>
+          ) : (
+            <div className="modal-alert"> {props.alert} </div>
+          )}
+          {props.input ? (
+            <form>
               <input
                 className="modal-input"
                 type="text"
@@ -44,10 +44,10 @@ const Modal = (props) => {
                 value={props.value}
                 onChange={props.onChange}
               />
-            ) : (
-              <></>
-            )}
-          </form>
+            </form>
+          ) : (
+            <></>
+          )}
         </div>
         <div className="modal-footer">
           <GenericButton
