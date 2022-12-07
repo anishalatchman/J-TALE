@@ -129,7 +129,6 @@ describe("Upload Flow Interactor Tests", () => {
       [{ id: "00000010", question: "Why are you still awake?" }],
     ]);
 
-    console.log(res);
     expect(res).toEqual({
       startingList: ["00000001", "00000010"],
       allQuestionList: ["00000001", "00000010"],

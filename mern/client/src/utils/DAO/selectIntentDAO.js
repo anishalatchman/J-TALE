@@ -8,7 +8,6 @@ export default class selectIntentDAO {
         `${process.env.REACT_APP_BACKEND_URL}/qa/update`,
         qa
       );
-      console.log(res);
       return res;
     } catch (e) {
       console.log(e.response.data);
