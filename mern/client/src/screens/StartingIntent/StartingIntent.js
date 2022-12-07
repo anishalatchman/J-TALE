@@ -160,7 +160,7 @@ function StartingIntent() {
             </h3>
             <div className={styles.instructionsContainer}>
               <h4 className={styles.instructions}>
-                Click through the transcript to complete another path.
+                Click through the current flow to complete another path.
               </h4>
             </div>
           </>
