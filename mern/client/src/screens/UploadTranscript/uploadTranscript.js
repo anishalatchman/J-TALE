@@ -181,10 +181,11 @@ function UploadTranscript() {
           disabled={false}
           text={"Go Back"}
         />
-        {setShowModal && (
+        {
           <Modal
             show={showModal}
             title="Name your flow to begin"
+            input={true}
             body="Enter your flow name"
             value={flowName.name}
             valid={true}
@@ -204,7 +205,7 @@ function UploadTranscript() {
               );
             }}
           />
-        )}
+        }
       </div>
     </div>
   );

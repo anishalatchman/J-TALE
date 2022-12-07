@@ -13,13 +13,16 @@ import { QuestionContext } from "../../Contexts/questionProvider";
 import { ScrollerContext } from "../../Contexts/scrollerProvider";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
 import Modal from "../Modals/GenericModal";
+import Alert from "../Alerts/GenericAlert";
 
 export default function Navbar() {
   // define context var to show/hide nav buttons
   const [currQA, setcurrQAState] = useContext(qaContext);
   const [showModalDelete, setShowModalDelete] = useState(false);
-  const [showModalDeleteFail, setShowModalDeleteFail] = useState(false);
-  const [showModalSaveFail, setShowModalSaveFail] = useState(false);
+  const [showAlertDeleteSuccess, setShowAlertDeleteSuccess] = useState(false);
+  const [showAlertDeleteFail, setShowAlertDeleteFail] = useState(false);
+  const [showAlertSaveFail, setShowAlertSaveFail] = useState(false);
+  const [showAlertSaveSuccess, setShowAlertSaveSuccess] = useState(false);
   const [
     currFlow,
     setFlowState,
@@ -55,10 +58,19 @@ export default function Navbar() {
     saveSession.saveFlow(currFlow, currQA, sessionID).then((res) => {
       if (!res) {
         alert("Unable to Save");
+        setShowAlertSaveFail(true);
+        setTimeout(() => {
+          setShowAlertSaveFail(false);
+        }, 3000);
+        // handleSaveError();
         return;
       } else {
         // alert("Saved Successfully");
-
+        setShowAlertSaveSuccess(true);
+        setTimeout(() => {
+          setShowAlertSaveSuccess(false);
+        }, 3000);
+        // handleSaveSuccess();
         PageChange("/save");
         // Disables continue button by resets intentState values to 0
         Object.keys(intentState).forEach((key) => {
@@ -74,10 +86,19 @@ export default function Navbar() {
     deleteFlow.deleteFlow(currFlow, sessionID).then((res) => {
       if (!res) {
         alert("Unable to Delete");
+        // handleDeleteError();
+        setShowAlertDeleteFail(true);
+        setTimeout(() => {
+          setShowAlertDeleteFail(false);
+        }, 3000);
       } else {
         // alert("Successfully Deleted");
         setShowModalDelete(false);
-
+        setShowAlertDeleteSuccess(true);
+        setTimeout(() => {
+          setShowAlertDeleteSuccess(false);
+        }, 3000);
+        // handleDeleteSuccess();
         PageChange("/");
 
         // Resets all contexts to original value\
@@ -109,7 +130,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className={styles.something}>
+    <div>
       <nav className={styles.navbarBG}>
         <Link
           to="/"
@@ -155,14 +176,34 @@ export default function Navbar() {
       <Modal
         show={showModalDelete}
         title="Delete Your Session?"
-        body="It will be gone forever!"
-        valid={true}
+        valid={false}
+        alert="Your work will be gone forever!"
         onClose={() => {
           setShowModalDelete(false);
         }}
         onSubmit={() => {
           tryDelete(currFlow, sessionID);
         }}
+      />
+      <Alert
+        show={showAlertSaveSuccess}
+        success={true}
+        message="Successfully Saved!"
+      />
+      <Alert
+        show={showAlertSaveFail}
+        success={false}
+        message="Unable to Save"
+      />
+      <Alert
+        show={showAlertDeleteSuccess}
+        success={true}
+        message="Successfully Deleted!"
+      />
+      <Alert
+        show={showAlertDeleteFail}
+        success={false}
+        message="Unable to Delete"
       />
     </div>
   );

@@ -1,0 +1,20 @@
+.alert {
+  @apply absolute;
+  top: 80px;
+  right: 40px;
+}
+.success {
+  @apply bg-green-500 rounded-3xl shadow-lg relative flex justify-center flex-col;
+  width: 240px;
+  height: 60px;
+}
+
+.failure {
+  @apply bg-red-500 rounded-3xl shadow-lg relative flex justify-center flex-col;
+  width: 240px;
+  height: 60px;
+}
+
+.text {
+  @apply text-center text-white font-nunito font-bold text-xl;
+}

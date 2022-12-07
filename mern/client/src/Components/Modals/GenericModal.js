@@ -8,6 +8,7 @@ import GenericButton from "../Buttons/GenericButton";
  */
 /** @prop {boolean} [show] : whether the modal shows or not*/
 /** @prop {String} [title] : title of modal, possible instructions for user*/
+/** @prop {boolean} [input] : whether the modal had an input */
 /** @prop {String} [body] : placeholder for text input box*/
 /** @prop {String} [value] : value of input user puts in form*/
 /** @prop {function} [onChange] : the function to be executed when changing input value on form*/
@@ -34,14 +35,18 @@ const Modal = (props) => {
             ) : (
               <div className="modal-alert"> {props.alert} </div>
             )}
-            <input
-              className="modal-input"
-              type="text"
-              name="name"
-              placeholder={props.body}
-              value={props.value}
-              onChange={props.onChange}
-            />
+            {props.input ? (
+              <input
+                className="modal-input"
+                type="text"
+                name="name"
+                placeholder={props.body}
+                value={props.value}
+                onChange={props.onChange}
+              />
+            ) : (
+              <></>
+            )}
           </form>
         </div>
         <div className="modal-footer">
