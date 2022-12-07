@@ -56,10 +56,11 @@ export default class uploadFileInteractor {
     }
   }
 
-  getQAList(idList) {
+  async getQAList(idList) {
+    // given a list of QA ids, returns list of QA objects
     const lst = [];
     for (var i = 0; i < idList.length; i++) {
-      uploadDAO.getQAByID(idList[i]).then((response) => {
+      await uploadDAO.getQAByID(idList[i]).then((response) => {
         //If response is successful, change to next page and show the additional navbar info
         if (response.status) {
           lst.push(response.data);

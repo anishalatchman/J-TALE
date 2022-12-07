@@ -38,16 +38,19 @@
 .intent0 {
   @apply h-24 border-2 border-voiceflow-blue m-2 rounded-lg p-3 pl-6 pr-6 text-voiceflow-blue font-nunito font-bold;
   width: 330px;
+  font-size: 18px;
 }
 
 .intent1 {
   @apply h-24 bg-voiceflow-blue-light border-2 border-voiceflow-blue-light m-2 rounded-lg p-3 pl-6 pr-6 text-white font-nunito font-bold;
   width: 330px;
+  font-size: 18px;
 }
 
 .intent2 {
   @apply h-24 bg-voiceflow-blue border-2 border-voiceflow-blue m-2 rounded-lg p-3 pl-6 pr-6 text-white font-nunito font-bold;
   width: 330px;
+  font-size: 18px;
 }
 
 .modalCancel {
@@ -59,5 +62,5 @@
 }
 
 .nav {
-  @apply rounded-full ml-3 p-1 px-6 text-white bg-voiceflow-blue-light font-nunito font-medium;
+  @apply justify-center rounded-full ml-3 p-1 px-6 text-white bg-voiceflow-blue-light font-nunito font-medium;
 }

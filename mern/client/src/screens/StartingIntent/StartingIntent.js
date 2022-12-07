@@ -26,8 +26,8 @@ function StartingIntent() {
   ] = useContext(SpeakerContext);
   const [intentState] = useContext(IntentContext);
   const [
-    ,
-    ,
+    isFirstQuestion,
+    setIsFirstQuestion,
     nextQuestions,
     setNextQuestions,
     allQuestions,
@@ -52,6 +52,8 @@ function StartingIntent() {
   const handleQAChange = () => {
     //Speech is used as an identifier for selected question/intent
     const speech = getSpeech();
+    console.log(prevSpeaker, "PREV SPEAKe");
+    console.log(currSpeaker, "CURRENT SPEAK");
 
     // This if statement differentiates between whether we are choosing questions or intents
     // If !buttons, we are choosing questions and if buttons we are choosing intents
@@ -59,7 +61,7 @@ function StartingIntent() {
       const intent = currQA.intents.find((x) => x.value === speech);
       const lst = findNextQuestions(intent);
       setNextQuestions(lst);
-      setSpeechList([
+      currFlow.speechList = [
         ...speechList,
         {
           source: prevSpeaker,
@@ -67,11 +69,9 @@ function StartingIntent() {
           question: intent,
           optionsLength: currQA.intents.length,
         },
-      ]);
-
-      // Sets speech list to currFlow
-      currFlow.speechList = speechList;
-      setFlowState(currFlow);
+      ];
+      setSpeechList(currFlow.speechList);
+      setFlowState(JSON.parse(JSON.stringify(currFlow)));
 
       const temp = [];
       // Goes through all questions and updates the list with the intents of the current question to be true
@@ -105,8 +105,7 @@ function StartingIntent() {
 
       // Makes Call to DB to update QA
       selectIntent.updateQA(nextQA);
-
-      setSpeechList([
+      currFlow.speechList = [
         ...speechList,
         {
           source: prevSpeaker,
@@ -114,17 +113,20 @@ function StartingIntent() {
           question: nextQA,
           optionsLength: nextQuestions.length,
         },
-      ]);
-
-      // Sets speech list to currFlow
-      currFlow.speechList = speechList;
-      setFlowState(currFlow);
+      ];
+      setSpeechList(currFlow.speechList);
+      setFlowState(JSON.parse(JSON.stringify(currFlow)));
     }
-
     // Disables continue button by resets intentState values to 0
     Object.keys(intentState).forEach((key) => {
       intentState[key] = 0;
     });
+  };
+
+  const setFlowSpeechList = () => {
+    console.log(speechList, "speech list");
+    // Sets speech list to currFlow
+    currFlow.speechList = speechList;
   };
 
   //Find the list of next questions, depending on the selected intent
@@ -151,53 +153,69 @@ function StartingIntent() {
         <Scrollbar />
       </div>
       <div className={styles.intentContainer}>
-        <h4 className={styles.speaker1}>{prevSpeaker}</h4>
-        <h1 className={styles.intentTitle}>{prevPrompt}</h1>
+        {nextQuestions.length === 0 || currQA?.intents?.length === 0 ? (
+          <>
+            <h3 className={styles.intentTitle}>
+              This flow has been completed!
+            </h3>
+            <div className={styles.instructionsContainer}>
+              <h4 className={styles.instructions}>
+                Click through the transcript to complete another path.
+              </h4>
+            </div>
+          </>
+        ) : (
+          <>
+            {isFirstQuestion ? (
+              <>
+                <h1 className={styles.intentTitle}>{prevPrompt}</h1>
+                <h4 className={styles.speaker2}>{prevSpeaker}</h4>
+              </>
+            ) : (
+              <>
+                <h4 className={styles.speaker1}>{prevSpeaker}</h4>
+                <h1 className={styles.intentTitle}>{prevPrompt}</h1>
+                <h4 className={styles.speaker2}>{currSpeaker}</h4>
+              </>
+            )}
 
-        <div>
-          {nextQuestions.length === 0 || currQA?.intents?.length === 0 ? (
-            <>
-              <h3 className={styles.completed}>
-                Your flow has been completed! Click the transcript to jump back.
-              </h3>
-            </>
-          ) : (
-            <>
-              <h4 className={styles.speaker2}>{currSpeaker}</h4>
+            <IntentButtons
+              intents={isIntents ? currQA.intents : nextQuestions}
+              user={isIntents}
+            />
+            <div className={styles.instructionsContainer}>
+              <h4 className={styles.instructions}>
+                Select intents you would like to include by{" "}
+                <strong>clicking once</strong>.
+              </h4>
+              <h4 className={styles.instructions}>
+                Choose a specific path by <strong>clicking again</strong> and
+                selecting continue.
+              </h4>
+            </div>
+          </>
+        )}
+      </div>
 
-              <IntentButtons
-                intents={isIntents ? currQA.intents : nextQuestions}
-                user={isIntents}
-              />
-              <div>
-                <h4 className={styles.instructions}>
-                  Select intents you would like to include by clicking once.
-                </h4>
-                <h4 className={styles.instructions1}>
-                  Choose a specific path by clicking again and selecting next.
-                </h4>
-              </div>
-            </>
-          )}
-        </div>
-
-        <div className={styles.buttonContainer}>
-          <GenericButton
-            buttonType={
-              Object.values(intentState).some((x) => x === 2)
-                ? "blue"
-                : "disabled"
-            }
-            text={"Continue"}
-            disabled={
-              Object.values(intentState).some((x) => x === 2) ? false : true
-            }
-            onClick={() => {
-              handleQAChange();
-              handleSpeakerChange();
-            }}
-          />
-        </div>
+      <div className={styles.buttonContainer}>
+        <GenericButton
+          buttonType={
+            Object.values(intentState).some((x) => x === 2)
+              ? "blue"
+              : "disabled"
+          }
+          text={"Continue"}
+          disabled={
+            Object.values(intentState).some((x) => x === 2) ? false : true
+          }
+          onClick={() => {
+            handleQAChange();
+            handleSpeakerChange();
+            setFlowSpeechList(); //Separate for state rendering
+            // Show User: and Bot: labels
+            setIsFirstQuestion(false);
+          }}
+        />
       </div>
     </div>
   );
