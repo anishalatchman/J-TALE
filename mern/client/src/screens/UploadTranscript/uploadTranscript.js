@@ -153,7 +153,7 @@ function UploadTranscript() {
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
     };
-  }, []);
+  });
 
   return (
     <div className="container">
