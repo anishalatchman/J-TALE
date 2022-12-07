@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 .intentTitle {
-  @apply text-left mb-3 ml-4 font-montserrat font-bold;
-  font-size: 58px;
+  @apply text-left mb-3 font-montserrat font-bold;
+  font-size: 50px;
 }
 
 .intentContainer {
-  @apply w-3/4;
+  @apply w-7/12 mt-12;
 }
 
 .buttonContainer {
@@ -16,40 +16,24 @@
 }
 
 .instructions {
-  @apply text-gray text-left ml-4 mt-2;
+  @apply text-left text-black;
+  font-size: 18px;
 }
 
-.instructions1 {
-  @apply text-gray text-left ml-4 mb-4;
+.instructionsContainer {
+  @apply inline-block bg-voiceflow-grey-light mt-4 mb-2 p-4 rounded-lg;
 }
 
-.scroller{
+.scroller {
   @apply ml-8;
 }
 
 .speaker1 {
-  @apply text-gray text-left ml-4 mt-12;
+  @apply text-gray text-left;
 }
 
 .speaker2 {
-  @apply text-gray text-left ml-4;
-}
-
-.buttonContainer1 {
-  @apply px-20 mb-5 items-center flex flex-col;
-}
-
-.buttonContainer2 {
-  @apply px-20 mb-5 justify-center flex flex-row;
-}
-
-.button1 {
-  @apply w-64 h-20 border-2 border-voiceflow-blue mb-5 rounded-full p-3 bg-voiceflow-blue text-white font-nunito;
-  font-size: 27px;
-}
-
-.button2 {
-  @apply border-2 border-voiceflow-blue mb-5 rounded-full p-3 text-voiceflow-blue;
+  @apply text-gray text-left mt-6;
 }
 
 .upload-icon {
@@ -60,7 +44,12 @@
   @apply mr-2;
 }
 
-.completed{
-  @apply text-left mb-3 ml-4 font-montserrat font-bold pt-8;
-  font-size: 38px;
-}
+/* .completed {
+  @apply text-left ml-4 font-montserrat font-bold pt-8;
+  font-size: 50px;
+} */
+
+/* .completedSubtitle {
+  @apply text-left mb-3 ml-4 font-montserrat pt-8;
+  font-size: 18px;
+} */
