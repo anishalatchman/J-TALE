@@ -20,7 +20,7 @@ export async function saveSession(flow, qa, sessionID) {
 
 // Takes in a qa object and sessionID and updates the flow object
 export async function saveQA(qa) {
-  return await axios.put("http://localhost:5000/qa/update", qa);
+  return await axios.put(`${process.env.REACT_APP_BACKEND_URL}/qa/update`, qa);
 }
 
 // Takes in the flow object, current question and session id to update the flow parameter with
@@ -28,7 +28,7 @@ export async function saveQA(qa) {
 export async function saveFlow(flow, qa, sessionID) {
   flow.current_question = qa.id;
   return await axios.put(
-    `http://localhost:5000/flow/update/${sessionID}`,
+    `${process.env.REACT_APP_BACKEND_URL}/flow/update/${sessionID}`,
     flow
   );
 }

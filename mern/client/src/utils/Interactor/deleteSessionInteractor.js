@@ -1,13 +1,14 @@
 import deleteSessionDAO from "../DAO/deleteSessionDAO";
 
-const deleteDAO = new deleteSessionDAO();
-
 export default class deleteSessionInteractor {
+  constructor() {
+    this.deleteDAO = new deleteSessionDAO();
+  }
   // Loops through the questions list in flow and deletes each item (helper to qaDeleted)
   async removeQAs(flow) {
     for (var i = 0; i < flow.allQuestions.length; i++) {
       try {
-        await deleteDAO.deleteqa(flow.allQuestions[i]);
+        await this.deleteDAO.deleteqa(flow.allQuestions[i]);
       } catch {
         return false;
       }
@@ -29,7 +30,7 @@ export default class deleteSessionInteractor {
   async flowDeleted(sessionID) {
     // Delete the flow itself
     var flowDeleted = false;
-    await deleteDAO.removeFlow(sessionID).then((response) => {
+    await this.deleteDAO.removeFlow(sessionID).then((response) => {
       if (response.status === 200) {
         flowDeleted = true;
       }
@@ -40,7 +41,7 @@ export default class deleteSessionInteractor {
   //Deletes transcript and returns status of success
   async transcriptDeleted(transcriptID) {
     var transcriptDeleted = false;
-    await deleteDAO.removeTranscript(transcriptID).then((response) => {
+    await this.deleteDAO.removeTranscript(transcriptID).then((response) => {
       if (response.status === 200) {
         transcriptDeleted = true;
       }

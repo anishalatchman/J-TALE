@@ -1,14 +1,17 @@
-// import server from "./httpSource";
 import axios from "axios";
 
 export default class uploadFileDAO {
+  constructor() {}
+
   async uploadFile(transcript) {
+    console.log("testing");
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/transcript/add`,
         transcript
       );
       console.log("Transcript Uploaded!");
+      console.log(res);
       return res.data.id;
     } catch (e) {
       return false;

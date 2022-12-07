@@ -1,6 +1,6 @@
 // These set of tests apply to the upload transcript use case
 import axios from "axios";
-import uploadFile from "../utils/DAO/uploadFileDAO";
+import uploadFile from "../../utils/DAO/uploadFileDAO";
 
 jest.mock("axios");
 
@@ -90,5 +90,3 @@ describe("DAO Tests", () => {
     jest.resetAllMocks();
   });
 });
-
-describe("Interactor Tests", () => {});
