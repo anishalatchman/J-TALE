@@ -138,7 +138,7 @@ function UploadTranscript() {
     const keyDownHandler = (event) => {
       if (event.key === "Enter") {
         event.preventDefault();
-        populatingQuestionContent();
+        populatingQuestionContext();
         uploadFlow(
           flowName.name,
           flowStartingQuestions,
