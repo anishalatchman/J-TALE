@@ -60,13 +60,13 @@ export default function Navbar() {
         setShowAlertSaveFail(true);
         setTimeout(() => {
           setShowAlertSaveFail(false);
-        }, 3000);
+        }, 1000);
         return;
       } else {
         setShowAlertSaveSuccess(true);
         setTimeout(() => {
           setShowAlertSaveSuccess(false);
-        }, 3000);
+        }, 1000);
         PageChange("/save");
         // Disables continue button by resets intentState values to 0
         Object.keys(intentState).forEach((key) => {
@@ -84,13 +84,13 @@ export default function Navbar() {
         setShowAlertDeleteFail(true);
         setTimeout(() => {
           setShowAlertDeleteFail(false);
-        }, 3000);
+        }, 1000);
       } else {
         setShowModalDelete(false);
         setShowAlertDeleteSuccess(true);
         setTimeout(() => {
           setShowAlertDeleteSuccess(false);
-        }, 3000);
+        }, 1000);
         PageChange("/");
 
         // Resets all contexts to original value\

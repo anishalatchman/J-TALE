@@ -1,8 +1,8 @@
 .alert {
-  @apply absolute;
+  @apply justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-x-0 z-50;
   top: 80px;
-  right: 40px;
 }
+
 .success {
   @apply bg-green-500 rounded-3xl shadow-lg relative flex justify-center flex-col z-10;
   width: 240px;
@@ -11,12 +11,12 @@
 }
 
 .failure {
-  @apply bg-red-500 rounded-3xl shadow-lg relative flex justify-center flex-col z-10;
+  @apply bg-red-500 rounded-3xl shadow-lg relative flex justify-center items-center flex-col z-10;
   width: 240px;
   min-height: 60px;
   height: auto;
 }
 
 .text {
-  @apply text-center text-white font-nunito font-bold text-xl;
+  @apply text-center text-white font-nunito font-bold text-xl justify-center items-center;
 }

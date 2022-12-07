@@ -116,6 +116,11 @@ export default function SavingSession() {
 
   return (
     <div>
+      <Alert
+        show={showClipboardConfirmation}
+        success={true}
+        message="Copied to clipboard!"
+      />
       <div className="container">
         <h1 className={styles.pageTitle}> Session Saved </h1>
         <h4 className={styles.subTitle}>
@@ -134,7 +139,7 @@ export default function SavingSession() {
                 setClipboardConfirmation(true);
                 setTimeout(() => {
                   setClipboardConfirmation(false);
-                }, 3000);
+                }, 1000);
               }}
               disabled={false}
               text={"Copy to Clipboard"}
@@ -168,11 +173,6 @@ export default function SavingSession() {
                 }}
               />
             )}
-            <Alert
-              show={showClipboardConfirmation}
-              success={true}
-              message="Copied to clipboard!"
-            />
           </div>
         </div>
 
