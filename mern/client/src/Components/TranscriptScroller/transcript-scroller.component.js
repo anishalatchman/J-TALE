@@ -126,7 +126,7 @@ export default function Scrollbar() {
     <div className={styles.scroller}>
       <div className={styles.transcriptContainer}>
         <div className={styles.transcriptHeader}>
-          <h1 className={styles.scrollerTitle}>Transcript</h1>
+          <h1 className={styles.scrollerTitle}>Current flow</h1>
           <p className={styles.transcriptSubtitle}>
             Click on a previous response to return to it.
           </p>
@@ -160,7 +160,7 @@ export default function Scrollbar() {
           buttonType="white"
           onClick={() => downloadFile()}
           disabled={false}
-          text={"Export Transcript"}
+          text={"Export All Flows"}
         />
       </div>
     </div>
