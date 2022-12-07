@@ -28,7 +28,11 @@
 }
 
 .input {
-  @apply h-12 m-6 w-3/4 pl-4 pr-2 py-2 text-center block rounded-full bg-white font-nunito text-xl;
+  @apply m-6 w-3/4 pl-4 pr-2 pt-2 pb-2 text-center block rounded-full font-nunito;
+}
+
+.input::placeholder {
+  @apply text-black;
 }
 
 .output {

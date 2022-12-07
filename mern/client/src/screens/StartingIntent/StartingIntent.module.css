@@ -16,12 +16,12 @@
 }
 
 .instructions {
-  @apply text-gray text-left text-black;
+  @apply text-left text-black;
   font-size: 18px;
 }
 
 .instructionsContainer {
-  @apply inline-block bg-voiceflow-grey-light mt-4 mb-4 p-4 rounded-lg;
+  @apply inline-block bg-voiceflow-grey-light mt-4 mb-2 p-4 rounded-lg;
 }
 
 .scroller {
@@ -33,7 +33,7 @@
 }
 
 .speaker2 {
-  @apply text-gray text-left mt-8;
+  @apply text-gray text-left mt-6;
 }
 
 .buttonContainer1 {

@@ -125,7 +125,7 @@ export default function SavingSession() {
             className={styles.input}
             type="text"
             readonly
-            value={sessionID}
+            placeholder={sessionID}
           />
           {/* <div className={styles.input}>
             <p>{sessionID}</p>
