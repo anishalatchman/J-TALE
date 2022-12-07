@@ -1,8 +1,6 @@
 import axios from "axios";
 
 export default class uploadFileDAO {
-  constructor() {}
-
   async uploadFile(transcript) {
     try {
       const res = await axios.post(
