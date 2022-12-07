@@ -71,15 +71,22 @@
 }
 
 .transcriptText {
-  @apply pl-10 pb-10 pt-6;
+  @apply pb-10 pt-6;
 }
 
 .indent {
+  @apply pl-10 font-nunito;
   text-indent: 30px;
 }
 
 .bolded {
-  @apply font-nunito;
+  @apply pl-10 font-nunito;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.bolded:hover {
+  @apply font-nunito pl-10 bg-voiceflow-grey;
   font-weight: 800;
   cursor: pointer;
 }
