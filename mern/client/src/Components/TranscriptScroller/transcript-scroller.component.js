@@ -7,6 +7,7 @@ import { QuestionContext } from "../../Contexts/questionProvider";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
 import { qaContext } from "../../Contexts/qaProvider";
 import { FlowContext } from "../../Contexts/flowProvider";
+import { IntentContext } from "../../Contexts/intentsProvider";
 
 export default function Scrollbar() {
   const [, setSpeaker, , setPrevSpeaker, , setIsIntents] =
@@ -16,6 +17,7 @@ export default function Scrollbar() {
     useContext(QuestionContext);
   const [, setcurrQAState] = useContext(qaContext);
   const [, , flowStartingQuestions] = useContext(FlowContext);
+  const [intentState] = useContext(IntentContext);
 
   const downloadFile = () => {
     // Gets the flow data as a list of JSON object of QA pairs
@@ -57,6 +59,10 @@ export default function Scrollbar() {
     if (speechList.length !== 0) {
       setPrevPrompt(speechList[speechList.length - 1].text);
     }
+    // Disables continue button by resets intentState values to 0
+    Object.keys(intentState).forEach((key) => {
+      intentState[key] = 0;
+    });
   };
 
   //Sets values for properly reselecting questions
@@ -126,7 +132,7 @@ export default function Scrollbar() {
     <div className={styles.scroller}>
       <div className={styles.transcriptContainer}>
         <div className={styles.transcriptHeader}>
-          <h1 className={styles.scrollerTitle}>Transcript</h1>
+          <h1 className={styles.scrollerTitle}>Current flow</h1>
           <p className={styles.transcriptSubtitle}>
             Click on a previous response to return to it.
           </p>
@@ -160,7 +166,7 @@ export default function Scrollbar() {
           buttonType="white"
           onClick={() => downloadFile()}
           disabled={false}
-          text={"Export Transcript"}
+          text={"Export All Flows"}
         />
       </div>
     </div>

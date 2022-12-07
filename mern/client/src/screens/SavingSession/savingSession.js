@@ -11,6 +11,7 @@ import { IntentContext } from "../../Contexts/intentsProvider";
 import { QuestionContext } from "../../Contexts/questionProvider";
 import { ScrollerContext } from "../../Contexts/scrollerProvider";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
+import Alert from "../../Components/Alerts/GenericAlert";
 
 export default function SavingSession() {
   const [
@@ -41,6 +42,7 @@ export default function SavingSession() {
   const [showModal, setShowModal] = useState(false);
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(true);
+  const [showClipboardConfirmation, setClipboardConfirmation] = useState(false);
 
   const Navigate = useNavigate();
   const PageChange = (url) => {
@@ -112,6 +114,11 @@ export default function SavingSession() {
 
   return (
     <div>
+      <Alert
+        show={showClipboardConfirmation}
+        success={true}
+        message="Copied to clipboard!"
+      />
       <div className="container">
         <h1 className={styles.pageTitle}> Session Saved </h1>
         <h4 className={styles.subTitle}>
@@ -130,6 +137,10 @@ export default function SavingSession() {
               buttonType="white"
               onClick={() => {
                 navigator.clipboard.writeText(sessionID);
+                setClipboardConfirmation(true);
+                setTimeout(() => {
+                  setClipboardConfirmation(false);
+                }, 1000);
               }}
               disabled={false}
               text={"Copy to Clipboard"}
@@ -142,28 +153,28 @@ export default function SavingSession() {
               disabled={false}
               text={"Email Session ID"}
             />
-          </div>
-        </div>
-        <div>
-          {setShowModal && (
-            <Modal
-              show={showModal}
-              title="Please Enter Your Email"
-              body=""
-              value={email}
-              valid={email === "" || validEmail}
-              onChange={handleEmailNameChange}
-              onClose={() => {
-                setShowModal(false);
-              }}
-              onSubmit={() => {
-                if (email !== "" && validEmail) {
-                  sendMail();
+            {setShowModal && (
+              <Modal
+                show={showModal}
+                title="Please Enter Your Email"
+                body=""
+                input={true}
+                value={email}
+                valid={email === "" || validEmail}
+                alert="Please Enter a Valid Email"
+                onChange={handleEmailNameChange}
+                onClose={() => {
                   setShowModal(false);
-                }
-              }}
-            />
-          )}
+                }}
+                onSubmit={() => {
+                  if (email !== "" && validEmail) {
+                    sendMail();
+                    setShowModal(false);
+                  }
+                }}
+              />
+            )}
+          </div>
         </div>
       </div>
 
