@@ -83,5 +83,5 @@ The transcript must be in a JSON file with the following information:
 
 This project is licensed under the *Apache License 2.0*.
 
-## :coffee: Trello: 
+## :coffee: Trello 
 https://trello.com/b/6HhbwIKN/jtale
