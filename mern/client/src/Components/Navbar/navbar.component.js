@@ -81,7 +81,6 @@ export default function Navbar() {
   // This function is called when user clicks deletes and deletes the flow
   const tryDelete = (currFlow, sessionID) => {
     const deleteFlow = new deleteController();
-    PageChange("/");
     deleteFlow.deleteFlow(currFlow, sessionID).then((res) => {
       if (!res) {
         setShowModalDelete(false);
@@ -90,6 +89,7 @@ export default function Navbar() {
           setShowAlertDeleteFail(false);
         }, 1000);
       } else {
+        PageChange("/");
         setShowModalDelete(false);
         setShowAlertDeleteSuccess(true);
         setShowDeleteLoad(false);
