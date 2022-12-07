@@ -36,7 +36,7 @@ jest.mock("../../utils/DAO/uploadFileDAO", () => {
   });
 });
 
-describe("Upload Flow Interactor Tests", () => {
+describe("Upload File Interactor Tests", () => {
   test("Test Upload File", async () => {
     const Interactor = new uploadFileInteractor();
     const res = await Interactor.uploadFile({ name: "test" });

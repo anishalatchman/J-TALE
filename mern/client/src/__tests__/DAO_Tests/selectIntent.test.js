@@ -16,7 +16,6 @@ describe("DAO Tests", () => {
 
     const returnFile = "00000000";
     axios.put.mockResolvedValueOnce(returnFile);
-
     const res = await DAO.updateQA(QA);
 
     expect(axios.put).toHaveBeenCalledTimes(1);

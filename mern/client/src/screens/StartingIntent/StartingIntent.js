@@ -148,7 +148,7 @@ function StartingIntent() {
   };
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <div className={styles.scroller}>
         <Scrollbar />
       </div>
