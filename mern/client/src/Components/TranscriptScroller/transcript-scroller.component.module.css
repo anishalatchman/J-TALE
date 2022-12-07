@@ -28,7 +28,7 @@
 }
 
 .scrollerTitle {
-  @apply mt-6 mb-6 font-montserrat items-center justify-center flex flex-row;
+  @apply mt-6 mb-2 font-montserrat items-center justify-center flex flex-row;
   /* font-family: 'Montserrat', sans-serif; */
   font-size: 28px;
   font-weight: 800;
@@ -60,9 +60,14 @@
 }
 
 .transcriptHeader {
-  @apply flex w-full items-center justify-center flex flex-row bg-voiceflow-grey;
+  @apply flex w-full items-center justify-center flex flex-col bg-voiceflow-grey;
   position: sticky;
   top: 0;
+}
+
+.transcriptSubtitle {
+  @apply font-nunito mb-6;
+  font-size: 18px;
 }
 
 .transcriptText {
@@ -76,4 +81,5 @@
 .bolded {
   @apply font-nunito;
   font-weight: 800;
+  cursor: pointer;
 }

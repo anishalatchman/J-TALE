@@ -94,7 +94,7 @@ function UploadTranscript() {
           setSessionID(response.res?.data._id);
           setFlowState(response.res?.data);
         } else {
-          setAlert("Error");
+          setAlert("Unable to create session. Please try again.");
         }
       });
   };
@@ -125,13 +125,13 @@ function UploadTranscript() {
     }
   };
 
-  const getQAs = (idList) => {
+  const getQAs = async (idList) => {
     return uploadFile.getQAList(idList);
   };
 
-  const populatingQuestionContent = async () => {
-    await setNextQuestions(getQAs(flowStartingQuestions));
-    await setAllQuestions(getQAs(flowAllQuestions));
+  const populatingQuestionContext = async () => {
+    setNextQuestions(await getQAs(flowStartingQuestions));
+    setAllQuestions(await getQAs(flowAllQuestions));
   };
 
   useEffect(() => {
@@ -198,6 +198,7 @@ function UploadTranscript() {
           onClick={() => {
             PageChange("/");
             setSessionID();
+            setSessionID();
           }}
           disabled={false}
           text={"Go Back"}
@@ -217,7 +218,7 @@ function UploadTranscript() {
               uploadFile.deleteQAs(flowAllQuestions);
             }}
             onSubmit={() => {
-              populatingQuestionContent();
+              populatingQuestionContext();
               uploadFlow(
                 flowName.name,
                 flowStartingQuestions,

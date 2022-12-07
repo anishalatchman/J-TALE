@@ -32,10 +32,11 @@ export default function Navbar() {
     setFlowAllQuestions,
   ] = useContext(FlowContext);
   const [intentState, setIntentState] = useContext(IntentContext);
-  const [, setSpeaker, , setPrevSpeaker] = useContext(SpeakerContext);
+  const [, setSpeaker, , setPrevSpeaker, , setIsIntents] =
+    useContext(SpeakerContext);
   const [
     ,
-    setQuestionState,
+    setIsFirstQuestion,
     ,
     setNextQuestions,
     ,
@@ -54,6 +55,7 @@ export default function Navbar() {
 
   // This function is called when user clicks save button and saves the current question
   const trySave = (currFlow, currQA, sessionID) => {
+    console.log(currFlow.speechList, "SAVING SPEECH LIST");
     const saveSession = new saveSessionController();
     saveSession.saveFlow(currFlow, currQA, sessionID).then((res) => {
       if (!res) {
@@ -112,13 +114,14 @@ export default function Navbar() {
     setFlowAllQuestions([]);
     setSpeaker("User:");
     setPrevSpeaker("Bot:");
-    setQuestionState([]);
+    setIsFirstQuestion(true);
     setNextQuestions([]);
     setAllQuestions([]);
-    setPrevPrompt('"How can I help you today?"');
+    setPrevPrompt("This is the start of your flow.");
     setSpeechList([]);
     setTranscriptID(null);
     setIntentState({});
+    setIsIntents(false);
   };
 
   return (
@@ -126,7 +129,7 @@ export default function Navbar() {
       <nav className={styles.navbarBG}>
         <Link
           to="/"
-          className={styles.navLink}
+          className={styles.navLinks}
           onClick={() => {
             setSessionID();
           }}
@@ -153,7 +156,7 @@ export default function Navbar() {
                 trySave(currFlow, currQA, sessionID);
               }}
               disabled={false}
-              text={"SAVE"}
+              text={"SAVE SESSION"}
             />
             <GenericButton
               buttonType="nav"

@@ -52,6 +52,7 @@ export default class flowInteractor {
       flow.allQuestions = req.body.allQuestions;
       flow.current_question = req.body.current_question;
       flow.transcriptID = req.body.transcriptID;
+      flow.speechList = req.body.speechList;
       FlowDAO.updateFlow(flow, res);
     });
   }

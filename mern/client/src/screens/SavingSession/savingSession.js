@@ -24,11 +24,11 @@ export default function SavingSession() {
   ] = useContext(FlowContext);
   const [, setcurrQAState] = useContext(qaContext);
   const [, setIntentState] = useContext(IntentContext);
-  const [currSpeaker, setSpeaker, , setPrevSpeaker] =
+  const [currSpeaker, setSpeaker, , setPrevSpeaker, , setIsIntents] =
     useContext(SpeakerContext);
   const [
     ,
-    setQuestionState,
+    setIsFirstQuestion,
     ,
     setNextQuestions,
     ,
@@ -89,11 +89,8 @@ export default function SavingSession() {
   const resetGoBack = () => {
     // Need to pop the most recent item from the transcript list if it is a question
     if (currSpeaker === "Bot:") {
-      speechList.pop();
       const temp = speechList;
       setSpeechList(temp);
-      setSpeaker("User:");
-      setPrevSpeaker("Bot:");
     }
   };
 
@@ -103,15 +100,16 @@ export default function SavingSession() {
     setFlowState({});
     setFlowStartingQuestions([]);
     setFlowAllQuestions([]);
-    setSpeaker("User:");
-    setPrevSpeaker("Bot:");
-    setQuestionState([]);
+    setSpeaker("Bot:");
+    setPrevSpeaker("User:");
+    setIsFirstQuestion(true);
     setNextQuestions([]);
     setAllQuestions([]);
-    setPrevPrompt('"How can I help you today?"');
+    setPrevPrompt("This is the start of your flow.");
     setSpeechList([]);
     setTranscriptID(null);
     setIntentState({});
+    setIsIntents(false);
   };
 
   return (
@@ -128,10 +126,13 @@ export default function SavingSession() {
         </h4>
         <div className={styles.inputForm}>
           <label className={styles.label}> Your Session ID </label>
-          <div className={styles.input}>
-            <p>{sessionID}</p>
-          </div>
-          <div className>
+          <input
+            className={styles.input}
+            type="text"
+            readOnly
+            placeholder={sessionID}
+          />
+          <div className={styles.buttonRow}>
             <GenericButton
               buttonType="white"
               onClick={() => {
@@ -175,27 +176,27 @@ export default function SavingSession() {
             )}
           </div>
         </div>
+      </div>
 
-        <div className={styles.buttonRow}>
-          <GenericButton
-            buttonType="blue"
-            onClick={() => {
-              PageChange("/");
-              resetEnd();
-            }}
-            disabled={false}
-            text={"End Session"}
-          />
-          <GenericButton
-            buttonType="outline"
-            onClick={() => {
-              PageChange("/startingintent");
-              resetGoBack();
-            }}
-            disabled={false}
-            text={"Go Back"}
-          />
-        </div>
+      <div className={styles.buttonRow}>
+        <GenericButton
+          buttonType="blue"
+          onClick={() => {
+            PageChange("/");
+            resetEnd();
+          }}
+          disabled={false}
+          text={"End Session"}
+        />
+        <GenericButton
+          buttonType="outline"
+          onClick={() => {
+            PageChange("/startingintent");
+            resetGoBack();
+          }}
+          disabled={false}
+          text={"Go Back"}
+        />
       </div>
     </div>
   );

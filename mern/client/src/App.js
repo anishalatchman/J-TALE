@@ -20,7 +20,8 @@ function App() {
   return (
     <Router>
       <div>
-        {/* SessionProvider contains all global vars (navstate, session id) */}
+        {/* SessionProvider contains all global vars (session id, transcript id) */}
+
         <SessionProvider>
           <IntentProvider>
             <SpeakerProvider>
@@ -46,6 +47,7 @@ function App() {
             </SpeakerProvider>
           </IntentProvider>
         </SessionProvider>
+
       </div>
     </Router>
   );
