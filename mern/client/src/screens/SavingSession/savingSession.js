@@ -125,67 +125,65 @@ export default function SavingSession() {
             readonly
             placeholder={sessionID}
           />
-          </div>
-          </div>
-          <div>
-            <GenericButton
-              buttonType="white"
-              onClick={() => {
-                navigator.clipboard.writeText(sessionID);
+        </div>
+        <div>
+          <GenericButton
+            buttonType="white"
+            onClick={() => {
+              navigator.clipboard.writeText(sessionID);
+            }}
+            disabled={false}
+            text={"Copy to Clipboard"}
+          />
+          <GenericButton
+            buttonType="white"
+            onClick={() => {
+              setShowModal(true);
+            }}
+            disabled={false}
+            text={"Email Session ID"}
+          />
+          {setShowModal && (
+            <Modal
+              show={showModal}
+              title="Please Enter Your Email"
+              body=""
+              value={email}
+              valid={email === "" || validEmail}
+              onChange={handleEmailNameChange}
+              onClose={() => {
+                setShowModal(false);
               }}
-              disabled={false}
-              text={"Copy to Clipboard"}
-            />
-            <GenericButton
-              buttonType="white"
-              onClick={() => {
-                setShowModal(true);
-              }}
-              disabled={false}
-              text={"Email Session ID"}
-            />
-            {setShowModal && (
-              <Modal
-                show={showModal}
-                title="Please Enter Your Email"
-                body=""
-                value={email}
-                valid={email === "" || validEmail}
-                onChange={handleEmailNameChange}
-                onClose={() => {
+              onSubmit={() => {
+                if (email !== "" && validEmail) {
+                  sendMail();
                   setShowModal(false);
-                }}
-                onSubmit={() => {
-                  if (email !== "" && validEmail) {
-                    sendMail();
-                    setShowModal(false);
-                  }
-                }}
-              />
-            )}
-          </div>
+                }
+              }}
+            />
+          )}
         </div>
+      </div>
 
-        <div className={styles.buttonRow}>
-          <GenericButton
-            buttonType="blue"
-            onClick={() => {
-              PageChange("/");
-              resetEnd();
-            }}
-            disabled={false}
-            text={"End Session"}
-          />
-          <GenericButton
-            buttonType="outline"
-            onClick={() => {
-              PageChange("/startingintent");
-              resetGoBack();
-            }}
-            disabled={false}
-            text={"Go Back"}
-          />
-        </div>
+      <div className={styles.buttonRow}>
+        <GenericButton
+          buttonType="blue"
+          onClick={() => {
+            PageChange("/");
+            resetEnd();
+          }}
+          disabled={false}
+          text={"End Session"}
+        />
+        <GenericButton
+          buttonType="outline"
+          onClick={() => {
+            PageChange("/startingintent");
+            resetGoBack();
+          }}
+          disabled={false}
+          text={"Go Back"}
+        />
       </div>
     </div>
   );
