@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import styles from "./navbar.module.css";
 import GenericButton from "../Buttons/GenericButton";
 import { SessionContext } from "../../Contexts/sessionProvider";
@@ -66,11 +65,11 @@ export default function Navbar() {
         }, 1000);
         return;
       } else {
+        PageChange("/save");
         setShowAlertSaveSuccess(true);
         setTimeout(() => {
           setShowAlertSaveSuccess(false);
         }, 1000);
-        PageChange("/save");
         // Disables continue button by resets intentState values to 0
         Object.keys(intentState).forEach((key) => {
           intentState[key] = 0;
@@ -82,8 +81,10 @@ export default function Navbar() {
   // This function is called when user clicks deletes and deletes the flow
   const tryDelete = (currFlow, sessionID) => {
     const deleteFlow = new deleteController();
+    PageChange("/");
     deleteFlow.deleteFlow(currFlow, sessionID).then((res) => {
       if (!res) {
+        setShowModalDelete(false);
         setShowAlertDeleteFail(true);
         setTimeout(() => {
           setShowAlertDeleteFail(false);
@@ -91,10 +92,10 @@ export default function Navbar() {
       } else {
         setShowModalDelete(false);
         setShowAlertDeleteSuccess(true);
+        setShowDeleteLoad(false);
         setTimeout(() => {
           setShowAlertDeleteSuccess(false);
         }, 1000);
-        PageChange("/");
 
         // Resets all contexts to original value\
         resetContext();
@@ -128,22 +129,14 @@ export default function Navbar() {
   return (
     <div>
       <nav className={styles.navbarBG}>
-        <Link
-          to="/"
-          className={styles.navLinks}
-          onClick={() => {
-            setSessionID();
-          }}
-        >
-          <div className={styles.navbarLinks}>
-            <img
-              src={require("../../assets/voiceflow.png")}
-              alt={"voiceflow"}
-              className={styles.navIcon}
-            />
-            | J TALE
-          </div>
-        </Link>
+        <div className={styles.navbarLinks}>
+          <img
+            src={require("../../assets/voiceflow.png")}
+            alt={"voiceflow"}
+            className={styles.navIcon}
+          />
+          | J TALE
+        </div>
 
         {/* Conditionally show buttons div based on sessionID existence */}
         {sessionID && (
@@ -172,10 +165,15 @@ export default function Navbar() {
       <Modal
         show={showModalDelete}
         title="Delete Your Session?"
-        valid={showDeleteLoad ? false : true}
-        alert="Deleting your session..."
+        valid={false}
+        alert={
+          showDeleteLoad
+            ? "Deleting your session..."
+            : "All your progress will be deleted!"
+        }
         onClose={() => {
           setShowModalDelete(false);
+          setShowDeleteLoad(false);
         }}
         onSubmit={() => {
           setShowDeleteLoad(true);
