@@ -57,20 +57,16 @@ export default function Navbar() {
     const saveSession = new saveSessionController();
     saveSession.saveFlow(currFlow, currQA, sessionID).then((res) => {
       if (!res) {
-        alert("Unable to Save");
         setShowAlertSaveFail(true);
         setTimeout(() => {
           setShowAlertSaveFail(false);
         }, 3000);
-        // handleSaveError();
         return;
       } else {
-        // alert("Saved Successfully");
         setShowAlertSaveSuccess(true);
         setTimeout(() => {
           setShowAlertSaveSuccess(false);
         }, 3000);
-        // handleSaveSuccess();
         PageChange("/save");
         // Disables continue button by resets intentState values to 0
         Object.keys(intentState).forEach((key) => {
@@ -85,20 +81,16 @@ export default function Navbar() {
     const deleteFlow = new deleteController();
     deleteFlow.deleteFlow(currFlow, sessionID).then((res) => {
       if (!res) {
-        alert("Unable to Delete");
-        // handleDeleteError();
         setShowAlertDeleteFail(true);
         setTimeout(() => {
           setShowAlertDeleteFail(false);
         }, 3000);
       } else {
-        // alert("Successfully Deleted");
         setShowModalDelete(false);
         setShowAlertDeleteSuccess(true);
         setTimeout(() => {
           setShowAlertDeleteSuccess(false);
         }, 3000);
-        // handleDeleteSuccess();
         PageChange("/");
 
         // Resets all contexts to original value\

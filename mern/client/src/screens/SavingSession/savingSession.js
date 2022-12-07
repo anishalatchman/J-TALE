@@ -11,6 +11,7 @@ import { IntentContext } from "../../Contexts/intentsProvider";
 import { QuestionContext } from "../../Contexts/questionProvider";
 import { ScrollerContext } from "../../Contexts/scrollerProvider";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
+import Alert from "../../Components/Alerts/GenericAlert";
 
 export default function SavingSession() {
   const [
@@ -41,6 +42,7 @@ export default function SavingSession() {
   const [showModal, setShowModal] = useState(false);
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(true);
+  const [showClipboardConfirmation, setClipboardConfirmation] = useState(false);
 
   const Navigate = useNavigate();
   const PageChange = (url) => {
@@ -129,6 +131,10 @@ export default function SavingSession() {
               buttonType="white"
               onClick={() => {
                 navigator.clipboard.writeText(sessionID);
+                setClipboardConfirmation(true);
+                setTimeout(() => {
+                  setClipboardConfirmation(false);
+                }, 3000);
               }}
               disabled={false}
               text={"Copy to Clipboard"}
@@ -146,6 +152,7 @@ export default function SavingSession() {
                 show={showModal}
                 title="Please Enter Your Email"
                 body=""
+                input={true}
                 value={email}
                 valid={email === "" || validEmail}
                 alert="Please Enter a Valid Email"
@@ -161,6 +168,11 @@ export default function SavingSession() {
                 }}
               />
             )}
+            <Alert
+              show={showClipboardConfirmation}
+              success={true}
+              message="Copied to clipboard!"
+            />
           </div>
         </div>
 

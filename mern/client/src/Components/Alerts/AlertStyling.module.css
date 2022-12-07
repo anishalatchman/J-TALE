@@ -6,13 +6,15 @@
 .success {
   @apply bg-green-500 rounded-3xl shadow-lg relative flex justify-center flex-col;
   width: 240px;
-  height: 60px;
+  min-height: 60px;
+  height: auto;
 }
 
 .failure {
   @apply bg-red-500 rounded-3xl shadow-lg relative flex justify-center flex-col;
   width: 240px;
-  height: 60px;
+  min-height: 60px;
+  height: auto;
 }
 
 .text {
