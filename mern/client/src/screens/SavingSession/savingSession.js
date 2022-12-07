@@ -148,6 +148,7 @@ export default function SavingSession() {
                 body=""
                 value={email}
                 valid={email === "" || validEmail}
+                alert="Please Enter a Valid Email"
                 onChange={handleEmailNameChange}
                 onClose={() => {
                   setShowModal(false);

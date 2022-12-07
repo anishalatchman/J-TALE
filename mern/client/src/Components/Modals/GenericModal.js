@@ -14,6 +14,7 @@ import GenericButton from "../Buttons/GenericButton";
 /** @prop {function} [onClose] : the function to be executed when CANCEL button is pressed*/
 /** @prop {fuction} [onSubmit] : the function to be executed when CONTINUE button is pressed*/
 /** @prop {boolean} [valid] : whether the inputted text is valid */
+/** @prop {string} [alert] : what to display on alert */
 
 const Modal = (props) => {
   if (!props.show) {
@@ -31,7 +32,7 @@ const Modal = (props) => {
             {props.valid ? (
               <></>
             ) : (
-              <div className="modal-alert"> Please Enter a Valid Email </div>
+              <div className="modal-alert"> {props.alert} </div>
             )}
             <input
               className="modal-input"

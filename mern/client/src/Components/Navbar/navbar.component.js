@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styles from "./navbar.module.css";
@@ -12,10 +12,14 @@ import saveSessionController from "../../utils/Controller/saveSessionController"
 import { QuestionContext } from "../../Contexts/questionProvider";
 import { ScrollerContext } from "../../Contexts/scrollerProvider";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
+import Modal from "../Modals/GenericModal";
 
 export default function Navbar() {
   // define context var to show/hide nav buttons
   const [currQA, setcurrQAState] = useContext(qaContext);
+  const [showModalDelete, setShowModalDelete] = useState(false);
+  const [showModalDeleteFail, setShowModalDeleteFail] = useState(false);
+  const [showModalSaveFail, setShowModalSaveFail] = useState(false);
   const [
     currFlow,
     setFlowState,
@@ -53,7 +57,7 @@ export default function Navbar() {
         alert("Unable to Save");
         return;
       } else {
-        alert("Saved Successfully");
+        // alert("Saved Successfully");
 
         PageChange("/save");
         // Disables continue button by resets intentState values to 0
@@ -71,7 +75,8 @@ export default function Navbar() {
       if (!res) {
         alert("Unable to Delete");
       } else {
-        alert("Successfully Deleted");
+        // alert("Successfully Deleted");
+        setShowModalDelete(false);
 
         PageChange("/");
 
@@ -104,46 +109,61 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={styles.navbarBG}>
-      <Link
-        to="/"
-        className={styles.navLink}
-        onClick={() => {
-          setSessionID();
-        }}
-      >
-        <div className={styles.navbarLinks}>
-          <img
-            src={require("../../assets/voiceflow.png")}
-            alt={"voiceflow"}
-            className={styles.navIcon}
-          />
-          | J TALE
-        </div>
-      </Link>
+    <div className={styles.something}>
+      <nav className={styles.navbarBG}>
+        <Link
+          to="/"
+          className={styles.navLink}
+          onClick={() => {
+            setSessionID();
+          }}
+        >
+          <div className={styles.navbarLinks}>
+            <img
+              src={require("../../assets/voiceflow.png")}
+              alt={"voiceflow"}
+              className={styles.navIcon}
+            />
+            | J TALE
+          </div>
+        </Link>
 
-      {/* Conditionally show buttons div based on sessionID existence */}
-      {sessionID && (
-        <div className="flex items-center">
-          <h2 className="font-nunito font-medium flex-grow">
-            SESSION ID: {sessionID}
-          </h2>
-          <GenericButton
-            buttonType="nav"
-            onClick={() => {
-              trySave(currFlow, currQA, sessionID);
-            }}
-            disabled={false}
-            text={"SAVE"}
-          />
-          <GenericButton
-            buttonType="nav"
-            onClick={() => tryDelete(currFlow, sessionID)}
-            disabled={false}
-            text={"DELETE SESSION"}
-          />
-        </div>
-      )}
-    </nav>
+        {/* Conditionally show buttons div based on sessionID existence */}
+        {sessionID && (
+          <div className="flex items-center">
+            <h2 className="font-nunito font-medium flex-grow">
+              SESSION ID: {sessionID}
+            </h2>
+            <GenericButton
+              buttonType="nav"
+              onClick={() => {
+                trySave(currFlow, currQA, sessionID);
+              }}
+              disabled={false}
+              text={"SAVE"}
+            />
+            <GenericButton
+              buttonType="nav"
+              // onClick={() => tryDelete(currFlow, sessionID)}
+              onClick={() => setShowModalDelete(true)}
+              disabled={false}
+              text={"DELETE SESSION"}
+            />
+          </div>
+        )}
+      </nav>
+      <Modal
+        show={showModalDelete}
+        title="Delete Your Session?"
+        body="It will be gone forever!"
+        valid={true}
+        onClose={() => {
+          setShowModalDelete(false);
+        }}
+        onSubmit={() => {
+          tryDelete(currFlow, sessionID);
+        }}
+      />
+    </div>
   );
 }
