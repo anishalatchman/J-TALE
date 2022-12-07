@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import styles from "./navbar.module.css";
 import GenericButton from "../Buttons/GenericButton";
 import { SessionContext } from "../../Contexts/sessionProvider";
@@ -12,10 +11,18 @@ import saveSessionController from "../../utils/Controller/saveSessionController"
 import { QuestionContext } from "../../Contexts/questionProvider";
 import { ScrollerContext } from "../../Contexts/scrollerProvider";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
+import Modal from "../Modals/GenericModal";
+import Alert from "../Alerts/GenericAlert";
 
 export default function Navbar() {
   // define context var to show/hide nav buttons
   const [currQA, setcurrQAState] = useContext(qaContext);
+  const [showModalDelete, setShowModalDelete] = useState(false);
+  const [showAlertDeleteSuccess, setShowAlertDeleteSuccess] = useState(false);
+  const [showAlertDeleteFail, setShowAlertDeleteFail] = useState(false);
+  const [showAlertSaveFail, setShowAlertSaveFail] = useState(false);
+  const [showAlertSaveSuccess, setShowAlertSaveSuccess] = useState(false);
+  const [showDeleteLoad, setShowDeleteLoad] = useState(false);
   const [
     currFlow,
     setFlowState,
@@ -52,12 +59,17 @@ export default function Navbar() {
     const saveSession = new saveSessionController();
     saveSession.saveFlow(currFlow, currQA, sessionID).then((res) => {
       if (!res) {
-        alert("Unable to Save");
+        setShowAlertSaveFail(true);
+        setTimeout(() => {
+          setShowAlertSaveFail(false);
+        }, 1000);
         return;
       } else {
-        alert("Saved Successfully");
-
         PageChange("/save");
+        setShowAlertSaveSuccess(true);
+        setTimeout(() => {
+          setShowAlertSaveSuccess(false);
+        }, 1000);
         // Disables continue button by resets intentState values to 0
         Object.keys(intentState).forEach((key) => {
           intentState[key] = 0;
@@ -69,13 +81,21 @@ export default function Navbar() {
   // This function is called when user clicks deletes and deletes the flow
   const tryDelete = (currFlow, sessionID) => {
     const deleteFlow = new deleteController();
+    PageChange("/");
     deleteFlow.deleteFlow(currFlow, sessionID).then((res) => {
       if (!res) {
-        alert("Unable to Delete");
+        setShowModalDelete(false);
+        setShowAlertDeleteFail(true);
+        setTimeout(() => {
+          setShowAlertDeleteFail(false);
+        }, 1000);
       } else {
-        alert("Successfully Deleted");
-
-        PageChange("/");
+        setShowModalDelete(false);
+        setShowAlertDeleteSuccess(true);
+        setShowDeleteLoad(false);
+        setTimeout(() => {
+          setShowAlertDeleteSuccess(false);
+        }, 1000);
 
         // Resets all contexts to original value\
         resetContext();
@@ -107,14 +127,8 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={styles.navbarBG}>
-      <Link
-        to="/"
-        className={styles.navLinks}
-        onClick={() => {
-          setSessionID();
-        }}
-      >
+    <div>
+      <nav className={styles.navbarBG}>
         <div className={styles.navbarLinks}>
           <img
             src={require("../../assets/voiceflow.png")}
@@ -123,30 +137,69 @@ export default function Navbar() {
           />
           | J TALE
         </div>
-      </Link>
 
-      {/* Conditionally show buttons div based on sessionID existence */}
-      {sessionID && (
-        <div className="flex items-center">
-          <h2 className="font-nunito font-medium flex-grow">
-            SESSION ID: {sessionID}
-          </h2>
-          <GenericButton
-            buttonType="nav"
-            onClick={() => {
-              trySave(currFlow, currQA, sessionID);
-            }}
-            disabled={false}
-            text={"SAVE SESSION"}
-          />
-          <GenericButton
-            buttonType="nav"
-            onClick={() => tryDelete(currFlow, sessionID)}
-            disabled={false}
-            text={"DELETE SESSION"}
-          />
-        </div>
-      )}
-    </nav>
+        {/* Conditionally show buttons div based on sessionID existence */}
+        {sessionID && (
+          <div className="flex items-center">
+            <h2 className="font-nunito font-medium flex-grow">
+              SESSION ID: {sessionID}
+            </h2>
+            <GenericButton
+              buttonType="nav"
+              onClick={() => {
+                trySave(currFlow, currQA, sessionID);
+              }}
+              disabled={false}
+              text={"SAVE SESSION"}
+            />
+            <GenericButton
+              buttonType="nav"
+              // onClick={() => tryDelete(currFlow, sessionID)}
+              onClick={() => setShowModalDelete(true)}
+              disabled={false}
+              text={"DELETE SESSION"}
+            />
+          </div>
+        )}
+      </nav>
+      <Modal
+        show={showModalDelete}
+        title="Delete Your Session?"
+        valid={false}
+        alert={
+          showDeleteLoad
+            ? "Deleting your session..."
+            : "All your progress will be deleted!"
+        }
+        onClose={() => {
+          setShowModalDelete(false);
+          setShowDeleteLoad(false);
+        }}
+        onSubmit={() => {
+          setShowDeleteLoad(true);
+          tryDelete(currFlow, sessionID);
+        }}
+      />
+      <Alert
+        show={showAlertSaveSuccess}
+        success={true}
+        message="Successfully Saved!"
+      />
+      <Alert
+        show={showAlertSaveFail}
+        success={false}
+        message="Unable to Save"
+      />
+      <Alert
+        show={showAlertDeleteSuccess}
+        success={true}
+        message="Successfully Deleted!"
+      />
+      <Alert
+        show={showAlertDeleteFail}
+        success={false}
+        message="Unable to Delete"
+      />
+    </div>
   );
 }

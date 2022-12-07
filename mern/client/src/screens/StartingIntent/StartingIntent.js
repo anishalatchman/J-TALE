@@ -173,9 +173,9 @@ function StartingIntent() {
               </>
             ) : (
               <>
-                <h4 className={styles.speaker1}>{prevSpeaker}</h4>
+                <h4 className={styles.speaker1}>{currSpeaker}</h4>
                 <h1 className={styles.intentTitle}>{prevPrompt}</h1>
-                <h4 className={styles.speaker2}>{currSpeaker}</h4>
+                <h4 className={styles.speaker2}>{prevSpeaker}</h4>
               </>
             )}
 
@@ -195,27 +195,27 @@ function StartingIntent() {
             </div>
           </>
         )}
-      </div>
 
-      <div className={styles.buttonContainer}>
-        <GenericButton
-          buttonType={
-            Object.values(intentState).some((x) => x === 2)
-              ? "blue"
-              : "disabled"
-          }
-          text={"Continue"}
-          disabled={
-            Object.values(intentState).some((x) => x === 2) ? false : true
-          }
-          onClick={() => {
-            handleQAChange();
-            handleSpeakerChange();
-            setFlowSpeechList(); //Separate for state rendering
-            // Show User: and Bot: labels
-            setIsFirstQuestion(false);
-          }}
-        />
+        <div className={styles.buttonContainer}>
+          <GenericButton
+            buttonType={
+              Object.values(intentState).some((x) => x === 2)
+                ? "blue"
+                : "disabled"
+            }
+            text={"Continue"}
+            disabled={
+              Object.values(intentState).some((x) => x === 2) ? false : true
+            }
+            onClick={() => {
+              handleQAChange();
+              handleSpeakerChange();
+              setFlowSpeechList(); //Separate for state rendering
+              // Show User: and Bot: labels
+              setIsFirstQuestion(false);
+            }}
+          />
+        </div>
       </div>
     </div>
   );
