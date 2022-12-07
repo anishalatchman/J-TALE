@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.intentTitle {
+  @apply text-left mb-3 font-montserrat font-bold;
+  font-size: 50px;
+}
+
+.intentContainer {
+  @apply w-7/12 mt-12;
+}
+
+.buttonContainer {
+  @apply ml-4 mb-5 items-center justify-end px-12 flex flex-row;
+}
+
+.instructions {
+  @apply text-left text-black;
+  font-size: 18px;
+}
+
+.instructionsContainer {
+  @apply inline-block bg-voiceflow-grey-light mt-4 mb-2 p-4 rounded-lg;
+}
+
+.scroller {
+  @apply ml-8;
+}
+
+.speaker1 {
+  @apply text-gray text-left;
+}
+
+.speaker2 {
+  @apply text-gray text-left mt-6;
+}
+
+.upload-icon {
+  display: inline-flex;
+  width: 37px;
+  height: 37px;
+  top: 10px;
+  @apply mr-2;
+}
+
+/* .completed {
+  @apply text-left ml-4 font-montserrat font-bold pt-8;
+  font-size: 50px;
+} */
+
+/* .completedSubtitle {
+  @apply text-left mb-3 ml-4 font-montserrat pt-8;
+  font-size: 18px;
+} */

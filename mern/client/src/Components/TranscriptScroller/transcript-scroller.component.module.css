@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Montserrat";
+  src: url(../../fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e5e5e5;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(182, 182, 182);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(155, 155, 155);
+}
+
+.scrollerTitle {
+  @apply mt-6 mb-2 font-montserrat items-center justify-center flex flex-row;
+  /* font-family: 'Montserrat', sans-serif; */
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.buttonContainer {
+  @apply px-20 items-center justify-center flex flex-row;
+}
+
+.scroller {
+  background-color: #e6e6e6;
+  float: right;
+  height: 550px;
+  width: 450px;
+  border-radius: 20px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.transcriptContainer {
+  background-color: #e6e6e6;
+  float: right;
+  height: 470px;
+  width: 450px;
+  border-radius: 20px;
+  overflow-y: auto;
+  overflow-x: auto;
+  /* padding-left: 20px; */
+}
+
+.transcriptHeader {
+  @apply flex w-full items-center justify-center flex flex-col bg-voiceflow-grey;
+  position: sticky;
+  top: 0;
+}
+
+.transcriptSubtitle {
+  @apply font-nunito mb-6;
+  font-size: 18px;
+}
+
+.transcriptText {
+  @apply pl-10 pb-10 pt-6;
+}
+
+.indent {
+  text-indent: 30px;
+}
+
+.bolded {
+  @apply font-nunito;
+  font-weight: 800;
+  cursor: pointer;
+}

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+//Creation of the QA entity
 const Schema = mongoose.Schema;
 
 const QASchema = new Schema({
@@ -14,6 +14,7 @@ const QASchema = new Schema({
   },
   question_included: {
     type: Boolean,
+    require: true,
   },
   intents: [
     {

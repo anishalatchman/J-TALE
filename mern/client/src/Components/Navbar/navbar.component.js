@@ -1,21 +1,152 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import "./navbar.css";
-export default class Navbar extends Component {
-  render() {
-    return (
-      <nav className="navbar-bg">
-        <Link to="/" className="nav-link">
-          <div className="navbar-links">
-            <img
-              src={require("../../assets/voiceflow.png")}
-              alt={"voiceflow"}
-              className="nav-icon"
-            />
-            | J TALE
-          </div>
-        </Link>
-      </nav>
-    );
-  }
+import styles from "./navbar.module.css";
+import GenericButton from "../Buttons/GenericButton";
+import { SessionContext } from "../../Contexts/sessionProvider";
+import { qaContext } from "../../Contexts/qaProvider";
+import { FlowContext } from "../../Contexts/flowProvider";
+import deleteController from "../../utils/Controller/deleteSessionController";
+import { IntentContext } from "../../Contexts/intentsProvider";
+import saveSessionController from "../../utils/Controller/saveSessionController";
+import { QuestionContext } from "../../Contexts/questionProvider";
+import { ScrollerContext } from "../../Contexts/scrollerProvider";
+import { SpeakerContext } from "../../Contexts/speakerProvider";
+
+export default function Navbar() {
+  // define context var to show/hide nav buttons
+  const [currQA, setcurrQAState] = useContext(qaContext);
+  const [
+    currFlow,
+    setFlowState,
+    ,
+    setFlowStartingQuestions,
+    ,
+    setFlowAllQuestions,
+  ] = useContext(FlowContext);
+  const [intentState, setIntentState] = useContext(IntentContext);
+  const [, setSpeaker, , setPrevSpeaker, , setIsIntents] =
+    useContext(SpeakerContext);
+  const [
+    ,
+    setIsFirstQuestion,
+    ,
+    setNextQuestions,
+    ,
+    setAllQuestions,
+    ,
+    setPrevPrompt,
+  ] = useContext(QuestionContext);
+  const [, setSpeechList] = useContext(ScrollerContext);
+  const [sessionID, setSessionID, , setTranscriptID] =
+    useContext(SessionContext);
+
+  const Navigate = useNavigate();
+  const PageChange = (url) => {
+    Navigate(url);
+  };
+
+  // This function is called when user clicks save button and saves the current question
+  const trySave = (currFlow, currQA, sessionID) => {
+    console.log(currFlow.speechList, "SAVING SPEECH LIST");
+    const saveSession = new saveSessionController();
+    saveSession.saveFlow(currFlow, currQA, sessionID).then((res) => {
+      if (!res) {
+        alert("Unable to Save");
+        return;
+      } else {
+        alert("Saved Successfully");
+
+        PageChange("/save");
+        // Disables continue button by resets intentState values to 0
+        Object.keys(intentState).forEach((key) => {
+          intentState[key] = 0;
+        });
+      }
+    });
+  };
+
+  // This function is called when user clicks deletes and deletes the flow
+  const tryDelete = (currFlow, sessionID) => {
+    const deleteFlow = new deleteController();
+    deleteFlow.deleteFlow(currFlow, sessionID).then((res) => {
+      if (!res) {
+        alert("Unable to Delete");
+      } else {
+        alert("Successfully Deleted");
+
+        PageChange("/");
+
+        // Resets all contexts to original value\
+        resetContext();
+
+        // Disables continue button by resets intentState values to 0
+        Object.keys(intentState).forEach((key) => {
+          intentState[key] = 0;
+        });
+      }
+    });
+  };
+
+  const resetContext = () => {
+    setSessionID(null);
+    setcurrQAState({});
+    setFlowState({});
+    setFlowStartingQuestions([]);
+    setFlowAllQuestions([]);
+    setSpeaker("User:");
+    setPrevSpeaker("Bot:");
+    setIsFirstQuestion(true);
+    setNextQuestions([]);
+    setAllQuestions([]);
+    setPrevPrompt("This is the start of your flow.");
+    setSpeechList([]);
+    setTranscriptID(null);
+    setIntentState({});
+    setIsIntents(false);
+  };
+
+  return (
+    <nav className={styles.navbarBG}>
+      <Link
+        to="/"
+        className={styles.navLinks}
+        onClick={() => {
+          setSessionID();
+        }}
+      >
+        <div className={styles.navbarLinks}>
+          <img
+            src={require("../../assets/voiceflow.png")}
+            alt={"voiceflow"}
+            className={styles.navIcon}
+          />
+          | J TALE
+        </div>
+      </Link>
+
+      {/* Conditionally show buttons div based on sessionID existence */}
+      {sessionID && (
+        <div className="flex items-center">
+          <h2 className="font-nunito font-medium flex-grow">
+            SESSION ID: {sessionID}
+          </h2>
+          <GenericButton
+            buttonType="nav"
+            onClick={() => {
+              trySave(currFlow, currQA, sessionID);
+            }}
+            disabled={false}
+            text={"SAVE SESSION"}
+          />
+          <GenericButton
+            buttonType="nav"
+            onClick={() => tryDelete(currFlow, sessionID)}
+            disabled={false}
+            text={"DELETE SESSION"}
+          />
+        </div>
+      )}
+    </nav>
+  );
 }

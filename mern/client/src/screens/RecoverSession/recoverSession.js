@@ -1,105 +1,166 @@
-import React, { Component } from "react";
-import "./recoverSession.css";
+import React, { useState, useContext, useEffect } from "react";
+import styles from "./recoverSession.module.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
-import { withRouter } from "../withRouter";
-class RecoverSession extends Component {
-  constructor(props) {
-    super(props);
+import { SessionContext } from "../../Contexts/sessionProvider";
+import { qaContext } from "../../Contexts/qaProvider";
+import { useNavigate } from "react-router-dom";
+import { recoverFlow } from "../../Controller/flowController";
+import { recoverStartingQA } from "../../Controller/QAController";
+import { FlowContext } from "../../Contexts/flowProvider";
+import { QuestionContext } from "../../Contexts/questionProvider";
+import { SpeakerContext } from "../../Contexts/speakerProvider";
+import { ScrollerContext } from "../../Contexts/scrollerProvider";
+import uploadFileController from "../../utils/Controller/uploadFileController";
 
-    this.state = { value: "" };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleBack = this.handleBack.bind(this);
-  }
+export default function RecoverSession() {
+  const Navigate = useNavigate();
+  const [, setSessionID, , setTranscriptID] = useContext(SessionContext);
+  const [, setCurrQA] = useContext(qaContext);
+  const [inputText, setInputText] = useState("");
+  // const [showError, setShowError] = useState(false);
+  const [infoMsg, setInfoMsg] = useState("");
+  const [, setSpeechList] = useContext(ScrollerContext);
+  // CONTEXTS TO IMPLEMENT FROM STARTING-INTENT
+  const [, setFlowState, , setFlowStartingQuestions, , setFlowAllQuestions] =
+    useContext(FlowContext);
+  const [
+    ,
+    setIsFirstQuestion,
+    nextQuestions,
+    setNextQuestions,
+    ,
+    setAllQuestions,
+    prevPrompt,
+    setPrevPrompt,
+  ] = useContext(QuestionContext);
+  const uploadFile = new uploadFileController();
+  const [, setSpeaker, , setPrevSpeaker, , setIsIntents] =
+    useContext(SpeakerContext);
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
-  handleSubmit(event) {
-    alert("A name was submitted: " + this.state.value);
+  // FUNCTIONS BELOW
+  const PageChange = (url) => {
+    Navigate(url);
+  };
+
+  useEffect(() => {
+    if (
+      nextQuestions?.length !== 0 &&
+      prevPrompt !== "This is the start of your flow."
+    ) {
+    }
+  }, [nextQuestions, prevPrompt]);
+
+  const handleSubmit = async (event) => {
+    // prevent page reload
     event.preventDefault();
-  }
-  handleBack(event) {
-    this.props.navigate("/");
-  }
+    // set sessionid before loading starting-intent page
+    const flow = await recoverFlow(inputText);
+    if (flow) {
+      setInfoMsg("Loading your session...");
+      const startingQA = await setFlowVars(flow);
+      const questionsObj = {
+        next: await getQAs(flow.questions),
+        all: await getQAs(flow.allQuestions),
+      };
+      LoadSession(startingQA, flow, questionsObj);
+    } else {
+      setInfoMsg("Invalid Session ID. Please try again.");
+    }
+  };
 
-  render() {
-    return (
-      <div className="container">
-        <h1 className="pageTitle">Recover Session</h1>
-        <form className="inputForm w-1/3 mx-auto" onSubmit={this.handleSubmit}>
-          <label className="text-xl text-white font-nunito font-medium">
-            {" "}
-            Input Session ID{" "}
-          </label>
-          <input
-            className="m-6 w-3/4 pl-4 pr-2 pt-2 pb-2 block rounded-full text-black"
-            type="text"
-            value={this.state.value}
-            onChange={this.handleChange}
-            placeholder="Session ID"
-          />
-          <GenericButton
-            buttonType="white"
-            onClick={() => this.handleChange}
-            disabled={false}
-            text={"Begin Session"}
-          />
-        </form>
-        <div className="buttonContainer">
-          <GenericButton
-            buttonType="outline"
-            onClick={this.handleBack}
-            disabled={false}
-            text={"Go Back"}
-          />
-        </div>
+  // recovers flow from DB and sets current_qa context state
+  const LoadSession = (startingQA, flow, questionsObj) => {
+    setInfoMsg("");
+    // console.log("Starting QA: ", startingQA);
+    setNextQuestions(questionsObj.next);
+    setAllQuestions(questionsObj.all);
+
+    setCurrQA(startingQA);
+    // flowContext is question ID's, questionContext is json objects
+
+    setIsIntents(true);
+    setSpeaker("Bot:");
+    setPrevSpeaker("User:");
+
+    // Show User: and Bot: labels if not on first question
+    if (flow.current_question !== "") {
+      setIsFirstQuestion(false);
+      setPrevPrompt(startingQA.question);
+    }
+    setSessionID(inputText);
+    PageChange("/startingintent");
+  };
+
+  const setFlowVars = (flow) => {
+    const startingQA = recoverStartingQA(flow);
+    // SET VARS FOR STARTING-INTENT
+    setFlowStartingQuestions(flow.questions);
+    setFlowAllQuestions(flow.allQuestions);
+    setTranscriptID(flow.transcriptID);
+    setFlowState(flow);
+    //Pops the last intent from the scroller if it is there
+    if (flow.speechList[flow.speechList.length - 1]?.source === "User:") {
+      flow.speechList.pop();
+    }
+    setSpeechList(flow.speechList);
+    return startingQA;
+  };
+
+  const handleChange = (event) => {
+    // set sessionID to input text
+    setInputText(event.target.value);
+  };
+
+  const getQAs = async (idList) => {
+    return uploadFile.getQAList(idList);
+  };
+
+  return (
+    <div className="container">
+      <h1 className={styles.pageTitle}>Recover Session</h1>
+      {infoMsg !== "" ? (
+        <h2
+          className={
+            infoMsg === "Loading your session..."
+              ? styles.loadingLabel
+              : styles.errorLabel
+          }
+        >
+          {infoMsg}
+        </h2>
+      ) : (
+        <></>
+      )}
+      <form className={styles.inputForm} onSubmit={handleSubmit}>
+        <label className={styles.label}>Input Session ID</label>
+        <input
+          className={styles.inputContainer}
+          id="inputField"
+          type="text"
+          value={inputText}
+          onChange={handleChange}
+          placeholder="Session ID"
+        />
+        <GenericButton
+          buttonType="white"
+          onClick={() => handleSubmit}
+          disabled={false}
+          text={"Begin Session"}
+        />
+      </form>
+      <div className={styles.buttonContainer}>
+        <GenericButton
+          buttonType="outline"
+          onClick={() => {
+            PageChange("/");
+            // clear input field and sessionID
+            setInputText("");
+            setSessionID();
+          }}
+          disabled={false}
+          text={"Go Back"}
+        />
       </div>
-    );
-  }
+    </div>
+  );
 }
-
-export default withRouter(RecoverSession);
-
-// FUNCTIONAL REACT VRSN:
-// function RecoverSession() {
-//   const Navigate = useNavigate();
-//   const PageChange = (url) => {
-//   Navigate(url);
-//   }
-
-//     const [name, setName] = useState(0);
-
-//     const handleSubmit = (event) => {
-//       event.preventDefault();
-//       alert(`The name you entered was: ${name}`)
-//       console.log(name)
-//     }
-
-//     return (
-//       <div className="container">
-//         <h1 className="pageTitle">
-//           Recover Session
-//         </h1>
-//       <form>
-//         <label>Enter your name:
-//           <input
-//             type="text"
-//             value={name}
-//             onChange={(e) => setName(e.target.value)}
-//           />
-//         </label>
-//         <input type="submit" />
-//       </form>
-//       <div className="buttonContainer">
-//         <GenericButton
-//               buttonType="outline"
-//               onClick={() => PageChange("/")}
-//               disabled={false}
-//               text={"Go Back"}
-//             />
-//       </div>
-//       </div>
-//     );
-//   }
-//   export default RecoverSession
