@@ -1,14 +1,13 @@
 module.exports = {
   collectCoverage: true,
-  collectCoverageFrom: ["src/utils/Controller/**, src/utils/Interactor/**"],
+  collectCoverageFrom: ["src/utils/DAO/*.js", "src/utils/Interactor/*.js"],
   coverageThreshold: {
     global: {
       lines: 80,
     },
   },
-  coverageDirectory: "coverage",
+  // coverageDirectory: "coverage",
   testEnvironment: "jsdom",
-  setUpFilesAfterEnv: ["src/jest.setup.js"],
   moduleNameMapper: {
     axios: "axios/dist/node/axios.cjs",
     "\\.(css|sass|png)$": "<rootDir>/src/mock/fileMock.js",
