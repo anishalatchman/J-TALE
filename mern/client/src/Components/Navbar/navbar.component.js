@@ -25,7 +25,8 @@ export default function Navbar() {
     setFlowAllQuestions,
   ] = useContext(FlowContext);
   const [intentState, setIntentState] = useContext(IntentContext);
-  const [, setSpeaker, , setPrevSpeaker] = useContext(SpeakerContext);
+  const [, setSpeaker, , setPrevSpeaker, , setIsIntents] =
+    useContext(SpeakerContext);
   const [
     ,
     setIsFirstQuestion,
@@ -47,6 +48,7 @@ export default function Navbar() {
 
   // This function is called when user clicks save button and saves the current question
   const trySave = (currFlow, currQA, sessionID) => {
+    console.log(currFlow.speechList, "SAVING SPEECH LIST");
     const saveSession = new saveSessionController();
     saveSession.saveFlow(currFlow, currQA, sessionID).then((res) => {
       if (!res) {
@@ -92,15 +94,16 @@ export default function Navbar() {
     setFlowState({});
     setFlowStartingQuestions([]);
     setFlowAllQuestions([]);
-    setSpeaker("Bot:");
-    setPrevSpeaker("User:");
+    setSpeaker("User:");
+    setPrevSpeaker("Bot:");
     setIsFirstQuestion(true);
     setNextQuestions([]);
     setAllQuestions([]);
-    setPrevPrompt('This is the start of your flow.');
+    setPrevPrompt("This is the start of your flow.");
     setSpeechList([]);
     setTranscriptID(null);
     setIntentState({});
+    setIsIntents(false);
   };
 
   return (

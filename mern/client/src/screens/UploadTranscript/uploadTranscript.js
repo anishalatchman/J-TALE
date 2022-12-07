@@ -122,14 +122,13 @@ function UploadTranscript() {
     }
   };
 
-  const getQAs = (idList) => {
+  const getQAs = async (idList) => {
     return uploadFile.getQAList(idList);
   };
 
   const populatingQuestionContext = async () => {
-    console.log("Here's the flowStartingQuestions", flowStartingQuestions);
-    await setNextQuestions(getQAs(flowStartingQuestions));
-    await setAllQuestions(getQAs(flowAllQuestions));
+    setNextQuestions(await getQAs(flowStartingQuestions));
+    setAllQuestions(await getQAs(flowAllQuestions));
   };
 
   return (

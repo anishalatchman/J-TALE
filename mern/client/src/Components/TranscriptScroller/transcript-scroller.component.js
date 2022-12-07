@@ -4,9 +4,19 @@ import styles from "./transcript-scroller.component.module.css";
 import { ScrollerContext } from "../../Contexts/scrollerProvider";
 import exportController from "../../utils/Controller/exportController";
 import { QuestionContext } from "../../Contexts/questionProvider";
+import { SpeakerContext } from "../../Contexts/speakerProvider";
+import { qaContext } from "../../Contexts/qaProvider";
+import { FlowContext } from "../../Contexts/flowProvider";
 
 export default function Scrollbar() {
-  const [, , , , allQuestions, , , ,] = useContext(QuestionContext);
+  const [, setSpeaker, , setPrevSpeaker, , setIsIntents] =
+    useContext(SpeakerContext);
+  const [speechList, setSpeechList] = useContext(ScrollerContext);
+  const [, , , setNextQuestions, allQuestions, , , setPrevPrompt] =
+    useContext(QuestionContext);
+  const [, setcurrQAState] = useContext(qaContext);
+  const [, , flowStartingQuestions] = useContext(FlowContext);
+
   const downloadFile = () => {
     // Gets the flow data as a list of JSON object of QA pairs
     const exportClass = new exportController();
@@ -28,8 +38,90 @@ export default function Scrollbar() {
     document.body.removeChild(link);
     URL.revokeObjectURL(href);
   };
+  const goBack = (currSpeaker, intents) => {
+    poppingList(intents, currSpeaker);
+    setIsIntents(currSpeaker === "User:");
 
-  const [speechList] = useContext(ScrollerContext);
+    console.log(speechList, "POPPED LIST");
+    if (currSpeaker === "Bot:") {
+      resetQuestion(intents);
+    }
+    //To reselect an intent
+    else {
+      setPrevSpeaker("User:");
+      setSpeaker("Bot:");
+      setcurrQAState(speechList[speechList.length - 1].question);
+      setNextQuestions([1]); // So that intent buttons are loaded when even though no next question list
+    }
+    //Sets the current speaker to the speaker
+    if (speechList.length !== 0) {
+      setPrevPrompt(speechList[speechList.length - 1].text);
+    }
+  };
+
+  //Sets values for properly reselecting questions
+  const resetQuestion = (intents) => {
+    //If going back to starting questions list
+    if (speechList.length === 0) {
+      setPrevPrompt("This is the start of your flow.");
+      setNextQuestions(findNextQuestions(intents, true));
+      setPrevSpeaker("Bot:");
+      setSpeaker("User:");
+      return;
+    }
+    //If selecting any other question, get next question list from previous intent
+    else {
+      const nextQuestions = findNextQuestions(
+        speechList[speechList.length - 1].question,
+        false
+      );
+      setNextQuestions(nextQuestions);
+      setPrevSpeaker("Bot:");
+      setSpeaker("User:");
+    }
+  };
+
+  //Find the list of next questions, depending on the selected intent
+  const findNextQuestions = (intents, starting) => {
+    const lst = [];
+    allQuestions.forEach((x) => {
+      if (starting) {
+        //If we clicked to reselect the first question, it reloads the starting questions
+        if (flowStartingQuestions.includes(x.id)) {
+          lst.push(x);
+        }
+      } else {
+        //If we're going back to reselect a question it searches the previous intent's children
+        if (intents.children && intents.children.includes(x.id)) {
+          lst.push(x);
+        } else {
+          //If we're reselecting an intent it returns the question object
+          if (!intents.children) {
+            return intents;
+          }
+        }
+      }
+    });
+    return lst;
+  };
+
+  //Pops all values of the list up to and including the value clicked
+  const poppingList = (intents) => {
+    var i = speechList.length - 1;
+    var newSpeechList = speechList; //So not to mutate a React hook
+    while (
+      newSpeechList[newSpeechList.length - 1].question !== intents &&
+      i >= 0
+    ) {
+      newSpeechList.pop();
+      i = i - 1;
+    }
+
+    //Pops the prompt that was clicked so the user can reselect it
+    newSpeechList.pop();
+    setSpeechList([...newSpeechList]);
+  };
+
   return (
     <div className={styles.scroller}>
       <div className={styles.transcriptContainer}>
@@ -42,14 +134,17 @@ export default function Scrollbar() {
           <div className={styles.transcriptText}>
             {speechList.map((speech) => {
               return (
-                <>
-                  <p key={speech.text} className={styles.bolded}>
+                <div key={speech.text}>
+                  <p
+                    className={styles.bolded}
+                    onClick={() => goBack(speech.source, speech.question)}
+                  >
                     {speech.source + " " + speech.text}{" "}
-                    <p className={styles.indent}>
-                      {speech.optionsLength} intents available
-                    </p>
                   </p>
-                </>
+                  <p className={styles.indent}>
+                    {speech.optionsLength} intents available
+                  </p>
+                </div>
               );
             })}
 

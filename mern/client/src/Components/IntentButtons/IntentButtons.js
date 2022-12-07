@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "./IntentButtons.module.css";
+import styles from "./IntentButtons.module.css";
 import { IntentContext } from "../../Contexts/intentsProvider";
 import GenericButton from "../Buttons/GenericButton";
 
@@ -16,10 +16,9 @@ import GenericButton from "../Buttons/GenericButton";
 export default function IntentButtons(props) {
   // define context var to determine the state of the intent buttons
   const [intentState, setIntentState] = useContext(IntentContext);
-
   var values = [];
   return (
-    <div className="container">
+    <div className={styles.container}>
       {/* To be displayed when flow is completed */}
       {props.intents.map((intent) => {
         //Constant to check whether the object is a user or a bot and access their speech accordingly
@@ -76,7 +75,7 @@ export default function IntentButtons(props) {
               // this is able to trigger React to re-render
               setIntentState(JSON.parse(JSON.stringify(intentState)));
             }}
-          ></GenericButton>
+          />
         );
       })}
     </div>
