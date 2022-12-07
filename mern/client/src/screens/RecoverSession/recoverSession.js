@@ -76,18 +76,16 @@ export default function RecoverSession() {
       setIsIntents(true);
       setSpeaker("Bot:");
       setPrevSpeaker("User:");
-      // console.log(flow.speechList, "SPEECH LISt");
-      // console.log(speechList, "SPEECH LIST 2");
 
       // Show User: and Bot: labels if not on first question
       if (flow.current_question !== "") {
         setIsFirstQuestion(false);
         setPrevPrompt(startingQA.question);
       }
-      PageChange("/startingintent");
     } else {
       setShowError(true);
     }
+    PageChange("/startingintent");
   };
 
   const setFlowVars = (flow) => {

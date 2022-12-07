@@ -167,14 +167,17 @@ function StartingIntent() {
         ) : (
           <>
             {isFirstQuestion ? (
-              <></>
+              <>
+                <h1 className={styles.intentTitle}>{prevPrompt}</h1>
+                <h4 className={styles.speaker2}>{prevSpeaker}</h4>
+              </>
             ) : (
-              <h4 className={styles.speaker1}>{prevSpeaker}</h4>
+              <>
+                <h4 className={styles.speaker1}>{prevSpeaker}</h4>
+                <h1 className={styles.intentTitle}>{prevPrompt}</h1>
+                <h4 className={styles.speaker2}>{currSpeaker}</h4>
+              </>
             )}
-
-            <h1 className={styles.intentTitle}>{prevPrompt}</h1>
-
-            <h4 className={styles.speaker2}>{currSpeaker}</h4>
 
             <IntentButtons
               intents={isIntents ? currQA.intents : nextQuestions}
