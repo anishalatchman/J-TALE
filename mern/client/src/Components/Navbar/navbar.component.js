@@ -23,6 +23,7 @@ export default function Navbar() {
   const [showAlertDeleteFail, setShowAlertDeleteFail] = useState(false);
   const [showAlertSaveFail, setShowAlertSaveFail] = useState(false);
   const [showAlertSaveSuccess, setShowAlertSaveSuccess] = useState(false);
+  const [showDeleteLoad, setShowDeleteLoad] = useState(false);
   const [
     currFlow,
     setFlowState,
@@ -171,12 +172,13 @@ export default function Navbar() {
       <Modal
         show={showModalDelete}
         title="Delete Your Session?"
-        valid={false}
-        alert="Your work will be gone forever!"
+        valid={showDeleteLoad ? false : true}
+        alert="Deleting your session..."
         onClose={() => {
           setShowModalDelete(false);
         }}
         onSubmit={() => {
+          setShowDeleteLoad(true);
           tryDelete(currFlow, sessionID);
         }}
       />
