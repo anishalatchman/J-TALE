@@ -19,6 +19,14 @@ Instead of having to think and type chatbot questions and responses manually, cr
 * Auto-suggest questions and responses in buttons
 * Provide the option to include or exclude suggested prompts, creating a tree
 
+## :computer:	Tech Stack
+
+This project was made using the **MERN stack**: MongoDB, Express, Node.js, React
+* **Testing:** Jest
+* **Config:** Docker, Babel
+* **Hosting:** Netlify, Google Cloud
+* **Styling:** Tailwind CSS
+
 ## :file_folder: Getting Started
 
 * Access our deployed site here: **https://jtale.netlify.app/**
@@ -78,6 +86,9 @@ The transcript must be in a JSON file with the following information:
   ]
 }
 ```
+## :rotating_light: Testing
+
+In both the **client** and **server** terminal, ```npm test``` to run the tests we've set up and check code coverage.
 
 ## :bookmark_tabs: License
 
