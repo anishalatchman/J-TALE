@@ -49,20 +49,24 @@ const Modal = (props) => {
             <></>
           )}
         </div>
-        <div className="modal-footer">
-          <GenericButton
-            buttonType="modalCancel"
-            onClick={props.onClose}
-            disabled={false}
-            text={"CANCEL"}
-          />
-          <GenericButton
-            buttonType="modalContinue"
-            onClick={props.onSubmit}
-            disabled={false}
-            text={"CONTINUE"}
-          />
-        </div>
+        {props.buttons ? (
+          <></>
+        ) : (
+          <div className="modal-footer">
+            <GenericButton
+              buttonType="modalCancel"
+              onClick={props.onClose}
+              disabled={false}
+              text={"CANCEL"}
+            />
+            <GenericButton
+              buttonType="modalContinue"
+              onClick={props.onSubmit}
+              disabled={false}
+              text={"CONTINUE"}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

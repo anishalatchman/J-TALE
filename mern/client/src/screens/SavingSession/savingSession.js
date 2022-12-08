@@ -119,7 +119,7 @@ export default function SavingSession() {
         success={true}
         message="Copied to clipboard!"
       />
-      <div className="container">
+      <div>
         <h1 className={styles.pageTitle}> Session Saved </h1>
         <h4 className={styles.subTitle}>
           You will need your session ID to continue next time.

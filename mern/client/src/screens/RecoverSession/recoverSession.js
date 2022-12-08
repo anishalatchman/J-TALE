@@ -123,7 +123,7 @@ export default function RecoverSession() {
   };
 
   return (
-    <div className="container">
+    <div>
       <h1 className={styles.pageTitle}>Recover Session</h1>
       {infoMsg !== "" ? (
         <h2
