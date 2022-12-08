@@ -79,9 +79,9 @@ export default function Navbar() {
   };
 
   // This function is called when user clicks deletes and deletes the flow
-  const tryDelete = (currFlow, sessionID) => {
+  const tryDelete = async (currFlow, sessionID) => {
     const deleteFlow = new deleteController();
-    deleteFlow.deleteFlow(currFlow, sessionID).then((res) => {
+    await deleteFlow.deleteFlow(currFlow, sessionID).then((res) => {
       if (!res) {
         setShowModalDelete(false);
         setShowAlertDeleteFail(true);
@@ -97,15 +97,15 @@ export default function Navbar() {
           setShowAlertDeleteSuccess(false);
         }, 1000);
 
-        // Resets all contexts to original value\
-        resetContext();
-
         // Disables continue button by resets intentState values to 0
         Object.keys(intentState).forEach((key) => {
           intentState[key] = 0;
         });
       }
     });
+    PageChange("/");
+    // Resets all contexts to original value\
+    resetContext();
   };
 
   const resetContext = () => {
@@ -166,6 +166,7 @@ export default function Navbar() {
         show={showModalDelete}
         title="Delete Your Session?"
         valid={false}
+        buttons={showDeleteLoad}
         alert={
           showDeleteLoad
             ? "Deleting your session..."

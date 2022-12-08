@@ -10,7 +10,7 @@ function Landing() {
   };
 
   return (
-    <div className="container">
+    <div>
       <h1 className={`h1 ${styles.title}`}>
         Transcript to chatbot, <br /> made simple
       </h1>

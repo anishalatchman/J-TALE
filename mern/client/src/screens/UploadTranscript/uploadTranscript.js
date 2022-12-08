@@ -156,7 +156,7 @@ function UploadTranscript() {
   });
 
   return (
-    <div className="container">
+    <div>
       <h1 className={styles.title}>Upload Transcript</h1>
       <h4 className={styles.failureIndicator}>{alert}</h4>
       <div className={styles.buttonContainer}>

@@ -32,6 +32,10 @@ jobs:
         cache-dependency-path: '**/package-lock.json'
     - run: npm ci
     - run: npm run build --if-present
+    - run: |
+        export REACT_APP_BACKEND_URL=${{ secrets.REACT_APP_BACKEND_URL }}
+        echo The secret is:$REACT_APP_BACKEND_URL
+        npm test
   
 
   buildBackend:
