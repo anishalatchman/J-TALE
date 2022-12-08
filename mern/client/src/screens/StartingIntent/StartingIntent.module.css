@@ -8,11 +8,11 @@
 }
 
 .intentContainer {
-  @apply w-7/12 mt-12;
+  @apply w-7/12;
 }
 
 .buttonContainer {
-  @apply ml-4 mb-5 items-center justify-end px-12 flex flex-row;
+  @apply ml-4;
 }
 
 .instructions {
@@ -53,3 +53,11 @@
   @apply text-left mb-3 ml-4 font-montserrat pt-8;
   font-size: 18px;
 } */
+
+.screenContainer{
+  @apply flex justify-center flex-row mt-12
+}
+
+.bottomContainer{
+  @apply flex flex-row justify-between items-center
+}

@@ -148,10 +148,7 @@ function StartingIntent() {
   };
 
   return (
-    <div className="container">
-      <div className={styles.scroller}>
-        <Scrollbar />
-      </div>
+    <div className={styles.screenContainer}>
       <div className={styles.intentContainer}>
         {nextQuestions.length === 0 || currQA?.intents?.length === 0 ? (
           <>
@@ -183,39 +180,45 @@ function StartingIntent() {
               intents={isIntents ? currQA.intents : nextQuestions}
               user={isIntents}
             />
-            <div className={styles.instructionsContainer}>
-              <h4 className={styles.instructions}>
-                Select intents you would like to include by{" "}
-                <strong>clicking once</strong>.
-              </h4>
-              <h4 className={styles.instructions}>
-                Choose a specific path by <strong>clicking again</strong> and
-                selecting continue.
-              </h4>
+            <div className={styles.bottomContainer}>
+              <div className={styles.instructionsContainer}>
+                <h4 className={styles.instructions}>
+                  Select intents you would like to include by{" "}
+                  <strong>clicking once</strong>.
+                </h4>
+                <h4 className={styles.instructions}>
+                  Choose a specific path by <strong>clicking again</strong> and
+                  selecting continue.
+                </h4>
+              </div>
+              <div className={styles.buttonContainer}>
+                <GenericButton
+                  buttonType={
+                    Object.values(intentState).some((x) => x === 2)
+                      ? "blue"
+                      : "disabled"
+                  }
+                  text={"Continue"}
+                  disabled={
+                    Object.values(intentState).some((x) => x === 2)
+                      ? false
+                      : true
+                  }
+                  onClick={() => {
+                    handleQAChange();
+                    handleSpeakerChange();
+                    setFlowSpeechList(); //Separate for state rendering
+                    // Show User: and Bot: labels
+                    setIsFirstQuestion(false);
+                  }}
+                />
+              </div>
             </div>
           </>
         )}
-
-        <div className={styles.buttonContainer}>
-          <GenericButton
-            buttonType={
-              Object.values(intentState).some((x) => x === 2)
-                ? "blue"
-                : "disabled"
-            }
-            text={"Continue"}
-            disabled={
-              Object.values(intentState).some((x) => x === 2) ? false : true
-            }
-            onClick={() => {
-              handleQAChange();
-              handleSpeakerChange();
-              setFlowSpeechList(); //Separate for state rendering
-              // Show User: and Bot: labels
-              setIsFirstQuestion(false);
-            }}
-          />
-        </div>
+      </div>
+      <div className={styles.scroller}>
+        <Scrollbar />
       </div>
     </div>
   );

@@ -1,11 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./recoverSession.module.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
 import { SessionContext } from "../../Contexts/sessionProvider";
 import { qaContext } from "../../Contexts/qaProvider";
 import { useNavigate } from "react-router-dom";
-import { recoverFlow } from "../../Controller/flowController";
-import { recoverStartingQA } from "../../Controller/QAController";
+import recoverSessionController from "../../utils/Controller/recoverSessionController";
 import { FlowContext } from "../../Contexts/flowProvider";
 import { QuestionContext } from "../../Contexts/questionProvider";
 import { SpeakerContext } from "../../Contexts/speakerProvider";
@@ -13,6 +12,7 @@ import { ScrollerContext } from "../../Contexts/scrollerProvider";
 import uploadFileController from "../../utils/Controller/uploadFileController";
 
 export default function RecoverSession() {
+  const recoverController = new recoverSessionController();
   const Navigate = useNavigate();
   const [, setSessionID, , setTranscriptID] = useContext(SessionContext);
   const [, setCurrQA] = useContext(qaContext);
@@ -26,11 +26,11 @@ export default function RecoverSession() {
   const [
     ,
     setIsFirstQuestion,
-    nextQuestions,
+    ,
     setNextQuestions,
     ,
     setAllQuestions,
-    prevPrompt,
+    ,
     setPrevPrompt,
   ] = useContext(QuestionContext);
   const uploadFile = new uploadFileController();
@@ -42,19 +42,13 @@ export default function RecoverSession() {
     Navigate(url);
   };
 
-  useEffect(() => {
-    if (
-      nextQuestions?.length !== 0 &&
-      prevPrompt !== "This is the start of your flow."
-    ) {
-    }
-  }, [nextQuestions, prevPrompt]);
-
   const handleSubmit = async (event) => {
     // prevent page reload
     event.preventDefault();
     // set sessionid before loading starting-intent page
-    const flow = await recoverFlow(inputText);
+
+    const flow = await recoverController.recoverFlow(inputText);
+
     if (flow) {
       setInfoMsg("Loading your session...");
       const startingQA = await setFlowVars(flow);
@@ -71,6 +65,7 @@ export default function RecoverSession() {
   // recovers flow from DB and sets current_qa context state
   const LoadSession = (startingQA, flow, questionsObj) => {
     setInfoMsg("");
+    console.log(startingQA, "STARTINGQA");
     // console.log("Starting QA: ", startingQA);
     setNextQuestions(questionsObj.next);
     setAllQuestions(questionsObj.all);
@@ -91,8 +86,8 @@ export default function RecoverSession() {
     PageChange("/startingintent");
   };
 
-  const setFlowVars = (flow) => {
-    const startingQA = recoverStartingQA(flow);
+  const setFlowVars = async (flow) => {
+    const startingQA = await recoverController.recoverStartingQA(flow);
     // SET VARS FOR STARTING-INTENT
     setFlowStartingQuestions(flow.questions);
     setFlowAllQuestions(flow.allQuestions);
@@ -112,11 +107,13 @@ export default function RecoverSession() {
   };
 
   const getQAs = async (idList) => {
-    return uploadFile.getQAList(idList);
+    const res = await uploadFile.getQAList(idList);
+    console.log(res);
+    return res;
   };
 
   return (
-    <div className="container">
+    <div>
       <h1 className={styles.pageTitle}>Recover Session</h1>
       {infoMsg !== "" ? (
         <h2
