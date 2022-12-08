@@ -6,8 +6,6 @@ jest.mock("axios");
 
 test("renders learn react link", () => {
   render(<App />);
-  const linkElement = screen.getByText(
-    /Transcript to chatbot with a couple clicks/i
-  );
+  const linkElement = screen.getByText(/A flow-building plugin for Voiceflow/);
   expect(linkElement).toBeInTheDocument();
 });

@@ -47,12 +47,7 @@ export default function RecoverSession() {
     event.preventDefault();
     // set sessionid before loading starting-intent page
 
-    var flow = false;
-    await recoverController.recoverFlow(inputText).then((res) => {
-      if (res.status === 200) {
-        flow = res.data;
-      }
-    });
+    const flow = await recoverController.recoverFlow(inputText);
 
     if (flow) {
       setInfoMsg("Loading your session...");
@@ -92,12 +87,7 @@ export default function RecoverSession() {
   };
 
   const setFlowVars = async (flow) => {
-    var startingQA;
-    await recoverController.recoverStartingQA(flow).then((res) => {
-      if (res.status === 200) {
-        startingQA = res.data;
-      }
-    });
+    const startingQA = await recoverController.recoverStartingQA(flow);
     // SET VARS FOR STARTING-INTENT
     setFlowStartingQuestions(flow.questions);
     setFlowAllQuestions(flow.allQuestions);

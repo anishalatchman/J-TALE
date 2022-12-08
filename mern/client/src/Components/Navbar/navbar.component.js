@@ -96,9 +96,6 @@ export default function Navbar() {
           setShowAlertDeleteSuccess(false);
         }, 1000);
 
-        // Resets all contexts to original value\
-        resetContext();
-
         // Disables continue button by resets intentState values to 0
         Object.keys(intentState).forEach((key) => {
           intentState[key] = 0;
@@ -106,6 +103,8 @@ export default function Navbar() {
       }
     });
     PageChange("/");
+    // Resets all contexts to original value\
+    resetContext();
   };
 
   const resetContext = () => {

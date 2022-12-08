@@ -8,15 +8,28 @@ export default class recoverSessionInteractor {
   async getQA(flow) {
     // Retrieves current QA ID from flow object
     const qaID = this.getQAIDFromFlow(flow);
+    if (!qaID) {
+      return false;
+    }
     // returns a QA object
-    const qaObject = await this.recoverDAO.getQAFromID(qaID);
-    return qaObject;
+    var returnVal = false;
+    await this.recoverDAO.getQAFromID(qaID).then((res) => {
+      if (res.status === 200 && res.data) {
+        returnVal = res.data;
+      }
+    });
+    return returnVal;
   }
 
   async getFlow(sessionID) {
+    var returnVal = false;
     // returns a flow object
-    const res = await this.recoverDAO.getFlowBySessionID(sessionID);
-    return res;
+    await this.recoverDAO.getFlowBySessionID(sessionID).then((res) => {
+      if (res.status === 200 && res.data) {
+        returnVal = res.data;
+      }
+    });
+    return returnVal;
   }
 
   // returns first QA pair from given flow json object

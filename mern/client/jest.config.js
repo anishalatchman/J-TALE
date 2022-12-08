@@ -6,7 +6,6 @@ module.exports = {
       lines: 80,
     },
   },
-  // coverageDirectory: "coverage",
   testEnvironment: "jsdom",
   moduleNameMapper: {
     axios: "axios/dist/node/axios.cjs",

@@ -2,10 +2,34 @@ import recoverSessionInteractor from "../../utils/Interactor/recoverSessionInter
 
 var mockGetFlow = jest
   .fn()
-  .mockReturnValueOnce({ id: "00000000", name: "test" });
+  .mockReturnValueOnce(
+    new Promise((resolve, reject) => {
+      resolve({ status: 200, data: { id: "00000000", name: "test" } });
+    })
+  )
+  .mockReturnValueOnce(
+    new Promise((resolve, reject) => {
+      resolve({ status: 400, data: { id: "00000000", name: "test" } });
+    })
+  );
 var mockGetQA = jest
   .fn()
-  .mockReturnValueOnce({ id: "00000000", question: "How are you doing?" });
+  .mockReturnValueOnce(
+    new Promise((resolve, reject) => {
+      resolve({
+        status: 200,
+        data: { id: "00000000", question: "How are you doing?" },
+      });
+    })
+  )
+  .mockReturnValueOnce(
+    new Promise((resolve, reject) => {
+      resolve({
+        status: 400,
+        data: { id: "00000000", question: "How are you doing?" },
+      });
+    })
+  );
 
 jest.mock("../../utils/DAO/recoverSessionDAO", () => {
   return jest.fn().mockImplementation(() => {
@@ -17,14 +41,20 @@ jest.mock("../../utils/DAO/recoverSessionDAO", () => {
 });
 
 describe("Recover Session Interactor Tests", () => {
-  test("Test Send Flow", async () => {
+  test("Test Get Flow", async () => {
     const Interactor = new recoverSessionInteractor();
-    const res = await Interactor.getFlow({
-      name: "test",
-      current_question: "00000000",
-    });
+    const res = await Interactor.getFlow("00000000");
 
     expect(res).toEqual({ id: "00000000", name: "test" });
+    expect(mockGetFlow).toHaveBeenCalled();
+    expect(mockGetFlow).toHaveBeenCalledWith("00000000");
+  });
+
+  test("Test Get Flow Fail", async () => {
+    const Interactor = new recoverSessionInteractor();
+    const res = await Interactor.getFlow("00000000");
+
+    expect(res).toEqual(false);
     expect(mockGetFlow).toHaveBeenCalled();
     expect(mockGetFlow).toHaveBeenCalledWith("00000000");
   });
@@ -39,13 +69,37 @@ describe("Recover Session Interactor Tests", () => {
     expect(res).toEqual("00000000");
   });
 
-  test("Test SendQA", async () => {
+  test("Test Get QA", async () => {
     const Interactor = new recoverSessionInteractor();
-    const res = await Interactor.getQA("00000000");
+    const res = await Interactor.getQA({
+      name: "test",
+      current_question: "00000000",
+    });
 
     expect(res).toEqual({ id: "00000000", question: "How are you doing?" });
     expect(mockGetQA).toHaveBeenCalled();
     expect(mockGetQA).toHaveBeenCalledWith("00000000");
+  });
+
+  test("Test Get QA Fail", async () => {
+    const Interactor = new recoverSessionInteractor();
+    const res = await Interactor.getQA({
+      name: "test",
+      current_question: "00000000",
+    });
+
+    expect(res).toEqual(false);
+    expect(mockGetQA).toHaveBeenCalled();
+    expect(mockGetQA).toHaveBeenCalledWith("00000000");
+  });
+
+  test("Test Get QA No Session ID", async () => {
+    const Interactor = new recoverSessionInteractor();
+    const res = await Interactor.getQA({
+      name: "test",
+    });
+
+    expect(res).toEqual(false);
   });
 
   afterAll(() => {
