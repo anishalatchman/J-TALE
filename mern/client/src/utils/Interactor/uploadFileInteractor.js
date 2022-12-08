@@ -1,20 +1,20 @@
 import uploadFileDAO from "../DAO/uploadFileDAO";
 
-const uploadDAO = new uploadFileDAO();
 export default class uploadFileInteractor {
   constructor() {
     this.allQuestionList = [];
+    this.uploadDAO = new uploadFileDAO();
   }
   // Checks if transcript file is a string and calls Upload Transcript
   uploadFile(transcript) {
     if (typeof transcript.name === "string") {
-      const res = uploadDAO.uploadFile(transcript);
+      const res = this.uploadDAO.uploadFile(transcript);
       return res;
     }
   }
 
   deleteFile(id) {
-    return uploadDAO.deleteFile(id);
+    return this.uploadDAO.deleteFile(id);
   }
 
   // Returns a list of the initial QA ids
@@ -51,7 +51,7 @@ export default class uploadFileInteractor {
   questionLoop(qlist) {
     //qlist is a list of JSON objects that exists as questions/answer pairs
     for (var i = 0; i < qlist.length; i++) {
-      uploadDAO.createQA(qlist[i]);
+      this.uploadDAO.createQA(qlist[i]);
       this.allQuestionList.push(qlist[i].id);
     }
   }
@@ -60,7 +60,7 @@ export default class uploadFileInteractor {
     // given a list of QA ids, returns list of QA objects
     const lst = [];
     for (var i = 0; i < idList.length; i++) {
-      await uploadDAO.getQAByID(idList[i]).then((response) => {
+      await this.uploadDAO.getQAByID(idList[i]).then((response) => {
         //If response is successful, change to next page and show the additional navbar info
         if (response.status) {
           lst.push(response.data);
@@ -74,11 +74,10 @@ export default class uploadFileInteractor {
 
   // Loops through the questions list in flow and deletes each item (helper to qaDeleted)
   async removeQAs(flowAllQuestions) {
-    console.log(flowAllQuestions);
     var removed = true;
     for (var i = 0; i < flowAllQuestions.length; i++) {
       try {
-        await uploadDAO.deleteqa(flowAllQuestions[i]);
+        await this.uploadDAO.deleteqa(flowAllQuestions[i]);
       } catch {
         removed = false;
       }

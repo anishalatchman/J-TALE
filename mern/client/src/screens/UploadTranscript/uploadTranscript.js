@@ -1,5 +1,5 @@
 import React from "react";
-import { useRef, useState, useContext } from "react";
+import { useRef, useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./uploadTranscript.module.css";
 import GenericButton from "../../Components/Buttons/GenericButton";
@@ -28,6 +28,7 @@ function UploadTranscript() {
     useContext(QuestionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
+  const [alert, setAlert] = useState();
   const [
     ,
     setFlowState,
@@ -61,6 +62,7 @@ function UploadTranscript() {
         // for case when someone uploads a valid transcript at first, then switches to a bad one.
         // it resets files to null to correctly display failure message.
         setFiles(null);
+        setAlert("Please upload a valid JSON file");
       }
     };
   };
@@ -92,7 +94,7 @@ function UploadTranscript() {
           setSessionID(response.res?.data._id);
           setFlowState(response.res?.data);
         } else {
-          alert("Unable to create session. Please try again.");
+          setAlert("Unable to create session. Please try again.");
         }
       });
   };
@@ -104,9 +106,10 @@ function UploadTranscript() {
       if (response) {
         setShowModal(true);
         setTranscriptID(response);
+        setAlert();
       } else {
         // prompts alert when you try to upload a transcript that is already posted onto DB
-        alert("This file was already uploaded.");
+        setAlert("This file was already uploaded.");
       }
     });
   };
@@ -118,7 +121,7 @@ function UploadTranscript() {
       setFlowStartingQuestions(res.startingList);
       setFlowAllQuestions(res.allQuestionList);
     } catch (e) {
-      alert("PARSE FAILED", e.response);
+      setAlert("PARSE FAILED", e.response);
     }
   };
 
@@ -131,16 +134,31 @@ function UploadTranscript() {
     setAllQuestions(await getQAs(flowAllQuestions));
   };
 
+  useEffect(() => {
+    const keyDownHandler = (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        populatingQuestionContext();
+        uploadFlow(
+          flowName.name,
+          flowStartingQuestions,
+          flowAllQuestions,
+          transcriptID
+        );
+      }
+    };
+
+    document.addEventListener("keydown", keyDownHandler);
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
+  });
+
   return (
-    <div className="container">
+    <div>
       <h1 className={styles.title}>Upload Transcript</h1>
-      {fileName !== "No files chosen" && files && !files.questions ? (
-        <h4 className={styles.failureIndicator}>
-          Please upload a valid JSON file.
-        </h4>
-      ) : (
-        <></>
-      )}
+      <h4 className={styles.failureIndicator}>{alert}</h4>
       <div className={styles.buttonContainer}>
         <input
           style={{ display: "none" }}
@@ -149,7 +167,13 @@ function UploadTranscript() {
           onChange={handleFileChange}
           accept=".json"
         />
-        <button className={styles.button} onClick={handleClick}>
+        <button
+          className={styles.button}
+          onClick={() => {
+            setAlert();
+            handleClick();
+          }}
+        >
           <img
             src={require("../../assets/uploadicon.png")}
             alt={"upload"}
@@ -179,10 +203,11 @@ function UploadTranscript() {
           disabled={false}
           text={"Go Back"}
         />
-        {setShowModal && (
+        {
           <Modal
             show={showModal}
             title="Name your flow to begin"
+            input={true}
             body="Enter your flow name"
             value={flowName.name}
             valid={true}
@@ -202,7 +227,7 @@ function UploadTranscript() {
               );
             }}
           />
-        )}
+        }
       </div>
     </div>
   );

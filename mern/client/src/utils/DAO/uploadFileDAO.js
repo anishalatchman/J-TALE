@@ -1,9 +1,12 @@
-import server from "./httpSource";
+import axios from "axios";
 
 export default class uploadFileDAO {
   async uploadFile(transcript) {
     try {
-      const res = await server.post("/transcript/add", transcript);
+      const res = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/transcript/add`,
+        transcript
+      );
       console.log("Transcript Uploaded!");
       return res.data.id;
     } catch (e) {
@@ -13,7 +16,9 @@ export default class uploadFileDAO {
 
   async deleteFile(id) {
     try {
-      await server.delete("/transcript/delete/" + id);
+      await axios.delete(
+        `${process.env.REACT_APP_BACKEND_URL}/transcript/delete/` + id
+      );
       console.log("Transcript Deleted!");
       return true;
     } catch (e) {
@@ -24,7 +29,10 @@ export default class uploadFileDAO {
   //Makes QA object in database
   async createQA(question) {
     try {
-      await server.post("/qa/add", question);
+      return await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/qa/add`,
+        question
+      );
     } catch (e) {
       console.log(e.response.data);
     }
@@ -33,7 +41,7 @@ export default class uploadFileDAO {
   //Gets the QA from the backend by ID
   async getQAByID(id) {
     try {
-      const res = await server.get("/qa/", {
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/qa/`, {
         params: { id: id },
       });
       return res;
@@ -44,8 +52,13 @@ export default class uploadFileDAO {
 
   // Axios call to delete a single QA object
   async deleteqa(qa) {
-    await server.delete("/qa/delete", {
-      data: { id: qa },
-    });
+    try {
+      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/qa/delete`, {
+        data: { id: qa },
+      });
+      return qa;
+    } catch (e) {
+      return false;
+    }
   }
 }
