@@ -89,6 +89,7 @@ export default function Navbar() {
           setShowAlertDeleteFail(false);
         }, 1000);
       } else {
+        PageChange("/");
         setShowModalDelete(false);
         setShowAlertDeleteSuccess(true);
         setShowDeleteLoad(false);
