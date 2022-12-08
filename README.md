@@ -21,7 +21,7 @@ Instead of having to think and type chatbot questions and responses manually, cr
 
 ## :file_folder: Getting Started
 
-* Access our deployed site here: **https://serene-dolphin-8fe2f4.netlify.app/**
+* Access our deployed site here: **https://jtale.netlify.app/**
 * Access our project locally by downloading and opening the unzipped **J-TALE-main** folder of our project on a JavaScript editor. 
   * Add a **.env** file in the **client** folder including the following: 
   ```
