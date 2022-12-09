@@ -55,7 +55,7 @@ This project was made using the **MERN stack**: MongoDB, Express, Node.js, React
   * Click parts of the transcript to navigate back to that part of the flow.
 * When finished, click **Save** on the navbar. This will lead you to a page with your flow ID so you can recover your session for next time.
 * If you wish to delete your session, click **Delete Session**.
-* **SUPER IMPORTANT**: We do not make use of any local storage so there will be issues if you refresh while you're inside a session (and you cannot upload the same transcript multiple times without deleting the session first). If you do refresh in a session, please go back to the base URL, and do not have access to your session id to recover the session, please reach out to one of the team members, so we can provide you with the necessary information.
+* **SUPER IMPORTANT**: We do not make use of any local storage so there will be issues if you refresh while you're inside a session (and you cannot upload the same transcript multiple times without deleting the session first). If you do refresh in a session, please go back to the base URL and recover your session. If you do not have access to your session id to recover the session, please reach out to one of the team members, so we can provide you with the necessary information.
 
 ## :pencil2: Transcript Format
 
