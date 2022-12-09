@@ -24,7 +24,7 @@ function UploadTranscript() {
   const [files, setFiles] = useState();
   const [, setSessionID, transcriptID, setTranscriptID] =
     useContext(SessionContext);
-  const [, , , setNextQuestions, , setAllQuestions] =
+  const [, , , setNextQuestions, allQuestions, setAllQuestions] =
     useContext(QuestionContext);
   const [showModal, setShowModal] = useState(false);
   const [flowName, setFlowName] = useState({ name: "" });
@@ -37,6 +37,7 @@ function UploadTranscript() {
     flowAllQuestions,
     setFlowAllQuestions,
   ] = useContext(FlowContext);
+  const [buttons, setButtons] = useState(false);
 
   const handleClick = () => {
     // open file input box on click of button
@@ -72,6 +73,18 @@ function UploadTranscript() {
     setFlowName({ ...flowName, [event.target.name]: event.target.value });
   };
 
+  useEffect(() => {
+    if (allQuestions.length !== 0) {
+      uploadFlow(
+        flowName.name,
+        flowStartingQuestions,
+        flowAllQuestions,
+        transcriptID
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allQuestions]);
+
   //Uploads flow to the backend
   const uploadFlow = (
     flowName,
@@ -91,6 +104,7 @@ function UploadTranscript() {
         //If response is successful, change to next page and show the additional navbar info
         if (response.status) {
           PageChange("/startingintent");
+          setButtons(false);
           setSessionID(response.res?.data._id);
           setFlowState(response.res?.data);
         } else {
@@ -130,6 +144,7 @@ function UploadTranscript() {
   };
 
   const populatingQuestionContext = async () => {
+    setButtons(true);
     setNextQuestions(await getQAs(flowStartingQuestions));
     setAllQuestions(await getQAs(flowAllQuestions));
   };
@@ -206,25 +221,21 @@ function UploadTranscript() {
         {
           <Modal
             show={showModal}
-            title="Name your flow to begin"
-            input={true}
+            title={!buttons ? "Name your flow to begin" : null}
+            input={!buttons}
+            alert={"Please wait a moment..."}
             body="Enter your flow name"
             value={flowName.name}
-            valid={true}
+            valid={!buttons}
             onChange={handleFlowNameChange}
             onClose={() => {
               setShowModal(false);
               uploadFile.deleteFile(transcriptID);
               uploadFile.deleteQAs(flowAllQuestions);
             }}
+            buttons={buttons}
             onSubmit={() => {
               populatingQuestionContext();
-              uploadFlow(
-                flowName.name,
-                flowStartingQuestions,
-                flowAllQuestions,
-                transcriptID
-              );
             }}
           />
         }

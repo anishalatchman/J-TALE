@@ -54,12 +54,16 @@ function StartingIntent() {
     const speech = getSpeech();
     console.log(prevSpeaker, "PREV SPEAKe");
     console.log(currSpeaker, "CURRENT SPEAK");
+    console.log(currQA, "CURRQA");
+    console.log(isIntents, "isINTENTS");
 
     // This if statement differentiates between whether we are choosing questions or intents
     // If !buttons, we are choosing questions and if buttons we are choosing intents
     if (isIntents) {
       const intent = currQA.intents.find((x) => x.value === speech);
+      console.log(intent, "INTENT");
       const lst = findNextQuestions(intent);
+      console.log(lst, "NEXT QUESTIONS LIST");
       setNextQuestions(lst);
       currFlow.speechList = [
         ...speechList,
@@ -90,6 +94,7 @@ function StartingIntent() {
     } else {
       // Finds the QA from list of next questions
       const nextQA = nextQuestions.find((x) => x.question === speech);
+      console.log(allQuestions, "ALL QUESTIONS IN HANDLE QA CHANGE");
 
       const temp = [];
       // Find the currQuestions in allQuestions and update the question included boolean
@@ -137,6 +142,7 @@ function StartingIntent() {
         lst.push(x);
       }
     });
+    console.log(lst, "FIND NEXT LIST");
     return lst;
   };
 
