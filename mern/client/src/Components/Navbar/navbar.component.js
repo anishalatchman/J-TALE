@@ -103,7 +103,6 @@ export default function Navbar() {
         });
       }
     });
-    PageChange("/");
     // Resets all contexts to original value\
     resetContext();
   };
