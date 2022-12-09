@@ -52,8 +52,6 @@ function StartingIntent() {
   const handleQAChange = () => {
     //Speech is used as an identifier for selected question/intent
     const speech = getSpeech();
-    console.log(prevSpeaker, "PREV SPEAKe");
-    console.log(currSpeaker, "CURRENT SPEAK");
 
     // This if statement differentiates between whether we are choosing questions or intents
     // If !buttons, we are choosing questions and if buttons we are choosing intents
@@ -124,7 +122,6 @@ function StartingIntent() {
   };
 
   const setFlowSpeechList = () => {
-    console.log(speechList, "speech list");
     // Sets speech list to currFlow
     currFlow.speechList = speechList;
   };
