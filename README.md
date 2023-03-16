@@ -6,6 +6,7 @@
 ## Demo
 
 Visit the deployed site here: **https://jtale.netlify.app/**
+
 Visit the Figma mockup here: **https://www.figma.com/file/tjtuN40Bv3Ny9ROuWNKF51/J-TALE-project-design?node-id=0%3A1&t=ZBXtdNJrjXTiJIRd-1**
 
 ![JTALE thumbnail](jtale_thumb.jpg)
