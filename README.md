@@ -3,6 +3,13 @@
 * **A project built by:** Emma Ho, Lucia Kim, Jacob Kolyakov, Anisha Latchman, Terry Tian
 * Special thanks to UofT’s TLI Cohort 5 professors and teaching assistants!
 
+## Demo
+
+Visit the deployed site here: **https://jtale.netlify.app/**
+
+![JTALE thumbnail](jtale_thumb.jpg)
+
+
 ## :telescope: Our Vision
 
 *Time enables creativity, creativity drives innovation, and innovation is the future of technology.*
